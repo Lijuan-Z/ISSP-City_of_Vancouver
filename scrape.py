@@ -32,11 +32,12 @@ def download_pdf(url, save_dir):
             pdf_response = requests.get(pdf_link)
             f.write(pdf_response.content)
 
-if __name__ == "__main__":
-    # URL of the website to scrape
-    website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
 
-    # Directory to save the downloaded PDFs
-    save_directory = "downloaded_pdfs"
-
-    download_pdf(website_url, save_directory)
+# if __name__ == "__main__":
+#     # URL of the website to scrape
+#     website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
+#
+#     # Directory to save the downloaded PDFs
+#     save_directory = "downloaded_pdfs"
+#
+#     download_pdf(website_url, save_directory)
