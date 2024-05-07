@@ -13,19 +13,19 @@ cd backend
 #### Create a Virtual Environment
 python -m venv myenv
 
-### Activate the Virtual Environment
+#### Activate the Virtual Environment
 - On Windows:
 myenv\Scripts\activate
 - On macOS/Linux:
 source myenv/bin/activate
 
-### Install Dependencies
+#### Install Dependencies
 pip install -r requirements.txt
 
-### Run the Backend
+#### Run the Backend
 python server.py
 
-### Check Backend
+#### Check Backend
 Open http://localhost:8000/search in the browser. It should display "Hello team!"
 
 
@@ -34,11 +34,11 @@ in the second terminal, navigate to the Frontend Directory:
 cd frontend
 
 
-### Install Dependencies
+#### Install Dependencies
 npm install
 
-### Run the Frontend
+#### Run the Frontend
 npm start
 
-### Check Frontend
+#### Check Frontend
 Open http://localhost:3000/searching in the browser. There should be a "Search" button.
