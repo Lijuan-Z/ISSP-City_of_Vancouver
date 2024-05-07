@@ -28,6 +28,10 @@ def generate_response(query):
 
     return response
 
+###### Any pre-server start running code run here ######
+# read pdf
+# save to json
+
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
 def page_not_found(error):
@@ -46,6 +50,7 @@ def search():
     query = request.args.get('q')  # Get the search query parameter
     app.logger.info(f"/search received a request of ${query}")
     if query is not None:
+        ###### Any query function run here #######
         return generate_response(query)
     else:
        app.logger.error(f"/search receive an empty query and returning status code 404")
