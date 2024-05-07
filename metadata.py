@@ -1,13 +1,18 @@
 import json
 import os
-import PyPDF2
+import pypdf
 
 
 def extract_metadata(pdf_path):
     try:
         with open(pdf_path, 'rb') as file:
-            pdf_reader = PyPDF2.PdfReader(file)
+            pdf_reader = pypdf.PdfReader(file)
             metadata = pdf_reader.metadata
+            # metadata = {
+            #     'Type': pdf_reader.metadata.title,
+            #     'Title': pdf_reader.metadata.title,
+            #     'Reference': pdf_path
+            # }
     except Exception as e:
         print(f"Error reading PDF file '{pdf_path}': {e}")
         metadata = None
