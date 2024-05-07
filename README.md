@@ -1,10 +1,10 @@
 # ISSP-City_of_Vancouver
-
+This is the main structure of our app. Currently, there is a button on the frontend that, when clicked, triggers the backend to return an Excel file.
 
 # Project Setup Instructions
 
 ## Clone the Repository
-After clone the repo, you need open two terninals, one for backend and one for frontend. follow the instructions below to run them seperately.
+After cloning the repository, you need to open two terminals: one for the backend and one for the frontend. Follow the instructions below to run them separately.
 
 ### Backend (Flask)
 in the first terminal, navigate to the Backend Directory:
