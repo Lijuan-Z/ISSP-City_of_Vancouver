@@ -13,7 +13,7 @@ const SearchBar = () => {
         const queryValue = event.currentTarget.value
         console.log(queryValue)
         try {
-            const response = await fetch(`http://127.0.0.1:8000/search?q=${queryValue}`)
+            const response = await fetch(`/search?q=${queryValue}`)
             if (!response.ok) {
                 throw new Error('Failed to submit the data. Please try again.')
             }
