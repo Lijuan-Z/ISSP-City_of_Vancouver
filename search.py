@@ -28,7 +28,6 @@ def extract_text(pdf_path, keyword):
             page_text = page.extract_text()
             sentences = page_text.split('.')
             for sentence in sentences:
-                # Include the last period in the sentence
                 cleaned_sentence = sentence.strip().replace('\n', '') + '.'
                 if keyword.lower() in cleaned_sentence.lower():
                     text_with_page.append((cleaned_sentence, page_num + 1))
@@ -67,10 +66,10 @@ if __name__ == '__main__':
     folder_path = 'test_pdfs'
     # folder_path = 'downloaded_pdfs'
 
-    # Search for PDFs containing these keywords
+    # Search for PDFs containing search term
     search_term = 'parking'
     nested_metadata_dict = create_metadata_dictionary(folder_path, search_term=search_term)
 
-    # Convert nested metadata dictionary to JSON string
+    # Convert metadata dictionary to JSON string
     json_str = json.dumps(nested_metadata_dict, indent=4)
     print(json_str)
