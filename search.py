@@ -71,8 +71,8 @@ def create_metadata_dictionary(folder_path, search_term=None):
 
 
 if __name__ == '__main__':
-    folder_path = 'test_pdfs'
-    # folder_path = 'downloaded_pdfs'
+    # folder_path = 'test_pdfs'
+    folder_path = 'downloaded_pdfs'
 
     # Search for PDFs containing these keywords
     search_term = 'parking'
@@ -80,4 +80,5 @@ if __name__ == '__main__':
 
     # Convert nested metadata dictionary to JSON string
     json_str = json.dumps(nested_metadata_dict, indent=4)
+    
     print(json_str)

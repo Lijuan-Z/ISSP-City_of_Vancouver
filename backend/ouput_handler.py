@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 
 class OutputHandler:
@@ -6,11 +7,16 @@ class OutputHandler:
     @staticmethod
     def create_excel_file(json_obj, output_file="output.xlsx"):
         json_for_dataframe = {}
+        print(type(json_obj))
+        if isinstance(json_obj, str):
+            json_obj = json.loads(json_obj)
+
         for key, value in json_obj.items():
             json_for_dataframe[key] = json_obj[key]
             json_for_dataframe[key]["File name"] = key
 
         pd.DataFrame(json_for_dataframe).transpose().to_excel(output_file)
+
 
 if __name__ == "__main__":
     output_handler = OutputHandler()
