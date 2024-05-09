@@ -1,3 +1,4 @@
+import httpx
 import os
 import requests
 from bs4 import BeautifulSoup
@@ -9,7 +10,8 @@ def download_pdf(url, save_dir):
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
-    response = requests.get(url)
+    # response = requests.get(url)
+    response = httpx.get(url)
     soup = BeautifulSoup(response.text, 'html.parser')
 
     # Find all links on the page
@@ -29,15 +31,16 @@ def download_pdf(url, save_dir):
         # Download the PDF
         with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
             print("Downloading", pdf_filename)
-            pdf_response = requests.get(pdf_link)
+            # pdf_response = requests.get(pdf_link)
+            pdf_response = httpx.get(pdf_link)
             f.write(pdf_response.content)
 
 
-# if __name__ == "__main__":
-#     # URL of the website to scrape
-#     website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
-#
-#     # Directory to save the downloaded PDFs
-#     save_directory = "downloaded_pdfs"
-#
-#     download_pdf(website_url, save_directory)
+if __name__ == "__main__":
+    # URL of the website to scrape
+    website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
+
+    # Directory to save the downloaded PDFs
+    save_directory = "downloaded_pdfs"
+
+    download_pdf(website_url, save_directory)

@@ -82,8 +82,6 @@ def extract_text(pdf_path, keywords):
     return text_with_page
 
 
-
-
 def create_metadata_dictionary(folder_path, search_term=None):
     nested_metadata_dict = {}
     for root, dirs, files in os.walk(folder_path):
