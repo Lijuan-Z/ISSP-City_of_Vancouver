@@ -19,6 +19,22 @@ def extract_metadata(pdf_path):
     return metadata
 
 
+def find_last_outline(pdf_file, page):
+    outlines = pdf_file.outline
+    if outlines:
+        last_title = outlines[0].get('/Title')
+        for outline in outlines:
+            page_num = pdf_file.get_destination_page_number(outline)
+            if page_num == page:
+                return outline.get('/Title')
+            if page_num > page:
+                return last_title
+            last_title = outline.get('/Title')
+        return None
+    else:
+        return None
+
+
 def extract_text(pdf_path, keyword):
     try:
         pdf_file = pypdf.PdfReader(pdf_path)
@@ -30,7 +46,8 @@ def extract_text(pdf_path, keyword):
             for sentence in sentences:
                 cleaned_sentence = sentence.strip().replace('\n', '') + '.'
                 if keyword.lower() in cleaned_sentence.lower():
-                    text_with_page.append((cleaned_sentence, page_num + 1))
+                    outline_title = find_last_outline(pdf_file, page_num)
+                    text_with_page.append((cleaned_sentence, page_num + 1, outline_title))
     except Exception as e:
         print(f"Error extracting text from PDF file '{pdf_path}': {e}")
         text_with_page = []
@@ -47,11 +64,12 @@ def create_metadata_dictionary(folder_path, search_term=None):
                 if search_term is not None:
                     instances = []
                     text_with_pages = extract_text(file_path, search_term)
-                    for extracted_text, page_number in text_with_pages:
+                    for extracted_text, page_number, outline_title in text_with_pages:
                         if extracted_text:
                             instances.append({
                                 'Page number': page_number,
-                                'Reference': extracted_text.strip()
+                                'Reference': extracted_text.strip(),
+                                'Chapter/Section': outline_title
                             })
                     if instances:
                         metadata = extract_metadata(file_path)
@@ -63,8 +81,8 @@ def create_metadata_dictionary(folder_path, search_term=None):
 
 
 if __name__ == '__main__':
-    folder_path = 'test_pdfs'
-    # folder_path = 'downloaded_pdfs'
+    # folder_path = 'test_pdfs'
+    folder_path = 'downloaded_pdfs'
 
     # Search for PDFs containing search term
     search_term = 'parking'
