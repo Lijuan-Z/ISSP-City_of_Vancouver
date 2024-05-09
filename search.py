@@ -46,8 +46,8 @@ def extract_text(pdf_path, keyword):
             for sentence in sentences:
                 cleaned_sentence = sentence.strip().replace('\n', '') + '.'
                 if keyword.lower() in cleaned_sentence.lower():
-                    outline_title = find_last_outline(pdf_file, page_num)
-                    text_with_page.append((cleaned_sentence, page_num + 1, outline_title))
+                    # outline_title = find_last_outline(pdf_file, page_num)
+                    text_with_page.append((cleaned_sentence, page_num + 1))
     except Exception as e:
         print(f"Error extracting text from PDF file '{pdf_path}': {e}")
         text_with_page = []
@@ -64,12 +64,12 @@ def create_metadata_dictionary(folder_path, search_term=None):
                 if search_term is not None:
                     instances = []
                     text_with_pages = extract_text(file_path, search_term)
-                    for extracted_text, page_number, outline_title in text_with_pages:
+                    for extracted_text, page_number in text_with_pages:
                         if extracted_text:
                             instances.append({
                                 'Page number': page_number,
                                 'Reference': extracted_text.strip(),
-                                'Chapter/Section': outline_title
+                                # 'Chapter/Section': outline_title
                             })
                     if instances:
                         metadata = extract_metadata(file_path)
@@ -90,5 +90,7 @@ if __name__ == '__main__':
 
     # Convert metadata dictionary to JSON string
     json_str = json.dumps(nested_metadata_dict, indent=4)
-    
+
     print(json_str)
+    with open('output2.json', 'w') as f:
+        f.write(json_str)
