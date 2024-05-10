@@ -96,6 +96,9 @@ if __name__ == '__main__':
     search_terms = ['parking', 'road']
     nested_metadata_dict = create_metadata_dictionary(folder_path, search_term=search_terms)
 
+    with open('metadata.json', 'w') as metadata_file:
+        json.dump(nested_metadata_dict, metadata_file)
+
     # Convert metadata dictionary to JSON string
     json_str = json.dumps(nested_metadata_dict, indent=4)
 
