@@ -3,6 +3,7 @@ import json
 import os
 import pypdf
 from pdfminer.layout import LTImage
+from backend.ouput_handler import OutputHandler
 
 
 def extract_metadata(pdf_path):
@@ -88,8 +89,8 @@ def create_metadata_dictionary(folder_path, search_term=None):
 
 
 if __name__ == '__main__':
-    folder_path = 'test_pdfs'
-    # folder_path = 'downloaded_pdfs'
+    #folder_path = 'test_pdfs'
+    folder_path = 'downloaded_pdfs'
 
     # Search for PDFs containing search term
     search_terms = ['parking', 'road']
@@ -97,4 +98,8 @@ if __name__ == '__main__':
 
     # Convert metadata dictionary to JSON string
     json_str = json.dumps(nested_metadata_dict, indent=4)
+
     print(json_str)
+
+    OutputHandler.create_excel_file(json_str)
+
