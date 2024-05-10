@@ -9,7 +9,7 @@ class OutputHandler:
 
         json_dict = OutputHandler.adjust_json_dict(json_obj)
 
-        pd.DataFrame(json_dict).transpose().to_excel(output_file)
+        pd.DataFrame(json_dict).to_excel(output_file, engine="xlsxwriter")
 
     @staticmethod
     def adjust_json_dict(json_obj):
