@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 import os
+import ast
 
 class OutputHandler:
 
@@ -17,7 +18,7 @@ class OutputHandler:
         if isinstance(json_obj, str):
             json_obj = json.loads(json_obj)
 
-        print("Adjusting json object")
+        # print("Adjusting json object")
         dict_list = []
         for key, value in json_obj.items():
             for instance in json_obj[key]['Instances']:
@@ -35,7 +36,7 @@ class OutputHandler:
     def adjust_json_dict(info_list):
 
         if isinstance(info_list, str):
-            json_obj = json.loads(info_list)
+            json_obj = ast.literal_eval(info_list)
         else:
             json_obj = info_list
 
@@ -59,5 +60,12 @@ class OutputHandler:
 
 
 if __name__ == "__main__":
-    pass
+    test_data = ""
+    with open('../Untitled_2.txt') as test_file:
+        test_data = test_file.read()
+
+    print(type(test_data))
+    print(test_data)
+    OutputHandler.create_excel_file(test_data)
+
 
