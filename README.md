@@ -22,6 +22,9 @@ source myenv/bin/activate
 #### Install Dependencies
 pip install -r requirements.txt
 
+#### Copy config.py
+Copy config.py from Google Drive to the backend folder
+
 #### Run the Backend
 python server.py
 

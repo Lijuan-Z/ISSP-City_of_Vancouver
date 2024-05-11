@@ -1,8 +1,11 @@
+from search_term import searching_endpoint
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
 import pandas as pd
 import io
 import configparser
+
+from output_handler import OutputHandler
 
 # config file for information management
 config = configparser.ConfigParser()
@@ -13,17 +16,19 @@ CORS(app)
 
 # Generate Excel file based on the query
 def generate_response(query):
-    # This is a simple example file.
-    df = pd.DataFrame({'Data': [1, 2, 3, 4, 5]})
-    output = io.BytesIO()
-    df.to_excel(output, index=False)
-    output.seek(0)  # Reset file pointer to the beginning
-    
+
+    output_str = searching_endpoint(query)
+    OutputHandler.create_excel_file(output_str)
+
+    excel_file_path = "output.xlsx"
+    with open(excel_file_path, "rb") as file:
+        file_data = file.read()
+
     # Create response object
-    response = make_response(output.getvalue())
+    response = make_response(file_data)
     
     # Set headers
-    response.headers["Content-Disposition"] = f"attachment; filename={query}.xlsx"
+    response.headers["Content-Disposition"] = f"attachment; filename=output.xlsx"
     response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
     return response
