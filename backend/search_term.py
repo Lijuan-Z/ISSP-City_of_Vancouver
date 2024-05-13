@@ -26,7 +26,7 @@ def search_pdf(keyword, filename, chatbot, file_type, url,image_search_enabled):
                 for image in page.images:
                     result = image_reader.readtext(image.data)
                     for (bbox, text, prob) in result:
-                        if is_contain_keyword(keyword, paragraph):
+                        if is_contain_keyword(keyword, text):
                             info = [file_type, title, url, page_num+1, '', 'image', keyword, text]
                             print(info)
                             results.append(info)
