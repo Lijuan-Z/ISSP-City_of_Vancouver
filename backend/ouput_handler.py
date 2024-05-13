@@ -50,7 +50,10 @@ class OutputHandler:
             new_dictionary['Section Title'] = instance[5]
             new_dictionary['Search Terms'] = instance[6]
             new_dictionary['Page Number'] = instance[3]
-            new_dictionary['Link'] = instance[2]
+            if instance[2] is not None:
+                new_dictionary['Link'] = f"{instance[2]}#page={instance[3]}"
+            else:
+                new_dictionary['Link'] = "Link not Found"
             new_dictionary['Reference'] = instance[7]
             new_dictionary['Proposed amendement'] = "In Development"
             new_dictionary['Rationale'] = "In Development"
