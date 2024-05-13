@@ -1,2 +1,6 @@
 *.idea
+*.DS_Store
+*.venv
+venv
+downloaded_pdfs/
 *.env
