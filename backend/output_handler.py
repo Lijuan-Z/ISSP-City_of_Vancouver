@@ -44,13 +44,19 @@ class OutputHandler:
         dict_list = []
         for instance in json_obj:
             new_dictionary = {}
-            new_dictionary['Land Use Document type'] = instance[0]
+            if instance[0] is not None:
+                new_dictionary['Land Use Document type'] = instance[0]
+            else:
+                new_dictionary['Land Use Document type'] =""
             new_dictionary['Title'] = instance[1]
             new_dictionary['Section #'] = instance[4]
             new_dictionary['Section Title'] = instance[5]
             new_dictionary['Search Terms'] = instance[6]
             new_dictionary['Page Number'] = instance[3]
-            new_dictionary['Link'] = f"{instance[2]}#page={instance[3]}"
+            if instance[2] is not None:
+                new_dictionary['Link'] = f"{instance[2]}#page={instance[3]}"
+            else:
+                new_dictionary['Link'] = ""
             new_dictionary['Reference'] = instance[7]
             new_dictionary['Proposed amendement'] = "In Development"
             new_dictionary['Rationale'] = "In Development"
