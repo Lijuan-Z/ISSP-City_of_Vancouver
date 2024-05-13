@@ -1,3 +1,4 @@
+import time
 from search_term import searching_endpoint
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
@@ -16,9 +17,16 @@ CORS(app)
 
 # Generate Excel file based on the query
 def generate_response(query):
-
+    start_time = time.time()
     output_str = searching_endpoint(query)
     OutputHandler.create_excel_file(output_str)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+
+    # Print the elapsed time
+    print("Elapsed time:", elapsed_time, "seconds")
+    
+    
 
     excel_file_path = "output.xlsx"
     with open(excel_file_path, "rb") as file:
