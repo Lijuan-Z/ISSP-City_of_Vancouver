@@ -72,7 +72,7 @@ def search_pdf(keyword, filename, chatbot, file_type, url,image_search_enabled):
                 pre_page_text = page_text
     except Exception as e:
         print(f"An error occurred: filename {filename} ,error:{e}")
-        
+
     return results
 
 
