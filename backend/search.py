@@ -30,11 +30,11 @@ def create_metadata_dictionary(json_path, search_terms=None):
                 if 'Pages' in file_data:
                     for page_num, page_content in file_data['Pages'].items():
                         # Split the entire page content into sentences
-                        sentences = page_content.split('.')
+                        sentences = page_content.split('\n \n')
                         for sentence_index, sentence in enumerate(sentences, start=1):
                             found_terms = []
                             for term in search_terms:
-                                if term.lower() in sentence.lower():
+                                if term.lower() == sentence.lower():
                                     found_terms.append(term)
                                     # Extract three sentences before and after the sentence containing the term
                                     context_start = max(0, sentence_index - 4)  # 4 sentences before
