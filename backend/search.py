@@ -59,9 +59,9 @@ def create_metadata_dictionary(json_path, search_terms=None):
 
 
 if __name__ == '__main__':
-    json_file_path = 'backend/processed.json'
+    json_file_path = 'processed.json'
     search_terms = ['parking', 'lane']
 
     nested_metadata_dict = create_metadata_dictionary(json_file_path, search_terms=search_terms)
-    output_file = 'backend/output.json'
+    output_file = 'output.json'
     write_to_json(nested_metadata_dict, output_file)
