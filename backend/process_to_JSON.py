@@ -13,10 +13,10 @@ class ProcessToJSON:
         nested_metadata_dict = {}
         for root, dirs, files in os.walk(self.folder_path):
             for file_name in files:
-                if file_name in file_list_inc_image: # TEMPORARY HARD CODE TO GENERATE EXAMPLE OUTPUT. REMOVE AFTERWARDS
-                    image_included = True # TEMPORARY HARD CODE TO GENERATE EXAMPLE OUTPUT. REMOVE AFTERWARDS
-                    print(f"Searching for images on file {file_name}")
-                    image_start = time.time()
+                # if file_name in file_list_inc_image: # TEMPORARY HARD CODE TO GENERATE EXAMPLE OUTPUT. REMOVE AFTERWARDS
+                #     image_included = True # TEMPORARY HARD CODE TO GENERATE EXAMPLE OUTPUT. REMOVE AFTERWARDS
+                #     print(f"Searching for images on file {file_name}")
+                #     image_start = time.time()
                 if file_name.endswith('.pdf'):
                     file_path = os.path.join(root, file_name)
                     try:
@@ -36,9 +36,9 @@ class ProcessToJSON:
                                 nested_metadata_dict[file_name]['Pages'][page_num] = page_text
                     except Exception as e:
                         print("Exception occured")
-                if image_included:
-                    image_included = False # TEMPORARY HARD CODE TO GENERATE EXAMPLE OUTPUT. REMOVE AFTERWARDS
-                    print(f"image_included - {time.time() - image_start}")
+                # if image_included:
+                #     image_included = False # TEMPORARY HARD CODE TO GENERATE EXAMPLE OUTPUT. REMOVE AFTERWARDS
+                #     print(f"image_included - {time.time() - image_start}")
 
         nested_metadata_dict = self.add_file_info_to_JSON(nested_metadata_dict, URL_info)
 
@@ -90,21 +90,21 @@ if __name__ == '__main__':
     with open('doc_type.json') as json_file:
         data = json.load(json_file)
 
-    image_file_list =[]
-    image_file_list.append("policy-plan-grandview-woodland.pdf")
-    image_file_list.append("guidelines-cd-1-501-bute-street.pdf")
-    image_file_list.append("policy-statement-st-pauls.pdf")
-    image_file_list.append("policy-statement-under-granville-bridge-neighbourhood.pdf")
-    image_file_list.append("guidelines-industrial-spaces.pdf")
-    image_file_list.append("guidelines-c-2-2b-2c-2c1-residential-rental-tenure.pdf")
-    image_file_list.append("guidelines-rm-10-10n.pdf")
-    image_file_list.append("guidelines-rt-11-rt-11n.pdf")
-    image_file_list.append("guidelines-fc-1-east-false-creek.pdf")
-    image_file_list.append("B004.pdf")
+    # image_file_list =[]
+    # image_file_list.append("policy-plan-grandview-woodland.pdf")
+    # image_file_list.append("guidelines-cd-1-501-bute-street.pdf")
+    # image_file_list.append("policy-statement-st-pauls.pdf")
+    # image_file_list.append("policy-statement-under-granville-bridge-neighbourhood.pdf")
+    # image_file_list.append("guidelines-industrial-spaces.pdf")
+    # image_file_list.append("guidelines-c-2-2b-2c-2c1-residential-rental-tenure.pdf")
+    # image_file_list.append("guidelines-rm-10-10n.pdf")
+    # image_file_list.append("guidelines-rt-11-rt-11n.pdf")
+    # image_file_list.append("guidelines-fc-1-east-false-creek.pdf")
+    # image_file_list.append("B004.pdf")
 
 
     start = time.time()
-    dict_info = processor.read_PDFs(False, URL_info=data, file_list_inc_image=image_file_list)
+    dict_info = processor.read_PDFs(False, URL_info=data)
     print(time.time() - start)
 
     with open('processed.json', 'w') as json_file:
