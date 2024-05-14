@@ -1,5 +1,6 @@
 import time
 from search_term import searching_endpoint
+from scrape import download_source_html, download_pdf, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
 import json
@@ -45,7 +46,23 @@ def generate_response(query):
 # Handling web-scrapping of PDF and document-type json file
 def scrap_file_and_data():
 
-    ### pdf downloading process ###
+    ### html, pdf & doc-type json download process ###
+    if config.getboolean('scrap', 'download'):
+        # URL of the website to scrape
+        website_url = config.get('scrap', 'cov_url')
+        # Directory to save the downloaded PDFs
+        save_directory = config.get('scrap', 'pdf_folder')
+        # Output file name for document_type json data
+        output_file = config.get('server', 'doc_file')
+
+        app.logger.info("/update: server is downloading html file from")
+        source_html = download_source_html(website_url)
+        app.logger.info("/update: server finished downloading html. Now downloading pdf files")
+        download_pdf(source_html, website_url, save_directory)
+        app.logger.info("/update: server finished downloading pdf files. Now creating doc-type-json file")
+        retrieve_document_type(source_html, output_file)
+
+    # open stored doc-type file and return update info
     with open(config.get('server', 'doc_file'), "r") as file:
         data = json.load(file)
 
@@ -58,11 +75,6 @@ def scrap_file_and_data():
         }
 
         return output
-
-
-###### Any pre-server start running code run here ######
-# read pdf
-# save to json
 
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
