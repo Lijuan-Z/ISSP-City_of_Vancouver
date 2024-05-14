@@ -6,22 +6,21 @@ import easyocr
 
 
 class ProcessToJSON:
-
     def __init__(self, folder_path):
         self.folder_path = folder_path
 
     def read_PDFs(self, image_included, URL_info):
-
         nested_metadata_dict = {}
         for root, dirs, files in os.walk(self.folder_path):
             for file_name in files:
                 if file_name.endswith('.pdf'):
                     file_path = os.path.join(root, file_name)
-                    with open(file_path, mode='rb') as file:
-                        reader = pypdf.PdfReader(file)
-                        nested_metadata_dict[file_name] = {}
-                        nested_metadata_dict[file_name]['Title'] = reader.metadata.title
-                        nested_metadata_dict[file_name]['Pages'] = {}
+                    try:
+                        with open(file_path, mode='rb') as file:
+                            reader = pypdf.PdfReader(file)
+                            nested_metadata_dict[file_name] = {}
+                            nested_metadata_dict[file_name]['Title'] = reader.metadata.title
+                            nested_metadata_dict[file_name]['Pages'] = {}
 
                         for page in reader.pages:
                             page_num = str(page.page_number + 1)
@@ -80,13 +79,13 @@ if __name__ == '__main__':
 
     # Search for PDFs containing search term
     processor = ProcessToJSON(folder_path)
-    URL_info =[]
+    URL_info = []
     with open('doc_type.json') as json_file:
         data = json.load(json_file)
 
     start = time.time()
-    dict_info = processor.read_PDFs(True, URL_info=data)
+    dict_info = processor.read_PDFs(False, URL_info=data)
     print(time.time() - start)
 
     with open('processed.json', 'w') as json_file:
-        json.dump(dict_info, json_file)
+        json.dump(dict_info, json_file, indent=4)
