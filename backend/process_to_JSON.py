@@ -90,19 +90,6 @@ if __name__ == '__main__':
     with open('doc_type.json') as json_file:
         data = json.load(json_file)
 
-    # image_file_list =[]
-    # image_file_list.append("policy-plan-grandview-woodland.pdf")
-    # image_file_list.append("guidelines-cd-1-501-bute-street.pdf")
-    # image_file_list.append("policy-statement-st-pauls.pdf")
-    # image_file_list.append("policy-statement-under-granville-bridge-neighbourhood.pdf")
-    # image_file_list.append("guidelines-industrial-spaces.pdf")
-    # image_file_list.append("guidelines-c-2-2b-2c-2c1-residential-rental-tenure.pdf")
-    # image_file_list.append("guidelines-rm-10-10n.pdf")
-    # image_file_list.append("guidelines-rt-11-rt-11n.pdf")
-    # image_file_list.append("guidelines-fc-1-east-false-creek.pdf")
-    # image_file_list.append("B004.pdf")
-
-
     start = time.time()
     dict_info = processor.read_PDFs(False, URL_info=data)
     print(time.time() - start)

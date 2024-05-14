@@ -34,7 +34,9 @@ def create_metadata_dictionary(json_path, search_terms=None):
                         for sentence_index, sentence in enumerate(sentences, start=1):
                             found_terms = []
                             for term in search_terms:
-                                if term.lower() in sentence.lower():
+                                # Split the sentence into words and check for exact matches
+                                words = sentence.split()
+                                if term.lower() in [word.lower() for word in words]:
                                     found_terms.append(term)
                                     # Extract three sentences before and after the sentence containing the term
                                     context_start = max(0, sentence_index - 4)  # 4 sentences before
@@ -48,7 +50,7 @@ def create_metadata_dictionary(json_path, search_terms=None):
                                         'Title': file_data['Title'],
                                         'Search terms': found_terms,
                                         'Page': page_num,
-                                        'Reference': context,
+                                        'Reference': context.strip(),
                                         'Link': file_data['Link'],
                                         'Land Use Document Type': file_data['Land Use Document Type']
                                     })
