@@ -34,6 +34,8 @@ class ProcessToJSON:
                             else:
                                 page_text = ""
                             nested_metadata_dict[file_name]['Pages'][page_num] = page_text
+                    except Exception as e:
+                        print("Exception occured")
 
         nested_metadata_dict = self.add_file_info_to_JSON(nested_metadata_dict, URL_info)
 
