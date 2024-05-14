@@ -42,6 +42,24 @@ def generate_response(query):
 
     return response
 
+# Handling web-scrapping of PDF and document-type json file
+def scrap_file_and_data():
+
+    ### pdf downloading process ###
+    with open(config.get('server', 'doc_file'), "r") as file:
+        data = json.load(file)
+
+        output = [{k: {'type': v['type'], 'title': v['title'], 'url': v['url']} for k, v in obj.items()} for obj in
+                  data]
+        list(output)
+        output = {
+            "last-updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+            "data": output
+        }
+
+        return output
+
+
 ###### Any pre-server start running code run here ######
 # read pdf
 # save to json
@@ -77,22 +95,14 @@ def search():
 def update():
     app.logger.info(f"/update: received a request")
     try:
-        ### pdf downloading process ###
-        with open('doc_type.json', "r") as file:
-        # with open(config.get('server', 'doc_file'), "r") as file:
-            data = json.load(file)
+        output = scrap_file_and_data()
 
-            output = [{k: {'type': v['type'], 'title': v['title'], 'url': v['url']} for k, v in obj.items()} for obj in data]
-            list(output)
-            output = {
-                "last-updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
-                "data": output
-            }
-            response = app.response_class(
-                response=json.dumps({"data": output}),
-                status=200,
-                mimetype='application/json'
-            )
+        app.logger.info(f"/update: finished scrapping and return response")
+        response = app.response_class(
+            response=json.dumps({"data": output}),
+            status=200,
+            mimetype='application/json'
+        )
         return response
     except Exception as e:
         app.logger.error(f"/update: Error in loading file - {e}")
