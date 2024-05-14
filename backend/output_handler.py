@@ -42,7 +42,7 @@ class OutputHandler:
                 new_dictionary['Section Title'] = ""
                 new_dictionary['Search Terms'] = ','.join(instance['Search terms'])
                 if instance['Link'] is not None:
-                    new_dictionary['Link'] = f"{instance['Link']}#=page{instance['Page']}"
+                    new_dictionary['Link'] = f"{instance['Link']}#page={instance['Page']}"
                 else:
                     new_dictionary['Link'] = ""
                 new_dictionary['Page Number'] = instance['Page']
