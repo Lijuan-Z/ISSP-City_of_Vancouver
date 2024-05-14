@@ -29,21 +29,29 @@ def create_metadata_dictionary(json_path, search_terms=None):
             for file_name, file_data in json_data.items():
                 if 'Pages' in file_data:
                     for page_num, page_content in file_data['Pages'].items():
-                        paragraphs = page_content.split('.')
-                        for paragraph in paragraphs:
+                        # Split the entire page content into sentences
+                        sentences = page_content.split('.')
+                        for sentence_index, sentence in enumerate(sentences, start=1):
                             found_terms = []
                             for term in search_terms:
-                                if term.lower() in paragraph.lower():
+                                if term.lower() in sentence.lower():
                                     found_terms.append(term)
-                            if found_terms:
-                                if file_name not in nested_metadata_dict:
-                                    nested_metadata_dict[file_name] = []
-                                nested_metadata_dict[file_name].append({
-                                    'Title': file_data['Title'],
-                                    'Search terms': found_terms,
-                                    'Page': page_num,
-                                    'Reference': paragraph
-                                })
+                                    # Extract three sentences before and after the sentence containing the term
+                                    context_start = max(0, sentence_index - 4)  # 4 sentences before
+                                    context_end = min(len(sentences), sentence_index + 4)  # 3 sentences after + 1 containing the term
+                                    context = '. '.join(sentences[context_start:context_end])
+                                    # Remove newline characters from the context
+                                    context = context.replace('\n', '')
+                                    if file_name not in nested_metadata_dict:
+                                        nested_metadata_dict[file_name] = []
+                                    nested_metadata_dict[file_name].append({
+                                        'Title': file_data['Title'],
+                                        'Search terms': found_terms,
+                                        'Page': page_num,
+                                        'Reference': context,
+                                        'Link': file_data['Link'],
+                                        'Land Use Document Type': file_data['Land Use Document Type']
+                                    })
     else:
         print("No data loaded from JSON file.")
 

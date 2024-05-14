@@ -54,8 +54,8 @@ class ProcessToJSON:
 
 
 if __name__ == '__main__':
-    folder_path = '../test_pdfs'
-    # folder_path = '../downloaded_pdfs'
+    # folder_path = '../test_pdfs'
+    folder_path = 'downloaded_pdfs'
 
     # Search for PDFs containing search term
     processor = ProcessToJSON(folder_path)
