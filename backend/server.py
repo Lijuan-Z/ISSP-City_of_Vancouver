@@ -59,15 +59,18 @@ def internal_error(error):
 
 @app.route("/search")
 def search():
+    try:
+        query = request.args.get('q').split(",")  # Get the search query parameter
 
-    query = request.args.get('q')  # Get the search query parameter
-    app.logger.info(f"/search received a request of ${query}")
-    if query is not None:
-        ###### Any query function run here #######
-        return generate_response(query)
-    else:
-       app.logger.error(f"/search receive an empty query and returning status code 404")
-       abort(404)
+        app.logger.info(f"/search received a request of ${query}")
+        if query is not None:
+            ###### Any query function run here #######
+            return generate_response(query)
+        else:
+           app.logger.error(f"/search receive an empty query and returning status code 404")
+           abort(404)
+    except:
+        abort(500)
 
 
 
