@@ -2,6 +2,7 @@ import pypdf
 import json
 import os
 import time
+import easyocr
 
 
 class ProcessToJSON:
@@ -26,8 +27,13 @@ class ProcessToJSON:
                             page_num = str(page.page_number + 1)
                             if not image_included:
                                 page_text = page.extract_text()
+                            elif image_included and page.images:
+                                image_start = time.time()
+                                print(f"Searching for image on file:{file_name} - {image_start} ")
+                                page_text = self.get_image_text(page)
+                                print(f"image end: {time.time() - image_start}")
                             else:
-                                page_text = "" #add function that includes text both from text and image
+                                page_text = ""
                             nested_metadata_dict[file_name]['Pages'][page_num] = page_text
 
         nested_metadata_dict = self.add_file_info_to_JSON(nested_metadata_dict, URL_info)
@@ -52,10 +58,25 @@ class ProcessToJSON:
         return nested_metadata_dict
 
 
+    def get_image_text(self, page):
+        image_reader = easyocr.Reader(['en'])
+        image_info = ""
+        try:
+            for image in page.images:
+                # print(filename,' has image')
+                result = image_reader.readtext(image.data, detail=0)
+                image_text = ' '.join(result)
+                image_info += f"IMAGE: {image_text}"
+        except:
+            print("Could not read image")
+        page_text = page.extract_text()
+        page_text += f" {image_info}"
+        return page_text
+
 
 if __name__ == '__main__':
     # folder_path = 'test_pdfs'
-    folder_path = '../downloaded_pdfs'
+    folder_path = '../downloaded_pdfs/Even less'
 
     # Search for PDFs containing search term
     processor = ProcessToJSON(folder_path)
@@ -64,7 +85,7 @@ if __name__ == '__main__':
         data = json.load(json_file)
 
     start = time.time()
-    dict_info = processor.read_PDFs(False, URL_info=data)
+    dict_info = processor.read_PDFs(True, URL_info=data)
     print(time.time() - start)
 
     with open('processed.json', 'w') as json_file:
