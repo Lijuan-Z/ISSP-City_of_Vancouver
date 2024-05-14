@@ -5,30 +5,31 @@ import time
 
 
 class ProcessToJSON:
-
     def __init__(self, folder_path):
         self.folder_path = folder_path
 
     def read_PDFs(self, image_included, URL_info):
-
         nested_metadata_dict = {}
         for root, dirs, files in os.walk(self.folder_path):
             for file_name in files:
                 if file_name.endswith('.pdf'):
                     file_path = os.path.join(root, file_name)
-                    with open(file_path, mode='rb') as file:
-                        reader = pypdf.PdfReader(file)
-                        nested_metadata_dict[file_name] = {}
-                        nested_metadata_dict[file_name]['Title'] = reader.metadata.title
-                        nested_metadata_dict[file_name]['Pages'] = {}
+                    try:
+                        with open(file_path, mode='rb') as file:
+                            reader = pypdf.PdfReader(file)
+                            nested_metadata_dict[file_name] = {}
+                            nested_metadata_dict[file_name]['Title'] = reader.metadata.title
+                            nested_metadata_dict[file_name]['Pages'] = {}
 
-                        for page in reader.pages:
-                            page_num = str(page.page_number + 1)
-                            if not image_included:
-                                page_text = page.extract_text()
-                            else:
-                                page_text = "" #add function that includes text both from text and image
-                            nested_metadata_dict[file_name]['Pages'][page_num] = page_text
+                            for page_num, page in enumerate(reader.pages, start=1):
+                                page_text = ""
+                                try:
+                                    page_text = page.extract_text()
+                                except Exception as e:
+                                    print(f"Error extracting text from page {page_num} of '{file_name}': {e}")
+                                nested_metadata_dict[file_name]['Pages'][str(page_num)] = page_text
+                    except Exception as e:
+                        print(f"Error reading PDF file '{file_name}': {e}")
 
         nested_metadata_dict = self.add_file_info_to_JSON(nested_metadata_dict, URL_info)
 
@@ -52,14 +53,13 @@ class ProcessToJSON:
         return nested_metadata_dict
 
 
-
 if __name__ == '__main__':
-    # folder_path = 'test_pdfs'
-    folder_path = '../downloaded_pdfs'
+    folder_path = '../test_pdfs'
+    # folder_path = '../downloaded_pdfs'
 
     # Search for PDFs containing search term
     processor = ProcessToJSON(folder_path)
-    URL_info =[]
+    URL_info = []
     with open('doc_type.json') as json_file:
         data = json.load(json_file)
 
@@ -68,4 +68,4 @@ if __name__ == '__main__':
     print(time.time() - start)
 
     with open('processed.json', 'w') as json_file:
-        json.dump(dict_info, json_file)
+        json.dump(dict_info, json_file, indent=4)
