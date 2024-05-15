@@ -2360,14 +2360,6 @@
     }
   },
   {
-    "guidelines-cannabis-store": {
-      "type": "Non-residential projects",
-      "title_original": "Cannabis Store PDF file (71 KB)",
-      "title": "Cannabis Store",
-      "url": "https://guidelines.vancouver.ca/guidelines-cannabis-store.pdf"
-    }
-  },
-  {
     "guidelines-casino": {
       "type": "Non-residential projects",
       "title_original": "Casino\u00a0PDF file (63 KB)",
@@ -2445,6 +2437,14 @@
       "title_original": "Live-work Use PDF file (591\u00a0KB)",
       "title": "Live-work Use",
       "url": "https://guidelines.vancouver.ca/guidelines-live-work-use.pdf"
+    }
+  },
+  {
+    "guidelines-medical-marijuana-related": {
+      "type": "Non-residential projects",
+      "title_original": "Medical Marijuana-related PDF file (130 KB)",
+      "title": "Medical Marijuana-related",
+      "url": "https://guidelines.vancouver.ca/guidelines-medical-marijuana-related.pdf"
     }
   },
   {
@@ -2600,14 +2600,6 @@
     }
   },
   {
-    "guidelines-energy-modelling": {
-      "type": "General",
-      "title_original": "Energy Modelling PDF file (311 KB)",
-      "title": "Energy Modelling",
-      "url": "https://guidelines.vancouver.ca/guidelines-energy-modelling.pdf"
-    }
-  },
-  {
     "guidelines-event-noise-protocols": {
       "type": "General",
       "title_original": "Event Noise PDF file\u00a0(165\u00a0KB)",
@@ -2637,6 +2629,30 @@
       "title_original": "Interior Public Space PDF file (468\u00a0KB)",
       "title": "Interior Public Space",
       "url": "https://guidelines.vancouver.ca/guidelines-interior-public-space.pdf"
+    }
+  },
+  {
+    "guidelines-energy-modelling": {
+      "type": "General",
+      "title_original": "Energy Modelling\u00a0PDF file\u00a0(311\u00a0KB)",
+      "title": "Energy Modelling",
+      "url": "https://guidelines.vancouver.ca/guidelines-energy-modelling.pdf"
+    }
+  },
+  {
+    "guidelines-sustainability-variance-rs-rt-ra-zero-emission-buildings": {
+      "type": "General",
+      "title_original": "R1-1, RT, and RA Districts\u00a0PDF file\u00a0(334 KB)",
+      "title": "R1-1, RT, and RA Districts",
+      "url": "https://guidelines.vancouver.ca/guidelines-sustainability-variance-rs-rt-ra-zero-emission-buildings.pdf"
+    }
+  },
+  {
+    "guidelines-sustainability-variance-larger-zero-emission-buildings": {
+      "type": "General",
+      "title_original": "Larger Projects\u00a0PDF file\u00a0(124\u00a0KB)",
+      "title": "Larger Projects",
+      "url": "https://guidelines.vancouver.ca/guidelines-sustainability-variance-larger-zero-emission-buildings.pdf"
     }
   },
   {
@@ -3357,22 +3373,6 @@
       "title_original": "Zero Emissions Building Catalyst PDF file (188\u00a0KB)\u200b",
       "title": "Zero Emissions Building Catalyst",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-zero-emissions-building-catalyst.pdf"
-    }
-  },
-  {
-    "bulletin-sustainability-zero-emissions-r1-rt-ra": {
-      "type": "Topic specific",
-      "title_original": "R1, RT and RA Districts PDF file (191 KB)",
-      "title": "R1, RT and RA Districts",
-      "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-zero-emissions-r1-rt-ra.pdf"
-    }
-  },
-  {
-    "bulletin-sustainability-zero-emissions-larger-buildings": {
-      "type": "Topic specific",
-      "title_original": "Large buildings PDF file (261 KB)",
-      "title": "Large buildings",
-      "url": "http://bylaws.vancouver.ca/bulletin/bulletin-sustainability-zero-emissions-larger-buildings.pdf"
     }
   },
   {

@@ -1,6 +1,6 @@
 import pandas as pd
 import json
-import os
+import re
 import ast
 
 class OutputHandler:
@@ -8,9 +8,51 @@ class OutputHandler:
     @staticmethod
     def create_excel_file(json_obj, output_file="output.xlsx"):
 
-        json_dict = OutputHandler.adjust_json_dict(json_obj)
+        json_dict = OutputHandler.adjust_json_dict_from_indexed(json_obj)
 
-        pd.DataFrame(json_dict).to_excel(output_file, engine="xlsxwriter")
+        OutputHandler.prettify_excel(json_dict, output_file)
+
+        # for v in dataframe['Reference']:
+        #     print(f"{v}\n\n")
+        #
+        #
+        # dataframe.to_excel(output_file, engine="xlsxwriter", sheet_name="Search Results", index=False)
+
+
+
+
+    @staticmethod
+    def adjust_json_dict_from_indexed(json_file):
+
+        json_obj = {}
+        with open(json_file, "r") as jf:
+            json_obj = json.load(jf)
+
+        if isinstance(json_obj, str):
+            json_obj = json.loads(json_obj)
+
+        dict_list = []
+        for key, value in json_obj.items():
+            for instance in json_obj[key]:
+                new_dictionary = {}
+                new_dictionary["Land Use Document Type"] = instance["Land Use Document Type"]
+                new_dictionary["File name"] = key
+                new_dictionary['Title'] = instance["Title"]
+                new_dictionary['Section #'] = ""
+                new_dictionary['Section Title'] = ""
+                new_dictionary['Search Terms'] = ','.join(instance['Search terms'])
+                if instance['Link'] is not None:
+                    new_dictionary['Link'] = f"{instance['Link']}#page={instance['Page']}"
+                else:
+                    new_dictionary['Link'] = ""
+                new_dictionary['Page Number'] = instance['Page']
+                new_dictionary['Reference'] = instance['Reference']
+                new_dictionary['Proposed amendment'] = "In Development"
+                new_dictionary['Rationale'] = "In Development"
+                dict_list.append(new_dictionary)
+
+        return dict_list
+
 
     @staticmethod
     def adjust_json_dict_old(json_obj):
@@ -64,13 +106,40 @@ class OutputHandler:
 
         return dict_list
 
+    @staticmethod
+    def prettify_excel(json_dict, output_file):
+        df = pd.DataFrame(json_dict)
 
-# if __name__ == "__main__":
-#     test_data = ""
-#     # with open('Untitled_2.txt') as test_file:
-#     #     test_data = test_file.read()
-#     test_data = [['Zoning district', 'Guidelines: Great Northern Way CD-1 Guidelines', 'https://guidelines.vancouver.ca/CD-1/G001.pdf', 5, 'section number', 'section name', 'parking', '2.4 Sustainability  \n(a) Design for Green Mobility through transit -oriented design, emphasis on non- automotive \ntransportati on, appropriate parking standards for cars and bikes, and enhanced \nopportunities for public bike share, car -share and electric vehicles.  \n(b) Create opportunities for sustainable green energy through integration of all new buildings, where feasible, with the SEFC Neighbourhood Energy Utility. '], ['Zoning district', 'Guidelines: Great Northern Way CD-1 Guidelines', 'https://guidelines.vancouver.ca/CD-1/G001.pdf', 6, 'section number', 'section name', 'parking', ' \n3.2 Setbacks  \n(a) Provide a 3- m (10 -ft.) setback along Great Northern Way, west of Carolina St.  \n(b) Provide a 9- m (30 -ft) setback along Great Norther n Way, east of Carolina St, noting that \nthis may be reduced to 3- m (10 -ft) where conditions permit. \n(c) Provide a 15- m (50 -ft.) landscape setback along the westerly and easterly most property \nlines of the CD -1 boundary to be reserved for the commemoration of China and Brewery \nCreeks.  \n(d) Building setbacks from property lines need to be provided and will be analyzed on a site \nby site basis.  Solar performance and other design criteria such as the effect on adjacent \nopen spaces; adjacent building design and use; any other concerns of a similar nature to \nthe foregoing will need to be taken into account.  \n(e) Parking or loading access is not to be located at or above grade in the landscape setbacks.  '], ['Zoning district', 'Guidelines: Great Northern Way CD-1 Guidelines', 'https://guidelines.vancouver.ca/CD-1/G001.pdf', 7, 'section number', 'section name', 'parking', '4.1 Parking Facilities  \n(a) All off -street parking should be located on the site it serves, unless otherwise approved \nby the Director of Planning in consultation with the General Manager of Engineering. \nSome interim surface parking may  be permitted, subject to landscaped setbacks and \nacceptable access points as determined by the Director of Planning in consultation with the General Manager of Engineering Services.  \n(b) No parking or maneuvering is permitted in landscape setbacks. '], ['Zoning district', 'Guidelines: Great Northern Way CD-1 Guidelines', 'https://guidelines.vancouver.ca/CD-1/G001.pdf', 7, 'section number', 'section name', 'parking', '4.3 Parking and Loading Access  \n(a) Where possible, access to parking and loading areas should be fr om the lane. If located \nalong the street, parking and loading should be combined into one entrance and its width should minimize interruption to the streetwall.  \n(b) Shared parking and loading entrances are encouraged for abutting properties.  \n(c) Where load ing access is taken from the street, trucks must not back in from (or onto) the \nstreet and all maneuvering must be done on site.  \n(d) No insulation, piping or mechanical equipment is to be visible from the street unless dealt \nwith in an architectural manner . '], ['Zoning district', 'Guidelines: Great Northern Way CD-1 Guidelines', 'https://guidelines.vancouver.ca/CD-1/G001.pdf', 10, 'section number', 'section name', 'parking', '(b) Proposed Access Road  – A new local road is proposed into the site off Great Northern \nWay at Carolina Street, which will terminate at a cul -de-sac bulb. The new road will be a \nlocal street with provision for on- street parking where appropri ate. The road should have \nlandscaped boulevards, street trees and sidewalks and be designed to prioritize pedestrian \nmovements. Traffic calming devices such as curb bulges should be incorporated into the \ndesign.  ']]
-#
-#     print(type(test_data))
-#     print(test_data)
-#     OutputHandler.create_excel_file(test_data)
+        with pd.ExcelWriter(output_file, engine='xlsxwriter') as writer:
+
+            df.to_excel(writer, index=False, sheet_name='Sheet1')
+            workbook = writer.book
+            worksheet = writer.sheets['Sheet1']
+
+            bold_format = workbook.add_format({'bold': True})
+
+            col_idx = df.columns.get_loc('Reference')
+
+            for index, row in df.iterrows():
+                reference = row['Reference']
+                search_terms = row['Search Terms'].split(',')
+
+                escaped = [re.escape(term) for term in search_terms]
+                pattern = '|'.join(escaped)
+                regex_pattern = re.compile(f'({pattern})', re.IGNORECASE)
+                result = regex_pattern.split(reference)
+                result = [item for item in result if item.strip()]
+                string_creator = []
+                for item in result:
+                    if item.lower() in search_terms:
+                        string_creator.append(bold_format)
+                    string_creator.append(item)
+
+                worksheet.write_rich_string(index+1, col_idx, *string_creator)
+
+
+if __name__ == "__main__":
+    test_data = "output.json"
+    output_file = 'test.xlsx'
+
+    OutputHandler.create_excel_file(test_data, output_file)
