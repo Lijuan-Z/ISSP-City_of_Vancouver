@@ -12,6 +12,7 @@ def download_source_html(url):
 
 
 def download_pdf(html, url, save_dir):
+    global file_counter
     # Create directory if it doesn't exist
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
@@ -22,7 +23,7 @@ def download_pdf(html, url, save_dir):
     # Filter out links that point to PDF files
     pdf_links = [link.get('href') for link in links if link.get('href') and link.get('href').endswith('.pdf')]
 
-    counter = 1
+    file_counter = 1
     total_files = len(pdf_links)
     for pdf_link in pdf_links:
         # Construct absolute URL if the link is relative
@@ -35,11 +36,18 @@ def download_pdf(html, url, save_dir):
         # Download the PDF
         with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
 
-            print(f"Downloading pdf_file: {pdf_filename} {counter} of {total_files}")
+            print(f"Downloading pdf_file: {pdf_filename} {file_counter} of {total_files}")
             # pdf_response = requests.get(pdf_link)
             pdf_response = httpx.get(pdf_link)
             f.write(pdf_response.content)
-            counter += 1
+            file_counter += 1
+
+        # temp for testing
+        if file_counter == 30:
+            break
+
+
+    return total_files
 
 
 def retrieve_document_type(html, output_file):
