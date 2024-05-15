@@ -111,25 +111,19 @@ class OutputHandler:
         df = pd.DataFrame(json_dict)
 
         with pd.ExcelWriter(output_file, engine='xlsxwriter') as writer:
-            # Write the DataFrame to the Excel file
-            df.to_excel(writer, index=False, sheet_name='Sheet1')
 
-            # Access the XlsxWriter workbook and worksheet objects
+            df.to_excel(writer, index=False, sheet_name='Sheet1')
             workbook = writer.book
             worksheet = writer.sheets['Sheet1']
 
-            # Add bold format
             bold_format = workbook.add_format({'bold': True})
 
-            # Get the column index of the 'Reference' column
             col_idx = df.columns.get_loc('Reference')
 
-            # Iterate through each row in the DataFrame
             for index, row in df.iterrows():
                 reference = row['Reference']
                 search_terms = row['Search Terms'].split(',')
 
-                # Iterate through each search term
                 escaped = [re.escape(term) for term in search_terms]
                 pattern = '|'.join(escaped)
                 regex_pattern = re.compile(f'({pattern})', re.IGNORECASE)
@@ -142,7 +136,6 @@ class OutputHandler:
                     string_creator.append(item)
 
                 worksheet.write_rich_string(index+1, col_idx, *string_creator)
-
 
 
 if __name__ == "__main__":
