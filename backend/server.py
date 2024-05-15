@@ -17,10 +17,14 @@ config.read('development.ini')
 app = Flask(__name__)
 CORS(app)
 
+update_status = False
+file_counter = 0
+
 # Generate Excel file based on the query
-def generate_response(query):
+def generate_response(query, files):
     start_time = time.time()
     output_str = searching_endpoint(query)
+    # output_str = searching_endpoint(query, files)
     OutputHandler.create_excel_file(output_str)
     end_time = time.time()
     elapsed_time = end_time - start_time
@@ -45,9 +49,11 @@ def generate_response(query):
 
 # Handling web-scrapping of PDF and document-type json file
 def scrap_file_and_data():
-
+    global update_status
     ### html, pdf & doc-type json download process ###
     if config.getboolean('scrap', 'download'):
+        update_status = True
+
         # URL of the website to scrape
         website_url = config.get('scrap', 'cov_url')
         # Directory to save the downloaded PDFs
@@ -58,23 +64,53 @@ def scrap_file_and_data():
         app.logger.info("/update: server is downloading html file from")
         source_html = download_source_html(website_url)
         app.logger.info("/update: server finished downloading html. Now downloading pdf files")
-        download_pdf(source_html, website_url, save_directory)
-        app.logger.info("/update: server finished downloading pdf files. Now creating doc-type-json file")
+        total_downloaded = download_pdf(source_html, website_url, save_directory)
+        app.logger.info(f"/update: server finished downloading {total_downloaded} pdf files. Now creating doc-type-json file")
         retrieve_document_type(source_html, output_file)
 
+        update_status = False
+
+def scrape_status():
+        # tmp:
+        file_counter = 2
+        total_file_to_update = 10
+        percentage_updated = int(file_counter / total_file_to_update * 100)
+        #
+
+        status_message = "Idle"
+        if update_status:
+            status_message = "Updating"
+
+        return {
+            "status": status_message,
+            "file_updated": file_counter,
+            "last-updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+            "total-updated-files": total_file_to_update,
+            "percentage_updated": percentage_updated
+        }
+
+
+
+def read_data_type_file():
     # open stored doc-type file and return update info
     with open(config.get('server', 'doc_file'), "r") as file:
         data = json.load(file)
 
-        output = [{k: {'type': v['type'], 'title': v['title'], 'url': v['url']} for k, v in obj.items()} for obj in
-                  data]
-        list(output)
-        output = {
-            "last-updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
-            "data": output
-        }
-
+        output = []
+        for obj in data:
+            for k, v in obj.items():
+                v["section"] = v['type']
+                v["webpage-title"] = v['title']
+                v["file-name"] = k
+                del v["title_original"]
+                del v['type']
+                del v['title']
+                output.append(v)
         return output
+
+def file_filter(file_names, category):
+    ### file filtering is done here ####
+    return ""
 
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
@@ -88,26 +124,32 @@ def internal_error(error):
     return render_template('500.html'), 500
 
 
-@app.route("/search")
+@app.route("/search", methods=["POST"])
 def search():
     try:
-        query = request.args.get('q').split(",")  # Get the search query parameter
+        # query = request.args.get('q').split(",")  # Get the search query parameter
+        file_data = request.json
+        app.logger.info(f'/search: received a request of {file_data["data"]["search-terms"]}')
 
-        app.logger.info(f"/search: received a request of ${query}")
-        if query is not None:
-            ###### Any query function run here #######
-            return generate_response(query)
+        file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
+
+        if file_data["data"] is not None:
+            return generate_response(file_data["data"]["search-terms"], file_list)
         else:
            app.logger.error(f"/search: receive an empty query and returning status code 404")
            abort(404)
-    except:
+    except Exception as e:
+        app.logger.error(f"/search: Error in loading file - {e}")
         abort(500)
 
 @app.route("/update")
 def update():
     app.logger.info(f"/update: received a request")
     try:
-        output = scrap_file_and_data()
+        # if not update_status:
+            # scrap_file_and_data()
+
+        output = scrape_status()
 
         app.logger.info(f"/update: finished scrapping and return response")
         response = app.response_class(
@@ -120,6 +162,22 @@ def update():
         app.logger.error(f"/update: Error in loading file - {e}")
         abort(500)
 
+@app.route("/data")
+def data():
+    app.logger.info(f"/data: received a request")
+    # try:
+    output = read_data_type_file()
+
+    app.logger.info(f"/data: return {len(output)} files response")
+    response = app.response_class(
+        response=json.dumps({"data": output}),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+    # except Exception as e:
+    #     app.logger.error(f"/data: Error in loading file - {e}")
+    #     abort(500)
 
 
 
