@@ -5,8 +5,7 @@ def search_files(files_to_search, json_path="processed.json", search_terms=None)
 
     output_dict = create_metadata_dictionary(files_to_search, json_path, search_terms)
 
-    write_to_json(output_dict, output_file="search.json")
-
+    return output_dict
 
 def load_json(json_path):
     try:
