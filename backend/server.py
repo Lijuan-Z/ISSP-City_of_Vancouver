@@ -110,7 +110,17 @@ def read_data_type_file():
 
 def file_filter(file_names, category):
     ### file filtering is done here ####
-    return ""
+    if len(category) == 0:
+        return file_names
+    else:
+        file_info = read_data_type_file()
+        if "all" in category:
+            file_list = list([f["file-name"] for f in file_info])
+            return file_list
+        else:
+            file_info = list(filter(lambda f: f["section"] in category, file_info))
+            file_list = list([f["file-name"] for f in file_info])
+            return file_list + file_names
 
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
@@ -127,13 +137,13 @@ def internal_error(error):
 @app.route("/search", methods=["POST"])
 def search():
     try:
-        # query = request.args.get('q').split(",")  # Get the search query parameter
         file_data = request.json
         app.logger.info(f'/search: received a request of {file_data["data"]["search-terms"]}')
 
         file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
 
-        if file_data["data"] is not None:
+        if len(file_list) != 0:
+            app.logger.info(f'/search: is going to search {len(file_list)} files')
             return generate_response(file_data["data"]["search-terms"], file_list)
         else:
            app.logger.error(f"/search: receive an empty query and returning status code 404")
@@ -165,19 +175,19 @@ def update():
 @app.route("/data")
 def data():
     app.logger.info(f"/data: received a request")
-    # try:
-    output = read_data_type_file()
+    try:
+        output = read_data_type_file()
 
-    app.logger.info(f"/data: return {len(output)} files response")
-    response = app.response_class(
-        response=json.dumps({"data": output}),
-        status=200,
-        mimetype='application/json'
-    )
-    return response
-    # except Exception as e:
-    #     app.logger.error(f"/data: Error in loading file - {e}")
-    #     abort(500)
+        app.logger.info(f"/data: return {len(output)} files response")
+        response = app.response_class(
+            response=json.dumps({"data": output}),
+            status=200,
+            mimetype='application/json'
+        )
+        return response
+    except Exception as e:
+        app.logger.error(f"/data: Error in loading file - {e}")
+        abort(500)
 
 
 
