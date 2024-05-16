@@ -9,7 +9,7 @@ class ProcessToJSON:
     def __init__(self, folder_path):
         self.folder_path = folder_path
 
-    def read_PDFs(self, image_included, URL_info, file_list_inc_image=[]):
+    def read_PDFs(self, URL_info , image_included=False, file_list_inc_image=[]):
         nested_metadata_dict = {}
         for root, dirs, files in os.walk(self.folder_path):
             for file_name in files:
@@ -91,7 +91,7 @@ if __name__ == '__main__':
         data = json.load(json_file)
 
     start = time.time()
-    dict_info = processor.read_PDFs(False, URL_info=data)
+    dict_info = processor.read_PDFs(image_included=False, URL_info=data)
     print(time.time() - start)
 
     with open('processed.json', 'w') as json_file:

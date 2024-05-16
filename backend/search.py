@@ -1,6 +1,13 @@
 import json
 
 
+def search_files(files_to_search, json_path="processed.json", search_terms=None):
+
+    output_dict = create_metadata_dictionary(files_to_search, json_path, search_terms)
+
+    write_to_json(output_dict, output_file="search.json")
+
+
 def load_json(json_path):
     try:
         with open(json_path, 'r') as json_file:
@@ -9,7 +16,6 @@ def load_json(json_path):
         print(f"Error reading JSON file '{json_path}': {e}")
         data = None
     return data
-
 
 def write_to_json(data, output_file):
     try:
@@ -20,14 +26,14 @@ def write_to_json(data, output_file):
         print(f"Error writing to JSON file '{output_file}': {e}")
 
 
-def create_metadata_dictionary(json_path, search_terms=None):
+def create_metadata_dictionary(files_to_search, json_path="processed.json", search_terms=None):
     nested_metadata_dict = {}
     json_data = load_json(json_path)
 
     if json_data:
         if search_terms is not None:
             for file_name, file_data in json_data.items():
-                if 'Pages' in file_data:
+                if 'Pages' in file_data and file_name[:-4] in files_to_search:
                     for page_num, page_content in file_data['Pages'].items():
                         # Split the entire page content into sentences
                         sentences = page_content.split('.')
@@ -64,6 +70,6 @@ if __name__ == '__main__':
     json_file_path = 'processed.json'
     search_terms = ['parking', 'lane']
 
-    nested_metadata_dict = create_metadata_dictionary(json_file_path, search_terms=search_terms)
+    nested_metadata_dict = search_files(json_file_path, search_terms=search_terms)
     output_file = 'output.json'
     write_to_json(nested_metadata_dict, output_file)

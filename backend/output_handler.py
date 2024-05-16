@@ -12,14 +12,6 @@ class OutputHandler:
 
         OutputHandler.prettify_excel(json_dict, output_file)
 
-        # for v in dataframe['Reference']:
-        #     print(f"{v}\n\n")
-        #
-        #
-        # dataframe.to_excel(output_file, engine="xlsxwriter", sheet_name="Search Results", index=False)
-
-
-
 
     @staticmethod
     def adjust_json_dict_from_indexed(json_file):

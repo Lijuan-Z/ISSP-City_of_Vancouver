@@ -1,5 +1,6 @@
 import time
 from search_term import searching_endpoint
+from search import search_files
 from scrape import download_source_html, download_pdf, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
@@ -24,18 +25,16 @@ file_counter = 0
 # Generate Excel file based on the query
 def generate_response(query, files):
     start_time = time.time()
-    output_str = searching_endpoint(query)
-    # output_str = searching_endpoint(query, files)
-    OutputHandler.create_excel_file(output_str)
+    # output_str = searching_endpoint(query)
+    search_files(files, json_path='processed.json', search_terms=query)
+    excel_file_path = "output.xlsx"
+    OutputHandler.create_excel_file(json_obj='output.json', output_file=excel_file_path)
     end_time = time.time()
     elapsed_time = end_time - start_time
 
     # Print the elapsed time
     print("Elapsed time:", elapsed_time, "seconds")
-    
-    
 
-    excel_file_path = "output.xlsx"
     with open(excel_file_path, "rb") as file:
         file_data = file.read()
 
