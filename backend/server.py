@@ -25,9 +25,9 @@ file_counter = 0
 def generate_response(query, files):
     start_time = time.time()
     # output_str = searching_endpoint(query)
-    search_files(files, json_path='processed.json', search_terms=query)
+    output_dict = search_files(files, json_path='processed.json', search_terms=query)
     excel_file_path = "output.xlsx"
-    OutputHandler.create_excel_file(json_obj='output.json', output_file=excel_file_path)
+    OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
     end_time = time.time()
     elapsed_time = end_time - start_time
 

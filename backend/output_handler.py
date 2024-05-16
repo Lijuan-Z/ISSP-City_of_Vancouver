@@ -14,11 +14,11 @@ class OutputHandler:
 
 
     @staticmethod
-    def adjust_json_dict_from_indexed(json_file):
+    def adjust_json_dict_from_indexed(json_obj):
 
-        json_obj = {}
-        with open(json_file, "r") as jf:
-            json_obj = json.load(jf)
+        # json_obj = {}
+        # with open(json_file, "r") as jf:
+        #     json_obj = json.load(jf)
 
         if isinstance(json_obj, str):
             json_obj = json.loads(json_obj)
