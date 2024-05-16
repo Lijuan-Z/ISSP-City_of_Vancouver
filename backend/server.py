@@ -3,6 +3,7 @@ from search_term import searching_endpoint
 from scrape import download_source_html, download_pdf, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
+import asyncio
 import json
 import pandas as pd
 import io
@@ -48,7 +49,7 @@ def generate_response(query, files):
     return response
 
 # Handling web-scrapping of PDF and document-type json file
-def scrap_file_and_data():
+async def scrap_file_and_data():
     global update_status
     ### html, pdf & doc-type json download process ###
     if config.getboolean('scrap', 'download'):
@@ -130,7 +131,7 @@ def page_not_found(error):
 # return 500 When any there are server errors
 @app.errorhandler(500)
 def internal_error(error):
-    app.logger.error(f"server encounter error ${error.name} and returning status code 500")
+    app.logger.error(f"server encounter error {error.name} and returning status code 500")
     return render_template('500.html'), 500
 
 
@@ -143,6 +144,7 @@ def search():
         file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
 
         if len(file_list) != 0:
+            print(file_list)
             app.logger.info(f'/search: is going to search {len(file_list)} files')
             return generate_response(file_data["data"]["search-terms"], file_list)
         else:
@@ -156,8 +158,8 @@ def search():
 def update():
     app.logger.info(f"/update: received a request")
     try:
-        # if not update_status:
-            # scrap_file_and_data()
+        if not update_status:
+            asyncio.run(scrap_file_and_data())
 
         output = scrape_status()
 
