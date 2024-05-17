@@ -4,7 +4,7 @@ from search import search_files
 from scrape import download_source_html, download_pdf, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
-import asyncio
+import threading, random
 import json
 import pandas as pd
 import io
@@ -12,11 +12,14 @@ import configparser
 
 from output_handler import OutputHandler
 
+thread_event = threading.Event()
+
 # config file for information management
 config = configparser.ConfigParser()
 config.read('development.ini')
 
 app = Flask(__name__)
+# app._static_folder = "_next/static"
 CORS(app)
 
 update_status = False
@@ -48,27 +51,30 @@ def generate_response(query, files):
     return response
 
 # Handling web-scrapping of PDF and document-type json file
-async def scrap_file_and_data():
+def scrap_file_and_data():
     global update_status
+
+    while thread_event.is_set():
     ### html, pdf & doc-type json download process ###
-    if config.getboolean('scrap', 'download'):
-        update_status = True
+        if config.getboolean('scrap', 'download'):
+            update_status = True
 
-        # URL of the website to scrape
-        website_url = config.get('scrap', 'cov_url')
-        # Directory to save the downloaded PDFs
-        save_directory = config.get('scrap', 'pdf_folder')
-        # Output file name for document_type json data
-        output_file = config.get('server', 'doc_file')
+            # URL of the website to scrape
+            website_url = config.get('scrap', 'cov_url')
+            # Directory to save the downloaded PDFs
+            save_directory = config.get('scrap', 'pdf_folder')
+            # Output file name for document_type json data
+            output_file = config.get('server', 'doc_file')
 
-        app.logger.info("/update: server is downloading html file from")
-        source_html = download_source_html(website_url)
-        app.logger.info("/update: server finished downloading html. Now downloading pdf files")
-        total_downloaded = download_pdf(source_html, website_url, save_directory)
-        app.logger.info(f"/update: server finished downloading {total_downloaded} pdf files. Now creating doc-type-json file")
-        retrieve_document_type(source_html, output_file)
+            app.logger.info("/update: server is downloading html file from")
+            source_html = download_source_html(website_url)
+            app.logger.info("/update: server finished downloading html. Now downloading pdf files")
+            total_downloaded = download_pdf(source_html, website_url, save_directory)
+            app.logger.info(f"/update: server finished downloading {total_downloaded} pdf files. Now creating doc-type-json file")
+            retrieve_document_type(source_html, output_file)
 
-        update_status = False
+            update_status = False
+            thread_event.clear()
 
 def scrape_status():
         # tmp:
@@ -133,6 +139,11 @@ def internal_error(error):
     app.logger.error(f"server encounter error {error.name} and returning status code 500")
     return render_template('500.html'), 500
 
+@app.route('/')
+def home():
+    app.logger.info("A request is received for loading home page")
+    return render_template('index.html')
+
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -158,7 +169,9 @@ def update():
     app.logger.info(f"/update: received a request")
     try:
         if not update_status:
-            asyncio.run(scrap_file_and_data())
+            thread_event.set()
+            thread = threading.Thread(target=scrap_file_and_data())
+            thread.start()
 
         output = scrape_status()
 
