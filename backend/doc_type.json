@@ -1,7 +1,23 @@
 [
   {
+    "regulation-redesign-syc-reference-guide": {
+      "type": "Zoning and Development By-law",
+      "title_original": "Reference Guide PDF file (208 KB)",
+      "title": "Reference Guide",
+      "url": "https://syc.vancouver.ca/projects/regulation-redesign/regulation-redesign-syc-reference-guide.pdf"
+    }
+  },
+  {
+    "land-uses-by-zoning-district": {
+      "type": "Zoning and Development By-law",
+      "title_original": "Land Uses by Zoning District PDF file (358 KB)",
+      "title": "Land Uses by Zoning District",
+      "url": "https://bylaws.vancouver.ca/zoning/land-uses-by-zoning-district.pdf"
+    }
+  },
+  {
     "zoning-by-law-section-1": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "1 - Administration\u00a0PDF file\u00a0(135\u00a0KB)",
       "title": "1 - Administration",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-1.pdf"
@@ -9,7 +25,7 @@
   },
   {
     "zoning-by-law-section-2": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "2 - Definitions\u00a0PDF file\u00a0(669 KB)",
       "title": "2 - Definitions",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-2.pdf"
@@ -17,7 +33,7 @@
   },
   {
     "zoning-by-law-section-3": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "3 - Authorities\u00a0PDF file\u00a0(40\u00a0KB)",
       "title": "3 - Authorities",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-3.pdf"
@@ -25,7 +41,7 @@
   },
   {
     "zoning-by-law-section-4": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "4 - Development Permits PDF file\u00a0(130\u00a0KB)",
       "title": "4 - Development Permits",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-4.pdf"
@@ -33,7 +49,7 @@
   },
   {
     "zoning-by-law-section-5": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "5 - By-law Relaxations and Powers of Discretion\u00a0PDF file\u00a0(77\u00a0KB)",
       "title": "5 - By-law Relaxations and Powers of Discretion",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-5.pdf"
@@ -41,7 +57,7 @@
   },
   {
     "zoning-by-law-section-6": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "6 - Amendments to the By-law\u00a0PDF file\u00a0(9 KB)",
       "title": "6 - Amendments to the By-law",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-6.pdf"
@@ -49,7 +65,7 @@
   },
   {
     "zoning-by-law-section-7": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "7 - General Prohibitions\u00a0PDF file\u00a0(46\u00a0KB)",
       "title": "7 - General Prohibitions",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-7.pdf"
@@ -57,7 +73,7 @@
   },
   {
     "zoning-by-law-section-8": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "8 - Building Lines\u00a0PDF file\u00a0(43\u00a0KB)",
       "title": "8 - Building Lines",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-8.pdf"
@@ -65,7 +81,7 @@
   },
   {
     "zoning-by-law-section-9": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "9 - Zoning Districts\u00a0PDF file\u00a0(18 KB)",
       "title": "9 - Zoning Districts",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-9.pdf"
@@ -73,7 +89,7 @@
   },
   {
     "zoning-by-law-section-10": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "10 - General Regulations\u00a0PDF file\u00a0(176\u00a0KB)",
       "title": "10 - General Regulations",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-10.pdf"
@@ -81,7 +97,7 @@
   },
   {
     "zoning-by-law-section-11": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "11 -\u00a0Use-specific Regulations\u00a0PDF file\u00a0(553\u00a0KB)",
       "title": "11 -Use-specific Regulations",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-11.pdf"
@@ -89,7 +105,7 @@
   },
   {
     "zoning-by-law-section-12": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "12 - Enforcement\u00a0PDF file\u00a0(37\u00a0KB)",
       "title": "12 - Enforcement",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-12.pdf"
@@ -97,7 +113,7 @@
   },
   {
     "zoning-by-law-section-13": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "13 - Penalties\u00a0PDF file\u00a0(41 KB)",
       "title": "13 - Penalties",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-13.pdf"
@@ -105,7 +121,7 @@
   },
   {
     "zoning-by-law-section-14": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "14 - Repeal of Previous By-laws\u00a0PDF file\u00a0(39\u00a0KB)",
       "title": "14 - Repeal of Previous By-laws",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-14.pdf"
@@ -113,7 +129,7 @@
   },
   {
     "zoning-by-law-section-15": {
-      "type": "Sections",
+      "type": "Zoning and Development By-law",
       "title_original": "15 - Effective Date of By-law\u00a0PDF file\u00a0(41\u00a0KB)",
       "title": "15 - Effective Date of By-law",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-section-15.pdf"
@@ -121,7 +137,7 @@
   },
   {
     "zoning-by-law-district-schedule-ra-1": {
-      "type": "Agricultural (RA-1 district)",
+      "type": "Zoning and Development By-law",
       "title_original": "RA-1 PDF file (58 KB)",
       "title": "RA-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-ra-1.pdf"
@@ -129,7 +145,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-1": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-1\u00a0PDF file\u00a0(55\u00a0KB)",
       "title": "RT-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-1.pdf"
@@ -137,7 +153,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-2": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-2\u00a0PDF file\u00a0(61\u00a0KB)",
       "title": "RT-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-2.pdf"
@@ -145,7 +161,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-3": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-3\u00a0PDF file\u00a0(80\u00a0KB)",
       "title": "RT-3",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-3.pdf"
@@ -153,7 +169,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-4-all-districts": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-4, RT-4A, RT-4N, and RT-4AN\u00a0PDF file\u00a0(64 KB)",
       "title": "RT-4, RT-4A, RT-4N, and RT-4AN",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-4-all-districts.pdf"
@@ -161,7 +177,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-5": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-5 and RT-5N\u00a0PDF file\u00a0(93\u00a0KB)",
       "title": "RT-5 and RT-5N",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-5.pdf"
@@ -169,7 +185,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-6": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-6\u00a0\u00a0PDF file\u00a0(81\u00a0KB)",
       "title": "RT-6",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-6.pdf"
@@ -177,7 +193,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-7": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-7\u00a0PDF file\u00a0(70\u00a0KB)",
       "title": "RT-7",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-7.pdf"
@@ -185,7 +201,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-8": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-8\u00a0PDF file\u00a0(71\u00a0KB)",
       "title": "RT-8",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-8.pdf"
@@ -193,7 +209,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-9": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-9\u00a0PDF file\u00a0(63\u00a0KB)",
       "title": "RT-9",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-9.pdf"
@@ -201,7 +217,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-10": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-10 and RT-10N\u00a0PDF file\u00a0(78\u00a0KB)",
       "title": "RT-10 and RT-10N",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-10.pdf"
@@ -209,7 +225,7 @@
   },
   {
     "zoning-by-law-district-schedule-rt-11": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RT-11 and RT-11N\u00a0PDF file\u00a0(84\u00a0KB)",
       "title": "RT-11 and RT-11N",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rt-11.pdf"
@@ -217,7 +233,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-1": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-1 and RM-1N PDF file (82\u00a0KB)",
       "title": "RM-1 and RM-1N",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-1.pdf"
@@ -225,7 +241,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-2": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-2 PDF file (70\u00a0KB)",
       "title": "RM-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-2.pdf"
@@ -233,7 +249,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-3": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-3 PDF file (77\u00a0KB)",
       "title": "RM-3",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-3.pdf"
@@ -241,7 +257,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-3a": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-3A PDF file (74 KB)",
       "title": "RM-3A",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-3a.pdf"
@@ -249,7 +265,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-4": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-4 and RM-4N PDF file (77\u00a0KB)",
       "title": "RM-4 and RM-4N",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-4.pdf"
@@ -257,7 +273,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-5-all-districts": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-5, RM-5A, RM-5B, RM-5C, and RM-5D\u00a0PDF file (192\u00a0KB)",
       "title": "RM-5, RM-5A, RM-5B, RM-5C, and RM-5D",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-5-all-districts.pdf"
@@ -265,7 +281,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-6": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-6 PDF file (77 KB)",
       "title": "RM-6",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-6.pdf"
@@ -273,7 +289,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-7-7an": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-7, RM-7N, and RM-7AN\u00a0PDF file (95\u00a0KB)",
       "title": "RM-7, RM-7N, and RM-7AN",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-7-7an.pdf"
@@ -281,7 +297,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-8-all-districts": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-8, RM-8N, RM-8A, and RM-8AN\u00a0PDF file (93 KB)",
       "title": "RM-8, RM-8N, RM-8A, and RM-8AN",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-8-all-districts.pdf"
@@ -289,7 +305,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-9-9an": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-9A and RM-9AN\u00a0PDF file (756\u00a0KB)",
       "title": "RM-9A and RM-9AN",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-9-9an.pdf"
@@ -297,7 +313,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-9-9n-9bn": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-9, RM-9N, and RM-9BN\u00a0PDF file (860\u00a0KB)",
       "title": "RM-9, RM-9N, and RM-9BN",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-9-9n-9bn.pdf"
@@ -305,7 +321,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-10": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-10 and RM-10N\u00a0PDF file (92\u00a0KB)",
       "title": "RM-10 and RM-10N",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-10.pdf"
@@ -313,7 +329,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-11": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-11 and RM-11N\u00a0PDF file\u00a0(648\u00a0KB)",
       "title": "RM-11 and RM-11N",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-11.pdf"
@@ -321,7 +337,7 @@
   },
   {
     "zoning-by-law-district-schedule-rm-12n": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RM-12N\u00a0PDF file\u00a0(107\u00a0KB)",
       "title": "RM-12N",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rm-12n.pdf"
@@ -329,7 +345,7 @@
   },
   {
     "zoning-by-law-district-schedule-fm-1": {
-      "type": "Residential (RT, RM, FM districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "FM-1 PDF file (193\u00a0KB)",
       "title": "FM-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-fm-1.pdf"
@@ -337,7 +353,7 @@
   },
   {
     "zoning-by-law-district-schedule-r1-1": {
-      "type": "Residential Inclusive (R1-1 district)",
+      "type": "Zoning and Development By-law",
       "title_original": "R1-1 PDF file (210 KB)",
       "title": "R1-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-r1-1.pdf"
@@ -345,7 +361,7 @@
   },
   {
     "zoning-by-law-district-schedule-rr-1": {
-      "type": "Rental (RR districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RR-1 PDF file (396\u00a0KB)",
       "title": "RR-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rr-1.pdf"
@@ -353,7 +369,7 @@
   },
   {
     "zoning-by-law-district-schedule-rr-2a-2b-2c": {
-      "type": "Rental (RR districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RR-2A, RR-2B, and RR-2C PDF file (394\u00a0KB)",
       "title": "RR-2A, RR-2B, and RR-2C",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rr-2a-2b-2c.pdf"
@@ -361,7 +377,7 @@
   },
   {
     "zoning-by-law-district-schedule-rr-3a-3b": {
-      "type": "Rental (RR districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "RR-3A and RR-3B PDF file (425 KB)",
       "title": "RR-3A and RR-3B",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-rr-3a-3b.pdf"
@@ -369,7 +385,7 @@
   },
   {
     "zoning-by-law-district-schedule-c-1": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "C-1 PDF file (68\u00a0KB)",
       "title": "C-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-c-1.pdf"
@@ -377,7 +393,7 @@
   },
   {
     "zoning-by-law-district-schedule-c-2": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "C-2 PDF file (257\u00a0KB)",
       "title": "C-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-c-2.pdf"
@@ -385,7 +401,7 @@
   },
   {
     "zoning-by-law-district-schedule-c-2b": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "C-2B PDF file (81\u00a0KB)",
       "title": "C-2B",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-c-2b.pdf"
@@ -393,7 +409,7 @@
   },
   {
     "zoning-by-law-district-schedule-c-2c": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "C-2C PDF file (70\u00a0KB)",
       "title": "C-2C",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-c-2c.pdf"
@@ -401,7 +417,7 @@
   },
   {
     "zoning-by-law-district-schedule-c-2c1": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "C-2C1 PDF file (75\u00a0KB)",
       "title": "C-2C1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-c-2c1.pdf"
@@ -409,7 +425,7 @@
   },
   {
     "zoning-by-law-district-schedule-c-3a": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "C-3A PDF file (82\u00a0KB)",
       "title": "C-3A",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-c-3a.pdf"
@@ -417,7 +433,7 @@
   },
   {
     "zoning-by-law-district-schedule-c-5-5a-6": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "C-5, C-5A, and C-6\u00a0PDF file (123\u00a0KB)",
       "title": "C-5, C-5A, and C-6",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-c-5-5a-6.pdf"
@@ -425,7 +441,7 @@
   },
   {
     "zoning-by-law-district-schedule-c-7-8": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "C-7 and C-8 PDF file (78\u00a0KB)",
       "title": "C-7 and C-8",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-c-7-8.pdf"
@@ -433,7 +449,7 @@
   },
   {
     "zoning-by-law-district-schedule-fc-1": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "FC-1\u00a0PDF file (71\u00a0KB)",
       "title": "FC-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-fc-1.pdf"
@@ -441,7 +457,7 @@
   },
   {
     "zoning-by-law-district-schedule-fc-2": {
-      "type": "Commercial (C, FC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "FC-2\u00a0PDF file\u00a0(284\u00a0KB)",
       "title": "FC-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-fc-2.pdf"
@@ -449,7 +465,7 @@
   },
   {
     "zoning-by-law-district-schedule-i-1": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "I-1 PDF file (72 KB)",
       "title": "I-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-1.pdf"
@@ -457,7 +473,7 @@
   },
   {
     "zoning-by-law-district-schedule-i-1a": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "I-1A PDF file (114 KB)",
       "title": "I-1A",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-1a.pdf"
@@ -465,7 +481,7 @@
   },
   {
     "zoning-by-law-district-schedule-i-1b": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "I-1B PDF file (122\u00a0KB)",
       "title": "I-1B",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-1b.pdf"
@@ -473,7 +489,7 @@
   },
   {
     "zoning-by-law-district-schedule-i-1c": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "I-1C\u00a0PDF file\u00a0(305 KB)",
       "title": "I-1C",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-1c.pdf"
@@ -481,7 +497,7 @@
   },
   {
     "zoning-by-law-district-schedule-i-2": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "I-2 PDF file (315 KB)",
       "title": "I-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-2.pdf"
@@ -489,7 +505,7 @@
   },
   {
     "zoning-by-law-district-schedule-i-3": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "I-3 PDF file (312KB)",
       "title": "I-3",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-3.pdf"
@@ -497,7 +513,7 @@
   },
   {
     "zoning-by-law-district-schedule-i-4": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "I-4\u00a0PDF file\u00a0(66\u00a0KB)",
       "title": "I-4",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-i-4.pdf"
@@ -505,7 +521,7 @@
   },
   {
     "zoning-by-law-district-schedule-ic-1": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "IC-1\u00a0PDF file\u00a0(352 KB)",
       "title": "IC-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-ic-1.pdf"
@@ -513,7 +529,7 @@
   },
   {
     "zoning-by-law-district-schedule-ic-2": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "IC-2\u00a0PDF file\u00a0(329 KB)",
       "title": "IC-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-ic-2.pdf"
@@ -521,7 +537,7 @@
   },
   {
     "zoning-by-law-district-schedule-ic-3": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "IC-3\u00a0PDF file\u00a0(317 KB)",
       "title": "IC-3",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-ic-3.pdf"
@@ -529,7 +545,7 @@
   },
   {
     "zoning-by-law-district-schedule-m-1": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "M-1\u00a0PDF file\u00a0(75 KB)",
       "title": "M-1",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-m-1.pdf"
@@ -537,7 +553,7 @@
   },
   {
     "zoning-by-law-district-schedule-m-1a": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "M-1A\u00a0PDF file\u00a0(59 KB)",
       "title": "M-1A",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-m-1a.pdf"
@@ -545,7 +561,7 @@
   },
   {
     "zoning-by-law-district-schedule-m-1b": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "M-1B\u00a0PDF file\u00a0(70 KB)",
       "title": "M-1B",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-m-1b.pdf"
@@ -553,7 +569,7 @@
   },
   {
     "zoning-by-law-district-schedule-m-2": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "M-2\u00a0PDF file\u00a0(71 KB)",
       "title": "M-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-m-2.pdf"
@@ -561,7 +577,7 @@
   },
   {
     "zoning-by-law-district-schedule-mc-1-2": {
-      "type": "Industrial (I, IC, M, MC districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "MC-1 and MC-2\u00a0PDF file\u00a0(280\u00a0KB)",
       "title": "MC-1 and MC-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-mc-1-2.pdf"
@@ -569,7 +585,7 @@
   },
   {
     "zoning-by-law-district-schedule-ha-1-1a": {
-      "type": "Historic area (HA districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "HA-1 and HA-1A\u00a0PDF file (105\u00a0KB)",
       "title": "HA-1 and HA-1A",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-ha-1-1a.pdf"
@@ -577,7 +593,7 @@
   },
   {
     "zoning-by-law-district-schedule-ha-2": {
-      "type": "Historic area (HA districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "HA-2\u00a0PDF file (55\u00a0KB)",
       "title": "HA-2",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-ha-2.pdf"
@@ -585,7 +601,7 @@
   },
   {
     "zoning-by-law-district-schedule-ha-3": {
-      "type": "Historic area (HA districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "HA-3\u00a0PDF file (71\u00a0KB)",
       "title": "HA-3",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-ha-3.pdf"
@@ -593,7 +609,7 @@
   },
   {
     "zoning-by-law-district-schedule-cd-1": {
-      "type": "Comprehensive development (CD districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "CD-1 (Comprehensive Development) District Schedule PDF file (1 MB)",
       "title": "CD-1 (Comprehensive Development) District Schedule",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-cd-1.pdf"
@@ -601,7 +617,7 @@
   },
   {
     "zoning-by-law-district-schedule-bcped": {
-      "type": "Comprehensive development (CD districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "BC\u00a0Place/Expo\u00a0PDF file\u00a0(103\u00a0KB)",
       "title": "BCPlace/Expo",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-bcped.pdf"
@@ -609,7 +625,7 @@
   },
   {
     "zoning-by-law-district-schedule-cwd": {
-      "type": "Comprehensive development (CD districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "Central Waterfront PDF file (17\u00a0KB)",
       "title": "Central Waterfront",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-cwd.pdf"
@@ -617,7 +633,7 @@
   },
   {
     "zoning-by-law-district-schedule-dd": {
-      "type": "Comprehensive development (CD districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "Downtown\u00a0PDF file\u00a0(17\u00a0KB)",
       "title": "Downtown",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-dd.pdf"
@@ -625,7 +641,7 @@
   },
   {
     "zoning-by-law-district-schedule-deod": {
-      "type": "Comprehensive development (CD districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "Downtown Eastside/Oppenheimer PDF file (15\u00a0KB)",
       "title": "Downtown Eastside/Oppenheimer",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-deod.pdf"
@@ -633,7 +649,7 @@
   },
   {
     "zoning-by-law-district-schedule-fccdd": {
-      "type": "Comprehensive development (CD districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "False Creek\u00a0PDF file\u00a0(22\u00a0KB)",
       "title": "False Creek",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-fccdd.pdf"
@@ -641,7 +657,7 @@
   },
   {
     "zoning-by-law-district-schedule-fsd": {
-      "type": "Comprehensive development (CD districts)",
+      "type": "Zoning and Development By-law",
       "title_original": "First Shaughnessy PDF file (75\u00a0KB)",
       "title": "First Shaughnessy",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-district-schedule-fsd.pdf"
@@ -649,7 +665,7 @@
   },
   {
     "zoning-by-law-schedule-c": {
-      "type": "General schedules",
+      "type": "Zoning and Development By-law",
       "title_original": "C - Streets Requiring Landscaped Setbacks PDF file (177\u00a0KB)",
       "title": "C - Streets Requiring Landscaped Setbacks",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-schedule-c.pdf"
@@ -657,7 +673,7 @@
   },
   {
     "zoning-by-law-schedule-d": {
-      "type": "General schedules",
+      "type": "Zoning and Development By-law",
       "title_original": "D - Zoning District Plan PDF file (38\u00a0KB)",
       "title": "D - Zoning District Plan",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-schedule-d.pdf"
@@ -665,7 +681,7 @@
   },
   {
     "zoning-by-law-schedule-e": {
-      "type": "General schedules",
+      "type": "Zoning and Development By-law",
       "title_original": "E - Building Lines\u00a0PDF file (664\u00a0KB)",
       "title": "E - Building Lines",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-schedule-e.pdf"
@@ -673,7 +689,7 @@
   },
   {
     "zoning-by-law-schedule-f": {
-      "type": "General schedules",
+      "type": "Zoning and Development By-law",
       "title_original": "F - Affordable Housing and Amenity Share Cost\u00a0PDF file\u00a0(27\u00a0KB)",
       "title": "F - Affordable Housing and Amenity Share Cost",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-schedule-f.pdf"
@@ -681,7 +697,7 @@
   },
   {
     "zoning-by-law-schedule-g": {
-      "type": "General schedules",
+      "type": "Zoning and Development By-law",
       "title_original": "G - Heritage Amenity Share Cost Schedule PDF file\u00a0(138\u00a0KB)",
       "title": "G - Heritage Amenity Share Cost Schedule",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-schedule-g.pdf"
@@ -689,7 +705,7 @@
   },
   {
     "zoning-by-law-schedule-h": {
-      "type": "General schedules",
+      "type": "Zoning and Development By-law",
       "title_original": "H - Stipulated Rents at Initial Occupancy for Secured Market Rental Housing PDF file\u00a0(143 KB)",
       "title": "H - Stipulated Rents at Initial Occupancy for Secured Market Rental Housing",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-schedule-h.pdf"
@@ -697,7 +713,7 @@
   },
   {
     "zoning-by-law-consolidated": {
-      "type": "Consolidated Zoning and Development By-law",
+      "type": "Zoning and Development By-law",
       "title_original": "Zoning and Development By-law (current) PDF file (8 MB)",
       "title": "Zoning and Development By-law (current)",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-consolidated.pdf"
@@ -705,7 +721,7 @@
   },
   {
     "zoning-by-law-consolidated-archive-2022-11-13": {
-      "type": "Consolidated Zoning and Development By-law",
+      "type": "Zoning and Development By-law",
       "title_original": "Zoning and Development By-law (last consolidated November 13, 2022) PDF file (20 MB)",
       "title": "Zoning and Development By-law (last consolidated November 13, 2022)",
       "url": "https://bylaws.vancouver.ca/zoning/zoning-by-law-consolidated-archive-2022-11-13.pdf"
@@ -713,7 +729,7 @@
   },
   {
     "odp-arbutus-corridor": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "Arbutus Corridor\u00a0PDF file\u00a0(7\u00a0MB)",
       "title": "Arbutus Corridor",
       "url": "https://bylaws.vancouver.ca/odp/odp-arbutus-corridor.pdf"
@@ -721,7 +737,7 @@
   },
   {
     "odp-central-waterfront": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "Central Waterfront\u00a0PDF file\u00a0(5.25\u00a0MB)",
       "title": "Central Waterfront",
       "url": "https://bylaws.vancouver.ca/odp/odp-central-waterfront.pdf"
@@ -729,7 +745,7 @@
   },
   {
     "odp-coal-harbour": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "Coal Harbour\u00a0PDF file\u00a0(2\u00a0MB)",
       "title": "Coal Harbour",
       "url": "https://bylaws.vancouver.ca/odp/odp-coal-harbour.pdf"
@@ -737,7 +753,7 @@
   },
   {
     "odp-downtown": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "Downtown\u00a0PDF file\u00a0(2\u00a0MB)",
       "title": "Downtown",
       "url": "https://bylaws.vancouver.ca/odp/odp-downtown.pdf"
@@ -745,7 +761,7 @@
   },
   {
     "odp-downtown-eastside-oppenheimer": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "Downtown Eastside/Oppenheimer\u00a0PDF file\u00a0(714\u00a0KB)",
       "title": "Downtown Eastside/Oppenheimer",
       "url": "https://bylaws.vancouver.ca/odp/odp-downtown-eastside-oppenheimer.pdf"
@@ -753,7 +769,7 @@
   },
   {
     "odp-east-fraser-lands": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "East Fraser Lands\u00a0PDF file\u00a0(6.70 MB)",
       "title": "East Fraser Lands",
       "url": "https://bylaws.vancouver.ca/odp/odp-east-fraser-lands.pdf"
@@ -761,7 +777,7 @@
   },
   {
     "odp-false-creek": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "False Creek\u00a0PDF file\u00a0(8\u00a0MB)",
       "title": "False Creek",
       "url": "https://bylaws.vancouver.ca/odp/odp-false-creek.pdf"
@@ -769,7 +785,7 @@
   },
   {
     "odp-false-creek-north": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "False Creek North PDF file\u00a0(6\u00a0MB)",
       "title": "False Creek North",
       "url": "https://bylaws.vancouver.ca/odp/odp-false-creek-north.pdf"
@@ -777,7 +793,7 @@
   },
   {
     "HCA_1to7": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "Heritage Conservation Area\u00a0PDF file\u00a0(21 MB)",
       "title": "Heritage Conservation Area",
       "url": "https://bylaws.vancouver.ca/odp/HCA_1to7.pdf"
@@ -785,7 +801,7 @@
   },
   {
     "odp-southeast-false-creek": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "Southeast False Creek\u00a0PDF file\u00a0(3\u00a0MB)",
       "title": "Southeast False Creek",
       "url": "https://bylaws.vancouver.ca/odp/odp-southeast-false-creek.pdf"
@@ -793,7 +809,7 @@
   },
   {
     "odp-southeast-granville-slopes": {
-      "type": "Area specific",
+      "type": "Official development plan by-laws",
       "title_original": "Southeast Granville Slopes\u00a0PDF file\u00a0(558 KB)",
       "title": "Southeast Granville Slopes",
       "url": "https://bylaws.vancouver.ca/odp/odp-southeast-granville-slopes.pdf"
@@ -801,7 +817,7 @@
   },
   {
     "odp-regional-context-statement": {
-      "type": "Citywide andsubject-related",
+      "type": "Official development plan by-laws",
       "title_original": "Regional Context Statement\u00a0PDF file\u00a0(4.5 MB)",
       "title": "Regional Context Statement",
       "url": "https://bylaws.vancouver.ca/odp/odp-regional-context-statement.pdf"
@@ -809,7 +825,7 @@
   },
   {
     "odp-rental-housing-stock": {
-      "type": "Citywide andsubject-related",
+      "type": "Official development plan by-laws",
       "title_original": "Rental Housing Stock\u00a0PDF file\u00a0(56\u00a0KB)",
       "title": "Rental Housing Stock",
       "url": "https://bylaws.vancouver.ca/ODP/odp-rental-housing-stock.pdf"
@@ -817,7 +833,7 @@
   },
   {
     "rr1appendixa": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Housing Vancouver (2017) PDF file (10 MB)",
       "title": "Housing Vancouver (2017)",
       "url": "https://council.vancouver.ca/20171128/documents/rr1appendixa.pdf"
@@ -825,7 +841,7 @@
   },
   {
     "policy-plan-metro-core-jobs-economy-land-use": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Metro Core Jobs and Economy Land Use Plan (2007)\u00a0PDF file\u00a0(2\u00a0MB)",
       "title": "Metro Core Jobs and Economy Land Use Plan (2007)",
       "url": "https://guidelines.vancouver.ca/policy-plan-metro-core-jobs-economy-land-use.pdf"
@@ -833,7 +849,7 @@
   },
   {
     "policy-plan-vancouver": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Vancouver\u00a0Plan (2022)\u00a0PDF file\u00a0(36\u00a0MB)",
       "title": "VancouverPlan (2022)",
       "url": "https://guidelines.vancouver.ca/policy-plan-vancouver.pdf"
@@ -841,7 +857,7 @@
   },
   {
     "policy-plan-broadway": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Broadway Plan (2022) PDF file (49\u00a0MB)",
       "title": "Broadway Plan (2022)",
       "url": "https://guidelines.vancouver.ca/policy-plan-broadway.pdf"
@@ -849,7 +865,7 @@
   },
   {
     "policy-plan-cambie-corridor": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Cambie Corridor Plan (2018)\u00a0PDF file (110 MB)",
       "title": "Cambie Corridor Plan (2018)",
       "url": "https://guidelines.vancouver.ca/policy-plan-cambie-corridor.pdf"
@@ -857,7 +873,7 @@
   },
   {
     "policy-plan-cambie-corridor-public-realm": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Public Realm\u00a0Plan (2018)\u00a0PDF file (26\u00a0MB)",
       "title": "Public RealmPlan (2018)",
       "url": "https://guidelines.vancouver.ca/policy-plan-cambie-corridor-public-realm.pdf"
@@ -865,7 +881,7 @@
   },
   {
     "policy-plan-central-area": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Central Area Plan (1991)\u00a0PDF file (9.6\u00a0MB)",
       "title": "Central Area Plan (1991)",
       "url": "https://guidelines.vancouver.ca/policy-plan-central-area.pdf"
@@ -873,7 +889,7 @@
   },
   {
     "C011": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Goals and Land Use Policy PDF file (148 KB)",
       "title": "Goals and Land Use Policy",
       "url": "https://guidelines.vancouver.ca/C011.pdf"
@@ -881,7 +897,7 @@
   },
   {
     "policy-plan-central-waterfront-hub-framework": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Central Waterfront Hub Framework (2009) PDF file (60\u00a0MB)",
       "title": "Central Waterfront Hub Framework (2009)",
       "url": "https://guidelines.vancouver.ca/policy-plan-central-waterfront-hub-framework.pdf"
@@ -889,7 +905,7 @@
   },
   {
     "policy-plan-chinatown": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Chinatown Neighbourhood Plan (2012)\u00a0PDF file (33 MB)",
       "title": "Chinatown Neighbourhood Plan (2012)",
       "url": "https://guidelines.vancouver.ca/policy-plan-chinatown.pdf"
@@ -897,7 +913,7 @@
   },
   {
     "C019A": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Vision Directions (2002)\u00a0PDF file (84 KB)",
       "title": "Vision Directions (2002)",
       "url": "https://guidelines.vancouver.ca/C019A.pdf"
@@ -905,7 +921,7 @@
   },
   {
     "policy-plan-downtown-eastside": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Downtown Eastside Plan (2014)\u00a0PDF file\u00a0(25 MB)",
       "title": "Downtown Eastside Plan (2014)",
       "url": "https://guidelines.vancouver.ca/policy-plan-downtown-eastside.pdf"
@@ -913,7 +929,7 @@
   },
   {
     "policy-plan-downtown-eastside-housing": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Housing Plan (2005) PDF file (3.3 MB)",
       "title": "Housing Plan (2005)",
       "url": "https://guidelines.vancouver.ca/policy-plan-downtown-eastside-housing.pdf"
@@ -921,7 +937,7 @@
   },
   {
     "policy-plan-east-vancouver-port-lands": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "East Vancouver Port Lands Area Plan (2007) PDF file (2.6\u00a0MB)",
       "title": "East Vancouver Port Lands Area Plan (2007)",
       "url": "https://guidelines.vancouver.ca/policy-plan-east-vancouver-port-lands.pdf"
@@ -929,7 +945,7 @@
   },
   {
     "policy-plan-false-creek-flats": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "False Creek Flats Plan (2017)\u00a0PDF file\u00a0(130\u00a0MB)",
       "title": "False Creek Flats Plan (2017)",
       "url": "https://guidelines.vancouver.ca/policy-plan-false-creek-flats.pdf"
@@ -937,7 +953,7 @@
   },
   {
     "policy-false-creek-south-provisional": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "False Creek South Provisional Policy\u00a0PDF file (1.2 MB)",
       "title": "False Creek South Provisional Policy",
       "url": "https://guidelines.vancouver.ca/policy-false-creek-south-provisional.pdf"
@@ -945,7 +961,7 @@
   },
   {
     "policy-plan-grandview-boundary-mixed-employment-area": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Grandview Boundary Mixed Employment Area Plan (2002)\u00a0PDF file\u00a0(4\u00a0MB)",
       "title": "Grandview Boundary Mixed Employment Area Plan (2002)",
       "url": "https://guidelines.vancouver.ca/policy-plan-grandview-boundary-mixed-employment-area.pdf"
@@ -953,7 +969,7 @@
   },
   {
     "policy-plan-granville-island-reference": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Granville Island Reference Document (1978)\u00a0PDF file (1 MB)",
       "title": "Granville Island Reference Document (1978)",
       "url": "https://guidelines.vancouver.ca/policy-plan-granville-island-reference.pdf"
@@ -961,7 +977,7 @@
   },
   {
     "granville-loops-policy-plan": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Granville Loops Policy Plan\u00a0(2010) PDF file\u00a0(5 MB)",
       "title": "Granville Loops Policy Plan(2010)",
       "url": "https://guidelines.vancouver.ca/granville-loops-policy-plan.pdf"
@@ -969,7 +985,7 @@
   },
   {
     "policy-plan-grandview-woodland": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Grandview-Woodland\u00a0Community Plan (2016)\u00a0PDF file (25 MB)",
       "title": "Grandview-WoodlandCommunity Plan (2016)",
       "url": "https://guidelines.vancouver.ca/policy-plan-grandview-woodland.pdf"
@@ -977,7 +993,7 @@
   },
   {
     "H011": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "\u200b",
       "title": "\u200b",
       "url": "https://guidelines.vancouver.ca/H011.pdf"
@@ -985,7 +1001,7 @@
   },
   {
     "policy-plan-joyce-collingwood-station-precinct": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Joyce-Collingwood Station Precinct Plan (2016)\u00a0PDF file (9 MB)",
       "title": "Joyce-Collingwood Station Precinct Plan (2016)",
       "url": "https://guidelines.vancouver.ca/policy-plan-joyce-collingwood-station-precinct.pdf"
@@ -993,7 +1009,7 @@
   },
   {
     "policy-plan-marpole": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Marpole Community Plan (2014)\u00a0PDF file (21 MB)",
       "title": "Marpole Community Plan (2014)",
       "url": "https://guidelines.vancouver.ca/policy-plan-marpole.pdf"
@@ -1001,7 +1017,7 @@
   },
   {
     "policy-plan-norquay-village": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Norquay Village Neighbourhood Centre Plan (2010)\u00a0PDF file (7 MB)",
       "title": "Norquay Village Neighbourhood Centre Plan (2010)",
       "url": "https://guidelines.vancouver.ca/policy-plan-norquay-village.pdf"
@@ -1009,7 +1025,7 @@
   },
   {
     "policy-plan-norquay-village-public-realm": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Public Realm Plan (2016)\u00a0PDF file\u00a0(1.5 MB)",
       "title": "Public Realm Plan (2016)",
       "url": "https://guidelines.vancouver.ca/policy-plan-norquay-village-public-realm.pdf"
@@ -1017,7 +1033,7 @@
   },
   {
     "policy-plan-norquay-village-public-benefits": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Public Benefits Strategy (2013)\u00a0PDF file\u00a0(4 MB)",
       "title": "Public Benefits Strategy (2013)",
       "url": "https://guidelines.vancouver.ca/policy-plan-norquay-village-public-benefits.pdf"
@@ -1025,7 +1041,7 @@
   },
   {
     "policy-plan-northeast-false-creek": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Northeast False Creek Plan (2018)\u00a0PDF file (23\u00a0MB)",
       "title": "Northeast False Creek Plan (2018)",
       "url": "https://guidelines.vancouver.ca/policy-plan-northeast-false-creek.pdf"
@@ -1033,7 +1049,7 @@
   },
   {
     "policy-plan-southlands": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Southlands Plan (1988) PDF file (28 MB)",
       "title": "Southlands Plan (1988)",
       "url": "https://guidelines.vancouver.ca/policy-plan-southlands.pdf"
@@ -1041,7 +1057,7 @@
   },
   {
     "policy-plan-still-creek-enhancement": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Still Creek Enhancement Plan (2002)\u00a0PDF file (9.25 MB)",
       "title": "Still Creek Enhancement Plan (2002)",
       "url": "https://guidelines.vancouver.ca/policy-plan-still-creek-enhancement.pdf"
@@ -1049,7 +1065,7 @@
   },
   {
     "policy-plan-victory-square": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "Victory Square Policy Plan (2005)\u00a0PDF file \u00a0(2 MB)",
       "title": "Victory Square Policy Plan (2005)",
       "url": "https://guidelines.vancouver.ca/policy-plan-victory-square.pdf"
@@ -1057,7 +1073,7 @@
   },
   {
     "policy-plan-west-end": {
-      "type": "Area specific plans",
+      "type": "Policies",
       "title_original": "West End Community Plan (2013)\u00a0PDF file (10\u00a0MB)",
       "title": "West End Community Plan (2013)",
       "url": "https://guidelines.vancouver.ca/policy-plan-west-end.pdf"
@@ -1065,7 +1081,7 @@
   },
   {
     "policy-statement-arbutus-centre": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Arbutus Centre (2008)\u00a0PDF file (1.3\u00a0MB)",
       "title": "Arbutus Centre (2008)",
       "url": "https://guidelines.vancouver.ca/policy-statement-arbutus-centre.pdf"
@@ -1073,7 +1089,7 @@
   },
   {
     "policy-statement-central-waterfront-port-lands": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Central Waterfront Port Lands (1994)\u00a0PDF file (2\u00a0MB)",
       "title": "Central Waterfront Port Lands (1994)",
       "url": "https://guidelines.vancouver.ca/policy-statement-central-waterfront-port-lands.pdf"
@@ -1081,7 +1097,7 @@
   },
   {
     "policy-statement-east-fraserlands": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "East Fraserlands (2004)\u00a0PDF file (6 MB)",
       "title": "East Fraserlands (2004)",
       "url": "https://guidelines.vancouver.ca/policy-statement-east-fraserlands.pdf"
@@ -1089,7 +1105,7 @@
   },
   {
     "policy-statement-heather-lands": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Heather Lands (2018)\u00a0PDF file\u00a0(13 MB)",
       "title": "Heather Lands (2018)",
       "url": "https://guidelines.vancouver.ca/policy-statement-heather-lands.pdf"
@@ -1097,7 +1113,7 @@
   },
   {
     "policy-statement-jericho-lands": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "\u0294\u0259y\u0313alm\u0259x\u02b7/Iy\u0313\u00e1lmexw/Jericho Lands (2024)\u00a0PDF file\u00a0(16 MB)",
       "title": "\u0294\u0259y\u0313alm\u0259x\u02b7/Iy\u0313\u00e1lmexw/Jericho Lands (2024)",
       "url": "https://guidelines.vancouver.ca/policy-statement-jericho-lands.pdf"
@@ -1105,7 +1121,7 @@
   },
   {
     "policy-statement-langara-college": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Langara College (2005)\u00a0PDF file (2\u00a0MB)",
       "title": "Langara College (2005)",
       "url": "https://guidelines.vancouver.ca/policy-statement-langara-college.pdf"
@@ -1113,7 +1129,7 @@
   },
   {
     "policy-statement-langara-gardens": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Langara Gardens (2018)\u00a0PDF file\u00a0(8 MB)",
       "title": "Langara Gardens (2018)",
       "url": "https://guidelines.vancouver.ca/policy-statement-langara-gardens.pdf"
@@ -1121,7 +1137,7 @@
   },
   {
     "policy-statement-little-mountain": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Little Mountain (2012)\u00a0PDF file\u00a0(6 MB)",
       "title": "Little Mountain (2012)",
       "url": "https://guidelines.vancouver.ca/policy-statement-little-mountain.pdf"
@@ -1129,7 +1145,7 @@
   },
   {
     "policy-statement-oakridge-centre": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Oakridge Centre (2007)\u00a0PDF file (8\u00a0MB)",
       "title": "Oakridge Centre (2007)",
       "url": "https://guidelines.vancouver.ca/policy-statement-oakridge-centre.pdf"
@@ -1137,7 +1153,7 @@
   },
   {
     "policy-statement-oakridge-transit-centre-adjacent-sites": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Oakridge Transit Centre and Adjacent Sites (2015)\u00a0PDF file\u00a0(10\u00a0MB)",
       "title": "Oakridge Transit Centre and Adjacent Sites (2015)",
       "url": "https://guidelines.vancouver.ca/policy-statement-oakridge-transit-centre-adjacent-sites.pdf"
@@ -1145,7 +1161,7 @@
   },
   {
     "policy-statement-pearson-dogwood": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Pearson Dogwood (2014)\u00a0PDF file\u00a0(6 MB)",
       "title": "Pearson Dogwood (2014)",
       "url": "https://guidelines.vancouver.ca/policy-statement-pearson-dogwood.pdf"
@@ -1153,7 +1169,7 @@
   },
   {
     "policy-statement-skeena-terrace": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Skeena Terrace (2022) PDF file\u00a0(21 MB)",
       "title": "Skeena Terrace (2022)",
       "url": "https://guidelines.vancouver.ca/policy-statement-skeena-terrace.pdf"
@@ -1161,7 +1177,7 @@
   },
   {
     "policy-statement-st-pauls": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "St. Paul's Hospital and Health Campus (2017)\u00a0PDF file\u00a0(11 MB)",
       "title": "St. Paul's Hospital and Health Campus (2017)",
       "url": "https://guidelines.vancouver.ca/policy-statement-st-pauls.pdf"
@@ -1169,7 +1185,7 @@
   },
   {
     "policy-statement-southeast-false-creek": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Southeast False Creek (1999) PDF file\u00a0(7 MB)",
       "title": "Southeast False Creek (1999)",
       "url": "https://guidelines.vancouver.ca/policy-statement-southeast-false-creek.pdf"
@@ -1177,7 +1193,7 @@
   },
   {
     "policy-statement-under-granville-bridge-neighbourhood": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Under the Granville Bridge Neighbourhood (2007)\u00a0PDF file (4\u00a0MB)",
       "title": "Under the Granville Bridge Neighbourhood (2007)",
       "url": "https://guidelines.vancouver.ca/policy-statement-under-granville-bridge-neighbourhood.pdf"
@@ -1185,7 +1201,7 @@
   },
   {
     "policy-statement-vcc-king-edward-campus": {
-      "type": "Policy statements",
+      "type": "Policies",
       "title_original": "Vancouver Community College King Edward Campus (2004)\u00a0PDF file (2\u00a0MB)",
       "title": "Vancouver Community College King Edward Campus (2004)",
       "url": "https://guidelines.vancouver.ca/policy-statement-vcc-king-edward-campus.pdf"
@@ -1193,7 +1209,7 @@
   },
   {
     "policy-rezoning-mirhpp": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Moderate Income Rental Housing\u00a0PDF file\u00a0(136\u00a0KB)",
       "title": "Moderate Income Rental Housing",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-mirhpp.pdf"
@@ -1201,7 +1217,7 @@
   },
   {
     "policy-rezoning-secured-rental": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Secured Rental PDF file (131 KB)",
       "title": "Secured Rental",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-secured-rental.pdf"
@@ -1209,7 +1225,7 @@
   },
   {
     "policy-plan-broadway": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Broadway Plan area\u00a0PDF file\u00a0(49 MB)",
       "title": "Broadway Plan area",
       "url": "https://guidelines.vancouver.ca/policy-plan-broadway.pdf"
@@ -1217,7 +1233,7 @@
   },
   {
     "policy-rezoning-broadway-area-west-of-vine-street": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Broadway Area West of Vine Street PDF file\u00a0(170\u00a0KB)",
       "title": "Broadway Area West of Vine Street",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-broadway-area-west-of-vine-street.pdf"
@@ -1225,7 +1241,7 @@
   },
   {
     "policy-plan-cambie-corridor.pdf#pag": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Cambie Corridor\u00a0PDF file\u00a0(101 MB)",
       "title": "Cambie Corridor",
       "url": "https://guidelines.vancouver.ca/policy-plan-cambie-corridor.pdf#page=38"
@@ -1233,7 +1249,7 @@
   },
   {
     "townhouse-rezoning-guide": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Summary of Townhouse Areas\u00a0PDF file (275\u00a0KB)",
       "title": "Summary of Townhouse Areas",
       "url": "/files/cov/townhouse-rezoning-guide.pdf"
@@ -1241,7 +1257,7 @@
   },
   {
     "policy-rezoning-cbd-shoulder": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Central Business District and shoulder PDF file (291 KB)",
       "title": "Central Business District and shoulder",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-cbd-shoulder.pdf"
@@ -1249,7 +1265,7 @@
   },
   {
     "p2": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Downtown South\u00a0PDF file\u00a0(88 KB)",
       "title": "Downtown South",
       "url": "https://council.vancouver.ca/documents/p2.pdf"
@@ -1257,7 +1273,7 @@
   },
   {
     "policy-rezoning-downtown-eastside": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Downtown Eastside PDF file\u00a0(862\u00a0KB)",
       "title": "Downtown Eastside",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-downtown-eastside.pdf"
@@ -1265,7 +1281,7 @@
   },
   {
     "R034": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "False Creek Flats\u00a0PDF file\u00a0(395\u00a0KB)",
       "title": "False Creek Flats",
       "url": "https://guidelines.vancouver.ca/R034.pdf"
@@ -1273,7 +1289,7 @@
   },
   {
     "policy-rezoning-former-community-visions-areas": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Former Community Visions Areas\u00a0PDF file\u00a0(579\u00a0KB)",
       "title": "Former Community Visions Areas",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-former-community-visions-areas.pdf"
@@ -1281,7 +1297,7 @@
   },
   {
     "policy-rezoning-grandview-boundary-mixed-employment-area": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Grandview Boundary Mixed Employment area\u00a0PDF file\u00a0(5\u00a0MB)",
       "title": "Grandview Boundary Mixed Employment area",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-grandview-boundary-mixed-employment-area.pdf"
@@ -1289,7 +1305,7 @@
   },
   {
     "policy-plan-grandview-woodland.pdf#pag": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Grandview-Woodland\u00a0PDF file\u00a0(23 MB)",
       "title": "Grandview-Woodland",
       "url": "https://guidelines.vancouver.ca/policy-plan-grandview-woodland.pdf#page=39"
@@ -1297,7 +1313,7 @@
   },
   {
     "policy-rezoning-granville-slopes": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Granville Slopes PDF file (212 KB)",
       "title": "Granville Slopes",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-granville-slopes.pdf"
@@ -1305,7 +1321,7 @@
   },
   {
     "policy-rezoning-granville": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Granville Street\u00a0PDF file (50 KB)",
       "title": "Granville Street",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-granville.pdf"
@@ -1313,7 +1329,7 @@
   },
   {
     "policy-rezoning-mt-pleasant-industrial-i-1c-guidelines": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "I-1C Mount Pleasant Light Industrial\u00a0PDF file\u00a0(1.75 MB)",
       "title": "I-1C Mount Pleasant Light Industrial",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-mt-pleasant-industrial-i-1c-guidelines.pdf"
@@ -1321,7 +1337,7 @@
   },
   {
     "policy-rezoning-i-2-m-2-non-industrial-uses": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "I-2 and M-2 Non-industrial Uses PDF file\u00a0(596 KB)",
       "title": "I-2 and M-2 Non-industrial Uses",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-i-2-m-2-non-industrial-uses.pdf"
@@ -1329,7 +1345,7 @@
   },
   {
     "policy-plan-joyce-collingwood-station-precinct.pdf#pag": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Joyce-Collingwood Station Precinct\u00a0PDF file\u00a0(8 MB)",
       "title": "Joyce-Collingwood Station Precinct",
       "url": " https://guidelines.vancouver.ca/policy-plan-joyce-collingwood-station-precinct.pdf#page=25"
@@ -1337,7 +1353,7 @@
   },
   {
     "policy-rezoning-little-mountain-adjacent": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Little Mountain Adjacent Area PDF file (1.08 MB)",
       "title": "Little Mountain Adjacent Area",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-little-mountain-adjacent.pdf"
@@ -1345,7 +1361,7 @@
   },
   {
     "policy-rezoning-marine-drive": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Marine Drive Industrial Area PDF file\u00a0(3 MB)",
       "title": "Marine Drive Industrial Area",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-marine-drive.pdf"
@@ -1353,7 +1369,7 @@
   },
   {
     "policy-rezoning-marine-landing-updates": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Marine Landing Policy Updates PDF file\u00a0(16\u00a0MB)",
       "title": "Marine Landing Policy Updates",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-marine-landing-updates.pdf"
@@ -1361,7 +1377,7 @@
   },
   {
     "policy-plan-marpole.pdf#pag": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Marpole\u00a0PDF file\u00a0(20 MB)",
       "title": "Marpole",
       "url": "https://guidelines.vancouver.ca/policy-plan-marpole.pdf#page=24"
@@ -1369,7 +1385,7 @@
   },
   {
     "policy-plan-metro-core-jobs-economy-land-use": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Metro Core Jobs and Economy Land Use Plan (2007)\u00a0PDF file\u00a0(2.1 MB)",
       "title": "Metro Core Jobs and Economy Land Use Plan (2007)",
       "url": "https://guidelines.vancouver.ca/policy-plan-metro-core-jobs-economy-land-use.pdf"
@@ -1377,7 +1393,7 @@
   },
   {
     "policy-plan-norquay-village.pdf#pag": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Norquay Village\u00a0PDF file\u00a0(7 MB)",
       "title": "Norquay Village",
       "url": "https://guidelines.vancouver.ca/policy-plan-norquay-village.pdf#page=46"
@@ -1385,7 +1401,7 @@
   },
   {
     "policy-rezoning-rupert-renfrew": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "Rupert and Renfrew\u00a0PDF file\u00a0(204 KB)",
       "title": "Rupert and Renfrew",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-rupert-renfrew.pdf"
@@ -1393,7 +1409,7 @@
   },
   {
     "policy-rezoning-west-end": {
-      "type": "Area specific",
+      "type": "Policies",
       "title_original": "West End PDF file (392\u00a0KB)",
       "title": "West End",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-west-end.pdf"
@@ -1401,7 +1417,7 @@
   },
   {
     "policy-community-amenity-contributions-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Community Amenity Contributions for Rezonings PDF file (1.7\u00a0MB)",
       "title": "Community Amenity Contributions for Rezonings",
       "url": "https://guidelines.vancouver.ca/policy-community-amenity-contributions-for-rezonings.pdf"
@@ -1409,7 +1425,7 @@
   },
   {
     "rr2.pdf#pag": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Community\u00a0Benefits Agreement Policy for Rezoning\u00a0PDF file (1\u00a0MB)",
       "title": "CommunityBenefits Agreement Policy for Rezoning",
       "url": "https://council.vancouver.ca/20180918/documents/rr2.pdf#page=17"
@@ -1417,7 +1433,7 @@
   },
   {
     "policy-development-contribution-expectations-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Development Contribution Expectations\u00a0PDF file\u00a0(1 MB)",
       "title": "Development Contribution Expectations",
       "url": "https://guidelines.vancouver.ca/policy-development-contribution-expectations-for-rezonings.pdf"
@@ -1425,7 +1441,7 @@
   },
   {
     "policy-below-market-rental-housing-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Below-market Rental Housing Policy for Rezoning\u00a0PDF file (63\u00a0KB)",
       "title": "Below-market Rental Housing Policy for Rezoning",
       "url": "https://guidelines.vancouver.ca/policy-below-market-rental-housing-for-rezonings.pdf"
@@ -1433,7 +1449,7 @@
   },
   {
     "policy-family-room-housing-mix-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Family room: Housing Mix Policy for Rezonings\u00a0PDF file\u00a0(300 KB)",
       "title": "Family room: Housing Mix Policy for Rezonings",
       "url": "https://guidelines.vancouver.ca/policy-family-room-housing-mix-for-rezonings.pdf"
@@ -1441,7 +1457,7 @@
   },
   {
     "policy-tenant-relocation-protection-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Tenant Relocation and Protection\u00a0Policy PDF file (767\u00a0KB)",
       "title": "Tenant Relocation and ProtectionPolicy",
       "url": "https://guidelines.vancouver.ca/policy-tenant-relocation-protection-for-rezonings.pdf"
@@ -1449,7 +1465,7 @@
   },
   {
     "policy-higher-buildings-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Higher buildings\u00a0PDF file\u00a0(911 KB)",
       "title": "Higher buildings",
       "url": "https://guidelines.vancouver.ca/policy-higher-buildings-for-rezonings.pdf"
@@ -1457,7 +1473,7 @@
   },
   {
     "policy-public-art-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Public Art Policy and Procedures for Rezonings\u00a0PDF file\u00a0(1\u00a0MB)",
       "title": "Public Art Policy and Procedures for Rezonings",
       "url": "https://guidelines.vancouver.ca/policy-public-art-for-rezonings.pdf"
@@ -1465,7 +1481,7 @@
   },
   {
     "policy-green-buildings-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Green Buildings Policy for Rezonings PDF file\u00a0(360 KB)",
       "title": "Green Buildings Policy for Rezonings",
       "url": "https://guidelines.vancouver.ca/policy-green-buildings-for-rezonings.pdf"
@@ -1473,7 +1489,7 @@
   },
   {
     "policy-mass-timber-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Mass Timber Policy for Rezonings PDF file\u00a0(170 KB)",
       "title": "Mass Timber Policy for Rezonings",
       "url": "https://guidelines.vancouver.ca/policy-mass-timber-for-rezonings.pdf"
@@ -1481,7 +1497,7 @@
   },
   {
     "policy-rezoning-sustainable-large-developments": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Sustainable Large Developments Policy for Rezonings PDF file (1 MB)",
       "title": "Sustainable Large Developments Policy for Rezonings",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-sustainable-large-developments.pdf"
@@ -1489,7 +1505,7 @@
   },
   {
     "policy-transfer-density-for-rezonings": {
-      "type": "Topic specific",
+      "type": "Policies",
       "title_original": "Transfer of Density Policy and Procedure\u00a0for Rezonings and HRAs PDF file (829\u00a0KB)",
       "title": "Transfer of Density Policy and Procedurefor Rezonings and HRAs",
       "url": "https://guidelines.vancouver.ca/policy-transfer-density-for-rezonings.pdf"
@@ -1497,7 +1513,7 @@
   },
   {
     "policy-downtown-office-conversion": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Downtown Office Conversion Policy\u00a0PDF file\u00a0(824 KB)",
       "title": "Downtown Office Conversion Policy",
       "url": "https://guidelines.vancouver.ca/policy-downtown-office-conversion.pdf"
@@ -1505,7 +1521,7 @@
   },
   {
     "policy-false-creek-south-provisional": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "False Creek South Provisional Policy\u00a0PDF file (1.2 MB)",
       "title": "False Creek South Provisional Policy",
       "url": "https://guidelines.vancouver.ca/policy-false-creek-south-provisional.pdf"
@@ -1513,7 +1529,7 @@
   },
   {
     "policy-fraser-river-burrard-inlet-waterfront": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Fraser River and Burrard Inlet Waterfront PDF file (465\u00a0KB)",
       "title": "Fraser River and Burrard Inlet Waterfront",
       "url": "https://guidelines.vancouver.ca/policy-fraser-river-burrard-inlet-waterfront.pdf"
@@ -1521,7 +1537,7 @@
   },
   {
     "policy-heritage-facade-rehabilitation-program": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Facade Rehabilitation Program\u00a0PDF file (125\u00a0KB)",
       "title": "Facade Rehabilitation Program",
       "url": "https://guidelines.vancouver.ca/policy-heritage-facade-rehabilitation-program.pdf"
@@ -1529,7 +1545,7 @@
   },
   {
     "policies-procedures-heritage-incentive-program": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Heritage Incentive Program\u00a0PDF file\u00a0(979 KB)",
       "title": "Heritage Incentive Program",
       "url": "https://guidelines.vancouver.ca/policies-procedures-heritage-incentive-program.pdf"
@@ -1537,7 +1553,7 @@
   },
   {
     "policy-heritage-policies": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Heritage Policies\u00a0PDF file\u00a0(125\u00a0KB)",
       "title": "Heritage Policies",
       "url": "https://guidelines.vancouver.ca/policy-heritage-policies.pdf"
@@ -1545,7 +1561,7 @@
   },
   {
     "policy-vancouver-heritage-register": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Vancouver Heritage Register\u00a0PDF file\u00a0(1.5 MB)",
       "title": "Vancouver Heritage Register",
       "url": "https://guidelines.vancouver.ca/policy-vancouver-heritage-register.pdf"
@@ -1553,7 +1569,7 @@
   },
   {
     "policy-hotel-development": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Hotel Development\u00a0PDF file\u00a0(91 KB)",
       "title": "Hotel Development",
       "url": "https://guidelines.vancouver.ca/policy-hotel-development.pdf"
@@ -1561,7 +1577,7 @@
   },
   {
     "policy-industrial-lands": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Industrial Lands\u00a0PDF file\u00a0(856\u00a0KB)",
       "title": "Industrial Lands",
       "url": "https://guidelines.vancouver.ca/policy-industrial-lands.pdf"
@@ -1569,7 +1585,7 @@
   },
   {
     "policy-kiosk-outdoor-mobile-vending": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Kiosk and Outdoor Mobile Vending\u00a0\u00a0PDF file\u00a0(450\u00a0KB)",
       "title": "Kiosk and Outdoor Mobile Vending",
       "url": "https://guidelines.vancouver.ca/policy-kiosk-outdoor-mobile-vending.pdf"
@@ -1577,7 +1593,7 @@
   },
   {
     "policy-event-related-noise-mitigation-residential-northeast-false-creek": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Northeast False Creek and Adjacent Impacted Areas Noise Policy PDF file\u00a0(574\u00a0KB)",
       "title": "Northeast False Creek and Adjacent Impacted Areas Noise Policy",
       "url": "https://guidelines.vancouver.ca/policy-event-related-noise-mitigation-residential-northeast-false-creek.pdf"
@@ -1585,7 +1601,7 @@
   },
   {
     "policy-rental-affordable-housing": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Affordable Housing\u00a0PDF file\u00a0(563",
       "title": "Affordable Housing",
       "url": "https://guidelines.vancouver.ca/policy-rental-affordable-housing.pdf"
@@ -1593,7 +1609,7 @@
   },
   {
     "policy-rental-affordable-housing": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "\u00a0KB)",
       "title": "KB)",
       "url": "https://guidelines.vancouver.ca/policy-rental-affordable-housing.pdf"
@@ -1601,7 +1617,7 @@
   },
   {
     "policy-low-cost-rental-artist-studios-downtown-ic-3": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Low Cost Rental Artist Studios in Downtown and IC-3 PDF file (65\u00a0KB)",
       "title": "Low Cost Rental Artist Studios in Downtown and IC-3",
       "url": "https://guidelines.vancouver.ca/policy-low-cost-rental-artist-studios-downtown-ic-3.pdf"
@@ -1609,7 +1625,7 @@
   },
   {
     "policy-rezoning-secured-rental": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Secured Rental PDF file (131 KB)",
       "title": "Secured Rental",
       "url": "https://bylaws.vancouver.ca/zoning/policy-rezoning-secured-rental.pdf"
@@ -1617,7 +1633,7 @@
   },
   {
     "policy-tenant-relocation-protection-for-rezonings": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Tenant Relocation and Protection Policy\u00a0PDF file\u00a0 (767\u00a0KB)",
       "title": "Tenant Relocation and Protection Policy",
       "url": "https://guidelines.vancouver.ca/policy-tenant-relocation-protection-for-rezonings.pdf"
@@ -1625,7 +1641,7 @@
   },
   {
     "policy-strata-title-rs-rt-rm": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Strata Title Policies for R1-1, RT, and RM Zones PDF file (62 KB)",
       "title": "Strata Title Policies for R1-1, RT, and RM Zones",
       "url": "https://guidelines.vancouver.ca/policy-strata-title-rs-rt-rm.pdf"
@@ -1633,7 +1649,7 @@
   },
   {
     "policy-sustainability-low-carbon-energy-systems": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Low-Carbon Energy Systems PDF file\u00a0(119 KB)",
       "title": "Low-Carbon Energy Systems",
       "url": "https://guidelines.vancouver.ca/policy-sustainability-low-carbon-energy-systems.pdf"
@@ -1641,7 +1657,7 @@
   },
   {
     "policy-zero-emissions-building-catalyst": {
-      "type": "General policies",
+      "type": "Policies",
       "title_original": "Zero Emissions Building Catalyst\u00a0PDF file\u00a0(662\u00a0KB)\u200b",
       "title": "Zero Emissions Building Catalyst",
       "url": "https://guidelines.vancouver.ca/policy-zero-emissions-building-catalyst.pdf"
@@ -1649,7 +1665,7 @@
   },
   {
     "guidelines-bridgehead": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Bridgehead PDF file (2 MB)",
       "title": "Bridgehead",
       "url": "https://guidelines.vancouver.ca/guidelines-bridgehead.pdf"
@@ -1657,7 +1673,7 @@
   },
   {
     "guidelines-central-area-pedestrian-weather-protection": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Central Area Pedestrian Weather Protection PDF file\u00a0(1.8\u00a0MB)",
       "title": "Central Area Pedestrian Weather Protection",
       "url": "https://guidelines.vancouver.ca/guidelines-central-area-pedestrian-weather-protection.pdf"
@@ -1665,7 +1681,7 @@
   },
   {
     "guidelines-downtown": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Downtown\u00a0PDF file\u00a0(560 KB)",
       "title": "Downtown",
       "url": "https://guidelines.vancouver.ca/guidelines-downtown.pdf"
@@ -1673,7 +1689,7 @@
   },
   {
     "guidelines-downtown-character-area-descriptions": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Character Area Descriptions\u00a0PDF file (2\u00a0MB)",
       "title": "Character Area Descriptions",
       "url": "https://guidelines.vancouver.ca/guidelines-downtown-character-area-descriptions.pdf"
@@ -1681,7 +1697,7 @@
   },
   {
     "guidelines-downtown-south": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Downtown South\u00a0PDF file\u00a0(8.6\u00a0MB)",
       "title": "Downtown South",
       "url": "https://guidelines.vancouver.ca/guidelines-downtown-south.pdf"
@@ -1689,7 +1705,7 @@
   },
   {
     "guidelines-downtown-south-granville-street": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Downtown South Granville Street PDF file (232\u00a0KB)",
       "title": "Downtown South Granville Street",
       "url": "https://guidelines.vancouver.ca/guidelines-downtown-south-granville-street.pdf"
@@ -1697,7 +1713,7 @@
   },
   {
     "guidelines-downtown-SRA-room-upgrading": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "SRAs Room Upgrading PDF file\u00a0(625\u00a0KB)",
       "title": "SRAs Room Upgrading",
       "url": "https://guidelines.vancouver.ca/guidelines-downtown-SRA-room-upgrading.pdf"
@@ -1705,7 +1721,7 @@
   },
   {
     "guidelines-downtown-west-georgia-street": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "West Georgia Street PDF file (2.5 MB)",
       "title": "West Georgia Street",
       "url": "https://guidelines.vancouver.ca/guidelines-downtown-west-georgia-street.pdf"
@@ -1713,7 +1729,7 @@
   },
   {
     "guidelines-downtown-eastside": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Downtown Eastside/Oppenheimer\u00a0PDF file\u00a0(1.6\u00a0MB)",
       "title": "Downtown Eastside/Oppenheimer",
       "url": "https://guidelines.vancouver.ca/guidelines-downtown-eastside.pdf"
@@ -1721,7 +1737,7 @@
   },
   {
     "guidelines-norquay-village-character-house-retention": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Norquay Village Character House and Retention PDF file (1.35 MB)",
       "title": "Norquay Village Character House and Retention",
       "url": "https://guidelines.vancouver.ca/guidelines-norquay-village-character-house-retention.pdf"
@@ -1729,7 +1745,7 @@
   },
   {
     "guidelines-southeast-false-creek-additional-penthouse-storeys": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Additional Penthouse Storeys PDF file\u00a0(587\u00a0KB)",
       "title": "Additional Penthouse Storeys",
       "url": "https://guidelines.vancouver.ca/guidelines-southeast-false-creek-additional-penthouse-storeys.pdf"
@@ -1737,7 +1753,7 @@
   },
   {
     "guidelines-southeast-false-creek-areas-3a-3b": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Areas 3A and 3B PDF file (850\u00a0MB)",
       "title": "Areas 3A and 3B",
       "url": "https://guidelines.vancouver.ca/guidelines-southeast-false-creek-areas-3a-3b.pdf"
@@ -1745,7 +1761,7 @@
   },
   {
     "guidelines-southlands": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Southlands PDF file (521 KB)",
       "title": "Southlands",
       "url": "https://guidelines.vancouver.ca/guidelines-southlands.pdf"
@@ -1753,7 +1769,7 @@
   },
   {
     "V001": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Vancouver Convention Centre Expansion Project Water Oriented Development\u00a0PDF file (1.23 MB)",
       "title": "Vancouver Convention Centre Expansion Project Water Oriented Development",
       "url": "https://guidelines.vancouver.ca/CD-1/V001.pdf"
@@ -1761,7 +1777,7 @@
   },
   {
     "guidelines-victory-square": {
-      "type": "Area specific",
+      "type": "Guidelines",
       "title_original": "Victory Square PDF file (1.8 MB)",
       "title": "Victory Square",
       "url": "https://guidelines.vancouver.ca/guidelines-victory-square.pdf"
@@ -1769,7 +1785,7 @@
   },
   {
     "guidelines-c-1-residential": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "C-1 PDF file (222 KB)",
       "title": "C-1",
       "url": "https://guidelines.vancouver.ca/guidelines-c-1-residential.pdf"
@@ -1777,7 +1793,7 @@
   },
   {
     "guidelines-c-2": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "C-2 PDF file (79 KB)",
       "title": "C-2",
       "url": "https://guidelines.vancouver.ca/guidelines-c-2.pdf"
@@ -1785,7 +1801,7 @@
   },
   {
     "guidelines-c-2b-2c-2c1": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "C-2B, C-2C, and C-2C1 PDF file (97 KB)",
       "title": "C-2B, C-2C, and C-2C1",
       "url": "https://guidelines.vancouver.ca/guidelines-c-2b-2c-2c1.pdf"
@@ -1793,7 +1809,7 @@
   },
   {
     "guidelines-c-2-2b-2c-2c1-residential-rental-tenure": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "C-2, C-2B, C-2C, and C-2C1 Guidelines for Residential Rental Tenure Buildings PDF file (7 MB)",
       "title": "C-2, C-2B, C-2C, and C-2C1 Guidelines for Residential Rental Tenure Buildings",
       "url": "https://guidelines.vancouver.ca/guidelines-c-2-2b-2c-2c1-residential-rental-tenure.pdf"
@@ -1801,7 +1817,7 @@
   },
   {
     "guidelines-c-2c-broadway-commercial": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "C-2C\u00a0Broadway and Commercial Drive\u00a0PDF file (2\u00a0MB)",
       "title": "C-2CBroadway and Commercial Drive",
       "url": "https://guidelines.vancouver.ca/guidelines-c-2c-broadway-commercial.pdf"
@@ -1809,7 +1825,7 @@
   },
   {
     "guidelines-c-3a-broadway-arbutus-2000-block-west-10th-avenue": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Broadway and Arbutus and 2000-block West 10th Avenue PDF file\u00a0(1.43 MB)",
       "title": "Broadway and Arbutus and 2000-block West 10th Avenue",
       "url": "https://guidelines.vancouver.ca/guidelines-c-3a-broadway-arbutus-2000-block-west-10th-avenue.pdf"
@@ -1817,7 +1833,7 @@
   },
   {
     "guidelines-c-3a-broadway-commercial-drive": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Broadway and Commercial Drive\u00a0PDF file\u00a0(2.48 MB)",
       "title": "Broadway and Commercial Drive",
       "url": "https://guidelines.vancouver.ca/guidelines-c-3a-broadway-commercial-drive.pdf"
@@ -1825,7 +1841,7 @@
   },
   {
     "guidelines-c-3a-burrard-slopes": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Burrard Slopes PDF file\u00a0 (3\u00a0MB)",
       "title": "Burrard Slopes",
       "url": "https://guidelines.vancouver.ca/guidelines-c-3a-burrard-slopes.pdf"
@@ -1833,7 +1849,7 @@
   },
   {
     "guidelines-c-3a-cambie-street": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Cambie Street PDF file (538\u00a0KB)",
       "title": "Cambie Street",
       "url": "https://guidelines.vancouver.ca/guidelines-c-3a-cambie-street.pdf"
@@ -1841,7 +1857,7 @@
   },
   {
     "guidelines-c-3a-central-broadway": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Central Broadway PDF file (3\u00a0MB)",
       "title": "Central Broadway",
       "url": "https://guidelines.vancouver.ca/guidelines-c-3a-central-broadway.pdf"
@@ -1849,7 +1865,7 @@
   },
   {
     "guidelines-c-3a-main-street": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Main Street PDF file (614\u00a0KB)\u200b",
       "title": "Main Street",
       "url": "https://guidelines.vancouver.ca/guidelines-c-3a-main-street.pdf"
@@ -1857,7 +1873,7 @@
   },
   {
     "guidelines-north-burrard-c-3a": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "North Burrard\u00a0PDF file (2.7\u00a0MB)",
       "title": "North Burrard",
       "url": "https://guidelines.vancouver.ca/guidelines-north-burrard-c-3a.pdf"
@@ -1865,7 +1881,7 @@
   },
   {
     "guidelines-c-7-8": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "C-7 and C-8 PDF file\u00a0(2\u00a0MB)",
       "title": "C-7 and C-8",
       "url": "https://guidelines.vancouver.ca/guidelines-c-7-8.pdf"
@@ -1873,7 +1889,7 @@
   },
   {
     "V001": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "100 Thurlow Street\u00a0PDF file\u00a0(1.23 MB)",
       "title": "100 Thurlow Street",
       "url": "https://guidelines.vancouver.ca/CD-1/V001.pdf"
@@ -1881,7 +1897,7 @@
   },
   {
     "R003": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "1200-1300 Pacific Boulevard\u00a0PDF file\u00a0(1.39 MB)",
       "title": "1200-1300 Pacific Boulevard",
       "url": "https://guidelines.vancouver.ca/CD-1/R003.pdf"
@@ -1889,7 +1905,7 @@
   },
   {
     "B002": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "1601 West Georgia Street\u00a0PDF file\u00a0(611 KB)",
       "title": "1601 West Georgia Street",
       "url": "https://guidelines.vancouver.ca/CD-1/B002.pdf"
@@ -1897,7 +1913,7 @@
   },
   {
     "B004": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "201 Burrard Street\u00a0PDF file\u00a0(1.71 MB)",
       "title": "201 Burrard Street",
       "url": "https://guidelines.vancouver.ca/CD-1/B004.pdf"
@@ -1905,7 +1921,7 @@
   },
   {
     "guidelines-cd-1-500-and-600-pacific-street": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "500 and 600 Pacific Street\u00a0PDF file\u00a0(796 KB)",
       "title": "500 and 600 Pacific Street",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-500-and-600-pacific-street.pdf"
@@ -1913,7 +1929,7 @@
   },
   {
     "guidelines-cd-1-501-bute-street": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "501 Bute Street\u00a0PDF file\u00a0(2.6 MB)",
       "title": "501 Bute Street",
       "url": "https://guidelines.vancouver.ca/guidelines-cd-1-501-bute-street.pdf"
@@ -1921,7 +1937,7 @@
   },
   {
     "F001": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "550 West 14th Avenue\u00a0PDF file\u00a0(311 KB)",
       "title": "550 West 14th Avenue",
       "url": "https://guidelines.vancouver.ca/CD-1/F001.pdf"
@@ -1929,7 +1945,7 @@
   },
   {
     "G001": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "555 Great Northern Way\u00a0PDF file\u00a0(1.5 MB)",
       "title": "555 Great Northern Way",
       "url": "https://guidelines.vancouver.ca/CD-1/G001.pdf"
@@ -1937,7 +1953,7 @@
   },
   {
     "guidelines-cd-1-572-beatty-st-international-village": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "572 Beatty Street\u00a0PDF file (870\u00a0KB)",
       "title": "572 Beatty Street",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-572-beatty-st-international-village.pdf"
@@ -1945,7 +1961,7 @@
   },
   {
     "B001": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "900 Burrard Street\u00a0PDF file\u00a0(133 KB)",
       "title": "900 Burrard Street",
       "url": "https://guidelines.vancouver.ca/CD-1/B001.pdf"
@@ -1953,7 +1969,7 @@
   },
   {
     "C004": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Celtic Avenue PDF file (946 KB)",
       "title": "Celtic Avenue",
       "url": "https://guidelines.vancouver.ca/CD-1/C004.pdf"
@@ -1961,7 +1977,7 @@
   },
   {
     "E001": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "East Vancouver Port Lands PDF file (332 KB)",
       "title": "East Vancouver Port Lands",
       "url": "https://guidelines.vancouver.ca/CD-1/E001.pdf"
@@ -1969,7 +1985,7 @@
   },
   {
     "guidelines-cd-1-fraser-lands-block-67-to-kerr": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Fraser Lands Block 67 to Kerr Street PDF file (778\u00a0KB)",
       "title": "Fraser Lands Block 67 to Kerr Street",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-fraser-lands-block-67-to-kerr.pdf"
@@ -1977,7 +1993,7 @@
   },
   {
     "guidelines-cd-1-joyce-station-area-vanness-north-rae-5000-5300-boundary": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Joyce Station Area\u00a0PDF file (1 MB)",
       "title": "Joyce Station Area",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-joyce-station-area-vanness-north-rae-5000-5300-boundary.pdf"
@@ -1985,7 +2001,7 @@
   },
   {
     "guidelines-cd-1-little-mountain": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Little Mountain PDF file (18\u00a0MB)",
       "title": "Little Mountain",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-little-mountain.pdf"
@@ -1993,7 +2009,7 @@
   },
   {
     "guidelines-cd-1-marina-neighbourhood-land-development": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Land Development PDF file\u00a0(3.4\u00a0MB)",
       "title": "Land Development",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-marina-neighbourhood-land-development.pdf"
@@ -2001,7 +2017,7 @@
   },
   {
     "guidelines-cd-1-marina-neighbourhood-marina-development": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Marina Development PDF file (842 KB)",
       "title": "Marina Development",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-marina-neighbourhood-marina-development.pdf"
@@ -2009,7 +2025,7 @@
   },
   {
     "guidelines-cd-1-marina-neighbourhood-sub-area-1b": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Sub-area 1B PDF file (2.8\u00a0MB)",
       "title": "Sub-area 1B",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-marina-neighbourhood-sub-area-1b.pdf"
@@ -2017,7 +2033,7 @@
   },
   {
     "guidelines-cd-1-quayside-neighbourhood": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Quayside Neighbourhood PDF file (1.51 MB)",
       "title": "Quayside Neighbourhood",
       "url": "https://guidelines.vancouver.ca/CD-1/guidelines-cd-1-quayside-neighbourhood.pdf"
@@ -2025,7 +2041,7 @@
   },
   {
     "V002": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Vancouver General Hospital Precinct PDF file (759 KB)",
       "title": "Vancouver General Hospital Precinct",
       "url": "https://guidelines.vancouver.ca/CD-1/V002.pdf"
@@ -2033,7 +2049,7 @@
   },
   {
     "guidelines-fc-1-east-false-creek": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "FC-1 East False Creek PDF file\u00a0(2.2\u00a0MB)",
       "title": "FC-1 East False Creek",
       "url": "https://guidelines.vancouver.ca/guidelines-fc-1-east-false-creek.pdf"
@@ -2041,7 +2057,7 @@
   },
   {
     "guidelines-fc-2-false-creek-flats": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "FC-2 False Creek Flats PDF file\u00a0(2.5\u00a0MB)",
       "title": "FC-2 False Creek Flats",
       "url": "https://guidelines.vancouver.ca/guidelines-fc-2-false-creek-flats.pdf"
@@ -2049,7 +2065,7 @@
   },
   {
     "guidelines-fm-1-fairview-slopes": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "FM-1 Fairview Slopes PDF file (469\u00a0KB)",
       "title": "FM-1 Fairview Slopes",
       "url": "https://guidelines.vancouver.ca/guidelines-fm-1-fairview-slopes.pdf"
@@ -2057,7 +2073,7 @@
   },
   {
     "HCA_2of7": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "General Guidelines\u00a0PDF file\u00a0(141 KB)",
       "title": "General Guidelines",
       "url": "https://bylaws.vancouver.ca/ODP/HCA_2of7.pdf"
@@ -2065,7 +2081,7 @@
   },
   {
     "HCA_3of7": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Area Map\u00a0PDF file\u00a0(508 KB)",
       "title": "Area Map",
       "url": "https://bylaws.vancouver.ca/ODP/HCA_3of7.pdf"
@@ -2073,7 +2089,7 @@
   },
   {
     "HCA_5of7": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Design Guidelines\u00a0PDF file\u00a0(12.6 MB)",
       "title": "Design Guidelines",
       "url": "https://bylaws.vancouver.ca/ODP/HCA_5of7.pdf"
@@ -2081,7 +2097,7 @@
   },
   {
     "policies-chinatown-ha-1-design": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "HA-1 Chinatown PDF file (1.7\u00a0MB)",
       "title": "HA-1 Chinatown",
       "url": "https://guidelines.vancouver.ca/policies-chinatown-ha-1-design.pdf"
@@ -2089,7 +2105,7 @@
   },
   {
     "guidelines-ha-1a-chinatown": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "HA-1A Chinatown PDF file (600 KB)",
       "title": "HA-1A Chinatown",
       "url": "https://guidelines.vancouver.ca/guidelines-ha-1a-chinatown.pdf"
@@ -2097,7 +2113,7 @@
   },
   {
     "guidelines-ha-2-gastown": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "HA-2 Gastown PDF file (1.2 MB)",
       "title": "HA-2 Gastown",
       "url": "https://guidelines.vancouver.ca/guidelines-ha-2-gastown.pdf"
@@ -2105,7 +2121,7 @@
   },
   {
     "policy-rezoning-mt-pleasant-industrial-i-1c-guidelines": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "I-1C Mount Pleasant Light Industrial\u00a0PDF file\u00a0(1.75 MB)",
       "title": "I-1C Mount Pleasant Light Industrial",
       "url": "https://guidelines.vancouver.ca/policy-rezoning-mt-pleasant-industrial-i-1c-guidelines.pdf"
@@ -2113,7 +2129,7 @@
   },
   {
     "guidelines-i-2-3-false-creek-flats": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "I-2 and I-3 False Creek Flats PDF file\u00a0(2.6\u00a0MB)",
       "title": "I-2 and I-3 False Creek Flats",
       "url": "https://guidelines.vancouver.ca/guidelines-i-2-3-false-creek-flats.pdf"
@@ -2121,7 +2137,7 @@
   },
   {
     "guidelines-ic-3-false-creek-flats": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "IC-3 False Creek Flats PDF file\u00a0(1.2\u00a0MB)",
       "title": "IC-3 False Creek Flats",
       "url": "https://guidelines.vancouver.ca/guidelines-ic-3-false-creek-flats.pdf"
@@ -2129,7 +2145,7 @@
   },
   {
     "guidelines-mc-1-mc-2-cedar-cottage-hudson-east-hastings-false-creek-flats-malkin-atlantic-prior": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "MC-1 and MC-2 PDF file\u00a0(2.7 MB)",
       "title": "MC-1 and MC-2",
       "url": "https://guidelines.vancouver.ca/guidelines-mc-1-mc-2-cedar-cottage-hudson-east-hastings-false-creek-flats-malkin-atlantic-prior.pdf"
@@ -2137,7 +2153,7 @@
   },
   {
     "guidelines-rs-districts-character-house-retention": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "Character House Retention\u00a0PDF file\u00a0(2 MB)",
       "title": "Character House Retention",
       "url": "https://guidelines.vancouver.ca/guidelines-rs-districts-character-house-retention.pdf"
@@ -2145,7 +2161,7 @@
   },
   {
     "guidelines-ra-1": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RA-1 PDF file (1\u00a0MB)",
       "title": "RA-1",
       "url": "https://guidelines.vancouver.ca/guidelines-ra-1.pdf"
@@ -2153,7 +2169,7 @@
   },
   {
     "guidelines-rm-1-rm-1n-courtyard-rowhouse": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-1 and RM 1-N Courtyard Rowhouse PDF file (3.7 MB)",
       "title": "RM-1 and RM 1-N Courtyard Rowhouse",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-1-rm-1n-courtyard-rowhouse.pdf"
@@ -2161,7 +2177,7 @@
   },
   {
     "guidelines-rm-3a-4-4n-social-housing": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-3A, RM-4, and RM-4N Social Housing\u00a0PDF file (363 KB)",
       "title": "RM-3A, RM-4, and RM-4N Social Housing",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-3a-4-4n-social-housing.pdf"
@@ -2169,7 +2185,7 @@
   },
   {
     "guidelines-rm-5-all-districts-west-end": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-5 West End PDF file (3 MB)",
       "title": "RM-5 West End",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-5-all-districts-west-end.pdf"
@@ -2177,7 +2193,7 @@
   },
   {
     "guidelines-rm-6-west-end-georgia-street-alberni-street": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-6 West End: Georgia Street and Alberni Street PDF file (495\u00a0KB)",
       "title": "RM-6 West End: Georgia Street and Alberni Street",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-6-west-end-georgia-street-alberni-street.pdf"
@@ -2185,7 +2201,7 @@
   },
   {
     "guidelines-rm-7": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-7 and RM-7N\u00a0PDF file (1\u00a0MB)",
       "title": "RM-7 and RM-7N",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-7.pdf"
@@ -2193,7 +2209,7 @@
   },
   {
     "guidelines-rm-7an": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-7AN\u00a0PDF file (1.8\u00a0MB)",
       "title": "RM-7AN",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-7an.pdf"
@@ -2201,7 +2217,7 @@
   },
   {
     "guidelines-rm-8-all-districts": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-8 All Districts\u00a0PDF file\u00a0(1 MB)",
       "title": "RM-8 All Districts",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-8-all-districts.pdf"
@@ -2209,7 +2225,7 @@
   },
   {
     "guidelines-rm-9-9a-9bn": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-9 All Districts\u00a0PDF file\u00a0(1.2\u00a0MB)",
       "title": "RM-9 All Districts",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-9-9a-9bn.pdf"
@@ -2217,7 +2233,7 @@
   },
   {
     "guidelines-rm-10-10n": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-10 and RM-10N PDF file\u00a0(2\u00a0MB)",
       "title": "RM-10 and RM-10N",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-10-10n.pdf"
@@ -2225,7 +2241,7 @@
   },
   {
     "guidelines-rm-11-11n": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-11 and RM-11N PDF file\u00a0(1.7\u00a0MB)",
       "title": "RM-11 and RM-11N",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-11-11n.pdf"
@@ -2233,7 +2249,7 @@
   },
   {
     "guidelines-rm-12n": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RM-12N PDF file\u00a0(2\u00a0MB)",
       "title": "RM-12N",
       "url": "https://guidelines.vancouver.ca/guidelines-rm-12n.pdf"
@@ -2241,7 +2257,7 @@
   },
   {
     "guidelines-rr-districts": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RR Districts PDF file (3.5 MB",
       "title": "RR Districts",
       "url": "https://guidelines.vancouver.ca/guidelines-rr-districts.pdf"
@@ -2249,7 +2265,7 @@
   },
   {
     "guidelines-multiple-conversion-dwelling-rs-1a-rs-2-rs-7-rt-1-rt-2-districts": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RT-1 and RT-2 Districts Multiple Conversion Dwelling PDF file (233\u00a0KB)",
       "title": "RT-1 and RT-2 Districts Multiple Conversion Dwelling",
       "url": "https://guidelines.vancouver.ca/guidelines-multiple-conversion-dwelling-rs-1a-rs-2-rs-7-rt-1-rt-2-districts.pdf"
@@ -2257,7 +2273,7 @@
   },
   {
     "guidelines-rt-2-multiple-dweling": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RT-2 Multiple Dwelling PDF file (124 KB)",
       "title": "RT-2 Multiple Dwelling",
       "url": "https://guidelines.vancouver.ca/guidelines-rt-2-multiple-dweling.pdf"
@@ -2265,7 +2281,7 @@
   },
   {
     "guidelines-rt-3": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RT-3\u00a0\u00a0PDF file\u00a0(968 KB)",
       "title": "RT-3",
       "url": "https://guidelines.vancouver.ca/guidelines-rt-3.pdf"
@@ -2273,7 +2289,7 @@
   },
   {
     "guidelines-rt-4-rt-4a-rt-4n-rt-4an-rt-5-rt-5n-rt-6": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RT-4, RT-5,\u00a0and RT-6\u00a0PDF file\u00a0(1.6\u00a0MB)",
       "title": "RT-4, RT-5,and RT-6",
       "url": "https://guidelines.vancouver.ca/guidelines-rt-4-rt-4a-rt-4n-rt-4an-rt-5-rt-5n-rt-6.pdf"
@@ -2281,7 +2297,7 @@
   },
   {
     "guidelines-rt-7-8": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RT-7 and RT-8 PDF file\u00a0(1.06 MB)",
       "title": "RT-7 and RT-8",
       "url": "https://guidelines.vancouver.ca/guidelines-rt-7-8.pdf"
@@ -2289,7 +2305,7 @@
   },
   {
     "guidelines-rt-9": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RT-9 \u00a0PDF file (1.5\u00a0MB)",
       "title": "RT-9",
       "url": "https://guidelines.vancouver.ca/guidelines-rt-9.pdf"
@@ -2297,7 +2313,7 @@
   },
   {
     "guidelines-rt-10-rt-10n-small-house-duplex": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RT-10 Small House and Duplex\u00a0PDF file\u00a0(3.8\u00a0MB)",
       "title": "RT-10 Small House and Duplex",
       "url": "https://guidelines.vancouver.ca/guidelines-rt-10-rt-10n-small-house-duplex.pdf"
@@ -2305,7 +2321,7 @@
   },
   {
     "guidelines-rt-11-rt-11n": {
-      "type": "Zoning district",
+      "type": "Guidelines",
       "title_original": "RT-11\u00a0PDF file\u00a0(2.7\u00a0MB)",
       "title": "RT-11",
       "url": "https://guidelines.vancouver.ca/guidelines-rt-11-rt-11n.pdf"
@@ -2313,7 +2329,7 @@
   },
   {
     "guidelines-adult-retail-store": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Adult Retail Store PDF file (689\u00a0KB)",
       "title": "Adult Retail Store",
       "url": "https://guidelines.vancouver.ca/guidelines-adult-retail-store.pdf"
@@ -2321,7 +2337,7 @@
   },
   {
     "guidelines-artist-studio": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Artist Studio PDF file (70\u00a0KB)",
       "title": "Artist Studio",
       "url": "https://guidelines.vancouver.ca/guidelines-artist-studio.pdf"
@@ -2329,7 +2345,7 @@
   },
   {
     "guidelines-artist-studio-industrial-districts-strata-title-conversion": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Artist Studios in Industrial Districts Strata Title Conversion PDF file\u00a0(458 KB)",
       "title": "Artist Studios in Industrial Districts Strata Title Conversion",
       "url": "https://guidelines.vancouver.ca/guidelines-artist-studio-industrial-districts-strata-title-conversion.pdf"
@@ -2337,7 +2353,7 @@
   },
   {
     "guidelines-bed-breakfast-accommodation": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Bed and Breakfast Accommodation\u00a0PDF file (457\u00a0KB)",
       "title": "Bed and Breakfast Accommodation",
       "url": "https://guidelines.vancouver.ca/guidelines-bed-breakfast-accommodation.pdf"
@@ -2345,7 +2361,7 @@
   },
   {
     "guidelines-bingo-hall": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Bingo Hall PDF file (582 KB)",
       "title": "Bingo Hall",
       "url": "https://guidelines.vancouver.ca/guidelines-bingo-hall.pdf"
@@ -2353,15 +2369,23 @@
   },
   {
     "guidelines-cabaret-non-alcohol": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Cabaret (Non-alcohol) PDF file (455 KB)",
       "title": "Cabaret (Non-alcohol)",
       "url": "https://guidelines.vancouver.ca/guidelines-cabaret-non-alcohol.pdf"
     }
   },
   {
+    "guidelines-cannabis-store": {
+      "type": "Guidelines",
+      "title_original": "Cannabis Store PDF file (71 KB)",
+      "title": "Cannabis Store",
+      "url": "https://guidelines.vancouver.ca/guidelines-cannabis-store.pdf"
+    }
+  },
+  {
     "guidelines-casino": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Casino\u00a0PDF file (63 KB)",
       "title": "Casino",
       "url": "https://guidelines.vancouver.ca/guidelines-casino.pdf"
@@ -2369,7 +2393,7 @@
   },
   {
     "guidelines-childcare-design": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Childcare Design PDF file (514\u00a0KB)",
       "title": "Childcare Design",
       "url": "https://guidelines.vancouver.ca/guidelines-childcare-design.pdf"
@@ -2377,7 +2401,7 @@
   },
   {
     "guidelines-church": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Church\u00a0PDF file (61 KB)",
       "title": "Church",
       "url": "https://guidelines.vancouver.ca/guidelines-church.pdf"
@@ -2385,7 +2409,7 @@
   },
   {
     "guidelines-community-care-facility-group-residence": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Community Care Facility and Group Residence PDF file (119\u00a0KB)",
       "title": "Community Care Facility and Group Residence",
       "url": "https://guidelines.vancouver.ca/guidelines-community-care-facility-group-residence.pdf"
@@ -2393,7 +2417,7 @@
   },
   {
     "guidelines-drive-in-restaurant-drive-through-service": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Drive-in Restaurant and Drive-through Service PDF file (454\u00a0KB)",
       "title": "Drive-in Restaurant and Drive-through Service",
       "url": "https://guidelines.vancouver.ca/guidelines-drive-in-restaurant-drive-through-service.pdf"
@@ -2401,7 +2425,7 @@
   },
   {
     "guidelines-farmers-market": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Farmers' Market PDF file (187 KB)",
       "title": "Farmers' Market",
       "url": "https://guidelines.vancouver.ca/guidelines-farmers-market.pdf"
@@ -2409,7 +2433,7 @@
   },
   {
     "guidelines-hotels-rooming-houses-adjacencies": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Hotels and Rooming Houses Adjacencies PDF file (790\u00a0KB)",
       "title": "Hotels and Rooming Houses Adjacencies",
       "url": "https://guidelines.vancouver.ca/guidelines-hotels-rooming-houses-adjacencies.pdf"
@@ -2417,7 +2441,7 @@
   },
   {
     "guidelines-industrial-spaces": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Industrial Spaces\u00a0PDF file (474 KB)",
       "title": "Industrial Spaces",
       "url": "https://guidelines.vancouver.ca/guidelines-industrial-spaces.pdf"
@@ -2425,7 +2449,7 @@
   },
   {
     "guidelines-liquor-store": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Liquor Store PDF file (191 KB)",
       "title": "Liquor Store",
       "url": "https://guidelines.vancouver.ca/guidelines-liquor-store.pdf"
@@ -2433,23 +2457,15 @@
   },
   {
     "guidelines-live-work-use": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Live-work Use PDF file (591\u00a0KB)",
       "title": "Live-work Use",
       "url": "https://guidelines.vancouver.ca/guidelines-live-work-use.pdf"
     }
   },
   {
-    "guidelines-medical-marijuana-related": {
-      "type": "Non-residential projects",
-      "title_original": "Medical Marijuana-related PDF file (130 KB)",
-      "title": "Medical Marijuana-related",
-      "url": "https://guidelines.vancouver.ca/guidelines-medical-marijuana-related.pdf"
-    }
-  },
-  {
     "guidelines-mini-storage-warehouse": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Mini-storage Warehouse PDF file (584 KB)",
       "title": "Mini-storage Warehouse",
       "url": "https://guidelines.vancouver.ca/guidelines-mini-storage-warehouse.pdf"
@@ -2457,7 +2473,7 @@
   },
   {
     "guidelines-mural": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Mural PDF file (454\u00a0KB)",
       "title": "Mural",
       "url": "https://guidelines.vancouver.ca/guidelines-mural.pdf"
@@ -2465,7 +2481,7 @@
   },
   {
     "guidelines-neighbourhood-energy-centre": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Neighbourhood Energy Centre PDF file (164 KB)",
       "title": "Neighbourhood Energy Centre",
       "url": "https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-centre.pdf"
@@ -2473,7 +2489,7 @@
   },
   {
     "guidelines-neighbourhood-energy-utility-connectivity-requirements": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Neighbourhood Energy Utility Connectivity Guidelines and Requirements\u00a0PDF file\u00a0(821\u00a0KB)",
       "title": "Neighbourhood Energy Utility Connectivity Guidelines and Requirements",
       "url": "https://guidelines.vancouver.ca/guidelines-neighbourhood-energy-utility-connectivity-requirements.pdf"
@@ -2481,7 +2497,7 @@
   },
   {
     "guidelines-pawnshop-secondhand-store": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Pawnshop and Secondhand Store PDF file (457\u00a0KB)",
       "title": "Pawnshop and Secondhand Store",
       "url": "https://guidelines.vancouver.ca/guidelines-pawnshop-secondhand-store.pdf"
@@ -2489,7 +2505,7 @@
   },
   {
     "guidelines-plaza": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Plaza PDF file (1 MB)",
       "title": "Plaza",
       "url": "https://guidelines.vancouver.ca/guidelines-plaza.pdf"
@@ -2497,7 +2513,7 @@
   },
   {
     "guidelines-public-house-neighbourhood-marine": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Public House (Neighbourhood or Marine) PDF file (453\u00a0KB)",
       "title": "Public House (Neighbourhood or Marine)",
       "url": "https://guidelines.vancouver.ca/guidelines-public-house-neighbourhood-marine.pdf"
@@ -2505,7 +2521,7 @@
   },
   {
     "guidelines-restaurant": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Restaurant\u00a0PDF file (143 KB)",
       "title": "Restaurant",
       "url": "https://guidelines.vancouver.ca/guidelines-restaurant.pdf"
@@ -2513,7 +2529,7 @@
   },
   {
     "guidelines-small-scale-pharmacy": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Small Scale Pharmacy PDF file (578\u00a0KB)",
       "title": "Small Scale Pharmacy",
       "url": "https://guidelines.vancouver.ca/guidelines-small-scale-pharmacy.pdf"
@@ -2521,7 +2537,7 @@
   },
   {
     "guidelines-urban-farm": {
-      "type": "Non-residential projects",
+      "type": "Guidelines",
       "title_original": "Urban Farm PDF file (114\u00a0KB)",
       "title": "Urban Farm",
       "url": "https://guidelines.vancouver.ca/guidelines-urban-farm.pdf"
@@ -2529,7 +2545,7 @@
   },
   {
     "guidelines-high-density-housing-for-families-with-children": {
-      "type": "Residential projects",
+      "type": "Guidelines",
       "title_original": "High-Density Housing for Families with Children PDF file (308\u00a0KB)",
       "title": "High-Density Housing for Families with Children",
       "url": "https://guidelines.vancouver.ca/guidelines-high-density-housing-for-families-with-children.pdf"
@@ -2537,7 +2553,7 @@
   },
   {
     "guidelines-lock-off-unit": {
-      "type": "Residential projects",
+      "type": "Guidelines",
       "title_original": "Lock-off Unit PDF file (613\u00a0KB)",
       "title": "Lock-off Unit",
       "url": "https://guidelines.vancouver.ca/guidelines-lock-off-unit.pdf"
@@ -2545,7 +2561,7 @@
   },
   {
     "policies-guidelines-micro-dwelling": {
-      "type": "Residential projects",
+      "type": "Guidelines",
       "title_original": "Micro Dwelling PDF file\u00a0(696\u00a0KB)",
       "title": "Micro Dwelling",
       "url": "https://guidelines.vancouver.ca/policies-guidelines-micro-dwelling.pdf"
@@ -2553,7 +2569,7 @@
   },
   {
     "guidelines-seniors-supportive-assisted-housing": {
-      "type": "Residential projects",
+      "type": "Guidelines",
       "title_original": "Seniors Supportive or Assisted Housing PDF file (73 KB)",
       "title": "Seniors Supportive or Assisted Housing",
       "url": "https://guidelines.vancouver.ca/guidelines-seniors-supportive-assisted-housing.pdf"
@@ -2561,7 +2577,7 @@
   },
   {
     "guidelines-strata-title-cooperative-conversion": {
-      "type": "Residential projects",
+      "type": "Guidelines",
       "title_original": "Strata Title and Cooperative Conversion\u00a0PDF file (552\u00a0KB)",
       "title": "Strata Title and Cooperative Conversion",
       "url": "https://guidelines.vancouver.ca/guidelines-strata-title-cooperative-conversion.pdf"
@@ -2569,7 +2585,7 @@
   },
   {
     "guidelines-accessibility": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Accessibility PDF file (1.8\u00a0MB)",
       "title": "Accessibility",
       "url": "https://guidelines.vancouver.ca/guidelines-accessibility.pdf"
@@ -2577,7 +2593,7 @@
   },
   {
     "guidelines-balcony-enclosure": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Balcony Enclosure PDF file (564\u00a0KB)",
       "title": "Balcony Enclosure",
       "url": "https://guidelines.vancouver.ca/guidelines-balcony-enclosure.pdf"
@@ -2585,7 +2601,7 @@
   },
   {
     "guidelines-bird-friendly-design": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Bird Friendly Design PDF file\u00a0 (193\u00a0KB)",
       "title": "Bird Friendly Design",
       "url": "https://guidelines.vancouver.ca/guidelines-bird-friendly-design.pdf"
@@ -2593,15 +2609,23 @@
   },
   {
     "guidelines-bird-friendly-design-explanatory-note": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Bird Friendly Design Explanatory Note PDF file\u00a0 (6.5 MB)",
       "title": "Bird Friendly Design Explanatory Note",
       "url": "https://guidelines.vancouver.ca/guidelines-bird-friendly-design-explanatory-note.pdf"
     }
   },
   {
+    "guidelines-energy-modelling": {
+      "type": "Guidelines",
+      "title_original": "Energy Modelling PDF file (311 KB)",
+      "title": "Energy Modelling",
+      "url": "https://guidelines.vancouver.ca/guidelines-energy-modelling.pdf"
+    }
+  },
+  {
     "guidelines-event-noise-protocols": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Event Noise PDF file\u00a0(165\u00a0KB)",
       "title": "Event Noise",
       "url": "https://guidelines.vancouver.ca/guidelines-event-noise-protocols.pdf"
@@ -2609,7 +2633,7 @@
   },
   {
     "guidelines-flood-plain-standards-requirements": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Flood Plain Standards and Requirements PDF file\u00a0 (2.8\u00a0MB)",
       "title": "Flood Plain Standards and Requirements",
       "url": "https://guidelines.vancouver.ca/guidelines-flood-plain-standards-requirements.pdf"
@@ -2617,7 +2641,7 @@
   },
   {
     "guidelines-garbage-recycling-storage-facility-design": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Garbage and Recycling Amenity Design\u00a0PDF file\u00a0(1\u00a0MB)",
       "title": "Garbage and Recycling Amenity Design",
       "url": "https://guidelines.vancouver.ca/guidelines-garbage-recycling-storage-facility-design.pdf"
@@ -2625,39 +2649,15 @@
   },
   {
     "guidelines-interior-public-space": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Interior Public Space PDF file (468\u00a0KB)",
       "title": "Interior Public Space",
       "url": "https://guidelines.vancouver.ca/guidelines-interior-public-space.pdf"
     }
   },
   {
-    "guidelines-energy-modelling": {
-      "type": "General",
-      "title_original": "Energy Modelling\u00a0PDF file\u00a0(311\u00a0KB)",
-      "title": "Energy Modelling",
-      "url": "https://guidelines.vancouver.ca/guidelines-energy-modelling.pdf"
-    }
-  },
-  {
-    "guidelines-sustainability-variance-rs-rt-ra-zero-emission-buildings": {
-      "type": "General",
-      "title_original": "R1-1, RT, and RA Districts\u00a0PDF file\u00a0(334 KB)",
-      "title": "R1-1, RT, and RA Districts",
-      "url": "https://guidelines.vancouver.ca/guidelines-sustainability-variance-rs-rt-ra-zero-emission-buildings.pdf"
-    }
-  },
-  {
-    "guidelines-sustainability-variance-larger-zero-emission-buildings": {
-      "type": "General",
-      "title_original": "Larger Projects\u00a0PDF file\u00a0(124\u00a0KB)",
-      "title": "Larger Projects",
-      "url": "https://guidelines.vancouver.ca/guidelines-sustainability-variance-larger-zero-emission-buildings.pdf"
-    }
-  },
-  {
     "guidelines-transportation-assessment-management-study-tams": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Transportation Assessment and Management Study PDF file\u00a0(124 KB)",
       "title": "Transportation Assessment and Management Study",
       "url": "https://guidelines.vancouver.ca/guidelines-transportation-assessment-management-study-tams.pdf"
@@ -2665,7 +2665,7 @@
   },
   {
     "guidelines-urban-agriculture-private-realm": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Urban Agriculture for the Private Realm PDF file (108\u00a0KB)",
       "title": "Urban Agriculture for the Private Realm",
       "url": "https://guidelines.vancouver.ca/guidelines-urban-agriculture-private-realm.pdf"
@@ -2673,7 +2673,7 @@
   },
   {
     "guidelines-view-protection": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "View Protection PDF file (580 KB)",
       "title": "View Protection",
       "url": "https://guidelines.vancouver.ca/guidelines-view-protection.pdf"
@@ -2681,7 +2681,7 @@
   },
   {
     "guidelines-water-wise-landscape": {
-      "type": "General",
+      "type": "Guidelines",
       "title_original": "Water Wise Landscape PDF file\u00a0 (453\u00a0KB)",
       "title": "Water Wise Landscape",
       "url": "https://guidelines.vancouver.ca/guidelines-water-wise-landscape.pdf"
@@ -2761,7 +2761,7 @@
   },
   {
     "bulletin-dtes-neighbourhood-fit-considerations": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Downtown Eastside Neighbourhood Fit Considerations\u00a0PDF file (965\u00a0KB)",
       "title": "Downtown Eastside Neighbourhood Fit Considerations",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-dtes-neighbourhood-fit-considerations.pdf"
@@ -2769,7 +2769,7 @@
   },
   {
     "bulletin-downtown-hotel-density-increase-limitations": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Downtown Hotel Density Increase Limitations PDF file (75 KB)",
       "title": "Downtown Hotel Density Increase Limitations",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-downtown-hotel-density-increase-limitations.pdf"
@@ -2777,7 +2777,7 @@
   },
   {
     "bulletin-point-grey-road-fsr-calculations": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Point Grey Road Floor Space Ratio Calculations PDF file (151\u00a0KB)",
       "title": "Point Grey Road Floor Space Ratio Calculations",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-point-grey-road-fsr-calculations.pdf"
@@ -2785,7 +2785,7 @@
   },
   {
     "bulletin-west-end-tower-form-siting-setbacks": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "West End Tower Form Siting and Setbacks\u00a0PDF file (1.5 MB)",
       "title": "West End Tower Form Siting and Setbacks",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-west-end-tower-form-siting-setbacks.pdf"
@@ -2793,7 +2793,7 @@
   },
   {
     "bulletin-industrial-districts-accessory-uses": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Industrial Districts Accessory Uses PDF file (683\u00a0KB)",
       "title": "Industrial Districts Accessory Uses",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-industrial-districts-accessory-uses.pdf"
@@ -2801,7 +2801,7 @@
   },
   {
     "bulletin-i-4-creative-products-manufacturing-uses": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "I-4 Creative Products Manufacturing Uses\u00a0PDF file\u00a0(734\u00a0KB)",
       "title": "I-4 Creative Products Manufacturing Uses",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-i-4-creative-products-manufacturing-uses.pdf"
@@ -2809,7 +2809,7 @@
   },
   {
     "bulletin-ra-1-clustering-buildings-near-road": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Clustering of Buildings Near Road Intersections\u00a0PDF file (167 KB)",
       "title": "Clustering of Buildings Near Road Intersections",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-ra-1-clustering-buildings-near-road.pdf"
@@ -2817,7 +2817,7 @@
   },
   {
     "bulletin-ra-1-grades-filling-drainage": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Grades, Filling, and Drainage\u00a0PDF file\u00a0(293 KB)",
       "title": "Grades, Filling, and Drainage",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-ra-1-grades-filling-drainage.pdf"
@@ -2825,7 +2825,7 @@
   },
   {
     "bulletin-ra-1-height-relaxation": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Height Relaxation PDF file (89\u00a0KB)",
       "title": "Height Relaxation",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-ra-1-height-relaxation.pdf"
@@ -2833,7 +2833,7 @@
   },
   {
     "bulletin-ra-1-illegal-occupancy": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Illegal Occupancy PDF file (176 KB)",
       "title": "Illegal Occupancy",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-ra-1-illegal-occupancy.pdf"
@@ -2841,7 +2841,7 @@
   },
   {
     "bulletin-ra-1-perimeter-landscaping": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Perimeter Landscaping PDF file (160 KB)",
       "title": "Perimeter Landscaping",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-ra-1-perimeter-landscaping.pdf"
@@ -2849,7 +2849,7 @@
   },
   {
     "bulletin-ra-1-stables": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "Stables\u00a0PDF file (198 KB)",
       "title": "Stables",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-ra-1-stables.pdf"
@@ -2857,7 +2857,7 @@
   },
   {
     "bulletin-rt-districts-attached-parking-garage-layout": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "RT Districts Attached Parking Garage Layout PDF file (160\u00a0KB)",
       "title": "RT Districts Attached Parking Garage Layout",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-rt-districts-attached-parking-garage-layout.pdf"
@@ -2865,7 +2865,7 @@
   },
   {
     "bulletin-r1-1-how-to-guide": {
-      "type": "Area specific",
+      "type": "Bulletins",
       "title_original": "R1-1 Housing Options How-to Guide\u00a0PDF file (14 MB)",
       "title": "R1-1 Housing Options How-to Guide",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-r1-1-how-to-guide.pdf"
@@ -2873,7 +2873,7 @@
   },
   {
     "bulletin-animal-grooming": {
-      "type": "Non-residential uses",
+      "type": "Bulletins",
       "title_original": "Animal Grooming PDF file (469\u00a0KB)",
       "title": "Animal Grooming",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-animal-grooming.pdf"
@@ -2881,7 +2881,7 @@
   },
   {
     "bulletin-beauty-wellness-centre": {
-      "type": "Non-residential uses",
+      "type": "Bulletins",
       "title_original": "Beauty and Wellness Centre PDF file (245\u00a0KB)",
       "title": "Beauty and Wellness Centre",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-beauty-wellness-centre.pdf"
@@ -2889,7 +2889,7 @@
   },
   {
     "bulletin-churches": {
-      "type": "Non-residential uses",
+      "type": "Bulletins",
       "title_original": "Churches PDF file (209\u00a0KB)",
       "title": "Churches",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-churches.pdf"
@@ -2897,7 +2897,7 @@
   },
   {
     "bulletin-community-food-market-kitchen-rental": {
-      "type": "Non-residential uses",
+      "type": "Bulletins",
       "title_original": "Community Food Markets and Community-based Kitchen Rentals\u00a0PDF file\u00a0(587\u00a0KB)",
       "title": "Community Food Markets and Community-based Kitchen Rentals",
       "url": "https://bylaws.vancouver.ca/Bulletin/bulletin-community-food-market-kitchen-rental.pdf"
@@ -2905,7 +2905,7 @@
   },
   {
     "bulletin-emergency-social-service-containers": {
-      "type": "Non-residential uses",
+      "type": "Bulletins",
       "title_original": "Emergency Social Service Containers PDF file (103\u00a0KB)",
       "title": "Emergency Social Service Containers",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-emergency-social-service-containers.pdf"
@@ -2913,7 +2913,7 @@
   },
   {
     "bulletin-small-scale-pharmacy": {
-      "type": "Non-residential uses",
+      "type": "Bulletins",
       "title_original": "Small Scale Pharmacy\u00a0PDF file (306\u00a0KB)",
       "title": "Small Scale Pharmacy",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-small-scale-pharmacy.pdf"
@@ -2921,7 +2921,7 @@
   },
   {
     "bulletin-community-serving-spaces-rezoning": {
-      "type": "Rezoning related",
+      "type": "Bulletins",
       "title_original": "Community Serving Spaces\u00a0PDF file\u00a0(1 MB)",
       "title": "Community Serving Spaces",
       "url": "https://bylaws.vancouver.ca/Bulletin/bulletin-community-serving-spaces-rezoning.pdf"
@@ -2929,7 +2929,7 @@
   },
   {
     "bulletin-grandview-woodland-pace-of-change": {
-      "type": "Rezoning related",
+      "type": "Bulletins",
       "title_original": "Grandview-Woodland Pace of Change Policy\u00a0PDF file\u00a0(486\u00a0KB)",
       "title": "Grandview-Woodland Pace of Change Policy",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-grandview-woodland-pace-of-change.pdf"
@@ -2937,7 +2937,7 @@
   },
   {
     "bulletin-green-buildings-policy-for-rezoning": {
-      "type": "Rezoning related",
+      "type": "Bulletins",
       "title_original": "Green Buildings Policy\u00a0PDF file\u00a0(319\u00a0KB)",
       "title": "Green Buildings Policy",
       "url": "https://bylaws.vancouver.ca/Bulletin/bulletin-green-buildings-policy-for-rezoning.pdf"
@@ -2945,7 +2945,7 @@
   },
   {
     "bulletin-neighbourhood-energy-guide-rezoning": {
-      "type": "Rezoning related",
+      "type": "Bulletins",
       "title_original": "Neighbourhood Energy Guide\u00a0PDF file\u00a0(750 KB)",
       "title": "Neighbourhood Energy Guide",
       "url": "https://guidelines.vancouver.ca/bulletins/bulletin-neighbourhood-energy-guide-rezoning.pdf"
@@ -2953,7 +2953,7 @@
   },
   {
     "bulletin-sustainable-large-developments": {
-      "type": "Rezoning related",
+      "type": "Bulletins",
       "title_original": "Sustainable Large Developments\u00a0PDF file\u00a0(406\u00a0KB)",
       "title": "Sustainable Large Developments",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainable-large-developments.pdf"
@@ -2961,7 +2961,7 @@
   },
   {
     "bulletin-transportation-demand-management-for-developments": {
-      "type": "Rezoning related",
+      "type": "Bulletins",
       "title_original": "Transportation Demand Management for Developments\u00a0PDF file\u00a0(2.7 MB)",
       "title": "Transportation Demand Management for Developments",
       "url": "https://guidelines.vancouver.ca/bulletins/bulletin-transportation-demand-management-for-developments.pdf"
@@ -2969,7 +2969,7 @@
   },
   {
     "bulletin-access-daylight-views-ventilation": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Access to Daylight, Views, and Ventilation\u00a0PDF file (109 KB)",
       "title": "Access to Daylight, Views, and Ventilation",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-access-daylight-views-ventilation.pdf"
@@ -2977,7 +2977,7 @@
   },
   {
     "bulletin-antennas": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Antennas\u00a0PDF file (74 KB)",
       "title": "Antennas",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-antennas.pdf"
@@ -2985,7 +2985,7 @@
   },
   {
     "bulletin-antennas-municipal-consultation": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Antennas and Municipal Consultation\u00a0PDF file (53\u00a0KB)",
       "title": "Antennas and Municipal Consultation",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-antennas-municipal-consultation.pdf"
@@ -2993,7 +2993,7 @@
   },
   {
     "bulletin-balconies-decks-entries": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Balconies, Decks, Entries, Porches, and Verandahs, Patios, and Roof Decks in R1-1, RT, and RM Districts\u00a0PDF file (736\u00a0KB)",
       "title": "Balconies, Decks, Entries, Porches, and Verandahs, Patios, and Roof Decks in R1-1, RT, and RM Districts",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-balconies-decks-entries.pdf"
@@ -3001,7 +3001,7 @@
   },
   {
     "bulletin-balcony-enclosure-existing-buildings": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Balcony Enclosure for Existing Buildings\u00a0PDF file (178\u00a0KB)",
       "title": "Balcony Enclosure for Existing Buildings",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-balcony-enclosure-existing-buildings.pdf"
@@ -3009,7 +3009,7 @@
   },
   {
     "bulletin-balcony-enclosure-new-buildings": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Balcony Enclosure for New Buildings\u00a0PDF file (605\u00a0KB)",
       "title": "Balcony Enclosure for New Buildings",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-balcony-enclosure-new-buildings.pdf"
@@ -3017,7 +3017,7 @@
   },
   {
     "bulletin-beekeeping": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Beekeeping in the City PDF file (212\u00a0KB)",
       "title": "Beekeeping in the City",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-beekeeping.pdf"
@@ -3025,7 +3025,7 @@
   },
   {
     "bulletin-building-grades": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Building Grades: Requirements for Development Applications PDF file (70\u00a0KB)",
       "title": "Building Grades: Requirements for Development Applications",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-building-grades.pdf"
@@ -3033,7 +3033,7 @@
   },
   {
     "bulletin-building-height": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Building Height PDF file (2 MB)",
       "title": "Building Height",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-building-height.pdf"
@@ -3041,7 +3041,7 @@
   },
   {
     "bulletin-density-bonus-contributions": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Density Bonus Contributions\u00a0PDF file (1.4 MB)",
       "title": "Density Bonus Contributions",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-density-bonus-contributions.pdf"
@@ -3049,7 +3049,7 @@
   },
   {
     "bulletin-development-cost-levies": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Development Cost Levies PDF file (850\u00a0KB)",
       "title": "Development Cost Levies",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-development-cost-levies.pdf"
@@ -3057,7 +3057,7 @@
   },
   {
     "bulletin-overheight-fences-in-front-yards": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Overheight fences in front yards PDF file (284\u00a0KB)",
       "title": "Overheight fences in front yards",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-overheight-fences-in-front-yards.pdf"
@@ -3065,7 +3065,7 @@
   },
   {
     "bulletin-floor-area-calculation-tracing-overlay": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Calculation and Tracing Overlay Requirements PDF file (309 KB)",
       "title": "Calculation and Tracing Overlay Requirements",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-floor-area-calculation-tracing-overlay.pdf"
@@ -3073,7 +3073,7 @@
   },
   {
     "bulletin-floor-area-exclusions-accessory-buildings": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Exclusions for Accessory Buildings\u00a0PDF file (56\u00a0KB)",
       "title": "Exclusions for Accessory Buildings",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-floor-area-exclusions-accessory-buildings.pdf"
@@ -3081,7 +3081,7 @@
   },
   {
     "bulletin-floor-area-exclusions-amenity-areas": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Exclusions for Amenity Areas PDF file (63\u00a0KB)",
       "title": "Exclusions for Amenity Areas",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-floor-area-exclusions-amenity-areas.pdf"
@@ -3089,7 +3089,7 @@
   },
   {
     "bulletin-floor-area-exclusion-improved-building-performance": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Exclusions for Improved Building Performance PDF file (121\u00a0KB)",
       "title": "Exclusions for Improved Building Performance",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-floor-area-exclusion-improved-building-performance.pdf"
@@ -3097,7 +3097,7 @@
   },
   {
     "bulletin-floor-area-exclusions-for-kitchen-exhaust-ducts-and-shafts": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Exclusions for Kitchen Exhaust Ducts and Shafts PDF file (69\u00a0KB)",
       "title": "Exclusions for Kitchen Exhaust Ducts and Shafts",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-floor-area-exclusions-for-kitchen-exhaust-ducts-and-shafts.pdf"
@@ -3105,7 +3105,7 @@
   },
   {
     "bulletin-mechanical-exclusion": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Exclusions for Zero Emissions Equipment\u00a0PDF file (110\u00a0KB)",
       "title": "Exclusions for Zero Emissions Equipment",
       "url": "https://bylaws.vancouver.ca/Bulletin/bulletin-mechanical-exclusion.pdf"
@@ -3113,7 +3113,7 @@
   },
   {
     "bulletin-groundwater-management": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Groundwater Management PDF file\u00a0(751\u00a0KB)",
       "title": "Groundwater Management",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-groundwater-management.pdf"
@@ -3121,7 +3121,7 @@
   },
   {
     "bulletin-character-buildings-retention-and-renovation": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Character House Retention and Renovation PDF file\u00a0(838 KB)",
       "title": "Character House Retention and Renovation",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-character-buildings-retention-and-renovation.pdf"
@@ -3129,7 +3129,7 @@
   },
   {
     "bulletin-first-shaughnessy-heritage-conservation-area-procedure-for-review-of-protected-heritage": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "First Shaughnessy Heritage Conservation Area Procedure for Review of Protected Heritage Property Status\u00a0PDF file\u00a0(583\u00a0KB)",
       "title": "First Shaughnessy Heritage Conservation Area Procedure for Review of Protected Heritage Property Status",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-first-shaughnessy-heritage-conservation-area-procedure-for-review-of-protected-heritage.pdf"
@@ -3137,7 +3137,7 @@
   },
   {
     "bulletin-heritage-assessment-process": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Heritage Assessment Process PDF file (790 KB)",
       "title": "Heritage Assessment Process",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-heritage-assessment-process.pdf"
@@ -3145,7 +3145,7 @@
   },
   {
     "bulletin-heritage-buildings-development-application-procedures-for-temporary-movie-sets": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Heritage Buildings: Development Application Procedures for Temporary Movie Sets PDF file\u00a0(407\u00a0KB)",
       "title": "Heritage Buildings: Development Application Procedures for Temporary Movie Sets",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-heritage-buildings-development-application-procedures-for-temporary-movie-sets.pdf"
@@ -3153,7 +3153,7 @@
   },
   {
     "bulletin-non-conforming-additions-structural-alterations": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Additions or Structural Alterations PDF file (96 KB)",
       "title": "Additions or Structural Alterations",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-non-conforming-additions-structural-alterations.pdf"
@@ -3161,7 +3161,7 @@
   },
   {
     "bulletin-non-conforming-buildings-yard-relaxations": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Yard Relaxations PDF file (63\u00a0KB)",
       "title": "Yard Relaxations",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-non-conforming-buildings-yard-relaxations.pdf"
@@ -3169,7 +3169,7 @@
   },
   {
     "bulletin-parking-collective-agreements-south-fraser-east-hastings-kerrisdale": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Collective Parking Agreements: South Fraser, East Hastings,\u00a0and Kerrisdale PDF file (109\u00a0KB)",
       "title": "Collective Parking Agreements: South Fraser, East Hastings,and Kerrisdale",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-parking-collective-agreements-south-fraser-east-hastings-kerrisdale.pdf"
@@ -3177,7 +3177,7 @@
   },
   {
     "bulletin-parking-loading-design-supplement": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Parking and Loading Design Supplement PDF file (1.9\u00a0MB)",
       "title": "Parking and Loading Design Supplement",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-parking-loading-design-supplement.pdf"
@@ -3185,7 +3185,7 @@
   },
   {
     "bulletin-parking-off-street-floor-space-exclusions": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Floor Space Exclusions PDF file (59\u00a0KB)",
       "title": "Floor Space Exclusions",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-parking-off-street-floor-space-exclusions.pdf"
@@ -3193,7 +3193,7 @@
   },
   {
     "bulletin-parking-off-street-separate-site-legal-guarantees": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "On a Separate Site and Legal Guarantees PDF file (68\u00a0KB)",
       "title": "On a Separate Site and Legal Guarantees",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-parking-off-street-separate-site-legal-guarantees.pdf"
@@ -3201,7 +3201,7 @@
   },
   {
     "bulletin-parking-off-street-reduction-zero-emission-retrofits": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Reduction for Zero Emission Retrofits PDF file (75\u00a0KB)",
       "title": "Reduction for Zero Emission Retrofits",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-parking-off-street-reduction-zero-emission-retrofits.pdf"
@@ -3209,7 +3209,7 @@
   },
   {
     "bulletin-parking-shared-vehicle-agreement-new-form-standards-practices": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Shared Vehicle Agreement New Form \u2013 Standards and Practices PDF file (340 KB)",
       "title": "Shared Vehicle Agreement New Form \u2013 Standards and Practices",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-parking-shared-vehicle-agreement-new-form-standards-practices.pdf"
@@ -3217,7 +3217,7 @@
   },
   {
     "bulletin-partial-storey-expression-construction": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Partial storey expression and construction\u00a0PDF file (936\u00a0KB)",
       "title": "Partial storey expression and construction",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-partial-storey-expression-construction.pdf"
@@ -3225,7 +3225,7 @@
   },
   {
     "bulletin-rental-development-application-condition": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Development Application Condition PDF file (253\u00a0KB)",
       "title": "Development Application Condition",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-rental-development-application-condition.pdf"
@@ -3233,7 +3233,7 @@
   },
   {
     "bulletin-rental-buildings-salvage-and-abatement": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Rental Buildings Salvage and Abatement PDF file (97\u00a0KB)",
       "title": "Rental Buildings Salvage and Abatement",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-rental-buildings-salvage-and-abatement.pdf"
@@ -3241,7 +3241,7 @@
   },
   {
     "bulletin-rental-housing-stock-odp": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Rental Housing Stock Official Development Plan\u00a0PDF file (216\u00a0KB)",
       "title": "Rental Housing Stock Official Development Plan",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-rental-housing-stock-odp.pdf"
@@ -3249,7 +3249,7 @@
   },
   {
     "bulletin-rental-incentive-programs": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Rental Incentive Programs\u00a0PDF file (433\u00a0KB)",
       "title": "Rental Incentive Programs",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-rental-incentive-programs.pdf"
@@ -3257,7 +3257,7 @@
   },
   {
     "bulletin-rental-tenant-relocation-protection-policy": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Tenant Relocation and Protection Policy Bulletin\u00a0PDF file\u00a0(599 KB)",
       "title": "Tenant Relocation and Protection Policy Bulletin",
       "url": "https://guidelines.vancouver.ca/bulletins/bulletin-rental-tenant-relocation-protection-policy.pdf"
@@ -3265,7 +3265,7 @@
   },
   {
     "bulletin-shading-devices-and-yard-projections": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Shading Devices and Yard Projections PDF file (186\u00a0KB)",
       "title": "Shading Devices and Yard Projections",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-shading-devices-and-yard-projections.pdf"
@@ -3273,7 +3273,7 @@
   },
   {
     "bulletin-storage-multiple-dwellings": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Storage in Multiple Dwellings\u00a0PDF file (478 KB)",
       "title": "Storage in Multiple Dwellings",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-storage-multiple-dwellings.pdf"
@@ -3281,7 +3281,7 @@
   },
   {
     "bulletin-street-lane-dedications-conditional-approvals": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Street and Lane Dedications Conditional Approvals\u00a0PDF file\u00a0(61\u00a0KB)",
       "title": "Street and Lane Dedications Conditional Approvals",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-street-lane-dedications-conditional-approvals.pdf"
@@ -3289,7 +3289,7 @@
   },
   {
     "bulletin-sustainability-energy-reporting-green-buildings": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Energy Reporting Policy for Green Buildings\u00a0PDF file (234\u00a0KB)",
       "title": "Energy Reporting Policy for Green Buildings",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-energy-reporting-green-buildings.pdf"
@@ -3297,7 +3297,7 @@
   },
   {
     "bulletin-heat-pumps-for-ground-oriented-dwellings": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Heat Pumps for Ground-oriented Dwellings PDF file\u00a0(86\u00a0KB)",
       "title": "Heat Pumps for Ground-oriented Dwellings",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-heat-pumps-for-ground-oriented-dwellings.pdf"
@@ -3305,7 +3305,7 @@
   },
   {
     "bulletin-sustainability-heat-pumps-larger-buildings": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Heat Pumps for Larger Buildings PDF file (190\u00a0KB)",
       "title": "Heat Pumps for Larger Buildings",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-heat-pumps-larger-buildings.pdf"
@@ -3313,7 +3313,7 @@
   },
   {
     "bulletin-sustainability-low-carbon-energy-supply-feasibility-screening": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Low Carbon Energy Feasibility Screening - Terms of Reference\u00a0PDF file\u00a0(302\u00a0KB)",
       "title": "Low Carbon Energy Feasibility Screening - Terms of Reference",
       "url": "https://bylaws.vancouver.ca/Bulletin/bulletin-sustainability-low-carbon-energy-supply-feasibility-screening.pdf"
@@ -3321,7 +3321,7 @@
   },
   {
     "bulletin-sustainability-mass-timber": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Mass Timber Variances\u00a0PDF file (80 KB)",
       "title": "Mass Timber Variances",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-mass-timber.pdf"
@@ -3329,7 +3329,7 @@
   },
   {
     "bulletin-sustainability-neighbourhood-energy-connectivity-standards": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Neighbourhood Energy Connectivity Standards\u00a0PDF file (511\u00a0KB)",
       "title": "Neighbourhood Energy Connectivity Standards",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-neighbourhood-energy-connectivity-standards.pdf"
@@ -3337,7 +3337,7 @@
   },
   {
     "bulletin-sustainability-passive-design-bay-windows-floor-space": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Bay Windows and Floor Space\u00a0PDF file (173\u00a0KB)",
       "title": "Bay Windows and Floor Space",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-passive-design-bay-windows-floor-space.pdf"
@@ -3345,7 +3345,7 @@
   },
   {
     "bulletin-sustainability-passive-design-demountable-green-walls": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Demountable Green Walls PDF file (185\u00a0KB)",
       "title": "Demountable Green Walls",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-passive-design-demountable-green-walls.pdf"
@@ -3353,7 +3353,7 @@
   },
   {
     "bulletin-sustainability-passive-design-natural-ventilation-light": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Natural Ventilation and Light\u00a0PDF file (180\u00a0KB)",
       "title": "Natural Ventilation and Light",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-passive-design-natural-ventilation-light.pdf"
@@ -3361,7 +3361,7 @@
   },
   {
     "bulletin-roof-mounted-energy-technologies-and-green-roofs": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Roof-mounted Energy Technologies and Green Roofs PDF file (351 KB)",
       "title": "Roof-mounted Energy Technologies and Green Roofs",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-roof-mounted-energy-technologies-and-green-roofs.pdf"
@@ -3369,15 +3369,31 @@
   },
   {
     "bulletin-zero-emissions-building-catalyst": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Zero Emissions Building Catalyst PDF file (188\u00a0KB)\u200b",
       "title": "Zero Emissions Building Catalyst",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-zero-emissions-building-catalyst.pdf"
     }
   },
   {
+    "bulletin-sustainability-zero-emissions-r1-rt-ra": {
+      "type": "Bulletins",
+      "title_original": "R1, RT and RA Districts PDF file (191 KB)",
+      "title": "R1, RT and RA Districts",
+      "url": "https://bylaws.vancouver.ca/bulletin/bulletin-sustainability-zero-emissions-r1-rt-ra.pdf"
+    }
+  },
+  {
+    "bulletin-sustainability-zero-emissions-larger-buildings": {
+      "type": "Bulletins",
+      "title_original": "Large buildings PDF file (261 KB)",
+      "title": "Large buildings",
+      "url": "http://bylaws.vancouver.ca/bulletin/bulletin-sustainability-zero-emissions-larger-buildings.pdf"
+    }
+  },
+  {
     "bulletin-transportation-demand-management-for-developments": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Transportation Demand Management for Developments\u00a0PDF file\u00a0(2.7 MB)",
       "title": "Transportation Demand Management for Developments",
       "url": "https://guidelines.vancouver.ca/bulletins/bulletin-transportation-demand-management-for-developments.pdf"
@@ -3385,7 +3401,7 @@
   },
   {
     "bulletin-tree-protection-accessory-building-applications": {
-      "type": "Topic specific",
+      "type": "Bulletins",
       "title_original": "Tree Protection in Accessory Building Applications PDF file (81 KB)",
       "title": "Tree Protection in Accessory Building Applications",
       "url": "https://bylaws.vancouver.ca/bulletin/bulletin-tree-protection-accessory-building-applications.pdf"

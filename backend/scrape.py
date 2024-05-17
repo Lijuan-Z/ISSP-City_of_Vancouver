@@ -43,8 +43,8 @@ def download_pdf(html, url, save_dir):
             file_counter += 1
 
         # temp for testing
-        if file_counter == 30:
-            break
+        # if file_counter == 10:
+        #     break
 
 
     return total_files
@@ -54,33 +54,32 @@ def retrieve_document_type(html, output_file):
     # soup = BeautifulSoup(html, 'html.parser')
     # print(soup)
     document_type = []
-    row = html.find_all(lambda tag: tag.get('class') == ['pd-blk-summary', 'border'])
-    for r in row:
+    # row = html.find_all(lambda tag: tag.get('class') == ['pd-blk-summary', 'border'])
+    section_title = None
+    contentBox = html.find_all("div", {"class": "blk-full"})
+    # row = list(filter(lambda node: node.find('em') is not None or node.find('span') is not None, html.find_all('h2')))
+    for row in contentBox:
+        section_name = list(
+            filter(lambda node: node.find('em') is not None or node.find('span') is not None, row.find_all('h2')))
+        if len(section_name) > 0:
+            section_title = section_name[0].text
+            section_title = section_title.replace("\xa0", "")
 
-        d_type = r.find('h4')
-        if d_type is None:
-            d_type = r.find('h3')
-        if d_type is None:
-            # the list is actually not contain pdf
-            continue
-
-        d_type = d_type.text
-        d_type = d_type.replace("\xa0", "")
-
-        pdf_files = r.parent.find_all('a')
-        for file in pdf_files:
-            if 'pdf' in file['href']:
-                document_type.append(
-                    {
-                        file['href'].split('/')[-1][:-4]: {
-                        "type": d_type,
-                        "title_original": file.text,
-                        "title": (file.text.split("PDF file")[0]).replace("\u00a0", "").strip(),
-                        # "title": file.text.split("\u00a0")[0],
-                        "url": file['href']
+        if section_title is not None:
+            pdf_files = row.find_all('a')
+            for file in pdf_files:
+                if file.has_attr("href") and 'pdf' in file['href']:
+                    document_type.append(
+                        {
+                            file['href'].split('/')[-1][:-4]: {
+                                "type": section_title,
+                                "title_original": file.text,
+                                "title": (file.text.split("PDF file")[0]).replace("\u00a0", "").strip(),
+                                # "title": file.text.split("\u00a0")[0],
+                                "url": file['href']
+                            }
                         }
-                    }
-                )
+                    )
 
     # [print(x) for x in document_type]
     # print(len(document_type))
