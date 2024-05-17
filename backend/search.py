@@ -63,7 +63,7 @@ def search(json_path, search_terms=None):
                                         })
 
                                         # Ask the chatbot for section number and title
-                                        prompt = "Can you get the section number and section title of the following text?\n" + paragraph + "\nPlease provide the section number and title in the format: Section Number: xxx. Section Title: xxx. If you can't return None. here is the current page context" + page_content + ". And here is the pre page context " + pre_page_text
+                                        prompt = "Can you get the section number and section title of the following text?\n" + paragraph + "\nPlease provide the section number and title in the format: Section Number: xxx. \n Section Title: xxx. If you can't return None. here is the current page context" + page_content + ". And here is the pre page context " + pre_page_text
                                         try:
                                             query_result = chatbot.chat(prompt)
                                             section_number = ""
