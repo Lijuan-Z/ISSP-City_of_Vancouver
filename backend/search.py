@@ -1,4 +1,5 @@
 import json
+import time
 from backend.search_term import api_connect
 
 
@@ -64,24 +65,28 @@ def search(json_path, search_terms=None):
 
                                         # Ask the chatbot for section number and title
                                         prompt = "Can you get the section number and section title of the following text?\n" + paragraph + "\nPlease provide the section number and title in the format: Section Number: xxx. \n Section Title: xxx. If you can't return None. here is the current page context" + page_content + ". And here is the pre page context " + pre_page_text
-                                        try:
-                                            query_result = chatbot.chat(prompt)
-                                            section_number = ""
-                                            section_title = ""
-                                            if query_result is not None:
-                                                # print("Query Result:", query_result)  # Debugging print
-                                                query_text = str(query_result)  # Extract text content from the Message object
-                                                # print("Query Text:", query_text)  # Debugging print
-                                                lines = query_text.split('\n')
-                                                for line in lines:
-                                                    if line.startswith("Section Number: "):
-                                                        section_number = line.split(":")[1].strip()
-                                                    elif line.startswith("Section Title: "):
-                                                        section_title = line.split(":")[1].strip()
-                                        except Exception as e:
-                                            # print(f"An error occurred while querying the chatbot: {e}")
-                                            section_number = "Unknown"
-                                            section_title = "Unknown"
+                                        max_retry = 3
+                                        retry_count = 0
+                                        query_result = None
+                                        while retry_count < max_retry and query_result is None:
+                                            try:
+                                                query_result = chatbot.chat(prompt)
+                                                section_number = ""
+                                                section_title = ""
+                                                if query_result is not None:
+                                                    query_text = str(query_result)  # Extract text content from the Message object
+                                                    lines = query_text.split('\n')
+                                                    for line in lines:
+                                                        if line.startswith("Section Number: "):
+                                                            section_number = line.split(":")[1].strip()
+                                                        elif line.startswith("Section Title: "):
+                                                            section_title = line.split(":")[1].strip()
+                                            except Exception as e:
+                                                print(f"An error occurred while querying the chatbot: {e}")
+                                                section_number = "Unknown"
+                                                section_title = "Unknown"
+                                                retry_count += 1
+                                                time.sleep(2)  # Wait for a few seconds before retrying
 
                                         nested_metadata_dict[file_name][-1]['Section Number'] = section_number
                                         nested_metadata_dict[file_name][-1]['Section Title'] = section_title
@@ -92,9 +97,8 @@ def search(json_path, search_terms=None):
     return nested_metadata_dict
 
 
-
 if __name__ == '__main__':
-    json_file_path = 'processed.json'
+    json_file_path = 'test.json'
     search_terms = ['parking', 'lane']
 
     dictionary = search(json_file_path, search_terms=search_terms)
