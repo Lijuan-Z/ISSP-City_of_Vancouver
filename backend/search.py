@@ -69,8 +69,8 @@ def search(json_path, search_terms=None):
                                             section_number = ""
                                             section_title = ""
                                             if query_result is not None:
-                                                print("Query Result:", query_result)  # Debugging print
-                                                query_text = query_result.text  # Extract text content from the Message object
+                                                # print("Query Result:", query_result)  # Debugging print
+                                                query_text = str(query_result)  # Extract text content from the Message object
                                                 # print("Query Text:", query_text)  # Debugging print
                                                 lines = query_text.split('\n')
                                                 for line in lines:
@@ -79,7 +79,7 @@ def search(json_path, search_terms=None):
                                                     elif line.startswith("Section Title: "):
                                                         section_title = line.split(":")[1].strip()
                                         except Exception as e:
-                                            print(f"An error occurred while querying the chatbot: {e}")
+                                            # print(f"An error occurred while querying the chatbot: {e}")
                                             section_number = "Unknown"
                                             section_title = "Unknown"
 
