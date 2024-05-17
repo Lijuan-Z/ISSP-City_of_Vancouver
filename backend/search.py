@@ -64,23 +64,24 @@ def search(json_path, search_terms=None):
 
                                         # Ask the chatbot for section number and title
                                         prompt = "Can you get the section number and section title of the following text?\n" + paragraph + "\nPlease provide the section number and title in the format: Section Number: xxx. Section Title: xxx. If you can't return None. here is the current page context" + page_content + ". And here is the pre page context " + pre_page_text
-                                        query_result = chatbot.chat(prompt)
-                                        section_number = "Unknown"
-                                        section_title = "Unknown"
-                                        if query_result is not None:
-                                            print("Query Result:", query_result)  # Debugging print
-                                            query_text = query_result.text  # Extract text content from the Message object
-                                            print("Query Text:", query_text)  # Debugging print
-                                            lines = query_text.split('\n')
-                                            for line in lines:
-                                                if line.startswith("Section Number: "):
-                                                    section_number = line.split(":")[1].strip()
-                                                elif line.startswith("Section Title: "):
-                                                    section_title = line.split(":")[1].strip()
-
-                                            # section = str(query_result).split('\n')
-                                            # section_number = section[0].split(":")[1]
-                                            # section_title = section[1].split(":")[1]
+                                        try:
+                                            query_result = chatbot.chat(prompt)
+                                            section_number = ""
+                                            section_title = ""
+                                            if query_result is not None:
+                                                print("Query Result:", query_result)  # Debugging print
+                                                query_text = query_result.text  # Extract text content from the Message object
+                                                # print("Query Text:", query_text)  # Debugging print
+                                                lines = query_text.split('\n')
+                                                for line in lines:
+                                                    if line.startswith("Section Number: "):
+                                                        section_number = line.split(":")[1].strip()
+                                                    elif line.startswith("Section Title: "):
+                                                        section_title = line.split(":")[1].strip()
+                                        except Exception as e:
+                                            print(f"An error occurred while querying the chatbot: {e}")
+                                            section_number = "Unknown"
+                                            section_title = "Unknown"
 
                                         nested_metadata_dict[file_name][-1]['Section Number'] = section_number
                                         nested_metadata_dict[file_name][-1]['Section Title'] = section_title
@@ -89,6 +90,7 @@ def search(json_path, search_terms=None):
         print("No data loaded from JSON file.")
 
     return nested_metadata_dict
+
 
 
 if __name__ == '__main__':
