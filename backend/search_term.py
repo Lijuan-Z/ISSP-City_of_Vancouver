@@ -103,10 +103,10 @@ def api_connect():
     return hugchat.ChatBot(cookies=cookies.get_dict())  # or cookie_path="usercookies/<email>.json"
 
 
-def searching_endpoint(keyword):
-    folder_path = '../downloaded_pdfs'
+def searching_endpoint(keyword, files):
+    folder_path = '../test_pdfs'
     output = []
-    image_search_enabled = True
+    image_search_enabled = False
 
     with open("doc_type.json", "r") as file:
         data = json.load(file)
