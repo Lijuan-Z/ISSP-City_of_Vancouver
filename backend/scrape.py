@@ -3,6 +3,7 @@ import os
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import json
+import time
 
 def download_source_html(url):
     # response = requests.get(url)
@@ -42,10 +43,6 @@ def download_pdf(html, url, save_dir):
             f.write(pdf_response.content)
             file_counter += 1
 
-        # temp for testing
-        # if file_counter == 10:
-        #     break
-
 
     return total_files
 
@@ -76,7 +73,10 @@ def retrieve_document_type(html, output_file):
                                 "title_original": file.text,
                                 "title": (file.text.split("PDF file")[0]).replace("\u00a0", "").strip(),
                                 # "title": file.text.split("\u00a0")[0],
-                                "url": file['href']
+                                "url": file['href'],
+                                "file_updated": False,
+                                "Last update": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+                                "checksum": "xxxxxxx"
                             }
                         }
                     )

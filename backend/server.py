@@ -4,7 +4,7 @@ from search import search_files
 from scrape import download_source_html, download_pdf, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
-import threading, random
+import threading
 import json
 import pandas as pd
 import io
@@ -24,6 +24,7 @@ CORS(app)
 
 update_status = False
 file_counter = 0
+
 
 # Generate Excel file based on the query
 def generate_response(query, files):
@@ -74,7 +75,8 @@ def scrap_file_and_data():
             retrieve_document_type(source_html, output_file)
 
             update_status = False
-            thread_event.clear()
+
+        thread_event.clear()
 
 def scrape_status():
         # tmp:
@@ -120,7 +122,8 @@ def file_filter(file_names, category):
         return file_names
     else:
         file_info = read_data_type_file()
-        if "all" in category:
+        checkall = list([x.lower() for x in category])
+        if "all" in checkall:
             file_list = list([f["file-name"] for f in file_info])
             return file_list
         else:
@@ -172,6 +175,7 @@ def update():
             thread_event.set()
             thread = threading.Thread(target=scrap_file_and_data())
             thread.start()
+            scrap_file_and_data()
 
         output = scrape_status()
 
