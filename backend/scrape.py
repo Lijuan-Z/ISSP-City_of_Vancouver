@@ -43,10 +43,6 @@ def download_pdf(html, url, save_dir):
             f.write(pdf_response.content)
             file_counter += 1
 
-        # temp for testing
-        if file_counter == 3:
-            break
-
 
     return total_files
 

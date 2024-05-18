@@ -4,19 +4,19 @@ from search import search_files
 from scrape import download_source_html, download_pdf, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
-import threading, random
+import threading
 import json
 import pandas as pd
 import io
-# import configparser
+import configparser
 
 from output_handler import OutputHandler
 
-# thread_event = threading.Event()
+thread_event = threading.Event()
 
 # config file for information management
-# config = configparser.ConfigParser()
-# config.read('development.ini')
+config = configparser.ConfigParser()
+config.read('development.ini')
 
 app = Flask(__name__)
 # app._static_folder = "_next/static"
@@ -24,6 +24,7 @@ CORS(app)
 
 update_status = False
 file_counter = 0
+
 
 # Generate Excel file based on the query
 def generate_response(query, files):
@@ -54,27 +55,28 @@ def generate_response(query, files):
 def scrap_file_and_data():
     global update_status
 
-    # while thread_event.is_set():
+    while thread_event.is_set():
     ### html, pdf & doc-type json download process ###
-    if True:
-        update_status = True
+        if config.getboolean('scrap', 'download'):
+            update_status = True
 
-        # URL of the website to scrape
-        website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
-        # Directory to save the downloaded PDFs
-        save_directory = "downloaded_pdfs"
-        # Output file name for document_type json data
-        output_file = "doc_type.json"
+            # URL of the website to scrape
+            website_url = config.get('scrap', 'cov_url')
+            # Directory to save the downloaded PDFs
+            save_directory = config.get('scrap', 'pdf_folder')
+            # Output file name for document_type json data
+            output_file = config.get('server', 'doc_file')
 
-        app.logger.info("/update: server is downloading html file from")
-        source_html = download_source_html(website_url)
-        app.logger.info("/update: server finished downloading html. Now downloading pdf files")
-        total_downloaded = download_pdf(source_html, website_url, save_directory)
-        app.logger.info(f"/update: server finished downloading {total_downloaded} pdf files. Now creating doc-type-json file")
-        retrieve_document_type(source_html, output_file)
+            app.logger.info("/update: server is downloading html file from")
+            source_html = download_source_html(website_url)
+            app.logger.info("/update: server finished downloading html. Now downloading pdf files")
+            total_downloaded = download_pdf(source_html, website_url, save_directory)
+            app.logger.info(f"/update: server finished downloading {total_downloaded} pdf files. Now creating doc-type-json file")
+            retrieve_document_type(source_html, output_file)
 
-        update_status = False
-            # thread_event.clear()
+            update_status = False
+
+        thread_event.clear()
 
 def scrape_status():
         # tmp:
@@ -99,7 +101,7 @@ def scrape_status():
 
 def read_data_type_file():
     # open stored doc-type file and return update info
-    with open("doc_type.json", "r") as file:
+    with open(config.get('server', 'doc_file'), "r") as file:
         data = json.load(file)
 
         output = []
@@ -120,7 +122,8 @@ def file_filter(file_names, category):
         return file_names
     else:
         file_info = read_data_type_file()
-        if "all" in category:
+        checkall = list([x.lower() for x in category])
+        if "all" in checkall:
             file_list = list([f["file-name"] for f in file_info])
             return file_list
         else:
@@ -169,9 +172,9 @@ def update():
     app.logger.info(f"/update: received a request")
     try:
         if not update_status:
-            # thread_event.set()
-            # thread = threading.Thread(target=scrap_file_and_data())
-            # thread.start()
+            thread_event.set()
+            thread = threading.Thread(target=scrap_file_and_data())
+            thread.start()
             scrap_file_and_data()
 
         output = scrape_status()
@@ -207,4 +210,4 @@ def data():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    app.run(debug=config.get('server', 'debug'), port=config.get('server', 'port'))
