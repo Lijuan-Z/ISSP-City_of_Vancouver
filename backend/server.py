@@ -74,7 +74,7 @@ def scrap_file_and_data():
             app.logger.info("/update: server finished downloading html. Now downloading pdf files")
             total_downloaded_cov = download_pdf(source_html_cov, website_url_cov, save_directory)
             total_downloaded_bylaw = download_pdf_voc_bylaws(source_html_bylaw, save_directory, total_downloaded_cov)
-            # app.logger.info(f"/update: server finished downloading {total_downloaded_cov + total_downloaded_bylaw} pdf files. Now creating doc-type-json file")
+            app.logger.info(f"/update: server finished downloading {total_downloaded_cov + total_downloaded_bylaw} pdf files. Now creating doc-type-json file")
             retrieve_document_type(source_html_cov, source_html_bylaw, output_file)
 
             update_status = False

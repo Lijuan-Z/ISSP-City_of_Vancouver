@@ -37,7 +37,7 @@ def download_pdf(html, url, save_dir):
         # Download the PDF
         with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
 
-            print(f"Downloading {file_counter} of {total_files} pdf_file from {url}: {pdf_filename}")
+            print(f"Downloading {file_counter} pdf_file from {url}: {pdf_filename}")
             # pdf_response = requests.get(pdf_link)
             pdf_response = httpx.get(pdf_link)
             f.write(pdf_response.content)
@@ -64,7 +64,7 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
         links = list(filter(lambda t: t.get('href') is not None and 'pdf' in t.get('href').lower(), subpage_html.find_all('a')))
         for link in links:
 
-            file_counter += 1
+
             link = link.get('href')
             # Construct absolute URL if the link is relative
             if not link.startswith('http'):
@@ -79,6 +79,7 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
                 # pdf_response = requests.get(pdf_link)
                 pdf_response = httpx.get(link)
                 f.write(pdf_response.content)
+                file_counter += 1
 
     return file_counter
 def retrieve_document_type(html, html2, output_file):
@@ -169,23 +170,23 @@ def retrieve_document_type(html, html2, output_file):
         json.dump(document_type, file)
 
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
 
-    # # URL of the website to scrape
-    # website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
-    # website_url2 = "https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
-    #
-    # # Directory to save the downloaded PDFs
-    # save_directory = "downloaded_pdfs"
-    #
-    # # Output file name for document_type json data
-    # output_file = "doc_type.json"
-    #
-    # source_html = download_source_html(website_url)
-    # source_html2 = download_source_html(website_url2)
-    # # download_pdf(source_html, website_url, save_directory)
-    # download_pdf_voc_bylaws(source_html2, save_directory, 0)
-    # retrieve_document_type(source_html, source_html2, output_file)
+    # URL of the website to scrape
+    website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
+    website_url2 = "https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
+
+    # Directory to save the downloaded PDFs
+    save_directory = "downloaded_pdfs"
+
+    # Output file name for document_type json data
+    output_file = "doc_type.json"
+
+    source_html = download_source_html(website_url)
+    source_html2 = download_source_html(website_url2)
+    download_pdf(source_html, website_url, save_directory)
+    download_pdf_voc_bylaws(source_html2, save_directory, 0)
+    retrieve_document_type(source_html, source_html2, output_file)
 
     # with open("source.html", "r", encoding="utf-8") as file:
     #     retreive_document_type(file)
