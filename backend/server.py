@@ -1,7 +1,7 @@
 import time
 from search_term import searching_endpoint
 from search import search_files
-from scrape import download_source_html, download_pdf, retrieve_document_type
+from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
 import threading
@@ -61,18 +61,21 @@ def scrap_file_and_data():
             update_status = True
 
             # URL of the website to scrape
-            website_url = config.get('scrap', 'cov_url')
+            website_url_cov = config.get('scrap', 'cov_url')
+            website_url_bylaw = config.get('scrap', 'bylaw_url')
             # Directory to save the downloaded PDFs
             save_directory = config.get('scrap', 'pdf_folder')
             # Output file name for document_type json data
             output_file = config.get('server', 'doc_file')
 
-            app.logger.info("/update: server is downloading html file from")
-            source_html = download_source_html(website_url)
+            app.logger.info("/update: server is downloading html file")
+            source_html_cov = download_source_html(website_url_cov)
+            source_html_bylaw = download_source_html(website_url_bylaw)
             app.logger.info("/update: server finished downloading html. Now downloading pdf files")
-            total_downloaded = download_pdf(source_html, website_url, save_directory)
-            app.logger.info(f"/update: server finished downloading {total_downloaded} pdf files. Now creating doc-type-json file")
-            retrieve_document_type(source_html, output_file)
+            total_downloaded_cov = download_pdf(source_html_cov, website_url_cov, save_directory)
+            total_downloaded_bylaw = download_pdf_voc_bylaws(source_html_bylaw, save_directory, total_downloaded_cov)
+            app.logger.info(f"/update: server finished downloading {total_downloaded_cov + total_downloaded_bylaw} pdf files. Now creating doc-type-json file")
+            retrieve_document_type(source_html_cov, source_html_bylaw, output_file)
 
             update_status = False
 
