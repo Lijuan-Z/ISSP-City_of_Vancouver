@@ -1,9 +1,10 @@
 import time
 from search_term import searching_endpoint
 from search import search_files
-from scrape import download_source_html, download_pdf, retrieve_document_type
+from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
+import threading
 import json
 import pandas as pd
 import io
@@ -11,15 +12,19 @@ import configparser
 
 from output_handler import OutputHandler
 
+thread_event = threading.Event()
+
 # config file for information management
 config = configparser.ConfigParser()
 config.read('development.ini')
 
 app = Flask(__name__)
+# app._static_folder = "_next/static"
 CORS(app)
 
 update_status = False
 file_counter = 0
+
 
 # Generate Excel file based on the query
 def generate_response(query, files):
@@ -49,25 +54,32 @@ def generate_response(query, files):
 # Handling web-scrapping of PDF and document-type json file
 def scrap_file_and_data():
     global update_status
+
+    while thread_event.is_set():
     ### html, pdf & doc-type json download process ###
-    if config.getboolean('scrap', 'download'):
-        update_status = True
+        if config.getboolean('scrap', 'download'):
+            update_status = True
 
-        # URL of the website to scrape
-        website_url = config.get('scrap', 'cov_url')
-        # Directory to save the downloaded PDFs
-        save_directory = config.get('scrap', 'pdf_folder')
-        # Output file name for document_type json data
-        output_file = config.get('server', 'doc_file')
+            # URL of the website to scrape
+            website_url_cov = config.get('scrap', 'cov_url')
+            website_url_bylaw = config.get('scrap', 'bylaw_url')
+            # Directory to save the downloaded PDFs
+            save_directory = config.get('scrap', 'pdf_folder')
+            # Output file name for document_type json data
+            output_file = config.get('server', 'doc_file')
 
-        app.logger.info("/update: server is downloading html file from")
-        source_html = download_source_html(website_url)
-        app.logger.info("/update: server finished downloading html. Now downloading pdf files")
-        total_downloaded = download_pdf(source_html, website_url, save_directory)
-        app.logger.info(f"/update: server finished downloading {total_downloaded} pdf files. Now creating doc-type-json file")
-        retrieve_document_type(source_html, output_file)
+            app.logger.info("/update: server is downloading html file")
+            source_html_cov = download_source_html(website_url_cov)
+            source_html_bylaw = download_source_html(website_url_bylaw)
+            app.logger.info("/update: server finished downloading html. Now downloading pdf files")
+            total_downloaded_cov = download_pdf(source_html_cov, website_url_cov, save_directory)
+            total_downloaded_bylaw = download_pdf_voc_bylaws(source_html_bylaw, save_directory, total_downloaded_cov)
+            app.logger.info(f"/update: server finished downloading {total_downloaded_cov + total_downloaded_bylaw} pdf files. Now creating doc-type-json file")
+            retrieve_document_type(source_html_cov, source_html_bylaw, output_file)
 
-        update_status = False
+            update_status = False
+
+        thread_event.clear()
 
 def scrape_status():
         # tmp:
@@ -113,7 +125,8 @@ def file_filter(file_names, category):
         return file_names
     else:
         file_info = read_data_type_file()
-        if "all" in category:
+        checkall = list([x.lower() for x in category])
+        if "all" in checkall:
             file_list = list([f["file-name"] for f in file_info])
             return file_list
         else:
@@ -129,8 +142,13 @@ def page_not_found(error):
 # return 500 When any there are server errors
 @app.errorhandler(500)
 def internal_error(error):
-    app.logger.error(f"server encounter error ${error.name} and returning status code 500")
+    app.logger.error(f"server encounter error {error.name} and returning status code 500")
     return render_template('500.html'), 500
+
+@app.route('/')
+def home():
+    app.logger.info("A request is received for loading home page")
+    return render_template('index.html')
 
 
 @app.route("/search", methods=["POST"])
@@ -142,6 +160,7 @@ def search():
         file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
 
         if len(file_list) != 0:
+            print(file_list)
             app.logger.info(f'/search: is going to search {len(file_list)} files')
             return generate_response(file_data["data"]["search-terms"], file_list)
         else:
@@ -155,8 +174,11 @@ def search():
 def update():
     app.logger.info(f"/update: received a request")
     try:
-        # if not update_status:
-            # scrap_file_and_data()
+        if not update_status:
+            thread_event.set()
+            thread = threading.Thread(target=scrap_file_and_data())
+            thread.start()
+            scrap_file_and_data()
 
         output = scrape_status()
 
