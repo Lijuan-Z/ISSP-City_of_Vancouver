@@ -32,7 +32,7 @@ def create_metadata_dictionary(files_to_search, json_path="processed.json", sear
     if json_data:
         if search_terms is not None:
             for file_name, file_data in json_data.items():
-                if 'Pages' in file_data and file_name[:-4] in files_to_search:
+                if 'Pages' in file_data: # and file_name[:-4] in files_to_search: removed files_to_search for testing
                     for page_num, page_content in file_data['Pages'].items():
                         # Split the entire page content into sentences
                         sentences = page_content.split('.')
@@ -67,8 +67,8 @@ def create_metadata_dictionary(files_to_search, json_path="processed.json", sear
 
 if __name__ == '__main__':
     json_file_path = 'processed.json'
-    search_terms = ['parking', 'lane']
+    search_terms = ['window']
 
     nested_metadata_dict = search_files(json_file_path, search_terms=search_terms)
-    output_file = 'output.json'
+    output_file = 'window.json'
     write_to_json(nested_metadata_dict, output_file)
