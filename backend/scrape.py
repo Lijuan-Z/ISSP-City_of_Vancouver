@@ -22,7 +22,7 @@ def download_pdf(html, url, save_dir):
     links = html.find_all('a')
 
     # Filter out links that point to PDF files
-    pdf_links = [link.get('href') for link in links if link.get('href') and link.get('href').endswith('.pdf')]
+    pdf_links = [link.get('href') for link in links if link.get('href') and "pdf" in link.get('href').lower()]
 
     file_counter = 1
     total_files = len(pdf_links)
@@ -35,14 +35,19 @@ def download_pdf(html, url, save_dir):
         pdf_filename = pdf_link.split('/')[-1]
 
         # Download the PDF
+        pdf_response = httpx.get(pdf_link)
+
+        if pdf_response.status_code == 301:
+            new_url = str(pdf_response.next_request.url)
+            print(f"Redirected to {new_url}")
+            # pdf_filename = new_url.split('/')[-1]
+            pdf_response = httpx.get(new_url)
+
+        print(f"Downloading {file_counter} pdf_file from {url}: {pdf_filename}")
         with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
 
-            print(f"Downloading {file_counter} pdf_file from {url}: {pdf_filename}")
-            # pdf_response = requests.get(pdf_link)
-            pdf_response = httpx.get(pdf_link)
             f.write(pdf_response.content)
             file_counter += 1
-
 
     return total_files
 
@@ -71,13 +76,18 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
                 link = urljoin(subpage_url, link)
 
             # Get the PDF filename from the URL
-            pdf_filename = link.split('/')[-1]
+            pdf_filename = link.split('/')[-1].split("#")[0]
 
             # Download the PDF
+            pdf_response = httpx.get(link)
+            print(f"Downloading {file_counter + previous_total} pdf_file from {page.get('href')}: {pdf_filename}")
+            if pdf_response.status_code == 301:
+                new_url = str(pdf_response.next_request.url)
+                print(f"Redirected to {new_url}")
+                # pdf_filename = new_url.split('/')[-1].split("#")[0]
+                pdf_response = httpx.get(new_url)
+
             with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
-                print(f"Downloading {file_counter + previous_total} pdf_file from {page.get('href')}: {pdf_filename}")
-                # pdf_response = requests.get(pdf_link)
-                pdf_response = httpx.get(link)
                 f.write(pdf_response.content)
                 file_counter += 1
 
@@ -103,10 +113,10 @@ def retrieve_document_type(html, html2, output_file):
                 if file.has_attr("href") and 'pdf' in file['href']:
 
                     pdf_filename = file.get('href').split('/')[-1]
-                    if len(pdf_filename.split('#')) > 1:
-                        pdf_filename = pdf_filename.split('#')[0][:-4] + "#" + pdf_filename.split('#')[1]
-                    else:
-                        pdf_filename = pdf_filename.split('#')[0][:-4]
+                    # if len(pdf_filename.split('#')) > 1:
+                    #     pdf_filename = pdf_filename.split('#')[0][:-4] + "#" + pdf_filename.split('#')[1]
+                    # else:
+                    pdf_filename = pdf_filename.split('#')[0][:-4]
 
                     document_type.append(
                         {
@@ -145,10 +155,10 @@ def retrieve_document_type(html, html2, output_file):
 
             # Get the PDF filename from the URL
             pdf_filename = link.get('href').split('/')[-1]
-            if len(pdf_filename.split('#')) > 1:
-                pdf_filename = pdf_filename.split('#')[0][:-4] + "#" + pdf_filename.split('#')[1]
-            else:
-                pdf_filename = pdf_filename.split('#')[0][:-4]
+            # if len(pdf_filename.split('#')) > 1:
+            #     pdf_filename = pdf_filename.split('#')[0][:-4] + "#" + pdf_filename.split('#')[1]
+            # else:
+            pdf_filename = pdf_filename.split('#')[0][:-4]
 
             document_type.append(
                 {
@@ -185,7 +195,7 @@ if __name__ == "__main__":
     source_html = download_source_html(website_url)
     source_html2 = download_source_html(website_url2)
     download_pdf(source_html, website_url, save_directory)
-    download_pdf_voc_bylaws(source_html2, save_directory, 0)
+    # download_pdf_voc_bylaws(source_html2, save_directory, 0)
     retrieve_document_type(source_html, source_html2, output_file)
 
     # with open("source.html", "r", encoding="utf-8") as file:
