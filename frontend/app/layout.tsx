@@ -13,11 +13,11 @@ import { useDisclosure } from '@mantine/hooks';
 import { theme } from '../theme';
 import Header from '@/components/Header/header';
 import { NavbarSimple } from '@/components/NavBar/navbar';
-import {FilesProviders} from "@/contexts/files.context";
+import { FilesProviders } from '@/contexts/files.context';
 
 export const metadata = {
-    title: 'Mantine Next.js template',
-    description: 'I am using Mantine with Next.js!',
+    title: 'PDS',
+    description: 'PDS Application',
 };
 
 export default function RootLayout({ children }: { children: any }) {
