@@ -24,23 +24,6 @@ import {
 import classes from './information.module.css';
 import { getUpdateInformation, updateFilesInBackend } from '@/utils/backend/backend.utils';
 
-const icons = {
-    up: IconArrowUpRight,
-    down: IconArrowDownRight,
-};
-
-const data = [
-    { label: 'Page views', stats: '456,578', progress: 65, color: 'teal', icon: 'up' },
-    { label: 'New users', stats: '2,550', progress: 72, color: 'blue', icon: 'up' },
-    {
-        label: 'Orders',
-        stats: '4,735',
-        progress: 52,
-        color: 'red',
-        icon: 'down',
-    },
-] as const;
-
 type StatusUpdate = {
     status: string;
     file_updated: number;
@@ -79,13 +62,13 @@ const Information = () => {
                 break;
             default:
                 setUpdating(true);
-                setTimeout(() => getNewUpdateInformation(), 2000);
+                setTimeout(() => getNewUpdateInformation(), 1000);
         }
     }, [updateInfo]);
     console.log('infor', updateInfo);
 
     return (
-        <Paper radius="md">
+        <Paper radius="md" p={10}>
             <Grid justify="space-between">
                 <Stack>
                     <Group justify="space-between">
@@ -136,7 +119,7 @@ const Information = () => {
             </Grid>
             <Center>
                 <Box pos="relative">
-                    <LoadingOverlay visible={updating} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} className = {classes.loader}/>
+                    <LoadingOverlay visible={updating} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} className={classes.loader} />
                     <Button rightSection={<IconReload size={14} />} onClick={updateFiles}>Update</Button>
 
                 </Box>
