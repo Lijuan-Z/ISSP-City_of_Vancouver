@@ -1,6 +1,7 @@
 import time
 from search_term import searching_endpoint
 from search import search_files
+import scrape
 from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
@@ -23,7 +24,6 @@ app = Flask(__name__)
 CORS(app)
 
 update_status = False
-file_counter = 0
 
 
 # Generate Excel file based on the query
@@ -82,11 +82,8 @@ def scrap_file_and_data():
         thread_event.clear()
 
 def scrape_status():
-        # tmp:
-        file_counter = 2
-        total_file_to_update = 10
-        percentage_updated = int(file_counter / total_file_to_update * 100)
-        #
+        total_file_to_update = 590
+        percentage_updated = float(scrape.file_counter / total_file_to_update * 100)
 
         status_message = "Idle"
         if update_status:
@@ -94,10 +91,10 @@ def scrape_status():
 
         return {
             "status": status_message,
-            "file_updated": file_counter,
+            "file_updated": scrape.file_counter,
             "last-updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
             "total-updated-files": total_file_to_update,
-            "percentage_updated": percentage_updated
+            "percentage_updated": f"{percentage_updated:.2f}"
         }
 
 
@@ -150,6 +147,57 @@ def home():
     app.logger.info("A request is received for loading home page")
     return render_template('index.html')
 
+@app.route("/update/<sub_path>")
+def update_sub(sub_path):
+    if sub_path == "info":
+        app.logger.info(f"/update/{sub_path}: received a request")
+        output = scrape_status()
+
+        app.logger.info(f"/update: finished scrapping and return response")
+        response = app.response_class(
+            response=json.dumps({"data": output}),
+            status=200,
+            mimetype='application/json'
+        )
+
+        return response
+    else:
+        app.logger.error(f"/update/: Invalid path")
+        return app.response_class(
+            response=json.dumps({"error": f"path /{sub_path} not found"}),
+            status=404,
+            mimetype='application/json'
+        )
+
+@app.route("/update")
+def update():
+    app.logger.info(f"/update: received a request")
+    try:
+        if not update_status:
+            start_time = time.time()
+            thread_event.set()
+            thread = threading.Thread(target=scrap_file_and_data())
+            thread.start()
+            scrap_file_and_data()
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+
+            output = {
+                "status": "updated",
+                "finished-time": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+                "duration": f"{elapsed_time:.2f}s"
+            }
+
+            app.logger.info(f"/update: finished scrapping and return response")
+            response = app.response_class(
+                response=json.dumps({"data": output}),
+                status=200,
+                mimetype='application/json'
+            )
+            return response
+    except Exception as e:
+        app.logger.error(f"/update: Error in loading file - {e}")
+        abort(500)
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -168,29 +216,6 @@ def search():
            abort(404)
     except Exception as e:
         app.logger.error(f"/search: Error in loading file - {e}")
-        abort(500)
-
-@app.route("/update")
-def update():
-    app.logger.info(f"/update: received a request")
-    try:
-        if not update_status:
-            thread_event.set()
-            thread = threading.Thread(target=scrap_file_and_data())
-            thread.start()
-            scrap_file_and_data()
-
-        output = scrape_status()
-
-        app.logger.info(f"/update: finished scrapping and return response")
-        response = app.response_class(
-            response=json.dumps({"data": output}),
-            status=200,
-            mimetype='application/json'
-        )
-        return response
-    except Exception as e:
-        app.logger.error(f"/update: Error in loading file - {e}")
         abort(500)
 
 @app.route("/data")
