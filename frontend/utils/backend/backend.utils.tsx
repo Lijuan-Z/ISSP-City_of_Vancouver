@@ -1,5 +1,5 @@
-import { saveAs } from 'file-saver';
-import { FilterTagsType } from '@/components/FilterMenu/filter-menu';
+import {saveAs} from 'file-saver';
+import {FilterTagsType} from '@/components/FilterMenu/filter-menu';
 
 export const searchKeywords = async (keywords: string[], filterTags: FilterTagsType) => {
     console.log(filterTags);
@@ -34,3 +34,22 @@ export const getFilesInformation = async () => {
     const data = response.json();
     return data;
 };
+
+
+export const getUpdateInformation = async () => {
+    const response = await fetch('/update/info');
+    if (!response.ok) {
+        throw new Error('Failed to submit the data. Please try again.');
+    }
+    const data = response.json();
+    return data;
+
+}
+
+
+export const updateFilesInBackend = async () => {
+    const response = await fetch('/update');
+    if (!response.ok) {
+        throw new Error('Failed to submit the data. Please try again.');
+    }
+}

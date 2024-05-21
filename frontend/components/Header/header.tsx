@@ -9,15 +9,6 @@ const Header = () => (
             position: 'relative',
         }}
     >
-        <Text
-          c="dimmed"
-          size="sm"
-          style={{
-            position: 'absolute',
-            right: '10px',
-        }}>2024-05-14 7:10
-        </Text>
-
         {/*<Flex*/}
         {/*  justify="flex-end"*/}
 

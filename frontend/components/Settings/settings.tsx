@@ -7,6 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { ActionIcon, Button, Modal } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 import SearchBar from '@/components/SearchBar/search-bar';
+import Information from "@/components/Information/information";
 
 type SettingsType = {
     scrapeURL: string
@@ -138,8 +139,8 @@ const Settings1 = () => {
     return (
         <div>
 
-            <Modal opened={opened} onClose={close} title="Backend Information">
-                {/* Modal content */}
+            <Modal opened={opened} onClose={close} centered>
+               <Information />
             </Modal>
             <ActionIcon variant="transparent" aria-label="Settings">
                 <IconInfoCircle
