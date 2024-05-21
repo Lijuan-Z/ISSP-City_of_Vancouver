@@ -106,7 +106,7 @@ def api_connect():
 def searching_endpoint(keyword):
     folder_path = '../downloaded_pdfs'
     output = []
-    image_search_enabled = True
+    image_search_enabled = False
 
     with open("doc_type.json", "r") as file:
         data = json.load(file)
@@ -123,5 +123,4 @@ def searching_endpoint(keyword):
                 count = count + 1
                 print(f'file: {count}  name {filename_key}')
                 output.extend(search_pdf(keyword, full_file_name, chatbot, file_type, url,image_search_enabled))
-
     return output
