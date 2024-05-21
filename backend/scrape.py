@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 import json
 import time
 
+file_counter = 0
+
 def download_source_html(url):
     # response = requests.get(url)
     response = httpx.get(url)
@@ -49,6 +51,7 @@ def download_pdf(html, url, save_dir):
             f.write(pdf_response.content)
             file_counter += 1
 
+
     return total_files
 
 def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
@@ -90,6 +93,7 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
             with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
                 f.write(pdf_response.content)
                 file_counter += 1
+
 
     return file_counter
 def retrieve_document_type(html, html2, output_file):
@@ -180,24 +184,24 @@ def retrieve_document_type(html, html2, output_file):
         json.dump(document_type, file)
 
 
-if __name__ == "__main__":
-
-    # URL of the website to scrape
-    website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
-    website_url2 = "https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
-
-    # Directory to save the downloaded PDFs
-    save_directory = "downloaded_pdfs"
-
-    # Output file name for document_type json data
-    output_file = "doc_type.json"
-
-    source_html = download_source_html(website_url)
-    source_html2 = download_source_html(website_url2)
-    download_pdf(source_html, website_url, save_directory)
-    # download_pdf_voc_bylaws(source_html2, save_directory, 0)
-    retrieve_document_type(source_html, source_html2, output_file)
-
-    # with open("source.html", "r", encoding="utf-8") as file:
-    #     retreive_document_type(file)
+# if __name__ == "__main__":
+#
+#     # URL of the website to scrape
+#     website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
+#     website_url2 = "https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
+#
+#     # Directory to save the downloaded PDFs
+#     save_directory = "downloaded_pdfs"
+#
+#     # Output file name for document_type json data
+#     output_file = "doc_type.json"
+#
+#     source_html = download_source_html(website_url)
+#     source_html2 = download_source_html(website_url2)
+#     download_pdf(source_html, website_url, save_directory)
+#     # download_pdf_voc_bylaws(source_html2, save_directory, 0)
+#     retrieve_document_type(source_html, source_html2, output_file)
+#
+#     # with open("source.html", "r", encoding="utf-8") as file:
+#     #     retreive_document_type(file)
 
