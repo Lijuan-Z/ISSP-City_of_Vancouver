@@ -51,18 +51,18 @@ def download_pdf(html, url, save_dir):
             f.write(pdf_response.content)
             file_counter += 1
 
-
     return total_files
 
 def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
     # Create directory if it doesn't exist
+    global file_counter
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
     # Find all links on the page
     sub_pages = html.find("div", {"id": "simpleList1117"}).findAll("a")
 
-    file_counter = 1
+    file_counter = previous_total
     for page in sub_pages:
         subpage_url = "https://vancouver.ca/" + page["href"]
         res = httpx.get(subpage_url)
@@ -83,7 +83,7 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
 
             # Download the PDF
             pdf_response = httpx.get(link)
-            print(f"Downloading {file_counter + previous_total} pdf_file from {page.get('href')}: {pdf_filename}")
+            print(f"Downloading {file_counter} pdf_file from {page.get('href')}: {pdf_filename}")
             if pdf_response.status_code == 301:
                 new_url = str(pdf_response.next_request.url)
                 print(f"Redirected to {new_url}")
