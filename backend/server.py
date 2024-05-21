@@ -92,8 +92,8 @@ def scrape_status():
         return {
             "status": status_message,
             "file_updated": scrape.file_counter,
-            "last-updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
-            "total-updated-files": total_file_to_update,
+            "last_updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+            "total_updated_files": total_file_to_update,
             "percentage_updated": f"{percentage_updated:.2f}"
         }
 
