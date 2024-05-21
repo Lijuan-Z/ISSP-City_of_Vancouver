@@ -72,6 +72,7 @@ const Information = () => {
         getNewUpdateInformation();
     }, []);
 
+
     useEffect(() => {
         switch (updateInfo.status) {
             case 'Idle':
@@ -79,13 +80,13 @@ const Information = () => {
                 break;
             default:
                 setUpdating(true);
-                setTimeout(() => getNewUpdateInformation(), 2000);
+                setTimeout(() => getNewUpdateInformation(), 1000);
         }
     }, [updateInfo]);
     console.log('infor', updateInfo);
 
     return (
-        <Paper radius="md">
+        <Paper radius="md" p={10}>
             <Grid justify="space-between">
                 <Stack>
                     <Group justify="space-between">
@@ -136,7 +137,7 @@ const Information = () => {
             </Grid>
             <Center>
                 <Box pos="relative">
-                    <LoadingOverlay visible={updating} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} className = {classes.loader}/>
+                    <LoadingOverlay visible={updating} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} className={classes.loader} />
                     <Button rightSection={<IconReload size={14} />} onClick={updateFiles}>Update</Button>
 
                 </Box>
