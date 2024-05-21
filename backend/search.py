@@ -2,10 +2,10 @@ import json
 
 
 def search_files(files_to_search, json_path="processed.json", search_terms=None):
-
     output_dict = create_metadata_dictionary(files_to_search, json_path, search_terms)
 
     return output_dict
+
 
 def load_json(json_path):
     try:
@@ -15,6 +15,7 @@ def load_json(json_path):
         print(f"Error reading JSON file '{json_path}': {e}")
         data = None
     return data
+
 
 def write_to_json(data, output_file):
     try:
@@ -28,10 +29,12 @@ def write_to_json(data, output_file):
 def create_metadata_dictionary(files_to_search, json_path="processed.json", search_terms=None):
     nested_metadata_dict = {}
     json_data = load_json(json_path)
+    # print(json_data)
 
     if json_data:
         if search_terms is not None:
             for file_name, file_data in json_data.items():
+                print("files", file_name, files_to_search)
                 if 'Pages' in file_data and file_name[:-4] in files_to_search:
                     for page_num, page_content in file_data['Pages'].items():
                         # Split the entire page content into sentences
@@ -45,7 +48,8 @@ def create_metadata_dictionary(files_to_search, json_path="processed.json", sear
                                     found_terms.append(term)
                                     # Extract three sentences before and after the sentence containing the term
                                     context_start = max(0, sentence_index - 4)  # 4 sentences before
-                                    context_end = min(len(sentences), sentence_index + 4)  # 3 sentences after + 1 containing the term
+                                    context_end = min(len(sentences),
+                                                      sentence_index + 4)  # 3 sentences after + 1 containing the term
                                     context = '. '.join(sentences[context_start:context_end])
                                     # Remove newline characters from the context
                                     context = context.replace('\n', '')
