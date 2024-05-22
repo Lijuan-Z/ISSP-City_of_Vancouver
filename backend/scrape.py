@@ -3,7 +3,8 @@ import os
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import json
-import time
+import pytz, datetime
+import hashlib
 
 file_counter = 0
 
@@ -96,9 +97,10 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
 
 
     return file_counter
-def retrieve_document_type(html, html2, output_file):
+def retrieve_document_type(html, html2, previous_record, output_file):
     # soup = BeautifulSoup(html, 'html.parser')
     # print(soup)
+
     document_type = []
 
     # handling zoning-and-land-use-policies-document-library website
@@ -122,6 +124,18 @@ def retrieve_document_type(html, html2, output_file):
                     # else:
                     pdf_filename = pdf_filename.split('#')[0][:-4]
 
+                    # update checksum, last update if a new file was downloaded
+                    file_data = (list(filter(lambda obj: list(obj.keys())[0] == pdf_filename,previous_record)))[0][pdf_filename]
+                    last_update = file_data["Last update"]
+                    checksum = file_data["checksum"]
+                    if file_data["file_updated"]:
+                        with open(f"downloaded_pdfs/{pdf_filename}.pdf", "rb") as new_pdf_file_content:
+                            checksum = generate_checksum(new_pdf_file_content.read())
+                            # last_update = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+                            last_update = datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S")
+
+
+
                     document_type.append(
                         {
                             pdf_filename: {
@@ -131,8 +145,8 @@ def retrieve_document_type(html, html2, output_file):
                                 # "title": file.text.split("\u00a0")[0],
                                 "url": file['href'],
                                 "file_updated": False,
-                                "Last update": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
-                                "checksum": "xxxxxxx"
+                                "Last update": last_update,
+                                "checksum": checksum
                             }
                         }
                     )
@@ -164,6 +178,16 @@ def retrieve_document_type(html, html2, output_file):
             # else:
             pdf_filename = pdf_filename.split('#')[0][:-4]
 
+            # update checksum, last update if a new file was downloaded
+            file_data = (list(filter(lambda obj: list(obj.keys())[0] == pdf_filename, previous_record)))[0][
+                pdf_filename]
+            last_update = file_data["Last update"]
+            checksum = file_data["checksum"]
+            if file_data["file_updated"]:
+                with open(f"downloaded_pdfs/{pdf_filename}.pdf", "rb") as new_pdf_file_content:
+                    checksum = generate_checksum(new_pdf_file_content.read())
+                    last_update = datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S")
+
             document_type.append(
                 {
                     pdf_filename: {
@@ -172,8 +196,8 @@ def retrieve_document_type(html, html2, output_file):
                         "title": (link.text.split("PDF file")[0]).replace("\u00a0", "").strip(),
                         "url": url,
                         "file_updated": False,
-                        "Last update": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
-                        "checksum": "xxxxxxx"
+                        "Last update": last_update,
+                        "checksum": checksum
                     }
                 }
             )
@@ -184,24 +208,37 @@ def retrieve_document_type(html, html2, output_file):
         json.dump(document_type, file)
 
 
-# if __name__ == "__main__":
-#
-#     # URL of the website to scrape
-#     website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
-#     website_url2 = "https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
-#
-#     # Directory to save the downloaded PDFs
-#     save_directory = "downloaded_pdfs"
-#
-#     # Output file name for document_type json data
-#     output_file = "doc_type.json"
-#
-#     source_html = download_source_html(website_url)
-#     source_html2 = download_source_html(website_url2)
-#     download_pdf(source_html, website_url, save_directory)
-#     # download_pdf_voc_bylaws(source_html2, save_directory, 0)
-#     retrieve_document_type(source_html, source_html2, output_file)
-#
-#     # with open("source.html", "r", encoding="utf-8") as file:
-#     #     retreive_document_type(file)
+def read_previous_source(json_file):
+    with open(json_file, "r", encoding="utf-8") as source_file:
+        return json.load(source_file)
+
+def generate_checksum(bytes_file):
+    hasher = hashlib.md5()
+    hasher.update(bytes_file)
+    return hasher.hexdigest()
+
+
+
+if __name__ == "__main__":
+
+    # URL of the website to scrape
+    website_url = "https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
+    website_url2 = "https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
+
+    # Directory to save the downloaded PDFs
+    save_directory = "downloaded_pdfs"
+
+    # Output file name for document_type json data
+    output_file = "doc_type.json"
+
+    previous_dl_file_info = read_previous_source(output_file)
+
+    source_html = download_source_html(website_url)
+    source_html2 = download_source_html(website_url2)
+    # download_pdf(source_html, website_url, save_directory)
+    # download_pdf_voc_bylaws(source_html2, save_directory, 0)
+    retrieve_document_type(source_html, source_html2, previous_dl_file_info, output_file)
+
+    # with open("source.html", "r", encoding="utf-8") as file:
+    #     retreive_document_type(file)
 

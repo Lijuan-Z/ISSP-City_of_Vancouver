@@ -1,6 +1,7 @@
 import time
 from search_term import searching_endpoint
 from search import search_files
+from obj3 import gen_output
 import scrape
 from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
@@ -198,6 +199,36 @@ def update():
     except Exception as e:
         app.logger.error(f"/update: Error in loading file - {e}")
         abort(500)
+@app.route("/search/o3", methods=["POST"])
+def search_o3():
+    try:
+        file_data = request.json
+        app.logger.info(f'/search/o3: received a request')
+
+        # This is my function to filter the restricted list of files for objective 3
+        file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
+
+        if len(file_list) != 0:
+            print(file_list)
+            app.logger.info(f'/search/o3: is going to search {len(file_list)} files')
+
+            """
+            input param: filelist - a list of files in array. For example 
+            ["zoning-by-law-district-schedule-fc-1", "zoning-by-law-district-schedule-r1-1"]
+            
+            output: the excel content (or if you want me to handle this, you can provide me the data)
+            """
+            response = gen_output(file_list)   # temp gen output objective 3
+            response.headers["Content-Disposition"] = f"attachment; filename=output.xlsx"
+            response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+            return response
+        else:
+           app.logger.error(f"/search/o3: receive an empty query and returning status code 404")
+           abort(404)
+    except Exception as e:
+        app.logger.error(f"/search: Error in loading file - {e}")
+        abort(500)
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -234,7 +265,6 @@ def data():
     except Exception as e:
         app.logger.error(f"/data: Error in loading file - {e}")
         abort(500)
-
 
 
 if __name__ == "__main__":
