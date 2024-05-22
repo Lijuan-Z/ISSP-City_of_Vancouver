@@ -32,7 +32,7 @@ class ProcessToJSON:
                     file_updated = URL_info[file_name[:-4]]['file_updated']
                 except KeyError:
                     file_updated = False
-                if file_name.endswith('.pdf') and not file_updated:
+                if file_name.lower().endswith('.pdf') and not file_updated:
                     file_path = os.path.join(root, file_name)
                     try:
                         with open(file_path, mode='rb') as file:
