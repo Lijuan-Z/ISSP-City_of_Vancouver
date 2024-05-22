@@ -30,10 +30,11 @@ class OutputHandler:
                 new_dictionary["Land Use Document Type"] = instance["Land Use Document Type"]
                 new_dictionary["File name"] = key
                 new_dictionary['Title'] = instance["Title"]
-                new_dictionary['Section #'] = ""
-                new_dictionary['Section Title'] = ""
+                new_dictionary['AI Title'] = instance["AI Title"]
+                new_dictionary['Section #'] = instance['Section Number']
+                new_dictionary['Section Title'] = instance['Section Title']
                 new_dictionary['Search Terms'] = ','.join(instance['Search terms'])
-                if instance['Link'] is not None:
+                if instance['Link'] is not None and instance['Link'] != "No link":
                     new_dictionary['Link'] = f"{instance['Link']}#page={instance['Page']}"
                 else:
                     new_dictionary['Link'] = ""
@@ -131,7 +132,9 @@ class OutputHandler:
 
 
 if __name__ == "__main__":
-    test_data = "output.json"
-    output_file = 'test.xlsx'
+    test_data = "output_test.json"
+    output_file = 'test2.xlsx'
+    with open(test_data, 'r') as f:
+        data = json.load(f)
 
-    OutputHandler.create_excel_file(test_data, output_file)
+    OutputHandler.create_excel_file(data, output_file)

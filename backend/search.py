@@ -22,7 +22,7 @@ def write_to_json(data, output_file):
         print(f"Error writing to JSON file '{output_file}': {e}")
 
 
-def search(json_path, search_terms=None):
+def search(file_to_search, json_path, search_terms=None):
     nested_metadata_dict = {}
     json_data = load_json(json_path)
     chatbot = api_connect()
@@ -31,7 +31,8 @@ def search(json_path, search_terms=None):
     if json_data:
         if search_terms is not None:
             for file_name, file_data in json_data.items():
-                if 'Pages' in file_data:
+                if 'Pages' in file_data and file_name[:-4] in file_to_search:
+                    print(f"Searching in file '{file_name}'")
                     for page_num, page_content in file_data['Pages'].items():
                         # Split the entire page content into paragraphs
                         paragraphs = page_content.split('\n \n')
@@ -56,6 +57,7 @@ def search(json_path, search_terms=None):
                                             nested_metadata_dict[file_name] = []
                                         nested_metadata_dict[file_name].append({
                                             'Title': file_data['Title'],
+                                            'AI Title': file_data['AI Title'],
                                             'Search terms': found_terms,
                                             'Page': page_num,
                                             'Reference': context.strip(),
@@ -74,7 +76,8 @@ def search(json_path, search_terms=None):
                                                 section_number = ""
                                                 section_title = ""
                                                 if query_result is not None:
-                                                    query_text = str(query_result)  # Extract text content from the Message object
+                                                    query_text = str(
+                                                        query_result)  # Extract text content from the Message object
                                                     lines = query_text.split('\n')
                                                     for line in lines:
                                                         if line.startswith("Section Number: "):
@@ -98,9 +101,12 @@ def search(json_path, search_terms=None):
 
 
 if __name__ == '__main__':
-    json_file_path = 'test.json'
+    json_file_path = 'processed_final.json'
     search_terms = ['parking', 'lane']
+    files = ['4837c', 'bulletin-floor-area-calculation-tracing-overlay', 'bulletin-ra-1-perimeter-landscaping', 'F001',
+             'guidelines-cd-1-little-mountain', 'guidelines-fc-1-east-false-creek', 'odp-false-creek',
+             'Part9_Schedule9A', 'policy-plan-vancouver', 'zoning-by-law-district-schedule-rm-1']
 
-    dictionary = search(json_file_path, search_terms=search_terms)
-    output_file = 'output.json'
+    dictionary = search(file_to_search=files, json_path=json_file_path, search_terms=search_terms)
+    output_file = 'output_test.json'
     write_to_json(dictionary, output_file)
