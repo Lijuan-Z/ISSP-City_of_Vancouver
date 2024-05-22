@@ -161,6 +161,7 @@ class GeminiAPI():
         if json_response[3:7] == "json":
             json_response = json_response[7:-3]
         print("\n")
+        print(json_response)
         json_response = json.dumps(json_response)
         # actual_dict = json_response
         # pattern = r'(".*?\'\s*[,}])|(\s*[,{]\s*\'[^"\'{}]+"\s*[,}])'

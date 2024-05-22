@@ -37,7 +37,7 @@ class ProcessToJSON:
                     try:
                         with open(file_path, mode='rb') as file:
                             file_update_counter += 1
-                            process_update = f"Updating file {file_update_counter} of {files_to_update}"
+                            process_update = f"Updating file {file_update_counter} of {files_to_update} -> {file_name}"
                             file_time = time.time()
                             print(process_update)
                             reader = pypdf.PdfReader(file)
@@ -54,6 +54,7 @@ class ProcessToJSON:
                     except Exception as e:
                         print(f"{file_name} could not be updated. Error: {e}")
 
+        print(f"Time to finish processing files: {time.time() - startTime}")
 
         #saving a file just in case
         with open('processed.json', 'w') as json_file:
@@ -71,8 +72,8 @@ class ProcessToJSON:
             json.dump(nested_metadata_dict, json_file, indent=4)
 
         #Add the AI titles using gemini
-        gemAI = GeminiAPI()
-        nested_metadata_dict = gemAI.find_title(URL_info, nested_metadata_dict)
+        # gemAI = GeminiAPI()
+        # nested_metadata_dict = gemAI.find_title(URL_info, nested_metadata_dict)
 
         return nested_metadata_dict
 
@@ -84,12 +85,14 @@ class ProcessToJSON:
                     file_updated = URL_info[file_name[:-4]]['file_updated']
                 except KeyError:
                     file_updated = False
-                if file_name.endswith('.pdf') and not file_updated:
+                if file_name.lower().endswith('.pdf') and not file_updated:
                     files_to_update += 1
 
         return files_to_update
 
     def add_file_info_to_JSON(self, nested_metadata_dict, URL_info):
+
+        print(f"Adding URL info to JSON")
 
         for key in nested_metadata_dict.keys():
             dict_info = URL_info
@@ -107,11 +110,11 @@ class ProcessToJSON:
 
     def adjust_URL_info(self, URL_info):
 
+        print(f"num of files in doc_type is {len(URL_info)}")
         #remove the list
         new_URL_info = {}
         for item in URL_info:
             new_URL_info.update(item)
-
         return new_URL_info
 
     def get_image_text(self, page):
