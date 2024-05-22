@@ -54,7 +54,8 @@ class ProcessToJSON:
                     except Exception as e:
                         print(f"{file_name} could not be updated. Error: {e}")
 
-        print(f"Time to finish processing files: {time.time() - startTime}")
+        process_update = f"Time to finish processing files: {time.time() - startTime}"
+        print(process_update)
 
         #saving a file just in case
         with open('processed.json', 'w') as json_file:
@@ -142,21 +143,21 @@ if __name__ == '__main__':
     with open('doc_type.json') as json_file:
         data = json.load(json_file)
 
-
-    start = time.time()
-    dict_info = processor.read_PDFs(image_included=True, URL_info=data)
-    print(time.time() - start)
-
-
-    # # part Below only if AI title didn't run
-    # with open("processed.json", "r") as processed_file:
-    #     processed_data = json.load(processed_file)
     #
-    # data = processor.adjust_URL_info(data)
-    #
-    # gemAI = GeminiAPI()
-    # dict_info = gemAI.find_title(data, processed_data)
-    # # end of AI title only
+    # start = time.time()
+    # dict_info = processor.read_PDFs(image_included=True, URL_info=data)
+    # print(time.time() - start)
+
+
+    # part Below only if AI title didn't run
+    with open("processed.json", "r") as processed_file:
+        processed_data = json.load(processed_file)
+
+    data = processor.adjust_URL_info(data)
+
+    gemAI = GeminiAPI()
+    dict_info = gemAI.find_title(data, processed_data)
+    # end of AI title only
 
     with open('processed_final.json', 'w') as json_file:
         json.dump(dict_info, json_file, indent=4)

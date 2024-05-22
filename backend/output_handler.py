@@ -30,6 +30,7 @@ class OutputHandler:
                 new_dictionary["Land Use Document Type"] = instance["Land Use Document Type"]
                 new_dictionary["File name"] = key
                 new_dictionary['Title'] = instance["Title"]
+                new_dictionary['AI Title'] = instance["AI Title"]
                 new_dictionary['Section #'] = instance['Section Number']
                 new_dictionary['Section Title'] = instance['Section Title']
                 new_dictionary['Search Terms'] = ','.join(instance['Search terms'])
