@@ -30,7 +30,7 @@ update_status = False
 # Generate Excel file based on the query
 def generate_response(query, files):
     start_time = time.time()
-    # output_str = searching_endpoint(query)
+    output_str = searching_endpoint(query)
     output_dict = search_files(files, json_path='processed.json', search_terms=query)
     excel_file_path = "output.xlsx"
     OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
@@ -199,6 +199,20 @@ def update():
     except Exception as e:
         app.logger.error(f"/update: Error in loading file - {e}")
         abort(500)
+
+@app.route("/search/info")
+def search_info():
+    app.logger.info(f"/search/info: received a request")
+    output = "searching file 3 of xxxx.pdf"
+
+    app.logger.info(f"/search: finished scrapping and return response")
+    response = app.response_class(
+        response=json.dumps({"data": output}),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
+
 @app.route("/search/o3", methods=["POST"])
 def search_o3():
     try:
@@ -218,8 +232,9 @@ def search_o3():
             
             output: the excel content (or if you want me to handle this, you can provide me the data)
             """
-            response = gen_output(file_list)   # temp gen output objective 3
-            response.headers["Content-Disposition"] = f"attachment; filename=output.xlsx"
+            response = "test"
+            # response = gen_output(file_list)   # temp gen output objective 3
+            response.headers["Content-Disposition"] = f"attachment; filename=output_o3.xlsx"
             response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
             return response
