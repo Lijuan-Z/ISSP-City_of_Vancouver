@@ -39,7 +39,7 @@ def api_connect():
     return hugchat.ChatBot(cookies=cookies.get_dict())  # or cookie_path="usercookies/<email>.json"
 
 
-def AI_process(input, use_context):
+def AI_process(input, use_context,chatbot,building_keywords,FSR_keywords):
     max_retry = 3
     retry_count = 0
     while retry_count < max_retry:
@@ -128,11 +128,16 @@ def get_date_and_title(text):
     footer = text.split('\n')[0]
     title_line = text.split('\n')[2]
     title = title_line[:len(title_line) // 2]
-    last_amended = footer.replace("City of Vancouver ", "")
+    parts = footer.split("City of Vancouver ", 1)  
+    title = parts[0].strip() if parts[0].strip() else title
+    if len(parts) > 1:
+        last_amended = parts[1].strip()
+    else:
+        last_amended = footer.replace("City of Vancouver ", "")
     return title, last_amended
 
 
-def search_pdf(filename):
+def search_pdf(filename,chatbot,building_keywords,FSR_keywords):
     with open(filename, 'rb') as pdf_file:
         print('=' * 60)
         print('filename:', filename)
@@ -164,7 +169,7 @@ def search_pdf(filename):
             if page_num >= start_page and page_num <= end_page:
                 content += page_text
 
-        AI_result = AI_process(content, use_context)
+        AI_result = AI_process(content, use_context,chatbot,building_keywords,FSR_keywords)
         file_info_dicts = {'Zoning District': zoning_district, 'Last Amended': last_amended}
         if AI_result:
             # Iterate through each dictionary in the array
@@ -174,9 +179,11 @@ def search_pdf(filename):
 
             # Print the updated array of dictionaries
             print(AI_result)
+            return AI_result
         else:
             print('No valid AI output for file: ',filename)
-    return AI_result
+            return [file_info_dicts]
+    
 
 def save_to_json(temp_json_file,data):
     with open(temp_json_file, 'a') as json_file:
@@ -186,7 +193,8 @@ def save_to_json(temp_json_file,data):
 
 
 def get_file_url(file_name, data_dict):
-    filename_key = file_name[:-4]
+    # filename_key = file_name[:-4]
+    filename_key = file_name
     if filename_key in data_dict:
         details = data_dict[filename_key]
         doc_url = details["url"]
@@ -195,9 +203,7 @@ def get_file_url(file_name, data_dict):
         print(f"Filename '{filename_key}.pdf' not found in the JSON data.")
     return doc_url
 
-
-if __name__ == '__main__':
-
+def enter_obj3(file_list):
     folder_path = 'test_pdfs'
     chatbot = api_connect()
 
@@ -250,43 +256,50 @@ if __name__ == '__main__':
     with open(temp_json_file, 'w') as json_file:
         pass
 
-    for root, dirs, files in os.walk(folder_path):
-        for file_name in files:
-            if file_name.endswith('.pdf'):
-                full_file_name = os.path.join(root, file_name)
-                url = get_file_url(file_name, data_dict)
+    for file_name in file_list:
+        full_file_name = os.path.join('../downloaded_pdfs', file_name + '.pdf')
+        url = get_file_url(file_name, data_dict)
 
-                result = search_pdf(full_file_name)
-                all_result = []
-                for row_dict in result:
-                    # Fill in the rows of the DataFrame
-                    row_data = {}
-                    for term in all_terms:
-                        if term in row_dict:
-                            row_data[term] = row_dict[term]
-                        elif term == 'URL':
-                            row_data[term] = url
-                        elif term == 'Date of Extraction':
-                            row_data[term] = formatted_date
-                        else:
-                            row_data[term] = ''
-                    all_result.append(row_data)
-                    # output_obj3.append(row_data)
-                save_to_json(temp_json_file,all_result)
+        result = search_pdf(full_file_name, chatbot, building_keywords, FSR_keywords)
+        all_result = []
+        for row_dict in result:
+            # Fill in the rows of the DataFrame
+            row_data = {}
+            for term in all_terms:
+                if term in row_dict:
+                    row_data[term] = row_dict[term]
+                elif term == 'URL':
+                    row_data[term] = url
+                elif term == 'Date of Extraction':
+                    row_data[term] = formatted_date
+                else:
+                    row_data[term] = ''
+            all_result.append(row_data)
+            # output_obj3.append(row_data)
+        save_to_json(temp_json_file, all_result)
 
+    excel_file_name = 'output_obj3.xlsx'
     with open(temp_json_file, 'r') as json_file:
         data = [json.loads(line) for line in json_file]
     # Create a new Excel file if it doesn't exist
     try:
         wb = Workbook()
-        wb.save("test_obj3.xlsx")
+        wb.save(excel_file_name)
     except Exception as e:
         print(f"An error occurred while creating the Excel file: {e}")
-    with ExcelWriter("test_obj3.xlsx", mode="a", engine="openpyxl", if_sheet_exists="overlay", ) as writer:
-        df.to_excel(writer, sheet_name="Sheet1", index=False)
+    with ExcelWriter(excel_file_name, mode="a", engine="openpyxl", if_sheet_exists="overlay", ) as writer:
+        df.to_excel(writer, sheet_name="Sheet", index=False)
         df = pd.DataFrame(data)
-        df.to_excel(writer, sheet_name="Sheet1", index=False)
+        df.to_excel(writer, sheet_name="Sheet", index=False)
 
+    with open(excel_file_name, 'rb') as file:
+        file_content = file.read()
+    return file_content
+
+
+if __name__ == '__main__':
+    file_list = ["zoning-by-law-district-schedule-fc-1", "zoning-by-law-district-schedule-r1-1"]
+    output = enter_obj3(file_list)
     print("end!")
 
 
