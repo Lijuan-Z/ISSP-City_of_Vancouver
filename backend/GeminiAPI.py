@@ -127,11 +127,20 @@ class GeminiAPI():
         for key, instance_group in instances_search.items():
             for instance in instance_group:
                 query = f"Prompt: {prompt}\n References :{instance}"
+                retries = 0
+                response = ""
+                while retries < 5:
+                    try:
+                        response = model.generate_content(
+                            contents=query
+                        )
+                        break
+                    except:
+                        retries += 1
+                        print(f"Error getting response from api call - trial {retries}")
 
-                response = model.generate_content(
-                    contents=query
-                )
                 response = self.clear_json_response(response.text)
+
                 print("\n\n")
                 print(response)
                 print(key)
@@ -145,7 +154,7 @@ class GeminiAPI():
 
     def add_response_to_search_results(self, search_results,response, file_name):
         #turn the response into an actual dictionary
-        # response = json.loads(response)
+
         for key, value in response.items():
             if key.startswith("Amendment"):
                 index = int(key.split('ment')[1])
@@ -157,24 +166,55 @@ class GeminiAPI():
 
 
     def clear_json_response(self, json_response):
-        print(json_response)
         if json_response[3:7] == "json":
             json_response = json_response[7:-3]
         print("\n")
-        print(json_response)
+        print(f"First output: {json_response}")
         json_response = json.dumps(json_response)
+        counter = 0
+        output = ""
+        while not isinstance(output, dict):    # use this for real case
+            try:
+                output = json.loads(json_response)
+                if not isinstance(output, dict):
+                    output = json.loads(output)
+                if isinstance(output, dict):
+                    break
+            except Exception as e:
+                print(e)
+                char_error = json_response[e.pos - 1]
+                char_error_minus2 = json_response[e.pos - 2]
+                char_section = json_response[e.pos-10:e.pos+10]
+                print(f"char before error {char_error}")
+                print(f"char section {char_section}")
+                trackback = 1
+                while json_response[e.pos - trackback] == " ":
+                    print(f"current trackback char: {json_response[e.pos - trackback]}")
+                    trackback += 1
+                if json_response[e.pos - trackback] == ",":
+                    json_response = json_response[0:e.pos - 1] + '",' + json_response[e.pos:]
+                    print(json_response)
+                elif json_response[e.pos - trackback] == "\"":
+                    json_response = json_response[0:e.pos - 1] + '\'' + json_response[e.pos + 1:]
+                else:
+                    print("other error, keep adding until all case fixed")
+                    exit()
+            counter += 1  # only for stopping infinity loop
+            print(f"counter: {counter}")
+        print(output)
+        print(f"output type: {type(output)}")
+
+
         # actual_dict = json_response
         # pattern = r'(".*?\'\s*[,}])|(\s*[,{]\s*\'[^"\'{}]+"\s*[,}])'
         # pattern = r'(".*?\'[,}])|(\'.*?"[,}])'
-        pattern = r',\s*\"(Amendment\d+|Rationale\d+)\":'
-        corrected_dict_str = re.sub(pattern, GeminiAPI.correct_quotes, json_response)
-        actual_dict = ast.literal_eval(corrected_dict_str)
+        # pattern = r',\s*\"(Amendment\d+|Rationale\d+)\":'
+        # corrected_dict_str = re.sub(pattern, GeminiAPI.correct_quotes, json_response)
+        actual_dict = output
         print(actual_dict)
-        print(type(actual_dict))
+        # print(f"Output type after ast literal_eval: {type(actual_dict)}")
         if not isinstance(actual_dict, dict):
             actual_dict = json.loads(actual_dict)
-            # actual_dict = json.loads(actual_dict)
-        print(type(actual_dict))
 
         return actual_dict
 

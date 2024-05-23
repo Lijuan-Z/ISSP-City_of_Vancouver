@@ -22,7 +22,7 @@ def write_to_json(data, output_file):
         print(f"Error writing to JSON file '{output_file}': {e}")
 
 
-def search(file_to_search, json_path, search_terms=None):
+def search_files(file_to_search, json_path, search_terms=None):
     nested_metadata_dict = {}
     json_data = load_json(json_path)
     chatbot = api_connect()
