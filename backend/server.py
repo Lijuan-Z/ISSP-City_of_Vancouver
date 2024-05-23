@@ -1,7 +1,7 @@
 import time
 from search_term import searching_endpoint
 from search import search_files
-from obj3 import gen_output
+from obj3_v2 import enter_obj3
 import scrape
 from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
 from flask import Flask, request, make_response, render_template, abort
@@ -213,15 +213,16 @@ def search_info():
     )
     return response
 
-@app.route("/search/o3", methods=["POST"])
+# @app.route("/search/o3", methods=["POST"])
+@app.route("/search/o3")
 def search_o3():
     try:
-        file_data = request.json
+        # file_data = request.json
         app.logger.info(f'/search/o3: received a request')
 
         # This is my function to filter the restricted list of files for objective 3
-        file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
-
+        # file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
+        file_list = ["zoning-by-law-district-schedule-fc-1", "zoning-by-law-district-schedule-r1-1"]
         if len(file_list) != 0:
             print(file_list)
             app.logger.info(f'/search/o3: is going to search {len(file_list)} files')
@@ -232,8 +233,10 @@ def search_o3():
             
             output: the excel content (or if you want me to handle this, you can provide me the data)
             """
-            response = "test"
-            # response = gen_output(file_list)   # temp gen output objective 3
+            # response = "test"
+            
+            obj3_data = enter_obj3(file_list)   # temp gen output objective 3
+            response = make_response(obj3_data)
             response.headers["Content-Disposition"] = f"attachment; filename=output_o3.xlsx"
             response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
