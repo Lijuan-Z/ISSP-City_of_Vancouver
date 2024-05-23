@@ -1,6 +1,6 @@
 import json
 import time
-from backend.search_term import api_connect
+from search_term import api_connect
 
 
 def load_json(json_path):
