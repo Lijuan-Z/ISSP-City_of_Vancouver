@@ -128,7 +128,12 @@ def get_date_and_title(text):
     footer = text.split('\n')[0]
     title_line = text.split('\n')[2]
     title = title_line[:len(title_line) // 2]
-    last_amended = footer.replace("City of Vancouver ", "")
+    parts = footer.split("City of Vancouver ", 1)  
+    title = parts[0].strip() if parts[0].strip() else title
+    if len(parts) > 1:
+        last_amended = parts[1].strip()
+    else:
+        last_amended = footer.replace("City of Vancouver ", "")
     return title, last_amended
 
 
@@ -174,9 +179,11 @@ def search_pdf(filename,chatbot,building_keywords,FSR_keywords):
 
             # Print the updated array of dictionaries
             print(AI_result)
+            return AI_result
         else:
             print('No valid AI output for file: ',filename)
-    return AI_result
+            return [file_info_dicts]
+    
 
 def save_to_json(temp_json_file,data):
     with open(temp_json_file, 'a') as json_file:
