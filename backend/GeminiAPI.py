@@ -6,6 +6,7 @@ import re
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import os
+from obj3_v2 import api_connect
 
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
@@ -84,22 +85,27 @@ class GeminiAPI():
                              'Follow the instructions of the prompt, for example'
                              '"Change mentions of window shape and size to "see window-by-law"". '
                              '-> Means change only if there is mention of shape and size of window.'
-                             'If no amendment is necessary, return "no amendment" in both fields.'
-                             'Return is in dictionary format: '
-                             '{"Amendment<reference number>": "Amendement suggestion", "Rationale<reference number>": "Rationale Suggestion"}.'
-                             'Ensure that every key and value end with a double quote and no other double quotes exist in the dictionary.'
-                             'Indicate removal by surrounding it with <remove></remove> symbol.'
-                             'Example: This is a text that contains <remove> part to be removed</remove>'
-                             'Indicate replaced text by surrounding it with <add></add> symbol'
-                             'Example: This is a text that contains <remove> part to be removed</remove> <add> part corrected </add>'
-                             'Ensure that the resulting amendment text is still coherent after removing and adding parts'
+                             'Return is in String: '
+                             'Amendment<reference number>: Amendement suggestion, Rationale<reference number>: Rationale Suggestion.'
+                             'If no amendment is required return both suggestions as "No Change"'
+                             'Only provide one amendment and one rationale per reference number'
+                             'Indicate removal by saying "Strike out <reference to be removed>'
+                             'Example: Strike out: This is a reference to be struck out'
+                             'Indicate substitution by saying "and substitute <reference to be included>"'
+                             'Example prompt:'
+                             '"Change mentions of window shape and size to "see window-by-law"'
+                             'Example reference content:'
+                             '{"0": "The windows can be up to 2 meters tall and the doors can be up to 3 meters tall"}'
+                             'Expected output:'
+                             'Amendment0: Strike out The windows can be up to 2 meters tall and substitute "See window by-law" '
+                             'Rationale0: Remove mentions of window shape and size and ensure alignment to window by-law'
                              )
         genai.configure(api_key=GOOGLE_API_KEY)
         model = genai.GenerativeModel(self.model,
                                       system_instruction=system_definition
                                       )
 
-        data = search_results
+        data = self.get_sections_using_hugface(search_results)
         max_reference_input = 3
 
         instances_search = {}
@@ -125,76 +131,150 @@ class GeminiAPI():
         timeout = 60
         instance_count = 0
         for key, instance_group in instances_search.items():
+            print(f"filename {key}")
+            print(f"instance_group: {instance_group}")
             for instance in instance_group:
-                query = f"Prompt: {prompt}\n References :{instance}"
-
-                response = model.generate_content(
-                    contents=query
-                )
-                response = self.clear_json_response(response.text)
-                print("\n\n")
-                print(response)
-                print(key)
-                data = self.add_response_to_search_results(data, response, key)
+                print(f"instance: {instance}")
                 instance_count += 1
+                query = f"Prompt: {prompt}\n References :{instance}"
+                retries = 0
+                response = ""
+                response_failed = False
+                while retries < 6:
+                    try:
+                        response = model.generate_content(
+                            contents=query
+                        )
+                        break
+                    except:
+                        retries += 1
+                        print(f"Error getting response from api call - trial {retries}")
+                        if retries == 6:
+                            response_failed = True
+                            break
+                        time.sleep(2)
                 if instance_count % 10 == 0:
                     print(f"time out number: {instance_count/10}")
                     time.sleep(timeout)
 
+                if not response_failed:
+                    print(response.text)
+
+                    actual_dict = self.convert_to_dict(response.text)
+
+                    print(actual_dict)
+
+                    data = self.add_response_to_search_results(search_results, actual_dict, key)
+
+
         return data
+
+    def convert_to_dict(self, input_str):
+        result = {}
+        lines = input_str.strip().split('\n')
+
+        for line in lines:
+            line = line.strip()
+            if not line:  # Skip empty lines
+                continue
+
+            key, value = line.split(':', 1)
+            key = key.strip()
+            value = value.strip().replace('"', "'")
+
+            match = re.match(r'(Amendment|Rationale)(\d+)', key)
+            if match:
+                kind = match.group(1)
+                num = match.group(2)
+                if num not in result:
+                    result[num] = {}
+                result[num][kind] = value
+
+        return result
 
     def add_response_to_search_results(self, search_results,response, file_name):
         #turn the response into an actual dictionary
-        # response = json.loads(response)
+
         for key, value in response.items():
-            if key.startswith("Amendment"):
-                index = int(key.split('ment')[1])
-                search_results[file_name][index]['Amendment'] = value
-                rationale_key = f"Rationale{index}"
-                search_results[file_name][index][rationale_key] = response.get(rationale_key)
+            for key2, value2 in value.items():
+                index = int(key)
+                print(key)
+                print(f"Search results for {file_name}: {search_results[file_name]}")
+                print(index)
+                try:
+                    search_results[file_name][index][key2] = value2
+                except IndexError:
+                    print(f"No index {index} found for {file_name}")
 
         return search_results
 
+    def get_sections_using_hugface(self, search_results, processed_file="processed_final.json"):
 
-    def clear_json_response(self, json_response):
-        print(json_response)
-        if json_response[3:7] == "json":
-            json_response = json_response[7:-3]
-        print("\n")
-        print(json_response)
-        json_response = json.dumps(json_response)
-        # actual_dict = json_response
-        # pattern = r'(".*?\'\s*[,}])|(\s*[,{]\s*\'[^"\'{}]+"\s*[,}])'
-        # pattern = r'(".*?\'[,}])|(\'.*?"[,}])'
-        pattern = r',\s*\"(Amendment\d+|Rationale\d+)\":'
-        corrected_dict_str = re.sub(pattern, GeminiAPI.correct_quotes, json_response)
-        actual_dict = ast.literal_eval(corrected_dict_str)
-        print(actual_dict)
-        print(type(actual_dict))
-        if not isinstance(actual_dict, dict):
-            actual_dict = json.loads(actual_dict)
-            # actual_dict = json.loads(actual_dict)
-        print(type(actual_dict))
+        with open(processed_file, "r") as f:
+            processed_data = json.load(f)
 
-        return actual_dict
+        for key, value in search_results.items():
+            for result in value:
+                index = value.index(result)
+                reference = result["Reference"]
+                page_number = int(result["Page"])
+                page_content = processed_data[key]['Pages'][str(page_number)]
+                if page_number > 1:
+                    pre_page = processed_data[key]['Pages'][str(page_number-1)]
+                else:
+                    pre_page = ""
 
-    @staticmethod
-    def correct_quotes(match):
-        # text = match.group(0)
-        # if text.startswith('"') and text.endswith("'") and (text[-2] in ',}'):
-        #     return text[:-1] + '"'
-        # elif text.startswith("'") and text.endswith('"') and (text[0] in ',{'):
-        #     return '"' + text[1:]
-        # return text
-        return '", "' + match.group(1) + '":'
+                #Adjusted from Lisa's code
+                prompt = (f"Can you get the section number and section title of the following text?\n {reference} \n"
+                          f"Please provide the section number and title in the format: "
+                          f"Section Number: xxx. \n Section Title: xxx. If you can't return 'Not Found'. "
+                          f"here is the current page context: {page_content} . "
+                          f"And here is the pre page context: {pre_page}")
+                max_retry = 3
+                retry_count = 0
+                query_result = None
+                chatbot = api_connect()
+                section_number = "Unknown"
+                section_title = "Unknown"
+                should_continue = True
+                while retry_count < max_retry and query_result is None and should_continue:
+                    try:
+                        query_result = chatbot.chat(prompt)
+                        if query_result is not None:
+                            query_text = str(
+                                query_result)  # Extract text content from the Message object
+                            lines = query_text.split('\n')
+                            for line in lines:
+                                if line.startswith("Section Number: "):
+                                    section_number = line.split(":")[1].strip()
+                                elif line.startswith("Section Title: "):
+                                    section_title = line.split(":")[1].strip()
+                    except Exception as e:
+                        print(f"An error occurred while querying the chatbot: {e}")
+                        if "too many" in str(e).lower():
+                            print("Too many requests error reached, waiting 15 seconds...")
+                            time.sleep(15)
+                        retry_count += 1
+                    time.sleep(2)  # always wait after each query attempt
+                search_results[key][index]['Section Number'] = section_number
+                search_results[key][index]['Section Title'] = section_title
 
+        print("Section finding finished")
+        return search_results
 
 
 if __name__ == "__main__":
     gemini = GeminiAPI()
-    with open("reduced_output.json", "r") as file:
+    with open("output_test.json", "r") as file:
         data = json.load(file)
-    prompt = "If there is any mention to parking space on parking spots only, replace with 'See parking by-law'"
+    prompt = ("If there is any mention to parking space size or number parking spots only."
+              "Replace with 'See parking by-law'"
+              "Do not replace mentions of parking access or location."
+              "Do not replace if parking by-law is already mentioned")
+    # search_results = gemini.get_sections_using_hugface(data)
+
+    # print(search_results)
+
     test = gemini.get_amendment_and_rationale(data, prompt)
     with open("instances.json", "w") as file:
         json.dump(test, file)
