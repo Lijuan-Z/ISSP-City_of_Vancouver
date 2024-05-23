@@ -107,6 +107,6 @@ if __name__ == '__main__':
              'guidelines-cd-1-little-mountain', 'guidelines-fc-1-east-false-creek', 'odp-false-creek',
              'Part9_Schedule9A', 'policy-plan-vancouver', 'zoning-by-law-district-schedule-rm-1']
 
-    dictionary = search(file_to_search=files, json_path=json_file_path, search_terms=search_terms)
+    dictionary = search_files(file_to_search=files, json_path=json_file_path, search_terms=search_terms)
     output_file = 'output_test.json'
     write_to_json(dictionary, output_file)

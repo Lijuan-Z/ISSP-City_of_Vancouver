@@ -30,9 +30,14 @@ class OutputHandler:
                 new_dictionary["Land Use Document Type"] = instance["Land Use Document Type"]
                 new_dictionary["File name"] = key
                 new_dictionary['Title'] = instance["Title"]
-                new_dictionary['AI Title'] = instance["AI Title"]
-                new_dictionary['Section #'] = instance['Section Number']
-                new_dictionary['Section Title'] = instance['Section Title']
+                try:
+                    new_dictionary['AI Title'] = instance["AI Title"]
+                    new_dictionary['Section #'] = instance['Section Number']
+                    new_dictionary['Section Title'] = instance['Section Title']
+                except:
+                    new_dictionary['AI Title'] = "No AI Title"
+                    new_dictionary['Section #'] = "Unknown"
+                    new_dictionary['Section Title'] = "Unknown"
                 new_dictionary['Search Terms'] = ','.join(instance['Search terms'])
                 if instance['Link'] is not None and instance['Link'] != "No link":
                     new_dictionary['Link'] = f"{instance['Link']}#page={instance['Page']}"
@@ -40,8 +45,12 @@ class OutputHandler:
                     new_dictionary['Link'] = ""
                 new_dictionary['Page Number'] = instance['Page']
                 new_dictionary['Reference'] = instance['Reference']
-                new_dictionary['Proposed amendment'] = "In Development"
-                new_dictionary['Rationale'] = "In Development"
+                try:
+                    new_dictionary['Proposed amendment'] = instance['Amendment']
+                    new_dictionary['Rationale'] = instance['Rationale']
+                except:
+                    new_dictionary['Proposed amendment'] = "No Amendment"
+                    new_dictionary['Rationale'] = "No Rationale"
                 dict_list.append(new_dictionary)
 
         return dict_list
@@ -93,7 +102,7 @@ class OutputHandler:
             else:
                 new_dictionary['Link'] = ""
             new_dictionary['Reference'] = instance[7]
-            new_dictionary['Proposed amendement'] = "In Development"
+            new_dictionary['Proposed amendment'] = "In Development"
             new_dictionary['Rationale'] = "In Development"
             dict_list.append(new_dictionary)
 
@@ -132,8 +141,8 @@ class OutputHandler:
 
 
 if __name__ == "__main__":
-    test_data = "output_test.json"
-    output_file = 'test2.xlsx'
+    test_data = "instances.json"
+    output_file = 'test4.xlsx'
     with open(test_data, 'r') as f:
         data = json.load(f)
 

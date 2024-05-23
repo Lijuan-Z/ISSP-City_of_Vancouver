@@ -84,15 +84,20 @@ class GeminiAPI():
                              'Follow the instructions of the prompt, for example'
                              '"Change mentions of window shape and size to "see window-by-law"". '
                              '-> Means change only if there is mention of shape and size of window.'
-                             'If no amendment is necessary, return "no amendment" in both fields.'
-                             'Return is in dictionary format: '
-                             '{"Amendment<reference number>": "Amendement suggestion", "Rationale<reference number>": "Rationale Suggestion"}.'
-                             'Ensure that every key and value end with a double quote and no other double quotes exist in the dictionary.'
-                             'Indicate removal by surrounding it with <remove></remove> symbol.'
-                             'Example: This is a text that contains <remove> part to be removed</remove>'
-                             'Indicate replaced text by surrounding it with <add></add> symbol'
-                             'Example: This is a text that contains <remove> part to be removed</remove> <add> part corrected </add>'
-                             'Ensure that the resulting amendment text is still coherent after removing and adding parts'
+                             'Return is in String: '
+                             'Amendment<reference number>: Amendement suggestion, Rationale<reference number>: Rationale Suggestion.'
+                             'If no amendment is required return both suggestions as "No Change"'
+                             'Only provide one amendment and one rationale per reference number'
+                             'Indicate removal by saying "Strike out <reference to be removed>'
+                             'Example: Strike out: This is a reference to be struck out'
+                             'Indicate substitution by saying "and substitute <reference to be included>"'
+                             'Example prompt:'
+                             '"Change mentions of window shape and size to "see window-by-law"'
+                             'Example reference content:'
+                             '{"0": "The windows can be up to 2 meters tall and the doors can be up to 3 meters tall"}'
+                             'Expected output:'
+                             'Amendment0: Strike out The windows can be up to 2 meters tall and substitute "See window by-law" '
+                             'Rationale0: Remove mentions of window shape and size and ensure alignment to window by-law'
                              )
         genai.configure(api_key=GOOGLE_API_KEY)
         model = genai.GenerativeModel(self.model,
@@ -125,11 +130,16 @@ class GeminiAPI():
         timeout = 60
         instance_count = 0
         for key, instance_group in instances_search.items():
+            print(f"filename {key}")
+            print(f"instance_group: {instance_group}")
             for instance in instance_group:
+                print(f"instance: {instance}")
+                instance_count += 1
                 query = f"Prompt: {prompt}\n References :{instance}"
                 retries = 0
                 response = ""
-                while retries < 5:
+                response_failed = False
+                while retries < 6:
                     try:
                         response = model.generate_content(
                             contents=query
@@ -138,103 +148,74 @@ class GeminiAPI():
                     except:
                         retries += 1
                         print(f"Error getting response from api call - trial {retries}")
-
-                response = self.clear_json_response(response.text)
-
-                print("\n\n")
-                print(response)
-                print(key)
-                data = self.add_response_to_search_results(data, response, key)
-                instance_count += 1
+                        if retries == 6:
+                            response_failed = True
+                            break
+                        time.sleep(2)
                 if instance_count % 10 == 0:
                     print(f"time out number: {instance_count/10}")
                     time.sleep(timeout)
 
+                if not response_failed:
+                    print(response.text)
+
+                    actual_dict = self.convert_to_dict(response.text)
+
+                    print(actual_dict)
+
+                    data = self.add_response_to_search_results(search_results, actual_dict, key)
+
+
         return data
+
+    def convert_to_dict(self, input_str):
+        result = {}
+        lines = input_str.strip().split('\n')
+
+        for line in lines:
+            line = line.strip()
+            if not line:  # Skip empty lines
+                continue
+
+            key, value = line.split(':', 1)
+            key = key.strip()
+            value = value.strip().replace('"', "'")
+
+            match = re.match(r'(Amendment|Rationale)(\d+)', key)
+            if match:
+                kind = match.group(1)
+                num = match.group(2)
+                if num not in result:
+                    result[num] = {}
+                result[num][kind] = value
+
+        return result
 
     def add_response_to_search_results(self, search_results,response, file_name):
         #turn the response into an actual dictionary
 
         for key, value in response.items():
-            if key.startswith("Amendment"):
-                index = int(key.split('ment')[1])
-                search_results[file_name][index]['Amendment'] = value
-                rationale_key = f"Rationale{index}"
-                search_results[file_name][index][rationale_key] = response.get(rationale_key)
+            for key2, value2 in value.items():
+                index = int(key)
+                print(key)
+                print(f"Search results for {file_name}: {search_results[file_name]}")
+                print(index)
+                try:
+                    search_results[file_name][index][key2] = value2
+                except IndexError:
+                    print(f"No index {index} found for {file_name}")
 
         return search_results
 
 
-    def clear_json_response(self, json_response):
-        if json_response[3:7] == "json":
-            json_response = json_response[7:-3]
-        print("\n")
-        print(f"First output: {json_response}")
-        json_response = json.dumps(json_response)
-        counter = 0
-        output = ""
-        while not isinstance(output, dict):    # use this for real case
-            try:
-                output = json.loads(json_response)
-                if not isinstance(output, dict):
-                    output = json.loads(output)
-                if isinstance(output, dict):
-                    break
-            except Exception as e:
-                print(e)
-                char_error = json_response[e.pos - 1]
-                char_error_minus2 = json_response[e.pos - 2]
-                char_section = json_response[e.pos-10:e.pos+10]
-                print(f"char before error {char_error}")
-                print(f"char section {char_section}")
-                trackback = 1
-                while json_response[e.pos - trackback] == " ":
-                    print(f"current trackback char: {json_response[e.pos - trackback]}")
-                    trackback += 1
-                if json_response[e.pos - trackback] == ",":
-                    json_response = json_response[0:e.pos - 1] + '",' + json_response[e.pos:]
-                    print(json_response)
-                elif json_response[e.pos - trackback] == "\"":
-                    json_response = json_response[0:e.pos - 1] + '\'' + json_response[e.pos + 1:]
-                else:
-                    print("other error, keep adding until all case fixed")
-                    exit()
-            counter += 1  # only for stopping infinity loop
-            print(f"counter: {counter}")
-        print(output)
-        print(f"output type: {type(output)}")
-
-
-        # actual_dict = json_response
-        # pattern = r'(".*?\'\s*[,}])|(\s*[,{]\s*\'[^"\'{}]+"\s*[,}])'
-        # pattern = r'(".*?\'[,}])|(\'.*?"[,}])'
-        # pattern = r',\s*\"(Amendment\d+|Rationale\d+)\":'
-        # corrected_dict_str = re.sub(pattern, GeminiAPI.correct_quotes, json_response)
-        actual_dict = output
-        print(actual_dict)
-        # print(f"Output type after ast literal_eval: {type(actual_dict)}")
-        if not isinstance(actual_dict, dict):
-            actual_dict = json.loads(actual_dict)
-
-        return actual_dict
-
-    @staticmethod
-    def correct_quotes(match):
-        # text = match.group(0)
-        # if text.startswith('"') and text.endswith("'") and (text[-2] in ',}'):
-        #     return text[:-1] + '"'
-        # elif text.startswith("'") and text.endswith('"') and (text[0] in ',{'):
-        #     return '"' + text[1:]
-        # return text
-        return '", "' + match.group(1) + '":'
-
-
-
 if __name__ == "__main__":
     gemini = GeminiAPI()
-    with open("reduced_output.json", "r") as file:
+    with open("output_test.json", "r") as file:
         data = json.load(file)
-    prompt = "If there is any mention to parking space on parking spots only, replace with 'See parking by-law'"
+    prompt = ("If there is any mention to parking space size or number parking spots only."
+              "Replace with 'See parking by-law'"
+              "Do not replace mentions of parking access or location."
+              "Do not replace if parking by-law is already mentioned")
     test = gemini.get_amendment_and_rationale(data, prompt)
     with open("instances.json", "w") as file:
         json.dump(test, file)
