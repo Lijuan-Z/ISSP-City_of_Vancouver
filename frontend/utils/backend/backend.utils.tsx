@@ -1,5 +1,5 @@
-import {saveAs} from 'file-saver';
-import {FilterTagsType} from '@/components/FilterMenu/filter-menu';
+import { saveAs } from 'file-saver';
+import { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 
 export const searchKeywords = async (keywords: string[], filterTags: FilterTagsType) => {
     console.log(filterTags);
