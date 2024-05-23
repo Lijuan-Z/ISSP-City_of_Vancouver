@@ -11,13 +11,15 @@ import {
     TagsInput,
     TextInputProps, Tooltip,
     Notification,
-    useMantineTheme, Dialog,
+    useMantineTheme, Dialog, Checkbox, Group,
 } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch, IconRadioactive, IconRobot } from '@tabler/icons-react';
 import { rem } from 'polished';
+import { useDisclosure } from '@mantine/hooks';
 import FilterMenu, { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 import { searchKeywords } from '@/utils/backend/backend.utils';
 import { FilesContext } from '@/contexts/files.context';
+import Prompt from '@/components/Prompt/prompt';
 
 type InputPropsType = {
     keywords: string[]
@@ -81,6 +83,8 @@ export const InputWithButton = forwardRef<TextInputProps, InputPropsType>(({
 const SearchBar1 = () => {
     const [keywords, setKeywords] = useState<string[]>([]);
     const [filterTags, setFilterTags] = useState<string[]>(['All']);
+    const [openedTextBox, { toggle }] = useDisclosure(false);
+
     const [searchError, setSearchError] = useState('');
     const { getFilterTagsType } = useContext(FilesContext);
     const searchKeyWords = () => {
@@ -107,11 +111,19 @@ const SearchBar1 = () => {
                           setKeywords={setKeywords}
                         />
                     </Tooltip>
-                    <FilterMenu
-                      filterTags={filterTags}
-                      setFilterTags={setFilterTags}
-                        // keepFiltersConsistent={keepFilterTagsConsistent}
-                    />
+                    <Group>
+                        <FilterMenu
+                          filterTags={filterTags}
+                          setFilterTags={setFilterTags}
+                            // keepFiltersConsistent={keepFilterTagsConsistent}
+                        />
+                        <Checkbox
+                          labelPosition="left"
+                          icon={IconRobot}
+                          label="A.I"
+                          onClick={toggle} />
+                    </Group>
+                    <Prompt opened={openedTextBox} />
                     <Center pos="relative">
                         <LoadingOverlay
                           visible={false}
