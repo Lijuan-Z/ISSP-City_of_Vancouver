@@ -213,27 +213,18 @@ def search_info():
     )
     return response
 
-# @app.route("/search/o3", methods=["POST"])
-@app.route("/search/o3")
+@app.route("/search/o3", methods=["POST"])
 def search_o3():
     try:
-        # file_data = request.json
+        file_data = request.json
         app.logger.info(f'/search/o3: received a request')
 
         # This is my function to filter the restricted list of files for objective 3
-        # file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
-        file_list = ["zoning-by-law-district-schedule-fc-1", "zoning-by-law-district-schedule-r1-1"]
+        file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
+        # file_list = ["zoning-by-law-district-schedule-fc-1", "zoning-by-law-district-schedule-r1-1"]
         if len(file_list) != 0:
             print(file_list)
             app.logger.info(f'/search/o3: is going to search {len(file_list)} files')
-
-            """
-            input param: filelist - a list of files in array. For example 
-            ["zoning-by-law-district-schedule-fc-1", "zoning-by-law-district-schedule-r1-1"]
-            
-            output: the excel content (or if you want me to handle this, you can provide me the data)
-            """
-            # response = "test"
             
             obj3_data = enter_obj3(file_list)   # temp gen output objective 3
             response = make_response(obj3_data)
