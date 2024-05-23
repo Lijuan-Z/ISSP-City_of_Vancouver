@@ -1,6 +1,12 @@
 import json
 import time
-from search_term import api_connect
+import configparser
+# from search_term import api_connect
+from obj3_v2 import api_connect
+
+# config file for information management
+config = configparser.ConfigParser()
+config.read('development.ini')
 
 
 def load_json(json_path):
@@ -101,12 +107,12 @@ def search_files(file_to_search, json_path, search_terms=None):
 
 
 if __name__ == '__main__':
-    json_file_path = 'processed_final.json'
+    json_file_path = config.get('server', 'processed_json_file')
     search_terms = ['parking', 'lane']
     files = ['4837c', 'bulletin-floor-area-calculation-tracing-overlay', 'bulletin-ra-1-perimeter-landscaping', 'F001',
              'guidelines-cd-1-little-mountain', 'guidelines-fc-1-east-false-creek', 'odp-false-creek',
              'Part9_Schedule9A', 'policy-plan-vancouver', 'zoning-by-law-district-schedule-rm-1']
 
-    dictionary = search(file_to_search=files, json_path=json_file_path, search_terms=search_terms)
+    dictionary = search_terms(file_to_search=files, json_path=json_file_path, search_terms=search_terms)
     output_file = 'output_test.json'
     write_to_json(dictionary, output_file)
