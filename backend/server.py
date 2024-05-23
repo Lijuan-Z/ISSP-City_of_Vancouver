@@ -1,5 +1,5 @@
 import time
-from search_term import searching_endpoint
+# from search_term import searching_endpoint
 from search import search_files
 from obj3_v2 import enter_obj3
 import scrape
@@ -30,8 +30,9 @@ update_status = False
 # Generate Excel file based on the query
 def generate_response(query, files):
     start_time = time.time()
-    output_str = searching_endpoint(query)
-    output_dict = search_files(files, json_path='processed.json', search_terms=query)
+    # output_str = searching_endpoint(query)
+    # output_dict = search_files(files, json_path="processed_final.json", search_terms=query)
+    output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
     excel_file_path = "output.xlsx"
     OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
     end_time = time.time()
