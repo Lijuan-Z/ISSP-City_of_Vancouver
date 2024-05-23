@@ -6,6 +6,7 @@ import re
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import os
+from obj3_v2 import api_connect
 
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
@@ -207,6 +208,60 @@ class GeminiAPI():
 
         return search_results
 
+    def get_sections_using_hugface(self, search_results, processed_file="processed_final.json"):
+
+        with open(processed_file, "r") as f:
+            processed_data = json.load(f)
+
+        for key, value in search_results.items():
+            for result in value:
+                index = value.index(result)
+                reference = result["Reference"]
+                page_number = int(result["Page"])
+                page_content = processed_data[key]['Pages'][str(page_number)]
+                if page_number > 1:
+                    pre_page = processed_data[key]['Pages'][str(page_number-1)]
+                else:
+                    pre_page = ""
+
+                #Adjusted from Lisa's code
+                prompt = (f"Can you get the section number and section title of the following text?\n {reference} \n"
+                          f"Please provide the section number and title in the format: "
+                          f"Section Number: xxx. \n Section Title: xxx. If you can't return 'Not Found'. "
+                          f"here is the current page context: {page_content} . "
+                          f"And here is the pre page context: {pre_page}")
+                max_retry = 3
+                retry_count = 0
+                query_result = None
+                chatbot = api_connect()
+                section_number = "Unknown"
+                section_title = "Unknown"
+                should_continue = True
+                while retry_count < max_retry and query_result is None and should_continue:
+                    try:
+                        query_result = chatbot.chat(prompt)
+                        if query_result is not None:
+                            query_text = str(
+                                query_result)  # Extract text content from the Message object
+                            lines = query_text.split('\n')
+                            for line in lines:
+                                if line.startswith("Section Number: "):
+                                    section_number = line.split(":")[1].strip()
+                                elif line.startswith("Section Title: "):
+                                    section_title = line.split(":")[1].strip()
+                    except Exception as e:
+                        print(f"An error occurred while querying the chatbot: {e}")
+                        if "too many" in str(e).lower():
+                            print("Too many requests error reached, waiting 15 seconds...")
+                            time.sleep(15)
+                        retry_count += 1
+                    time.sleep(2)  # always wait after each query attempt
+                search_results[key][index]['Section Number'] = section_number
+                search_results[key][index]['Section Title'] = section_title
+
+
+        return search_results
+
 
 if __name__ == "__main__":
     gemini = GeminiAPI()
@@ -216,6 +271,10 @@ if __name__ == "__main__":
               "Replace with 'See parking by-law'"
               "Do not replace mentions of parking access or location."
               "Do not replace if parking by-law is already mentioned")
-    test = gemini.get_amendment_and_rationale(data, prompt)
-    with open("instances.json", "w") as file:
-        json.dump(test, file)
+    search_results = gemini.get_sections_using_hugface(data)
+
+    print(search_results)
+
+    # test = gemini.get_amendment_and_rationale(data, prompt)
+    # with open("instances.json", "w") as file:
+    #     json.dump(test, file)
