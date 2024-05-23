@@ -105,7 +105,7 @@ class GeminiAPI():
                                       system_instruction=system_definition
                                       )
 
-        data = search_results
+        data = self.get_sections_using_hugface(search_results)
         max_reference_input = 3
 
         instances_search = {}
@@ -259,7 +259,7 @@ class GeminiAPI():
                 search_results[key][index]['Section Number'] = section_number
                 search_results[key][index]['Section Title'] = section_title
 
-
+        print("Section finding finished")
         return search_results
 
 
@@ -271,10 +271,10 @@ if __name__ == "__main__":
               "Replace with 'See parking by-law'"
               "Do not replace mentions of parking access or location."
               "Do not replace if parking by-law is already mentioned")
-    search_results = gemini.get_sections_using_hugface(data)
+    # search_results = gemini.get_sections_using_hugface(data)
 
-    print(search_results)
+    # print(search_results)
 
-    # test = gemini.get_amendment_and_rationale(data, prompt)
-    # with open("instances.json", "w") as file:
-    #     json.dump(test, file)
+    test = gemini.get_amendment_and_rationale(data, prompt)
+    with open("instances.json", "w") as file:
+        json.dump(test, file)

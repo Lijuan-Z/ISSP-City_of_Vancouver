@@ -142,7 +142,7 @@ class OutputHandler:
 
 if __name__ == "__main__":
     test_data = "instances.json"
-    output_file = 'test4.xlsx'
+    output_file = 'test5.xlsx'
     with open(test_data, 'r') as f:
         data = json.load(f)
 
