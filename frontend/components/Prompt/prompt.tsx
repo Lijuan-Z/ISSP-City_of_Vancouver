@@ -1,5 +1,5 @@
 import { Accordion, Box, Button, Collapse, Group, Text, Textarea } from '@mantine/core';
-import React from 'react';
+import React, {ChangeEvent, Dispatch, SetStateAction} from 'react';
 import { useDisclosure } from '@mantine/hooks';
 
 const groceries = [
@@ -13,14 +13,18 @@ const groceries = [
 
 type PromptPropsType = {
     opened: boolean
+    text: string
+    setText: (value: string | ChangeEvent<any> | null | undefined) => void
 };
-const Prompt = ({ opened }: PromptPropsType) => (
+const Prompt = ({ opened, text, setText }: PromptPropsType) => (
 
     <Collapse in={opened}>
         <Textarea
           placeholder="A.I. Prompt"
           autosize
           minRows={2}
+          value={text}
+          onChange={setText}
         />
     </Collapse>
 

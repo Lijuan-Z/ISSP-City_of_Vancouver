@@ -15,7 +15,7 @@ import {
 } from '@mantine/core';
 import { IconSearch, IconRadioactive, IconRobot } from '@tabler/icons-react';
 import { rem } from 'polished';
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure, useInputState } from '@mantine/hooks';
 import FilterMenu, { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 import { searchKeywords } from '@/utils/backend/backend.utils';
 import { FilesContext } from '@/contexts/files.context';
@@ -84,8 +84,9 @@ const SearchBar1 = () => {
     const [keywords, setKeywords] = useState<string[]>([]);
     const [filterTags, setFilterTags] = useState<string[]>(['All']);
     const [openedTextBox, { toggle }] = useDisclosure(false);
-
+    const [prompt, setPrompt] = useInputState('');
     const [searchError, setSearchError] = useState('');
+    const enableSearch = openedTextBox ? prompt.length !== 0 && keywords.length !== 0 && filterTags.length !== 0 : keywords.length !== 0 && filterTags.length !== 0;
     const { getFilterTagsType } = useContext(FilesContext);
     const searchKeyWords = () => {
         console.log(keywords, filterTags);
@@ -123,7 +124,7 @@ const SearchBar1 = () => {
                           label="A.I"
                           onClick={toggle} />
                     </Group>
-                    <Prompt opened={openedTextBox} />
+                    <Prompt text={prompt} setText={setPrompt} opened={openedTextBox} />
                     <Center pos="relative">
                         <LoadingOverlay
                           visible={false}
@@ -133,11 +134,11 @@ const SearchBar1 = () => {
                                 blur: 2,
                             }} />
                         <Tooltip
-                          label={keywords.length === 0 ? 'Need at least one Keyword and Tag' : 'Search Keyword(s)'}>
+                          label={!enableSearch ? 'Need at least one Keyword and Tag' : 'Search Keyword(s)'}>
                             <Button
                               variant="filled"
                               radius="xs"
-                              disabled={keywords.length === 0 || filterTags.length === 0}
+                              disabled={!enableSearch}
                               onClick={searchKeyWords}
                               style={{
                                     width: '100px',
