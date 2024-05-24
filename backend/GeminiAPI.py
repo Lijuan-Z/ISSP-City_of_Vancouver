@@ -5,10 +5,10 @@ import re
 import google.generativeai as genai
 import os
 from obj3_v2 import api_connect
+from config import GOOGLE_API_KEY
+# GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
-GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
-
-
+gemini_update = ""
 
 class GeminiAPI():
 
