@@ -24,6 +24,9 @@ SECTION3_2 = ''
 SECTION4 = 'GENERAL REGULATIONS'
 
 
+o3_message = ""
+
+
 def is_contain_keyword(keyword, text):
     if keyword.isupper():
         return re.search(keyword, text)
@@ -40,6 +43,7 @@ def api_connect():
 
 
 def AI_process(input, use_context,chatbot,building_keywords,FSR_keywords):
+    global o3_message
     max_retry = 3
     retry_count = 0
     while retry_count < max_retry:
@@ -68,6 +72,7 @@ def AI_process(input, use_context,chatbot,building_keywords,FSR_keywords):
                              "where 'Height Max(m)' is the the max value of 'Height Max(m)' and 'maximum building height'")
             building_result = chatbot.chat(format_prompt)
             print(building_result)
+            o3_message = f"Retrieved basic building information (step 2 of 4)"
 
             # get FSR
             # prompt = (("Extract the value of those terms for each 'Use'."
@@ -100,6 +105,7 @@ def AI_process(input, use_context,chatbot,building_keywords,FSR_keywords):
                       ".The Use cases are: " + str(use_case) + ";The input context is:" + input)
             fsr_result = chatbot.chat(prompt)
             print(fsr_result)
+            o3_message = f"Retrieved FSR information (step 3 of 4)"
 
             format_prompt = ("combine " + str(building_result) + "and" + str(fsr_result)
                              + "together based on 'Use'. "
@@ -115,6 +121,7 @@ def AI_process(input, use_context,chatbot,building_keywords,FSR_keywords):
             end_index = output_str.rfind("]") + 1
             array_of_dicts_str = output_str[start_index:end_index]
             print(array_of_dicts_str)
+            o3_message = f"Aggregate information for ouput (step 4 of 4)"
             array_of_dicts = eval(array_of_dicts_str)
             return array_of_dicts
         except Exception as e:
@@ -138,9 +145,11 @@ def get_date_and_title(text):
 
 
 def search_pdf(filename,chatbot,building_keywords,FSR_keywords):
+    global o3_message
     with open(filename, 'rb') as pdf_file:
         print('=' * 60)
         print('filename:', filename)
+        o3_message = f"Starting with fie {filename}"
         pdf_reader = PyPDF2.PdfReader(pdf_file)
 
         total_page_number = len(pdf_reader.pages)
@@ -154,6 +163,7 @@ def search_pdf(filename,chatbot,building_keywords,FSR_keywords):
             if page_num == 0:
                 zoning_district, last_amended = get_date_and_title(page_text)
                 print(zoning_district, last_amended)
+                o3_message = f"Retrieved document date and title (step 1 of 4)"
 
             if is_contain_keyword(SECTION1_2, page_text):
                 index = page_text.index(SECTION1_2)
@@ -182,6 +192,7 @@ def search_pdf(filename,chatbot,building_keywords,FSR_keywords):
             return AI_result
         else:
             print('No valid AI output for file: ',filename)
+            o3_message = f"Error: AI output is invalid for {filename}."
             return [file_info_dicts]
     
 
