@@ -2,7 +2,7 @@ import time, datetime, pytz
 # from search_term import searching_endpoint
 from search import search_files
 # from GeminiAPI import GeminiAPI
-import GeminiAPI
+import Obj2AI
 import process_to_JSON
 from obj3_v2 import enter_obj3
 import scrape
@@ -26,7 +26,7 @@ config.read('development.ini')
 app = Flask(__name__)
 # app._static_folder = "_next/static"
 CORS(app)
-gemini = GeminiAPI.GeminiAPI()
+gemini = GeminiAPI.Obj2AI()
 update_status = False
 
 

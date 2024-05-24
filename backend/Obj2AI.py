@@ -10,7 +10,7 @@ from config import GOOGLE_API_KEY
 
 gemini_update = ""
 
-class GeminiAPI():
+class Obj2AI():
 
     def __init__(self):
         self.model = "gemini-1.5-flash-latest"
@@ -280,7 +280,7 @@ class GeminiAPI():
 
 
 if __name__ == "__main__":
-    gemini = GeminiAPI()
+    gemini = Obj2AI()
     with open("output_test.json", "r") as file:
         data = json.load(file)
     prompt = ("If there is any mention to parking space size or number parking spots only."

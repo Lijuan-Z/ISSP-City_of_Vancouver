@@ -3,7 +3,7 @@ import json
 import os
 import time
 import easyocr
-from GeminiAPI import GeminiAPI
+from Obj2AI import Obj2AI
 import configparser
 
 config = configparser.ConfigParser()
@@ -77,7 +77,7 @@ class ProcessToJSON:
             json.dump(nested_metadata_dict, json_file, indent=4)
 
         #Add the AI titles using gemini
-        gemAI = GeminiAPI()
+        gemAI = Obj2AI()
         nested_metadata_dict = gemAI.find_title(URL_info, nested_metadata_dict)
 
         with open(config.get('server', 'processed_json_file'), "w") as processed_file:
