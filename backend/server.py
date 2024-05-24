@@ -25,22 +25,21 @@ config.read('development.ini')
 app = Flask(__name__)
 # app._static_folder = "_next/static"
 CORS(app)
-
+gemini = GeminiAPI()
 update_status = False
 
 
 # Generate Excel file based on the query
-def generate_response(query, files):
+def generate_response(query, files, enable_ai, prompt):
     start_time = time.time()
     excel_file_path = "output.xlsx"
     # output_str = searching_endpoint(query)
     # output_dict = search_files(files, json_path="processed_final.json", search_terms=query)
     try:
-        gemini = GeminiAPI()
         output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
-        # if withAI:
-        # output_dict = gemini.get_amendment_and_rationale(output_dict, "Replace with 'See parking by-law")
-        # output_dict = gemini.get_amendment_and_rationale(output_dict, prompt)
+        if enable_ai is True:
+            # For objective 2 - enable Gemini - API AI
+            output_dict = gemini.get_amendment_and_rationale(output_dict, prompt)
         OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
     except Exception as e:
         msg = f"There is an error when searching from AI. code: {e}"
@@ -262,22 +261,25 @@ def search_o3():
 
 @app.route("/search", methods=["POST"])
 def search():
-    try:
+    # try:
         file_data = request.json
         app.logger.info(f'/search: received a request of {file_data["data"]["search-terms"]}')
+
+        if file_data["data"]["ai"] is True:
+            app.logger.info(f'/search: AI enabled. With prompt {file_data["data"]["prompt"]}')
 
         file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
 
         if len(file_list) != 0:
             print(file_list)
             app.logger.info(f'/search: is going to search {len(file_list)} files')
-            return generate_response(file_data["data"]["search-terms"], file_list)
+            return generate_response(file_data["data"]["search-terms"], file_list, file_data["data"]["ai"], file_data["data"]["prompt"])
         else:
            app.logger.error(f"/search: receive an empty query and returning status code 404")
            abort(404)
-    except Exception as e:
-        app.logger.error(f"/search: Error in loading file - {e}")
-        abort(500)
+    # except Exception as e:
+    #     app.logger.error(f"/search: Error in loading file - {e}")
+    #     abort(500)
 
 @app.route("/data")
 def data():
