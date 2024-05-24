@@ -1,4 +1,4 @@
-import time
+import time, datetime, pytz
 # from search_term import searching_endpoint
 from search import search_files
 # from GeminiAPI import GeminiAPI
@@ -95,7 +95,11 @@ def scrap_file_and_data():
         thread_event.clear()
 
 def scrape_status():
+
         total_file_to_update = 590
+        if scrape.total_files > total_file_to_update:
+            total_file_to_update = scrape.total_files
+
         percentage_updated = float(scrape.file_counter / total_file_to_update * 100)
 
         status_message = "Idle"
@@ -105,7 +109,7 @@ def scrape_status():
         return {
             "status": status_message,
             "file_updated": scrape.file_counter,
-            "last_updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+            "last_updated": datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S"),
             "total_updated_files": total_file_to_update,
             "percentage_updated": f"{percentage_updated:.2f}"
         }
@@ -197,7 +201,7 @@ def update():
 
             output = {
                 "status": "updated",
-                "finished-time": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+                "finished-time": datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S"),
                 "duration": f"{elapsed_time:.2f}s"
             }
 
@@ -215,7 +219,7 @@ def update():
 @app.route("/search/info")
 def search_info():
     app.logger.info(f"/search/info: received a request")
-    output = {"search": process_to_JSON.process_update,
+    output = {"ocr": process_to_JSON.process_update,
               "ai": GeminiAPI.gemini_update}
 
     app.logger.info(f"/search: finished scrapping and return response")
