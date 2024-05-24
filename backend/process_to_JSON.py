@@ -4,15 +4,19 @@ import os
 import time
 import easyocr
 from GeminiAPI import GeminiAPI
+import configparser
 
+config = configparser.ConfigParser()
+config.read('development.ini')
 
+process_update = ""
 
 class ProcessToJSON:
     def __init__(self, folder_path):
         self.folder_path = folder_path
         # Load current JSON
         try:
-            with open("processed.json", "r") as processed_file:
+            with open(config.get('server', 'processed_json_file'), "r") as processed_file:
                 self.current_data = json.load(processed_file)
         except FileNotFoundError:
             self.current_data = {}

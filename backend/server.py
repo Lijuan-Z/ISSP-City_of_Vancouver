@@ -1,8 +1,9 @@
 import time
 # from search_term import searching_endpoint
 from search import search_files
+# from GeminiAPI import GeminiAPI
+import GeminiAPI
 import process_to_JSON
-from GeminiAPI import GeminiAPI
 from obj3_v2 import enter_obj3
 import scrape
 from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
@@ -25,7 +26,7 @@ config.read('development.ini')
 app = Flask(__name__)
 # app._static_folder = "_next/static"
 CORS(app)
-gemini = GeminiAPI()
+gemini = GeminiAPI.GeminiAPI()
 update_status = False
 
 
@@ -34,7 +35,6 @@ def generate_response(query, files, enable_ai, prompt):
     start_time = time.time()
     excel_file_path = "output.xlsx"
     # output_str = searching_endpoint(query)
-    # output_dict = search_files(files, json_path="processed_final.json", search_terms=query)
     try:
         output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
         if enable_ai is True:
@@ -42,7 +42,7 @@ def generate_response(query, files, enable_ai, prompt):
             output_dict = gemini.get_amendment_and_rationale(output_dict, prompt)
         OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
     except Exception as e:
-        msg = f"There is an error when searching from AI. code: {e}"
+        msg = f"There is either no information for output or an error when searching {query}. code: {e}"
         print(msg)
         output_excel = pd.DataFrame({'Error': {"message": msg}})
         output_excel.to_excel(excel_file_path)
@@ -215,7 +215,8 @@ def update():
 @app.route("/search/info")
 def search_info():
     app.logger.info(f"/search/info: received a request")
-    output = "searching file 3 of xxxx.pdf"
+    output = {"search": process_to_JSON.process_update,
+              "ai": GeminiAPI.gemini_update}
 
     app.logger.info(f"/search: finished scrapping and return response")
     response = app.response_class(
