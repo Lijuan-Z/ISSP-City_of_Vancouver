@@ -11,13 +11,15 @@ import {
     TagsInput,
     TextInputProps, Tooltip,
     Notification,
-    useMantineTheme, Dialog,
+    useMantineTheme, Dialog, Checkbox, Group,
 } from '@mantine/core';
-import { IconSearch } from '@tabler/icons-react';
+import { IconSearch, IconRadioactive, IconRobot } from '@tabler/icons-react';
 import { rem } from 'polished';
+import { useDisclosure, useInputState } from '@mantine/hooks';
 import FilterMenu, { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 import { searchKeywords } from '@/utils/backend/backend.utils';
 import { FilesContext } from '@/contexts/files.context';
+import Prompt from '@/components/Prompt/prompt';
 
 type InputPropsType = {
     keywords: string[]
@@ -81,7 +83,10 @@ export const InputWithButton = forwardRef<TextInputProps, InputPropsType>(({
 const SearchBar1 = () => {
     const [keywords, setKeywords] = useState<string[]>([]);
     const [filterTags, setFilterTags] = useState<string[]>(['All']);
+    const [openedTextBox, { toggle }] = useDisclosure(false);
+    const [prompt, setPrompt] = useInputState('');
     const [searchError, setSearchError] = useState('');
+    const enableSearch = openedTextBox ? prompt.length !== 0 && keywords.length !== 0 && filterTags.length !== 0 : keywords.length !== 0 && filterTags.length !== 0;
     const { getFilterTagsType } = useContext(FilesContext);
     const searchKeyWords = () => {
         console.log(keywords, filterTags);
@@ -107,11 +112,19 @@ const SearchBar1 = () => {
                           setKeywords={setKeywords}
                         />
                     </Tooltip>
-                    <FilterMenu
-                      filterTags={filterTags}
-                      setFilterTags={setFilterTags}
-                        // keepFiltersConsistent={keepFilterTagsConsistent}
-                    />
+                    <Group>
+                        <FilterMenu
+                          filterTags={filterTags}
+                          setFilterTags={setFilterTags}
+                            // keepFiltersConsistent={keepFilterTagsConsistent}
+                        />
+                        <Checkbox
+                          labelPosition="left"
+                          icon={IconRobot}
+                          label="A.I"
+                          onClick={toggle} />
+                    </Group>
+                    <Prompt text={prompt} setText={setPrompt} opened={openedTextBox} />
                     <Center pos="relative">
                         <LoadingOverlay
                           visible={false}
@@ -121,11 +134,11 @@ const SearchBar1 = () => {
                                 blur: 2,
                             }} />
                         <Tooltip
-                          label={keywords.length === 0 ? 'Need at least one Keyword and Tag' : 'Search Keyword(s)'}>
+                          label={!enableSearch ? 'Need at least one Keyword and Tag' : 'Search Keyword(s)'}>
                             <Button
                               variant="filled"
                               radius="xs"
-                              disabled={keywords.length === 0 || filterTags.length === 0}
+                              disabled={!enableSearch}
                               onClick={searchKeyWords}
                               style={{
                                     width: '100px',
