@@ -2,6 +2,7 @@ import ast
 import json
 import time
 import re
+# from config import GOOGLE_API_KEY
 
 import google.generativeai as genai
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
@@ -9,6 +10,7 @@ import os
 from obj3_v2 import api_connect
 
 GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
+
 
 class GeminiAPI():
     def __init__(self):

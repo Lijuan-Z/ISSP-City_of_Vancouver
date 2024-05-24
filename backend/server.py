@@ -1,6 +1,8 @@
 import time
 # from search_term import searching_endpoint
 from search import search_files
+import process_to_JSON
+from GeminiAPI import GeminiAPI
 from obj3_v2 import enter_obj3
 import scrape
 from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
@@ -34,7 +36,11 @@ def generate_response(query, files):
     # output_str = searching_endpoint(query)
     # output_dict = search_files(files, json_path="processed_final.json", search_terms=query)
     try:
+        gemini = GeminiAPI()
         output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
+        # if withAI:
+        # output_dict = gemini.get_amendment_and_rationale(output_dict, "Replace with 'See parking by-law")
+        # output_dict = gemini.get_amendment_and_rationale(output_dict, prompt)
         OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
     except Exception as e:
         msg = f"There is an error when searching from AI. code: {e}"
