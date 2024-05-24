@@ -4,9 +4,10 @@ from search import search_files
 # from GeminiAPI import GeminiAPI
 import GeminiAPI
 import process_to_JSON
+import obj3_v2
 from obj3_v2 import enter_obj3
 import scrape
-from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
+from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type, read_previous_source
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
 import threading
@@ -18,6 +19,7 @@ import configparser
 from output_handler import OutputHandler
 
 thread_event = threading.Event()
+thread_event_o3 = threading.Event()
 
 # config file for information management
 config = configparser.ConfigParser()
@@ -88,7 +90,8 @@ def scrap_file_and_data():
             total_downloaded_cov = download_pdf(source_html_cov, website_url_cov, save_directory)
             total_downloaded_bylaw = download_pdf_voc_bylaws(source_html_bylaw, save_directory, total_downloaded_cov)
             app.logger.info(f"/update: server finished downloading {total_downloaded_cov + total_downloaded_bylaw} pdf files. Now creating doc-type-json file")
-            retrieve_document_type(source_html_cov, source_html_bylaw, output_file)
+            previous_file = read_previous_source(config.get('server', 'doc_file'))
+            retrieve_document_type(source_html_cov, source_html_bylaw, previous_file, output_file)
 
             update_status = False
 
@@ -148,6 +151,11 @@ def file_filter(file_names, category):
             file_list = list([f["file-name"] for f in file_info])
             return file_list + file_names
 
+def o3_handler(file_list):
+    # if thread_event.is_set():
+    thread = threading.Thread(target=enter_obj3(file_list))
+    thread.start()
+
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
 def page_not_found(error):
@@ -195,7 +203,6 @@ def update():
             thread_event.set()
             thread = threading.Thread(target=scrap_file_and_data())
             thread.start()
-            scrap_file_and_data()
             end_time = time.time()
             elapsed_time = end_time - start_time
 
@@ -242,8 +249,10 @@ def search_o3():
         if len(file_list) != 0:
             print(file_list)
             app.logger.info(f'/search/o3: is going to search {len(file_list)} files')
-            
-            # obj3_data = enter_obj3(file_list)   # temp gen output objective 3
+
+            thread_event.set()
+            obj3_data = o3_handler(file_list)
+
             # response = make_response(obj3_data)
             # response.headers["Content-Disposition"] = f"attachment; filename=output_o3.xlsx"
             # response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -307,13 +316,10 @@ def data():
 def data_o3():
     app.logger.info(f"/data/o3: received a request")
     try:
-        output_msg = "Asking AI to generate file - step (2/10) of zoning-by-law-district-schedule-fc-1.pdf"
-        output_msg = "Asking AI to generate file - step (6/10) of zoning-by-law-district-schedule-r1-1.pdf"
-        # output_msg = "finished excel creation output_03.xlsx in folder /LZR"
 
         o3_file_status = False
 
-        output = {"data": output_msg,
+        output = {"data": obj3_v2.o3_message,
                   "is_created": o3_file_status}
 
         app.logger.info(f"/data: returning {len(output)} files response")
