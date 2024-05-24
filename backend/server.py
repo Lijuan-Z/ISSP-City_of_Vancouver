@@ -1,5 +1,5 @@
 import time
-from search_term import searching_endpoint
+# from search_term import searching_endpoint
 from search import search_files
 from obj3_v2 import enter_obj3
 import scrape
@@ -8,6 +8,8 @@ from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
 import threading
 import json
+import pandas as pd
+import io
 import configparser
 
 from output_handler import OutputHandler
@@ -29,7 +31,8 @@ update_status = False
 def generate_response(query, files):
     start_time = time.time()
     # output_str = searching_endpoint(query)
-    output_dict = search_files(files, json_path='processed.json', search_terms=query)
+    # output_dict = search_files(files, json_path="processed_final.json", search_terms=query)
+    output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
     excel_file_path = "output.xlsx"
     OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
     end_time = time.time()
@@ -43,20 +46,19 @@ def generate_response(query, files):
 
     # Create response object
     response = make_response(file_data)
-
+    
     # Set headers
     response.headers["Content-Disposition"] = f"attachment; filename=output.xlsx"
     response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
     return response
 
-
 # Handling web-scrapping of PDF and document-type json file
 def scrap_file_and_data():
     global update_status
 
     while thread_event.is_set():
-        ### html, pdf & doc-type json download process ###
+    ### html, pdf & doc-type json download process ###
         if config.getboolean('scrap', 'download'):
             update_status = True
 
@@ -74,30 +76,29 @@ def scrap_file_and_data():
             app.logger.info("/update: server finished downloading html. Now downloading pdf files")
             total_downloaded_cov = download_pdf(source_html_cov, website_url_cov, save_directory)
             total_downloaded_bylaw = download_pdf_voc_bylaws(source_html_bylaw, save_directory, total_downloaded_cov)
-            app.logger.info(
-                f"/update: server finished downloading {total_downloaded_cov + total_downloaded_bylaw} pdf files. Now creating doc-type-json file")
+            app.logger.info(f"/update: server finished downloading {total_downloaded_cov + total_downloaded_bylaw} pdf files. Now creating doc-type-json file")
             retrieve_document_type(source_html_cov, source_html_bylaw, output_file)
 
             update_status = False
 
         thread_event.clear()
 
-
 def scrape_status():
-    total_file_to_update = 590
-    percentage_updated = float(scrape.file_counter / total_file_to_update * 100)
+        total_file_to_update = 590
+        percentage_updated = float(scrape.file_counter / total_file_to_update * 100)
 
-    status_message = "Idle"
-    if update_status:
-        status_message = "Updating"
+        status_message = "Idle"
+        if update_status:
+            status_message = "Updating"
 
-    return {
-        "status": status_message,
-        "file_updated": scrape.file_counter,
-        "last_updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
-        "total_updated_files": total_file_to_update,
-        "percentage_updated": f"{percentage_updated:.2f}"
-    }
+        return {
+            "status": status_message,
+            "file_updated": scrape.file_counter,
+            "last_updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+            "total_updated_files": total_file_to_update,
+            "percentage_updated": f"{percentage_updated:.2f}"
+        }
+
 
 
 def read_data_type_file():
@@ -117,7 +118,6 @@ def read_data_type_file():
                 output.append(v)
         return output
 
-
 def file_filter(file_names, category):
     ### file filtering is done here ####
     if len(category) == 0:
@@ -133,12 +133,10 @@ def file_filter(file_names, category):
             file_list = list([f["file-name"] for f in file_info])
             return file_list + file_names
 
-
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('404.html'), 404
-
 
 # return 500 When any there are server errors
 @app.errorhandler(500)
@@ -146,12 +144,10 @@ def internal_error(error):
     app.logger.error(f"server encounter error {error.name} and returning status code 500")
     return render_template('500.html'), 500
 
-
 @app.route('/')
 def home():
     app.logger.info("A request is received for loading home page")
     return render_template('index.html')
-
 
 @app.route("/update/<sub_path>")
 def update_sub(sub_path):
@@ -174,7 +170,6 @@ def update_sub(sub_path):
             status=404,
             mimetype='application/json'
         )
-
 
 @app.route("/update")
 def update():
@@ -206,7 +201,6 @@ def update():
         app.logger.error(f"/update: Error in loading file - {e}")
         abort(500)
 
-
 @app.route("/search/info")
 def search_info():
     app.logger.info(f"/search/info: received a request")
@@ -220,7 +214,6 @@ def search_info():
     )
     return response
 
-
 @app.route("/search/o3", methods=["POST"])
 def search_o3():
     try:
@@ -233,20 +226,19 @@ def search_o3():
         if len(file_list) != 0:
             print(file_list)
             app.logger.info(f'/search/o3: is going to search {len(file_list)} files')
-
-            obj3_data = enter_obj3(file_list)  # temp gen output objective 3
+            
+            obj3_data = enter_obj3(file_list)   # temp gen output objective 3
             response = make_response(obj3_data)
             response.headers["Content-Disposition"] = f"attachment; filename=output_o3.xlsx"
             response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
             return response
         else:
-            app.logger.error(f"/search/o3: receive an empty query and returning status code 404")
-            abort(404)
+           app.logger.error(f"/search/o3: receive an empty query and returning status code 404")
+           abort(404)
     except Exception as e:
         app.logger.error(f"/search: Error in loading file - {e}")
         abort(500)
-
 
 @app.route("/search", methods=["POST"])
 def search():
@@ -261,12 +253,11 @@ def search():
             app.logger.info(f'/search: is going to search {len(file_list)} files')
             return generate_response(file_data["data"]["search-terms"], file_list)
         else:
-            app.logger.error(f"/search: receive an empty query and returning status code 404")
-            abort(404)
+           app.logger.error(f"/search: receive an empty query and returning status code 404")
+           abort(404)
     except Exception as e:
         app.logger.error(f"/search: Error in loading file - {e}")
         abort(500)
-
 
 @app.route("/data")
 def data():
