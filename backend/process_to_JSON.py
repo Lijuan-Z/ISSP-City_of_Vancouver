@@ -4,15 +4,19 @@ import os
 import time
 import easyocr
 from GeminiAPI import GeminiAPI
+import configparser
 
+config = configparser.ConfigParser()
+config.read('development.ini')
 
+process_update = ""
 
 class ProcessToJSON:
     def __init__(self, folder_path):
         self.folder_path = folder_path
         # Load current JSON
         try:
-            with open("processed.json", "r") as processed_file:
+            with open(config.get('server', 'processed_json_file'), "r") as processed_file:
                 self.current_data = json.load(processed_file)
         except FileNotFoundError:
             self.current_data = {}
@@ -73,8 +77,11 @@ class ProcessToJSON:
             json.dump(nested_metadata_dict, json_file, indent=4)
 
         #Add the AI titles using gemini
-        # gemAI = GeminiAPI()
-        # nested_metadata_dict = gemAI.find_title(URL_info, nested_metadata_dict)
+        gemAI = GeminiAPI()
+        nested_metadata_dict = gemAI.find_title(URL_info, nested_metadata_dict)
+
+        with open(config.get('server', 'processed_json_file'), "w") as processed_file:
+            json.dump(nested_metadata_dict, processed_file, indent=4)
 
         return nested_metadata_dict
 
@@ -143,21 +150,10 @@ if __name__ == '__main__':
     with open('doc_type.json') as json_file:
         data = json.load(json_file)
 
-    #
-    # start = time.time()
-    # dict_info = processor.read_PDFs(image_included=True, URL_info=data)
-    # print(time.time() - start)
 
+    start = time.time()
+    dict_info = processor.read_PDFs(image_included=True, URL_info=data)
+    print(time.time() - start)
 
-    # part Below only if AI title didn't run
-    with open("processed.json", "r") as processed_file:
-        processed_data = json.load(processed_file)
-
-    data = processor.adjust_URL_info(data)
-
-    gemAI = GeminiAPI()
-    dict_info = gemAI.find_title(data, processed_data)
-    # end of AI title only
-
-    with open('processed_final.json', 'w') as json_file:
+    with open('processed_test.json', 'w') as json_file:
         json.dump(dict_info, json_file, indent=4)

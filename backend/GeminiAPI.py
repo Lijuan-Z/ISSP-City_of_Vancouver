@@ -1,16 +1,17 @@
-import ast
 import json
 import time
 import re
 
 import google.generativeai as genai
-from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import os
 from obj3_v2 import api_connect
+from config import GOOGLE_API_KEY
+# GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
 
-GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
+gemini_update = ""
 
 class GeminiAPI():
+
     def __init__(self):
         self.model = "gemini-1.5-flash-latest"
 
@@ -78,6 +79,7 @@ class GeminiAPI():
         return data
 
     def get_amendment_and_rationale(self, search_results, prompt):
+        global gemini_update
         system_definition = ('You are receiving some pieces of information in dictionary format'
                              'The format is {<reference number>: <content>}.'
                              'You will also receive a prompt'
@@ -105,6 +107,7 @@ class GeminiAPI():
                                       system_instruction=system_definition
                                       )
 
+
         data = self.get_sections_using_hugface(search_results)
         max_reference_input = 3
 
@@ -131,6 +134,7 @@ class GeminiAPI():
         timeout = 60
         instance_count = 0
         for key, instance_group in instances_search.items():
+            gemini_update = f"Searching for amendments for {key}"
             print(f"filename {key}")
             print(f"instance_group: {instance_group}")
             for instance in instance_group:
@@ -151,10 +155,15 @@ class GeminiAPI():
                         print(f"Error getting response from api call - trial {retries}")
                         if retries == 6:
                             response_failed = True
+                            gemini_update = f"Could not get amendment for {key}"
+                            if (instance_count + retries) % 15 == 0:
+                                gemini_update = f"Timeout due to AI input limit"
+                                time.sleep(timeout)
                             break
                         time.sleep(2)
                 if instance_count % 10 == 0:
                     print(f"time out number: {instance_count/10}")
+                    gemini_update = f"Timeout due to AI input limit"
                     time.sleep(timeout)
 
                 if not response_failed:
@@ -166,7 +175,7 @@ class GeminiAPI():
 
                     data = self.add_response_to_search_results(search_results, actual_dict, key)
 
-
+        gemini_update = f"Finished searching for amendments"
         return data
 
     def convert_to_dict(self, input_str):
@@ -210,10 +219,15 @@ class GeminiAPI():
 
     def get_sections_using_hugface(self, search_results, processed_file="processed_final.json"):
 
+        global gemini_update
+
         with open(processed_file, "r") as f:
             processed_data = json.load(f)
 
+        file_count = 1
+
         for key, value in search_results.items():
+            gemini_update = f"Finding section titles and numbers. file: {file_count} of {len(search_results)}"
             for result in value:
                 index = value.index(result)
                 reference = result["Reference"]
@@ -259,7 +273,9 @@ class GeminiAPI():
                 search_results[key][index]['Section Number'] = section_number
                 search_results[key][index]['Section Title'] = section_title
 
-        print("Section finding finished")
+            file_count += 1
+
+        gemini_update = "Section finding finished!"
         return search_results
 
 

@@ -4,3 +4,5 @@ venv
 config.py
 __pycache__/
 cookies/
+yarn.lock
+package.json

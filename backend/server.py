@@ -1,6 +1,9 @@
-import time
+import time, datetime, pytz
 # from search_term import searching_endpoint
 from search import search_files
+# from GeminiAPI import GeminiAPI
+import GeminiAPI
+import process_to_JSON
 from obj3_v2 import enter_obj3
 import scrape
 from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type
@@ -23,23 +26,31 @@ config.read('development.ini')
 app = Flask(__name__)
 # app._static_folder = "_next/static"
 CORS(app)
-
+gemini = GeminiAPI.GeminiAPI()
 update_status = False
 
 
 # Generate Excel file based on the query
-def generate_response(query, files):
+def generate_response(query, files, enable_ai, prompt):
     start_time = time.time()
-    # output_str = searching_endpoint(query)
-    # output_dict = search_files(files, json_path="processed_final.json", search_terms=query)
-    output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
     excel_file_path = "output.xlsx"
-    OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-
-    # Print the elapsed time
-    print("Elapsed time:", elapsed_time, "seconds")
+    # output_str = searching_endpoint(query)
+    try:
+        output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
+        if enable_ai is True:
+            # For objective 2 - enable Gemini - API AI
+            output_dict = gemini.get_amendment_and_rationale(output_dict, prompt)
+        OutputHandler.create_excel_file(output_dict, output_file=excel_file_path)
+    except Exception as e:
+        msg = f"There is either no information for output or an error when searching {query}. code: {e}"
+        print(msg)
+        output_excel = pd.DataFrame({'Error': {"message": msg}})
+        output_excel.to_excel(excel_file_path)
+    finally:
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        # Print the elapsed time
+        print("Elapsed time:", elapsed_time, "seconds")
 
     with open(excel_file_path, "rb") as file:
         file_data = file.read()
@@ -84,7 +95,11 @@ def scrap_file_and_data():
         thread_event.clear()
 
 def scrape_status():
+
         total_file_to_update = 590
+        if scrape.total_files > total_file_to_update:
+            total_file_to_update = scrape.total_files
+
         percentage_updated = float(scrape.file_counter / total_file_to_update * 100)
 
         status_message = "Idle"
@@ -94,7 +109,7 @@ def scrape_status():
         return {
             "status": status_message,
             "file_updated": scrape.file_counter,
-            "last_updated": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+            "last_updated": datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S"),
             "total_updated_files": total_file_to_update,
             "percentage_updated": f"{percentage_updated:.2f}"
         }
@@ -186,7 +201,7 @@ def update():
 
             output = {
                 "status": "updated",
-                "finished-time": time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime()),
+                "finished-time": datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S"),
                 "duration": f"{elapsed_time:.2f}s"
             }
 
@@ -204,7 +219,8 @@ def update():
 @app.route("/search/info")
 def search_info():
     app.logger.info(f"/search/info: received a request")
-    output = "searching file 3 of xxxx.pdf"
+    output = {"ocr": process_to_JSON.process_update,
+              "ai": GeminiAPI.gemini_update}
 
     app.logger.info(f"/search: finished scrapping and return response")
     response = app.response_class(
@@ -227,10 +243,18 @@ def search_o3():
             print(file_list)
             app.logger.info(f'/search/o3: is going to search {len(file_list)} files')
             
-            obj3_data = enter_obj3(file_list)   # temp gen output objective 3
-            response = make_response(obj3_data)
-            response.headers["Content-Disposition"] = f"attachment; filename=output_o3.xlsx"
-            response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            # obj3_data = enter_obj3(file_list)   # temp gen output objective 3
+            # response = make_response(obj3_data)
+            # response.headers["Content-Disposition"] = f"attachment; filename=output_o3.xlsx"
+            # response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+            output = f"requesting AI to generate report for {len(file_list)} files"
+            app.logger.info(f"/search/o3: is returning a response")
+            response = app.response_class(
+                response=json.dumps({"data": output}),
+                status=200,
+                mimetype='application/json'
+            )
 
             return response
         else:
@@ -242,22 +266,25 @@ def search_o3():
 
 @app.route("/search", methods=["POST"])
 def search():
-    try:
+    # try:
         file_data = request.json
         app.logger.info(f'/search: received a request of {file_data["data"]["search-terms"]}')
+
+        if file_data["data"]["ai"] is True:
+            app.logger.info(f'/search: AI enabled. With prompt {file_data["data"]["prompt"]}')
 
         file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
 
         if len(file_list) != 0:
             print(file_list)
             app.logger.info(f'/search: is going to search {len(file_list)} files')
-            return generate_response(file_data["data"]["search-terms"], file_list)
+            return generate_response(file_data["data"]["search-terms"], file_list, file_data["data"]["ai"], file_data["data"]["prompt"])
         else:
            app.logger.error(f"/search: receive an empty query and returning status code 404")
            abort(404)
-    except Exception as e:
-        app.logger.error(f"/search: Error in loading file - {e}")
-        abort(500)
+    # except Exception as e:
+    #     app.logger.error(f"/search: Error in loading file - {e}")
+    #     abort(500)
 
 @app.route("/data")
 def data():
@@ -266,6 +293,30 @@ def data():
         output = read_data_type_file()
 
         app.logger.info(f"/data: return {len(output)} files response")
+        response = app.response_class(
+            response=json.dumps({"data": output}),
+            status=200,
+            mimetype='application/json'
+        )
+        return response
+    except Exception as e:
+        app.logger.error(f"/data: Error in loading file - {e}")
+        abort(500)
+
+@app.route("/data/o3")
+def data_o3():
+    app.logger.info(f"/data/o3: received a request")
+    try:
+        output_msg = "Asking AI to generate file - step (2/10) of zoning-by-law-district-schedule-fc-1.pdf"
+        output_msg = "Asking AI to generate file - step (6/10) of zoning-by-law-district-schedule-r1-1.pdf"
+        # output_msg = "finished excel creation output_03.xlsx in folder /LZR"
+
+        o3_file_status = False
+
+        output = {"data": output_msg,
+                  "is_created": o3_file_status}
+
+        app.logger.info(f"/data: returning {len(output)} files response")
         response = app.response_class(
             response=json.dumps({"data": output}),
             status=200,

@@ -7,6 +7,7 @@ import pytz, datetime
 import hashlib
 
 file_counter = 0
+total_files = 0
 
 def download_source_html(url):
     # response = requests.get(url)
@@ -17,6 +18,7 @@ def download_source_html(url):
 
 def download_pdf(html, url, save_dir):
     global file_counter
+    global total_files
     # Create directory if it doesn't exist
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
@@ -57,6 +59,7 @@ def download_pdf(html, url, save_dir):
 def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
     # Create directory if it doesn't exist
     global file_counter
+    global total_files
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
@@ -64,6 +67,7 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
     sub_pages = html.find("div", {"id": "simpleList1117"}).findAll("a")
 
     file_counter = previous_total
+    total_files = previous_total
     for page in sub_pages:
         subpage_url = "https://vancouver.ca/" + page["href"]
         res = httpx.get(subpage_url)
@@ -94,6 +98,7 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
             with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
                 f.write(pdf_response.content)
                 file_counter += 1
+                total_files += 1
 
 
     return file_counter
