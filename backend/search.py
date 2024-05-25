@@ -28,7 +28,7 @@ def write_to_json(data, output_file):
         print(f"Error writing to JSON file '{output_file}': {e}")
 
 
-def search_files(json_path, search_terms=None):
+def search_files(files, json_path, search_terms=None):
     nested_metadata_dict = {}
     json_data = load_json(json_path)
     chatbot = api_connect()
@@ -37,7 +37,7 @@ def search_files(json_path, search_terms=None):
     if json_data:
         if search_terms is not None:
             for file_name, file_data in json_data.items():
-                if 'Pages' in file_data and file_name[:-4]:
+                if 'Pages' in file_data and file_name[:-4] in files:
                     # print(f"Searching in file '{file_name}'")
                     for page_num, page_content in file_data['Pages'].items():
                         # Split the entire page content into paragraphs
@@ -102,10 +102,10 @@ def search_files(json_path, search_terms=None):
 if __name__ == '__main__':
     json_file_path = config.get('server', 'processed_json_file')
     search_terms = ['parking', 'lane']
-    # files = ['4837c', 'bulletin-floor-area-calculation-tracing-overlay', 'bulletin-ra-1-perimeter-landscaping', 'F001',
-    #          'guidelines-cd-1-little-mountain', 'guidelines-fc-1-east-false-creek', 'odp-false-creek',
-    #          'Part9_Schedule9A', 'policy-plan-vancouver', 'zoning-by-law-district-schedule-rm-1']
+    files = ['4837c', 'bulletin-floor-area-calculation-tracing-overlay', 'bulletin-ra-1-perimeter-landscaping', 'F001',
+             'guidelines-cd-1-little-mountain', 'guidelines-fc-1-east-false-creek', 'odp-false-creek',
+             'Part9_Schedule9A', 'policy-plan-vancouver', 'zoning-by-law-district-schedule-rm-1']
 
-    dictionary = search_files(json_path=json_file_path, search_terms=search_terms)
+    dictionary = search_files(files=files, json_path=json_file_path, search_terms=search_terms)
     output_file = 'output_test.json'
     write_to_json(dictionary, output_file)
