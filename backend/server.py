@@ -25,12 +25,25 @@ thread_event_o3 = threading.Event()
 config = configparser.ConfigParser()
 config.read('development.ini')
 
+# preload the stored doc_type.json for retreiving last update date
+latest_doc_type = read_previous_source(config.get('server', 'doc_file'))
+last_update_date = max(list([list(obj.values())[0]["Last update"] for obj in latest_doc_type]))
+
 app = Flask(__name__)
 # app._static_folder = "_next/static"
 CORS(app)
 gemini = GeminiAPI.GeminiAPI()
 update_status = False
 
+
+def o3_handler(t_event):
+    while t_event.is_set():
+        # enter_obj3(["zoning-by-law-district-schedule-fc-1"])
+        t_event.clear()
+
+# thread_event_o3.set()
+# thread_o3 = threading.Thread(target=o3_handler, args=[thread_event_o3], daemon=True)
+# thread_o3.start()
 
 # Generate Excel file based on the query
 def generate_response(query, files, enable_ai, prompt):
@@ -69,6 +82,7 @@ def generate_response(query, files, enable_ai, prompt):
 # Handling web-scrapping of PDF and document-type json file
 def scrap_file_and_data():
     global update_status
+    global last_update_date
 
     while thread_event.is_set():
     ### html, pdf & doc-type json download process ###
@@ -92,6 +106,9 @@ def scrap_file_and_data():
             app.logger.info(f"/update: server finished downloading {total_downloaded_cov + total_downloaded_bylaw} pdf files. Now creating doc-type-json file")
             previous_file = read_previous_source(config.get('server', 'doc_file'))
             retrieve_document_type(source_html_cov, source_html_bylaw, previous_file, output_file)
+            # getting latest update date
+            latest_file = read_previous_source(config.get('server', 'doc_file'))
+            last_update_date = max(list([list(obj.values())[0]["Last update"] for obj in latest_file]))
 
             update_status = False
 
@@ -112,7 +129,7 @@ def scrape_status():
         return {
             "status": status_message,
             "file_updated": scrape.file_counter,
-            "last_updated": datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S"),
+            "last_updated": last_update_date,
             "total_updated_files": total_file_to_update,
             "percentage_updated": f"{percentage_updated:.2f}"
         }
@@ -150,11 +167,6 @@ def file_filter(file_names, category):
             file_info = list(filter(lambda f: f["section"] in category, file_info))
             file_list = list([f["file-name"] for f in file_info])
             return file_list + file_names
-
-def o3_handler(file_list):
-    # if thread_event.is_set():
-    thread = threading.Thread(target=enter_obj3(file_list))
-    thread.start()
 
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
@@ -250,8 +262,8 @@ def search_o3():
             print(file_list)
             app.logger.info(f'/search/o3: is going to search {len(file_list)} files')
 
-            thread_event.set()
-            obj3_data = o3_handler(file_list)
+            # thread_event_o3.set()
+            enter_obj3(file_list)
 
             # response = make_response(obj3_data)
             # response.headers["Content-Disposition"] = f"attachment; filename=output_o3.xlsx"
