@@ -7,7 +7,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { ActionIcon, Button, Modal } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 import SearchBar from '@/components/SearchBar/search-bar';
-import Information from "@/components/Information/information";
+import Information from '@/components/Information/information';
 
 type SettingsType = {
     scrapeURL: string

@@ -44,6 +44,7 @@ const Information = () => {
         setUpdating(true);
         updateFilesInBackend()
             .catch(error => console.log(error));
+        getNewUpdateInformation();
     };
 
     const getNewUpdateInformation = () => {

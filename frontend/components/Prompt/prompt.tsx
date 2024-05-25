@@ -1,5 +1,5 @@
 import { Accordion, Box, Button, Collapse, Group, Text, Textarea } from '@mantine/core';
-import React, {ChangeEvent, Dispatch, SetStateAction} from 'react';
+import React, { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 
 const groceries = [
