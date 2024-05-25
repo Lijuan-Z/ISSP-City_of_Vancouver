@@ -14,7 +14,7 @@ const InputBar = forwardRef<TextInputProps, InputPropsType>(({
                                                                            }, ref) => {
     const theme = useMantineTheme();
     return <TagsInput
-      ref={ref}
+      ref={ref as any}
       placeholder="Search keyword(s)..."
       data={[]}
       value={keywords}

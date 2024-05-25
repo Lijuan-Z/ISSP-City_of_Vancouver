@@ -27,6 +27,7 @@ const SearchBar1 = () => {
     const [openedTextBox, { toggle }] = useDisclosure(false);
     const [prompt, setPrompt] = useInputState('');
     const [searchError, setSearchError] = useState('');
+    const showErrorPrompt = !!searchError;
     const enableSearch = openedTextBox ? prompt.length !== 0
         && keywords.length !== 0
         && filterTags.length !== 0 : keywords.length !== 0
@@ -63,7 +64,7 @@ const SearchBar1 = () => {
                         />
                         <Checkbox
                           labelPosition="left"
-                          icon={IconRobot}
+                          icon={IconRobot as any}
                           label="A.I"
                           onClick={toggle} />
                     </Group>
@@ -94,7 +95,7 @@ const SearchBar1 = () => {
                 </Flex>
             </Box>
             <Dialog
-              opened={searchError}
+              opened={showErrorPrompt}
               withCloseButton
               onClose={() => setSearchError('')}
               size="lg"

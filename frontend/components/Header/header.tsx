@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Box, Button, Flex, Text } from '@mantine/core';
+import { Box, Flex } from '@mantine/core';
 import Settings1 from '@/components/Settings/settings';
 
 const Header = () => (

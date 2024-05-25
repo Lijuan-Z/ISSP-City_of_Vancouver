@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import {
     Group,
-    List,
     Paper,
     rem,
-    ThemeIcon,
     Text,
-    Progress,
-    SimpleGrid,
     Box,
     Tooltip,
     Button,
-    Center, RingProgress, Grid, Stack, LoadingOverlay, Loader,
+    Center, RingProgress, Grid, Stack, LoadingOverlay,
 } from '@mantine/core';
 import {
-    IconArrowDownRight,
-    IconArrowUpRight,
-    IconCircleCheck,
-    IconCircleDashed,
-    IconDeviceAnalytics, IconDownload, IconFile,
+    IconFile,
     IconPlayerPause, IconPlayerPlay, IconReload,
 } from '@tabler/icons-react';
 import classes from './information.module.css';
@@ -38,19 +30,25 @@ const Information = () => {
         }
     );
     const [updating, setUpdating] = useState(false);
-    const { file_updated, total_updated_files, percentage_updated, last_updated, status } = updateInfo;
+    const {
+        file_updated,
+        total_updated_files,
+        percentage_updated,
+        last_updated,
+        status,
+    } = updateInfo;
     const UpdateIcon = updating ? IconPlayerPlay : IconPlayerPause;
     const updateFiles = () => {
         setUpdating(true);
         updateFilesInBackend()
-            .catch(error => console.log(error));
+            .catch(error => error);
         getNewUpdateInformation();
     };
 
     const getNewUpdateInformation = () => {
         getUpdateInformation()
             .then(data => setUpdateInfo(data.data))
-            .catch(error => console.log(error));
+            .catch(error => error);
     };
     useEffect(() => {
         getNewUpdateInformation();
@@ -66,7 +64,6 @@ const Information = () => {
                 setTimeout(() => getNewUpdateInformation(), 1000);
         }
     }, [updateInfo]);
-    console.log('infor', updateInfo);
 
     return (
         <Paper radius="md" p={10}>
@@ -120,8 +117,17 @@ const Information = () => {
             </Grid>
             <Center>
                 <Box pos="relative">
-                    <LoadingOverlay visible={updating} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} className={classes.loader} />
-                    <Button rightSection={<IconReload size={14} />} onClick={updateFiles}>Update</Button>
+                    <LoadingOverlay
+                      visible={updating}
+                      zIndex={1000}
+                      overlayProps={{ radius: 'sm', blur: 2 }}
+                      className={classes.loader} />
+                    <Button
+                      rightSection={<IconReload size={14} />}
+                      onClick={updateFiles}
+                    >
+                        Update
+                    </Button>
 
                 </Box>
             </Center>
