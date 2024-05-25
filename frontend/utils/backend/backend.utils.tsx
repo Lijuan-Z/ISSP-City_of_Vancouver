@@ -1,13 +1,16 @@
 import { saveAs } from 'file-saver';
 import { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 
-export const searchKeywords = async (keywords: string[], filterTags: FilterTagsType) => {
+export const searchKeywords = async (keywords: string[], filterTags: FilterTagsType, enableAI?: boolean, aiPrompt?: string) => {
     console.log(filterTags);
+    const aiSearch = !!enableAI
     const requestBody = {
         data: {
             'search-terms': keywords,
             files: filterTags.files,
             categories: filterTags.categories,
+            ai: aiSearch,
+            prompt: aiPrompt
         },
     };
     console.log(requestBody);

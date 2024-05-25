@@ -1,7 +1,6 @@
 'use client';
 
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import fileInformation from '@/public/files2.json';
 import { getFilesInformation } from '@/utils/backend/backend.utils';
 import { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 
