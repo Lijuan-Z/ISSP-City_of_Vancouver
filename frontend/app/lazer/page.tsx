@@ -2,13 +2,19 @@
 
 import React, { useContext, useState } from 'react';
 import { Button, Center, Dialog, Flex, LoadingOverlay, Notification, Tooltip } from '@mantine/core';
-import FilterMenu, { FilterTagsType } from '@/components/FilterMenu/filter-menu';
-import { FilesContext, FilesProviders } from '@/contexts/files.context';
+import FilterMenu from '@/components/FilterMenu/filter-menu';
+import { FilesContext } from '@/contexts/files.context';
+import { getSearchTagsForLazer } from '@/utils/backend/backend.utils';
 
 const Lazer = () => {
     const [filterTags, setFilterTags] = useState<string[]>([]);
     const [searchError, setSearchError] = useState('');
     const { getFilterTagsType } = useContext(FilesContext);
+    const showError = !!searchError;
+    const getLazerOutput = () => {
+        getSearchTagsForLazer(getFilterTagsType(filterTags))
+            .catch(error => setSearchError(error.message));
+    };
     return (
         <>
             <Flex
@@ -36,9 +42,7 @@ const Lazer = () => {
                           variant="filled"
                           radius="xs"
                           disabled={filterTags.length === 0}
-                          onClick={() => {
-                              setSearchError('Testing');
-                            }}
+                          onClick={getLazerOutput}
                           style={{
                                 width: '100px',
                             }}>Search
@@ -50,7 +54,7 @@ const Lazer = () => {
 
             </Flex>
             <Dialog
-              opened={searchError}
+              opened={showError}
               withCloseButton
               onClose={() => setSearchError('')}
               size="lg"
