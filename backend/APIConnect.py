@@ -4,25 +4,55 @@ from config import EMAIL, PASSWD
 from config import GOOGLE_API_KEY
 import google.generativeai as genai
 
+
 class APIConnect:
-    def __init__(self):
-        self.gemini_model = "gemini-1.5-flash-latest"
+    """
+    A class to handle connections to different APIs such as HugChat and Gemini.
+    """
+
     @staticmethod
     def hugchat_connect():
-        cookie_path_dir = "./cookies/"  # NOTE: trailing slash (/) is required to avoid errors
-        sign = Login(EMAIL, PASSWD)
-        cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
-        # Create ChatBot
-        return hugchat.ChatBot(cookies=cookies.get_dict())  # or cookie_path="usercookies/<email>.json"
+        """
+        Connect to HugChat using predefined user credentials.
+
+        Returns:
+            hugchat.ChatBot: An instance of the HugChat bot initialized with user cookies.
+        """
+        cookie_path_dir = "./cookies/"  # Directory where cookies will be saved; trailing slash is required
+        sign = Login(EMAIL, PASSWD)  # Login instance created with user credentials
+        cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)  # Perform login and save cookies
+        # Create and return ChatBot instance with the obtained cookies
+        return hugchat.ChatBot(cookies=cookies.get_dict())  # or use cookie_path="usercookies/<email>.json"
 
     @staticmethod
     def hugchat_connect_section():
-        cookie_path_dir = "./cookies/"  # NOTE: trailing slash (/) is required to avoid errors
-        sign = Login(EMAIL, PASSWD)
-        cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
-        # Create ChatBot
-        return hugchat.ChatBot(cookies=cookies.get_dict())  # or cookie_path="usercookies/<email>.json"
+        """
+        Connect to a specific section of HugChat using predefined user credentials.
 
-    def gemini_connect(self, system_definition):
-        genai.configure(api_key=GOOGLE_API_KEY)
-        return genai.GenerativeModel(self.gemini_model, system_instruction=system_definition)
+        This method is currently identical to hugchat_connect but will be modified in the future
+        to handle different user credentials or sections.
+
+        Returns:
+            hugchat.ChatBot: An instance of the HugChat bot initialized with user cookies.
+        """
+        cookie_path_dir = "./cookies/"  # Directory where cookies will be saved; trailing slash is required
+        sign = Login(EMAIL, PASSWD)  # Login instance created with user credentials
+        cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)  # Perform login and save cookies
+        # Create and return ChatBot instance with the obtained cookies
+        return hugchat.ChatBot(cookies=cookies.get_dict())  # or use cookie_path="usercookies/<email>.json"
+
+    @staticmethod
+    def gemini_connect(system_definition):
+        """
+        Connect to the Gemini AI model using a system definition and an API key.
+
+        Args:
+            system_definition (str): Instructions or configuration for the Gemini model.
+
+        Returns:
+            genai.GenerativeModel: An instance of the Gemini generative model configured with the system definition.
+        """
+        gemini_model = "gemini-1.5-flash-latest"  # Specify the version of the Gemini model
+        genai.configure(api_key=GOOGLE_API_KEY)  # Configure the genai module with the Google API key
+        # Create and return an instance of the Gemini generative model with the provided system definition
+        return genai.GenerativeModel(gemini_model, system_instruction=system_definition)

@@ -2,18 +2,11 @@ import json
 import time
 import re
 
-import google.generativeai as genai
-import os
-from obj3_v2 import api_connect
-from config import GOOGLE_API_KEY
-# GOOGLE_API_KEY = os.environ['GOOGLE_API_KEY']
+from APIConnect import APIConnect
 
 gemini_update = ""
 
 class Obj2AI():
-
-    def __init__(self):
-        self.model = "gemini-1.5-flash-latest"
 
     def find_title(self, URL_info, processed_data):
         system_definition = ("You are going to receive the first 2 pages of a document in form of a dictionary,"
@@ -27,14 +20,7 @@ class Obj2AI():
                              "Also could be zoning by-law section documents:"
                              "Example: 'Section 11: Use Specific Regulations' or 'Schedule E: Building Lines'"
                              )
-        genai.configure(api_key=GOOGLE_API_KEY)
-        model = genai.GenerativeModel(self.model,
-                                      system_instruction=system_definition
-                                      )
-
-        # generation_config = genai.types.GenerationConfig(
-        #     candidate_count=1,  # Number of response versions to return
-        # )
+        model = APIConnect.gemini_connect(system_definition)
 
         data = processed_data
 
@@ -102,11 +88,7 @@ class Obj2AI():
                              'Amendment0: Strike out The windows can be up to 2 meters tall and substitute "See window by-law" '
                              'Rationale0: Remove mentions of window shape and size and ensure alignment to window by-law'
                              )
-        genai.configure(api_key=GOOGLE_API_KEY)
-        model = genai.GenerativeModel(self.model,
-                                      system_instruction=system_definition
-                                      )
-
+        model = APIConnect.gemini_connect(system_definition)
 
         data = self.get_sections_using_hugface(search_results)
         max_reference_input = 3
@@ -247,7 +229,7 @@ class Obj2AI():
                 max_retry = 3
                 retry_count = 0
                 query_result = None
-                chatbot = api_connect()
+                chatbot = APIConnect.hugchat_connect_section()
                 section_number = "Unknown"
                 section_title = "Unknown"
                 should_continue = True
@@ -292,5 +274,5 @@ if __name__ == "__main__":
     # print(search_results)
 
     test = gemini.get_amendment_and_rationale(data, prompt)
-    with open("instances.json", "w") as file:
+    with open("instances2.json", "w") as file:
         json.dump(test, file)
