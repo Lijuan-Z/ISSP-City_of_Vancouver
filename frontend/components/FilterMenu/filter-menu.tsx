@@ -4,27 +4,25 @@ import { Text, rem, ActionIcon, TagsInput, TagsInputProps, Group, Flex } from '@
 import {
     IconExternalLink, IconAdjustmentsHorizontal,
 } from '@tabler/icons-react';
-import React, { Dispatch, SetStateAction, useContext } from 'react';
+import React, { Dispatch, memo, SetStateAction, useContext } from 'react';
 import { theme } from '@/theme';
 import { FilesContext } from '@/contexts/files.context';
 
 export type FilterTagsType = {
     categories: string[]
     files: string[]
-
 };
-type FilterMenuProps = {
+export type FilterMenuProps = {
     filterTags: string[]
     setFilterTags: Dispatch<SetStateAction<string[]>>,
     // keepFiltersConsistent: (tags: string[]) => void
 };
 
-function FilterMenu({
-                        filterTags,
-                        setFilterTags,
+const FilterMenu = memo(({
+                             filterTags,
+                             setFilterTags,
 
-                    }: FilterMenuProps) {
-    console.log(filterTags);
+                         }: FilterMenuProps) => {
     const { files: fileData } = useContext(FilesContext);
     const fileNames = fileData.map(item => item['webpage-title']);
 
@@ -111,7 +109,7 @@ function FilterMenu({
             }}
           placeholder="Filter tags"
           data={dropdownData}
-          onClear={() => setFilterTags(['All'])}
+          onClear={() => setFilterTags([])}
           clearable
             // onSearchChange={}
             // onOptionSubmit={(value) => console.log(value)}
@@ -121,6 +119,6 @@ function FilterMenu({
           renderOption={renderTagsInputOption}
         />
     );
-}
+});
 
 export default FilterMenu;

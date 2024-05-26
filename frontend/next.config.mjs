@@ -24,6 +24,7 @@ import bundleAnalyzer from '@next/bundle-analyzer';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    output: 'export',
     async rewrites() {
         return [
             {

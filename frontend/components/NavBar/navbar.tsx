@@ -1,19 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { Group, Code } from '@mantine/core';
-import {
-    IconBellRinging,
-    IconFingerprint,
-    IconKey,
-    IconSettings,
-    Icon2fa,
-    IconDatabaseImport,
-    IconReceipt2,
-    IconSwitchHorizontal,
-    IconLogout, IconPdf, IconDatabase,
+import { IconPdf, IconDatabase,
 } from '@tabler/icons-react';
-// import { MantineLogo } from '@mantinex/mantine-logo';
 import { usePathname, useRouter } from 'next/navigation';
 import classes from './NavbarSimple.module.css';
 
@@ -34,7 +22,6 @@ const data = [
 export function NavbarSimple() {
     const router = useRouter();
     const pathName = usePathname();
-    console.log('path', pathName);
     const links = data.map((item) => (
         <a
           className={classes.link}
