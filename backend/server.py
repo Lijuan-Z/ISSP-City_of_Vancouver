@@ -24,6 +24,14 @@ thread_event_o3 = threading.Event()
 # config file for information management
 config = configparser.ConfigParser()
 config.read('development.ini')
+config.read('credential.ini')
+
+###
+print(config.get('hf1', 'name'))
+print(config.get('hf1', 'password'))
+print(config.get('hf2', 'name'))
+print(config.get('hf2', 'password'))
+print(config.get('gemini', 'key'))
 
 # preload the stored doc_type.json for retreiving last update date
 latest_doc_type = read_previous_source(config.get('server', 'doc_file'))
@@ -34,16 +42,14 @@ app = Flask(__name__)
 CORS(app)
 gemini = GeminiAPI.Obj2AI()
 update_status = False
+o3_status = False
 
+def o3_handler(file_list):
+    global  o3_status
+    o3_status = True
+    enter_obj3(file_list)
+    o3_status = False
 
-def o3_handler(t_event):
-    while t_event.is_set():
-        # enter_obj3(["zoning-by-law-district-schedule-fc-1"])
-        t_event.clear()
-
-# thread_event_o3.set()
-# thread_o3 = threading.Thread(target=o3_handler, args=[thread_event_o3], daemon=True)
-# thread_o3.start()
 
 # Generate Excel file based on the query
 def generate_response(query, files, enable_ai, prompt):
@@ -184,6 +190,11 @@ def home():
     app.logger.info("A request is received for loading home page")
     return render_template('index.html')
 
+@app.route('/lazer')
+def lazer():
+    app.logger.info("A request is received for loading /lazer page")
+    return render_template('lazer.html')
+
 @app.route("/update/<sub_path>")
 def update_sub(sub_path):
     if sub_path == "info":
@@ -260,16 +271,19 @@ def search_o3():
         # file_list = ["zoning-by-law-district-schedule-fc-1", "zoning-by-law-district-schedule-r1-1"]
         if len(file_list) != 0:
             print(file_list)
-            app.logger.info(f'/search/o3: is going to search {len(file_list)} files')
 
-            # thread_event_o3.set()
-            enter_obj3(file_list)
+            # thread_o3 = threading.Thread(target=enter_obj3, args=[file_list], daemon=True)
+            output = ""
+            if not o3_status:
+                app.logger.info(f'/search/o3: is going to extract data from {len(file_list)} files')
+                output = f"requesting AI to generate report for {len(file_list)} files"
+                thread_o3 = threading.Thread(target=o3_handler, args=[file_list], daemon=True)
+                thread_o3.start()
+            else:
+                app.logger.info(f'/search/o3: is busy extracting data for {len(file_list)} files')
+                output = f"AI is generating report for {len(file_list)} files. Request ignored"
 
-            # response = make_response(obj3_data)
-            # response.headers["Content-Disposition"] = f"attachment; filename=output_o3.xlsx"
-            # response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
-            output = f"requesting AI to generate report for {len(file_list)} files"
             app.logger.info(f"/search/o3: is returning a response")
             response = app.response_class(
                 response=json.dumps({"data": output}),
@@ -328,11 +342,9 @@ def data():
 def data_o3():
     app.logger.info(f"/data/o3: received a request")
     try:
-
-        o3_file_status = False
-
+        # need to check whether output_o3.xlsx exist
         output = {"data": obj3_v2.o3_message,
-                  "is_created": o3_file_status}
+                  "in_search": o3_status}
 
         app.logger.info(f"/data: returning {len(output)} files response")
         response = app.response_class(
