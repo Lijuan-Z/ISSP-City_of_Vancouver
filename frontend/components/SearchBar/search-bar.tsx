@@ -10,9 +10,9 @@ import {
     Notification,
     Dialog,
     Checkbox,
-    Group,
+    Group, Divider, Text, Blockquote, Stack,
 } from '@mantine/core';
-import { IconRobot } from '@tabler/icons-react';
+import { IconInfoCircle, IconRobot } from '@tabler/icons-react';
 
 import { useDisclosure, useInputState } from '@mantine/hooks';
 import FilterMenu from '@/components/FilterMenu/filter-menu';
@@ -44,7 +44,21 @@ const SearchBar1 = () => {
 
     return (
         <>
-            <Box>
+            <Stack>
+
+                <Box
+                  style={{
+                        maxWidth: '500px',
+                    }}
+                >
+                    <Blockquote color="blue" iconSize={30} icon={<IconInfoCircle />} mt="sm" p={12}>
+                        <Text size="xs">
+                            Please update the files by clicking
+                            the 'Update Files' button on the top right and clicking 'update'.
+                        </Text>
+                    </Blockquote>
+                </Box>
+
                 <Flex
                   direction="column"
                   gap={6}
@@ -54,20 +68,23 @@ const SearchBar1 = () => {
                         <InputBar
                           keywords={keywords}
                           setKeywords={setKeywords}
+                          inputBarDescription={"Type in a keyword(s) below, press 'enter' or ',' to separate keywords:"}
                         />
                     </Tooltip>
                     <Group>
                         <FilterMenu
                           filterTags={filterTags}
                           setFilterTags={setFilterTags}
+                          filterMenuDescription="Select document(s) and/or document type(s) from the list:"
                             // keepFiltersConsistent={keepFilterTagsConsistent}
                         />
-                        <Checkbox
-                          labelPosition="left"
-                          icon={IconRobot as any}
-                          label="A.I"
-                          onClick={toggle} />
                     </Group>
+                    <Divider my="md" />
+                    <Checkbox
+                      labelPosition="left"
+                      icon={IconRobot as any}
+                      label="Generate Consequential Amendments"
+                      onClick={toggle} />
                     <Prompt text={prompt} setText={setPrompt} opened={openedTextBox} />
                     <Center pos="relative">
                         <LoadingOverlay
@@ -86,14 +103,14 @@ const SearchBar1 = () => {
                               onClick={searchKeyWords}
                               style={{
                                     width: '100px',
-                                }}>Search
-
+                                }}>
+                                Search
                             </Button>
                         </Tooltip>
 
                     </Center>
                 </Flex>
-            </Box>
+            </Stack>
             <Dialog
               opened={showErrorPrompt}
               withCloseButton

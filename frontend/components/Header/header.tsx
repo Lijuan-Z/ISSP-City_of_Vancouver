@@ -2,13 +2,19 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { Box, Flex } from '@mantine/core';
+import { Box, Button, Flex } from '@mantine/core';
 // import LogoImage from '@/public/city_vancouver_logo.png';
 import { ImageLoaderProps } from 'next/dist/shared/lib/image-config';
+import { IconExternalLink } from '@tabler/icons-react';
 import Settings1 from '@/components/Settings/settings';
+import AppTitle from '@/components/AppTitle/app-title';
 
 const Header = () => {
-    const imageLoader = ({ src, width, quality } : ImageLoaderProps) => `http://localhost:3000/${src}?w=${width}&q=${quality || 75}`;
+    const imageLoader = ({
+                             src,
+                             width,
+                             quality,
+                         }: ImageLoaderProps) => `http://localhost:8000/${src}?w=${width}&q=${quality || 75}`;
 
     return (
         <Box
@@ -34,14 +40,33 @@ const Header = () => {
             >
                 <Image
                   loader={imageLoader}
-                  src="./city_vancouver_logo.png"
+                  src="static/city_vancouver_logo.png"
                   alt="logo"
                   width={200}
                   height={100}
                 />
+                <AppTitle />
                 <Flex
                   align="center"
+                  gap={10}
                 >
+                    {
+                        //TODO: Add link to the manual
+                    }
+                    <Button
+                      variant="filled"
+                      aria-label="manual"
+                      leftSection={
+                            <IconExternalLink
+                              color="white"
+                              size={30}
+                              cursor="pointer"
+                            />
+
+                        }
+                    >
+                        Manual
+                    </Button>
                     <Settings1 />
                 </Flex>
             </Flex>
