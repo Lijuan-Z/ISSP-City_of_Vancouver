@@ -259,7 +259,7 @@ if __name__ == '__main__':
 
 
     start = time.time()
-    dict_info = processor.read_PDFs(image_included=True, URL_info=data)
+    dict_info = processor.read_PDFs(image_included=False, URL_info=data)
     print(time.time() - start)
 
     with open('processed_test.json', 'w') as json_file:

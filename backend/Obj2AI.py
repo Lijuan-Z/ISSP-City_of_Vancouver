@@ -6,9 +6,11 @@ from APIConnect import APIConnect
 
 gemini_update = ""
 
+
 class Obj2AI():
 
     def find_title(self, URL_info, processed_data):
+        global gemini_update
         system_definition = ("You are going to receive the first 2 pages of a document in form of a dictionary,"
                              "The format is {<page_number>: <content>}."
                              "The title of the document is included in those 2 pages"
@@ -22,47 +24,52 @@ class Obj2AI():
                              )
         model = APIConnect.gemini_connect(system_definition)
 
-        data = processed_data
-
         doc_count = 0
 
-        for key, value in data.items():
-            try:
-                file_updated = URL_info[key]['file_updated']
-            except KeyError:
-                file_updated = False
-            if not file_updated:
+        for key, value in processed_data.items():
+            if not Obj2AI.is_file_updated(key, URL_info):
                 doc_count += 1
-                new_dict = {}
-                new_dict[key] = {}
-                new_dict[key]["1"] = data[key]['Pages']['1']
-                try:
-                    new_dict[key]["2"] = data[key]['Pages']['2']
-                except KeyError as e:
-                    print(f"only one page on document {key}")
-                dict_str = json.dumps(new_dict[key])
-                prompt = dict_str
+                first_two_pages = {pg_num: value['Pages'][pg_num] for pg_num in ['1', '2'] if pg_num in value['Pages']}
 
-                print(new_dict)
-                print("\n\n")
+                if not first_two_pages:
+                    print(f"No valid pages found for document {key}")
+                    continue
 
+                processed_data[key]['AI Title'] = self.get_title_from_model(model, first_two_pages)
 
-                response = model.generate_content(
-                    contents=prompt
-                )
-                try:
-                    print(response.text)
-                    data[key]['AI Title'] = response.text
-                except:
-                    data[key]['AI Title'] = "No response"
+                self.handle_timeout(doc_count)
 
-                if doc_count % 10 == 0:
-                    print(f"timeout number {doc_count/10}")
-                    time.sleep(60)
-                else:
-                    time.sleep(2)
+        return processed_data
 
-        return data
+    def get_title_from_model(self, model, first_two_pages):
+        prompt = json.dumps(first_two_pages)
+
+        response = model.generate_content(
+            contents=prompt
+        )
+        try:
+            print(response.text)
+            return response.text
+        except:
+            print(f"Failed to get response from model")
+            return "No response"
+
+    @staticmethod
+    def is_file_updated(file_name, URL_info):
+        try:
+            return URL_info[file_name]['file_updated']
+        except KeyError:
+            return False
+
+    def handle_timeout(self, doc_count):
+        timeout = 60
+        if doc_count % 10 == 0:
+            global gemini_update
+            gemini_update = "Timeout due to free model limitation reached - 60 seconds wait"
+            print(f"Timeout number {doc_count / 10}")
+            time.sleep(timeout)
+        else:
+            time.sleep(2)
 
     def get_amendment_and_rationale(self, search_results, prompt):
         global gemini_update
@@ -90,75 +97,79 @@ class Obj2AI():
                              )
         model = APIConnect.gemini_connect(system_definition)
 
-        data = self.get_sections_using_hugface(search_results)
+        search_results = self.get_sections_using_hugface(search_results)
         max_reference_input = 3
 
-        instances_search = {}
-        total_count = 0
-
-        for key,value in data.items():
-            instances_search[key] = []
-            reference_num = 0
-            for i in range(0, len(value), max_reference_input):
-                combined_dict = {}
-
-                for j in range(max_reference_input):
-                    if i + j < len(value):  # Check if the index exists
-                        total_count +=1
-                        combined_dict[reference_num] = value[i+j]['Reference']
-                        reference_num += 1
-
-                instances_search[key].append(combined_dict)
+        instances_search, total_count = self.prepare_instances(search_results, max_reference_input)
 
         print(f"Total instances found: {total_count}")
 
-        # return instances_search
-        timeout = 60
+        data = self.process_instances(instances_search, prompt, model, search_results)
+
+        gemini_update = f"Finished searching for amendments"
+        return data
+
+    def process_instances(self, instances_search, prompt, model, search_results):
+        global gemini_update
         instance_count = 0
         for key, instance_group in instances_search.items():
             gemini_update = f"Searching for amendments for {key}"
+            print(gemini_update)
             print(f"filename {key}")
             print(f"instance_group: {instance_group}")
             for instance in instance_group:
                 print(f"instance: {instance}")
                 instance_count += 1
                 query = f"Prompt: {prompt}\n References :{instance}"
-                retries = 0
-                response = ""
-                response_failed = False
-                while retries < 6:
-                    try:
-                        response = model.generate_content(
-                            contents=query
-                        )
-                        break
-                    except:
-                        retries += 1
-                        print(f"Error getting response from api call - trial {retries}")
-                        if retries == 6:
-                            response_failed = True
-                            gemini_update = f"Could not get amendment for {key}"
-                            if (instance_count + retries) % 15 == 0:
-                                gemini_update = f"Timeout due to AI input limit"
-                                time.sleep(timeout)
-                            break
-                        time.sleep(2)
-                if instance_count % 10 == 0:
-                    print(f"time out number: {instance_count/10}")
-                    gemini_update = f"Timeout due to AI input limit"
-                    time.sleep(timeout)
+                response_success, response = self.get_response_from_model(model, query, instance_count)
+                self.handle_timeout(instance_count)
 
-                if not response_failed:
+                if response_success:
                     print(response.text)
-
                     actual_dict = self.convert_to_dict(response.text)
-
                     print(actual_dict)
+                    search_results = self.add_response_to_search_results(search_results, actual_dict, key)
 
-                    data = self.add_response_to_search_results(search_results, actual_dict, key)
+        return search_results
 
-        gemini_update = f"Finished searching for amendments"
-        return data
+    def get_response_from_model(self, model, query, instance_count):
+        retries = 0
+        response_success = True
+        response = ""
+
+        while retries <= 6:
+            try:
+                response = model.generate_content(contents=query)
+                break
+            except:
+                retries += 1
+                print(f"Error getting response from API call - trial {retries}")
+                if retries == 6:
+                    response_success = False
+                    global gemini_update
+                    gemini_update = f"Could not get amendment for instance"
+                    break
+                self.handle_timeout(instance_count + retries)
+
+        return response_success, response
+
+    def prepare_instances(self, data, max_reference_input):
+        instances_search = {}
+        total_count = 0
+
+        for key, value in data.items():
+            instances_search[key] = []
+            reference_num = 0
+            for i in range(0, len(value), max_reference_input):
+                combined_dict = {}
+                for j in range(max_reference_input):
+                    if i + j < len(value):
+                        total_count += 1
+                        combined_dict[reference_num] = value[i + j]['Reference']
+                        reference_num += 1
+                instances_search[key].append(combined_dict)
+
+        return instances_search, total_count
 
     def convert_to_dict(self, input_str):
         result = {}
@@ -183,8 +194,8 @@ class Obj2AI():
 
         return result
 
-    def add_response_to_search_results(self, search_results,response, file_name):
-        #turn the response into an actual dictionary
+    def add_response_to_search_results(self, search_results, response, file_name):
+        # turn the response into an actual dictionary
 
         for key, value in response.items():
             for key2, value2 in value.items():
@@ -203,63 +214,117 @@ class Obj2AI():
 
         global gemini_update
 
-        with open(processed_file, "r") as f:
-            processed_data = json.load(f)
+        processed_data = self.load_processed_data(processed_file)
 
         file_count = 1
 
         for key, value in search_results.items():
             gemini_update = f"Finding section titles and numbers. file: {file_count} of {len(search_results)}"
+            print(gemini_update)
             for result in value:
                 index = value.index(result)
                 reference = result["Reference"]
                 page_number = int(result["Page"])
                 page_content = processed_data[key]['Pages'][str(page_number)]
-                if page_number > 1:
-                    pre_page = processed_data[key]['Pages'][str(page_number-1)]
-                else:
-                    pre_page = ""
-
-                #Adjusted from Lisa's code
-                prompt = (f"Can you get the section number and section title of the following text?\n {reference} \n"
-                          f"Please provide the section number and title in the format: "
-                          f"Section Number: xxx. \n Section Title: xxx. If you can't return 'Not Found'. "
-                          f"here is the current page context: {page_content} . "
-                          f"And here is the pre page context: {pre_page}")
-                max_retry = 3
-                retry_count = 0
-                query_result = None
-                chatbot = APIConnect.hugchat_connect_section()
-                section_number = "Unknown"
-                section_title = "Unknown"
-                should_continue = True
-                while retry_count < max_retry and query_result is None and should_continue:
-                    try:
-                        query_result = chatbot.chat(prompt)
-                        if query_result is not None:
-                            query_text = str(
-                                query_result)  # Extract text content from the Message object
-                            lines = query_text.split('\n')
-                            for line in lines:
-                                if line.startswith("Section Number: "):
-                                    section_number = line.split(":")[1].strip()
-                                elif line.startswith("Section Title: "):
-                                    section_title = line.split(":")[1].strip()
-                    except Exception as e:
-                        print(f"An error occurred while querying the chatbot: {e}")
-                        if "too many" in str(e).lower():
-                            print("Too many requests error reached, waiting 15 seconds...")
-                            time.sleep(15)
-                        retry_count += 1
-                    time.sleep(2)  # always wait after each query attempt
+                pre_page = processed_data[key]['Pages'].get(str(page_number - 1), "") if page_number > 1 else ""
+                print(f"Constructing prompt")
+                # Adjusted from Lisa's code
+                prompt = self.construct_prompt(reference, page_content, pre_page)
+                print(f"Finished constructing prompt")
+                section_number, section_title = self.get_section_info(prompt)
                 search_results[key][index]['Section Number'] = section_number
                 search_results[key][index]['Section Title'] = section_title
+                # max_retry = 3
+                # retry_count = 0
+                # query_result = None
+                # chatbot = APIConnect.hugchat_connect_section()
+                # section_number = "Unknown"
+                # section_title = "Unknown"
+                # should_continue = True
+                # while retry_count < max_retry and query_result is None and should_continue:
+                #     try:
+                #         query_result = chatbot.chat(prompt)
+                #         if query_result is not None:
+                #             query_text = str(
+                #                 query_result)  # Extract text content from the Message object
+                #             lines = query_text.split('\n')
+                #             for line in lines:
+                #                 if line.startswith("Section Number: "):
+                #                     section_number = line.split(":")[1].strip()
+                #                 elif line.startswith("Section Title: "):
+                #                     section_title = line.split(":")[1].strip()
+                #     except Exception as e:
+                #         print(f"An error occurred while querying the chatbot: {e}")
+                #         if "too many" in str(e).lower():
+                #             print("Too many requests error reached, waiting 15 seconds...")
+                #             time.sleep(15)
+                #         retry_count += 1
+                #     time.sleep(2)  # always wait after each query attempt
+                # search_results[key][index]['Section Number'] = section_number
+                # search_results[key][index]['Section Title'] = section_title
 
             file_count += 1
 
         gemini_update = "Section finding finished!"
+        print(gemini_update)
         return search_results
 
+    def load_processed_data(self, processed_file):
+        try:
+            with open(processed_file, "r") as f:
+                return json.load(f)
+        except FileNotFoundError as e:
+            print(f"Processed file not found: {e}")
+            raise
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON from processed file: {e}")
+            raise
+
+    def construct_prompt(self, reference, page_content, pre_page):
+        return (f"Can you get the section number and section title of the following text?\n{reference}\n"
+                f"Please provide the section number and title in the format: "
+                f"Section Number: xxx.\nSection Title: xxx. If you can't return 'Not Found'.\n"
+                f"Here is the current page context: {page_content}.\n"
+                f"And here is the pre page context: {pre_page}")
+
+    def get_section_info(self, prompt, max_retry = 3):
+        chatbot = APIConnect.hugchat_connect_section()
+        retry_count = 0
+        section_number = "Unknown"
+        section_title = "Unknown"
+
+        while retry_count < max_retry:
+            try:
+                print(f"Sending request to chatbot")
+                query_result = chatbot.chat(prompt)
+                print(f"Result before parsing the response: {query_result}")
+                if query_result:
+                    section_number, section_title = self.parse_query_result(query_result)
+                    break
+            except Exception as e:
+                print(f"Error querying the chatbot: {e}")
+                if "too many" in str(e).lower():
+                    print("Too many requests error, waiting 15 seconds...")
+                    time.sleep(15)
+                retry_count += 1
+            time.sleep(2)  # Always wait after each query attempt
+
+        return section_number, section_title
+
+    def parse_query_result(self, query_result):
+        section_number = "Unknown"
+        section_title = "Unknown"
+        query_text = str(query_result)
+        lines = query_text.split('\n')
+        print(f"parsing result")
+        print(query_text)
+        for line in lines:
+            if line.startswith("Section Number: "):
+                section_number = line.split(":")[1].strip()
+            elif line.startswith("Section Title: "):
+                section_title = line.split(":")[1].strip()
+
+        return section_number, section_title
 
 if __name__ == "__main__":
     gemini = Obj2AI()
@@ -272,7 +337,12 @@ if __name__ == "__main__":
     # search_results = gemini.get_sections_using_hugface(data)
 
     # print(search_results)
+    with open("processed.json", "r") as f:
+        processed_data = json.load(f)
 
-    test = gemini.get_amendment_and_rationale(data, prompt)
-    with open("instances2.json", "w") as file:
-        json.dump(test, file)
+    with open("doc_type.json", "r") as f:
+        URL_info = json.load(f)
+
+    # test = gemini.get_amendment_and_rationale(data, prompt)
+    # with open("instances2.json", "w") as file:
+    #     json.dump(test, file)

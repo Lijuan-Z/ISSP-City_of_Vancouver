@@ -150,5 +150,6 @@ if __name__ == '__main__':
              'Part9_Schedule9A', 'policy-plan-vancouver', 'zoning-by-law-district-schedule-rm-1']
 
     dictionary = search_files(files=files, json_path=json_file_path, search_terms=search_terms)
-    output_file = 'output_test.json'
+
+    output_file = 'output_test2.json'
     write_to_json(dictionary, output_file)
