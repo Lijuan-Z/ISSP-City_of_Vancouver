@@ -24,6 +24,14 @@ thread_event_o3 = threading.Event()
 # config file for information management
 config = configparser.ConfigParser()
 config.read('development.ini')
+config.read('credential.ini')
+
+
+print(config.get('hf1', 'name'))
+print(config.get('hf1', 'password'))
+print(config.get('hf2', 'name'))
+print(config.get('hf2', 'password'))
+print(config.get('gemini', 'key'))
 
 # preload the stored doc_type.json for retreiving last update date
 latest_doc_type = read_previous_source(config.get('server', 'doc_file'))
