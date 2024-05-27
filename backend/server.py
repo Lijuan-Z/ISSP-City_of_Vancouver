@@ -182,6 +182,11 @@ def home():
     app.logger.info("A request is received for loading home page")
     return render_template('index.html')
 
+@app.route('/lazer')
+def lazer():
+    app.logger.info("A request is received for loading /lazer page")
+    return render_template('lazer.html')
+
 @app.route("/update/<sub_path>")
 def update_sub(sub_path):
     if sub_path == "info":
@@ -331,7 +336,7 @@ def data_o3():
     try:
         # need to check whether output_o3.xlsx exist
         output = {"data": obj3_v2.o3_message,
-                  "is_created": False}
+                  "in_search": o3_status}
 
         app.logger.info(f"/data: returning {len(output)} files response")
         response = app.response_class(
