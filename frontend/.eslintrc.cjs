@@ -11,6 +11,7 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
+    "linebreak-style": 0,
     'react/react-in-jsx-scope': 'off',
     'import/extensions': 'off',
   },

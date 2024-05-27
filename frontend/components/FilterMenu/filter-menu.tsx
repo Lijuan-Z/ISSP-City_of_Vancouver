@@ -15,13 +15,14 @@ export type FilterTagsType = {
 export type FilterMenuProps = {
     filterTags: string[]
     setFilterTags: Dispatch<SetStateAction<string[]>>,
+    filterMenuDescription: string
     // keepFiltersConsistent: (tags: string[]) => void
 };
 
 const FilterMenu = memo(({
                              filterTags,
                              setFilterTags,
-
+                             filterMenuDescription,
                          }: FilterMenuProps) => {
     const { files: fileData } = useContext(FilesContext);
     const fileNames = fileData.map(item => item['webpage-title']);
@@ -93,6 +94,8 @@ const FilterMenu = memo(({
 
     return (
         <TagsInput
+          withAsterisk
+          description={filterMenuDescription}
           leftSection={
                 <ActionIcon size={32} radius="xl" color={theme.primaryColor} variant="white">
                     <IconAdjustmentsHorizontal
@@ -104,8 +107,8 @@ const FilterMenu = memo(({
                 </ActionIcon>
             }
           style={{
-                minWidth: '350px',
-                maxWidth: '350px',
+                minWidth: '450px',
+                maxWidth: '450px',
             }}
           placeholder="Filter tags"
           data={dropdownData}
