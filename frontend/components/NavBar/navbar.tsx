@@ -8,12 +8,12 @@ import classes from './NavbarSimple.module.css';
 const data = [
     {
         link: '/',
-        label: 'Objective One',
+        label: 'Consequential Amendments',
         icon: IconPdf,
     },
     {
         link: '/lazer',
-        label: 'Objective Three',
+        label: 'Digitization of District Schedule',
         icon: IconDatabase,
 
     },

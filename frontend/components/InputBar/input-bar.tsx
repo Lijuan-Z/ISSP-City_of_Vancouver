@@ -6,14 +6,17 @@ import { rem } from 'polished';
 type InputPropsType = {
     keywords: string[]
     setKeywords: Dispatch<SetStateAction<string[]>>
+    inputBarDescription: string
 } & TextInputProps;
 
 const InputBar = forwardRef<TextInputProps, InputPropsType>(({
-                                                                               setKeywords,
-                                                                               keywords,
-                                                                           }, ref) => {
+                                                                 setKeywords,
+                                                                 keywords,
+                                                                 inputBarDescription,
+                                                             }, ref) => {
     const theme = useMantineTheme();
     return <TagsInput
+      withAsterisk
       ref={ref as any}
       placeholder="Search keyword(s)..."
       data={[]}
@@ -21,9 +24,10 @@ const InputBar = forwardRef<TextInputProps, InputPropsType>(({
       onChange={setKeywords}
       clearable
       style={{
-            minWidth: '400px',
-            maxWidth: '400px',
+            minWidth: '600px',
+            maxWidth: '600px',
         }}
+      description={inputBarDescription}
       leftSection={
             <ActionIcon size={32} radius="xl" color={theme.primaryColor} variant="white">
                 <IconSearch
