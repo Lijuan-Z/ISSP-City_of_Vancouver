@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { ActionIcon, Button, Modal } from '@mantine/core';
+import { Button, Modal } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 import Information from '@/components/Information/information';
 
