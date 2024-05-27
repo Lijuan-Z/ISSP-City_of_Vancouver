@@ -24,6 +24,7 @@ const Lazer = () => {
             >
                 <Center>
                     <FilterMenu
+                      filterMenuDescription="Select document(s) and/or document type(s) from the list:"
                       filterTags={filterTags}
                       setFilterTags={setFilterTags}
                     />
