@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useDisclosure } from '@mantine/hooks';
-import { ActionIcon, Modal } from '@mantine/core';
+import { ActionIcon, Button, Modal } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 import Information from '@/components/Information/information';
 
@@ -16,16 +16,23 @@ const Settings1 = () => {
         <div>
 
             <Modal opened={opened} onClose={close} centered>
-               <Information />
+                <Information />
             </Modal>
-            <ActionIcon variant="transparent" aria-label="Settings">
-                <IconInfoCircle
-                  color="#0484CB"
-                  size={30}
-                  onClick={open}
-                  cursor="pointer"
-                />
-            </ActionIcon>
+            <Button
+              variant="filled"
+              aria-label="Settings"
+              onClick={open}
+              leftSection={
+                    <IconInfoCircle
+                      color="white"
+                      size={30}
+                      cursor="pointer"
+                    />
+
+                }
+            >
+                Update Files
+            </Button>
 
         </div>);
 };
