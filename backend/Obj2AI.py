@@ -10,6 +10,16 @@ gemini_update = ""
 class Obj2AI():
 
     def find_title(self, URL_info, processed_data):
+        """
+        Finds and sets the title of each document based on the first two pages of its content.
+
+        Parameters:
+        URL_info (dict): A dictionary containing information about URLs.
+        processed_data (dict): A dictionary containing processed document data.
+
+        Returns:
+        dict: Updated processed_data with AI-determined titles.
+        """
         global gemini_update
         system_definition = ("You are going to receive the first 2 pages of a document in form of a dictionary,"
                              "The format is {<page_number>: <content>}."
@@ -42,6 +52,16 @@ class Obj2AI():
         return processed_data
 
     def get_title_from_model(self, model, first_two_pages):
+        """
+        Gets the title of a document from the AI model using the first two pages.
+
+        Parameters:
+        model: The AI model used to generate the title.
+        first_two_pages (dict): A dictionary containing the first two pages of the document.
+
+        Returns:
+        str: The title of the document.
+        """
         prompt = json.dumps(first_two_pages)
 
         response = model.generate_content(
@@ -56,12 +76,32 @@ class Obj2AI():
 
     @staticmethod
     def is_file_updated(file_name, URL_info):
+        """
+        Checks if a file has been updated based on the URL information.
+
+        Parameters:
+        file_name (str): The name of the file.
+        URL_info (dict): A dictionary containing information about URLs.
+
+        Returns:
+        bool: True if the file has been updated, False otherwise.
+        """
         try:
             return URL_info[file_name]['file_updated']
         except KeyError:
             return False
 
     def handle_timeout(self, doc_count, timout_trigger=10):
+        """
+        Handles timeout to manage the rate of requests to the AI model.
+
+        Parameters:
+        doc_count (int): The current document count.
+        timout_trigger (int): The document count at which to trigger a timeout.
+
+        Returns:
+        None
+        """
         timeout = 60
         if doc_count % timout_trigger == 0:
             global gemini_update
@@ -72,6 +112,16 @@ class Obj2AI():
             time.sleep(2)
 
     def get_amendment_and_rationale(self, search_results, prompt):
+        """
+        Gets amendments and rationales for given search results based on a prompt.
+
+        Parameters:
+        search_results (dict): A dictionary containing search results.
+        prompt (str): The prompt to guide the AI in generating amendments and rationales.
+
+        Returns:
+        dict: Updated search results with amendments and rationales.
+        """
         global gemini_update
         system_definition = ('You are receiving some pieces of information in dictionary format'
                              'The format is {<reference number>: <content>}.'
@@ -110,6 +160,18 @@ class Obj2AI():
         return data
 
     def process_instances(self, instances_search, prompt, model, search_results):
+        """
+        Processes instances to get amendments and rationales.
+
+        Parameters:
+        instances_search (dict): A dictionary containing instances to search.
+        prompt (str): The prompt to guide the AI in generating amendments and rationales.
+        model: The AI model used to generate amendments and rationales.
+        search_results (dict): A dictionary containing search results.
+
+        Returns:
+        dict: Updated search results with amendments and rationales.
+        """
         global gemini_update
         instance_count = 0
         for key, instance_group in instances_search.items():
@@ -133,6 +195,17 @@ class Obj2AI():
         return search_results
 
     def get_response_from_model(self, model, query, instance_count):
+        """
+        Gets a response from the AI model.
+
+        Parameters:
+        model: The AI model used to generate content.
+        query (str): The query to send to the AI model.
+        instance_count (int): The current instance count.
+
+        Returns:
+        tuple: A tuple containing a boolean indicating success and the response text.
+        """
         retries = 0
         response_success = True
         response = ""
@@ -154,6 +227,16 @@ class Obj2AI():
         return response_success, response
 
     def prepare_instances(self, data, max_reference_input):
+        """
+        Prepares instances for searching.
+
+        Parameters:
+        data (dict): A dictionary containing data to search.
+        max_reference_input (int): The maximum number of references to input at a time.
+
+        Returns:
+        tuple: A tuple containing instances to search and the total count.
+        """
         instances_search = {}
         total_count = 0
 
@@ -172,6 +255,15 @@ class Obj2AI():
         return instances_search, total_count
 
     def convert_to_dict(self, input_str):
+        """
+        Converts an input string to a dictionary.
+
+        Parameters:
+        input_str (str): The input string to convert.
+
+        Returns:
+        dict: The converted dictionary.
+        """
         result = {}
         lines = input_str.strip().split('\n')
 
@@ -195,8 +287,17 @@ class Obj2AI():
         return result
 
     def add_response_to_search_results(self, search_results, response, file_name):
-        # turn the response into an actual dictionary
+        """
+        Adds the response from the AI model to the search results.
 
+        Parameters:
+        search_results (dict): A dictionary containing search results.
+        response (dict): A dictionary containing the AI model response.
+        file_name (str): The name of the file being processed.
+
+        Returns:
+        dict: Updated search results with AI-generated amendments and rationales.
+        """
         for key, value in response.items():
             for key2, value2 in value.items():
                 index = int(key)
@@ -211,6 +312,16 @@ class Obj2AI():
         return search_results
 
     def get_sections_using_hugface(self, search_results, processed_file="processed_final.json"):
+        """
+        Retrieves section titles and numbers using the Hugging Face API (default model Cohere for AI).
+
+        Parameters:
+        search_results (dict): A dictionary containing search results.
+        processed_file (str): The file path for processed data. Defaults to "processed_final.json".
+
+        Returns:
+        dict: Updated search results with section numbers and titles.
+        """
 
         global gemini_update
 
@@ -246,6 +357,15 @@ class Obj2AI():
         return search_results
 
     def load_processed_data(self, processed_file):
+        """
+        Loads processed data from a JSON file.
+
+        Parameters:
+        processed_file (str): The file path for the processed data.
+
+        Returns:
+        dict: The loaded processed data.
+        """
         try:
             with open(processed_file, "r") as f:
                 return json.load(f)
@@ -257,6 +377,17 @@ class Obj2AI():
             raise
 
     def construct_prompt(self, reference, page_content, pre_page):
+        """
+        Constructs a prompt for querying the AI model.
+
+        Parameters:
+        reference (str): The reference text to be included in the prompt.
+        page_content (str): The content of the current page.
+        pre_page (str): The content of the previous page.
+
+        Returns:
+        str: The constructed prompt.
+        """
         return (f"Can you get the section number and section title of the following text?\n{reference}\n"
                 f"Please provide the section number and title in the format: "
                 f"Section Number: xxx.\nSection Title: xxx. If you can't return 'Not Found'.\n"
@@ -264,6 +395,16 @@ class Obj2AI():
                 f"And here is the pre page context: {pre_page}")
 
     def get_section_info(self, prompt, max_retry = 3):
+        """
+        Retrieves section information using the AI model.
+
+        Parameters:
+        prompt (str): The prompt to send to the AI model.
+        max_retry (int): The maximum number of retry attempts. Defaults to 3.
+
+        Returns:
+        tuple: A tuple containing the section number and section title.
+        """
         chatbot = APIConnect.hugchat_connect_section()
         retry_count = 0
         timeout = 45
@@ -289,6 +430,15 @@ class Obj2AI():
         return section_number, section_title
 
     def parse_query_result(self, query_result):
+        """
+        Parses the query result from the AI model to extract section information.
+
+        Parameters:
+        query_result (str): The query result to parse.
+
+        Returns:
+        tuple: A tuple containing the section number and section title.
+        """
         section_number = "Unknown"
         section_title = "Unknown"
         query_text = str(query_result)
