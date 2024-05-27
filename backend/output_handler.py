@@ -1,9 +1,23 @@
 import pandas as pd
+from openpyxl import Workbook
 import json
 import re
 import ast
 
 class OutputHandler:
+
+    @staticmethod
+    def output_for_objective3(data, headers_df, excel_file_name):
+        # Create a new Excel file if it doesn't exist
+        try:
+            wb = Workbook()
+            wb.save(excel_file_name)
+        except Exception as e:
+            print(f"An error occurred while creating the Excel file: {e}")
+        with pd.ExcelWriter(excel_file_name, mode="a", engine="openpyxl", if_sheet_exists="overlay", ) as writer:
+            headers_df.to_excel(writer, sheet_name="Sheet", index=False)
+            df = pd.DataFrame(data)
+            df.to_excel(writer, sheet_name="Sheet", index=False)
 
     @staticmethod
     def create_excel_file(json_obj, output_file="output.xlsx"):
