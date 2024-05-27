@@ -58,14 +58,25 @@ def search_files(files, json_path, search_terms=None):
     """
     nested_metadata_dict = {}
     json_data = load_json(json_path)
+    found_file = False
 
     if json_data:
         if search_terms is not None:
-            nested_metadata_dict = search_in_json_data(json_data, files, search_terms)
+            nested_metadata_dict, found_file = search_in_json_data(json_data, files, search_terms)
     else:
         print("No data loaded from JSON file.")
 
-    return nested_metadata_dict
+    return check_files_and_search_results(nested_metadata_dict, found_file)
+
+
+def check_files_and_search_results(search_results, found_file):
+    if found_file and search_results:
+        return search_results, found_file
+    elif found_file and not search_results:
+        return "No search terms found in the files", False
+    else:
+        return "Files not found", False
+
 
 def search_in_json_data(json_data, files, search_terms):
     """
@@ -80,12 +91,15 @@ def search_in_json_data(json_data, files, search_terms):
         dict: Nested dictionary containing search results.
     """
     nested_metadata_dict = {}
+    found_file = False
 
     for file_name, file_data in json_data.items():
         if 'Pages' in file_data and file_name[:-4] in files:
+            found_file = True
             search_terms_in_file(file_name, file_data, search_terms, nested_metadata_dict)
 
-    return nested_metadata_dict
+    return nested_metadata_dict, found_file
+
 
 def search_terms_in_file(file_name, file_data, search_terms, nested_metadata_dict):
     """
