@@ -38,7 +38,7 @@ const SearchBar1 = () => {
             searchKeywords(keywords, getFilterTagsType(filterTags), openedTextBox, prompt)
                 .catch(error => setSearchError(error.message));
         } catch (e) {
-            console.log(e);
+            e;
         }
     };
 
@@ -53,8 +53,9 @@ const SearchBar1 = () => {
                 >
                     <Blockquote color="blue" iconSize={30} icon={<IconInfoCircle />} mt="sm" p={12}>
                         <Text size="xs">
-                            Please update the files by clicking
-                            the 'Update Files' button on the top right and clicking 'update'.
+                            Please update the files by clicking the
+                            &apos;Update Files&apos; button on the top right
+                            and clicking &apos;update&apos;.
                         </Text>
                     </Blockquote>
                 </Box>
