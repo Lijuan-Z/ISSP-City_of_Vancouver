@@ -147,9 +147,10 @@ if __name__ == '__main__':
     search_terms = ['parking', 'lane']
     files = ['4837c', 'bulletin-floor-area-calculation-tracing-overlay', 'bulletin-ra-1-perimeter-landscaping', 'F001',
              'guidelines-cd-1-little-mountain', 'guidelines-fc-1-east-false-creek', 'odp-false-creek',
-             'Part9_Schedule9A', 'policy-plan-vancouver', 'zoning-by-law-district-schedule-rm-1']
+             'Part9_Schedule9A', 'policy-plan-vancouver', 'zoning-by-law-district-schedule-rm-1', 'blablabla']
+    only_wrong_files = ['wrong1', 'wrong2']
 
-    dictionary = search_files(files=files, json_path=json_file_path, search_terms=search_terms)
+    dictionary = search_files(files=only_wrong_files, json_path=json_file_path, search_terms=search_terms)
 
-    output_file = 'output_test2.json'
+    output_file = 'output_test3.json'
     write_to_json(dictionary, output_file)

@@ -61,12 +61,12 @@ class Obj2AI():
         except KeyError:
             return False
 
-    def handle_timeout(self, doc_count):
+    def handle_timeout(self, doc_count, timout_trigger=10):
         timeout = 60
-        if doc_count % 10 == 0:
+        if doc_count % timout_trigger == 0:
             global gemini_update
             gemini_update = "Timeout due to free model limitation reached - 60 seconds wait"
-            print(f"Timeout number {doc_count / 10}")
+            print(f"Timeout number {doc_count / timout_trigger}")
             time.sleep(timeout)
         else:
             time.sleep(2)
@@ -217,6 +217,8 @@ class Obj2AI():
         processed_data = self.load_processed_data(processed_file)
 
         file_count = 1
+        start_section = time.time()
+        result_count = 1
 
         for key, value in search_results.items():
             gemini_update = f"Finding section titles and numbers. file: {file_count} of {len(search_results)}"
@@ -232,41 +234,15 @@ class Obj2AI():
                 prompt = self.construct_prompt(reference, page_content, pre_page)
                 print(f"Finished constructing prompt")
                 section_number, section_title = self.get_section_info(prompt)
+                self.handle_timeout(result_count, 5)
                 search_results[key][index]['Section Number'] = section_number
                 search_results[key][index]['Section Title'] = section_title
-                # max_retry = 3
-                # retry_count = 0
-                # query_result = None
-                # chatbot = APIConnect.hugchat_connect_section()
-                # section_number = "Unknown"
-                # section_title = "Unknown"
-                # should_continue = True
-                # while retry_count < max_retry and query_result is None and should_continue:
-                #     try:
-                #         query_result = chatbot.chat(prompt)
-                #         if query_result is not None:
-                #             query_text = str(
-                #                 query_result)  # Extract text content from the Message object
-                #             lines = query_text.split('\n')
-                #             for line in lines:
-                #                 if line.startswith("Section Number: "):
-                #                     section_number = line.split(":")[1].strip()
-                #                 elif line.startswith("Section Title: "):
-                #                     section_title = line.split(":")[1].strip()
-                #     except Exception as e:
-                #         print(f"An error occurred while querying the chatbot: {e}")
-                #         if "too many" in str(e).lower():
-                #             print("Too many requests error reached, waiting 15 seconds...")
-                #             time.sleep(15)
-                #         retry_count += 1
-                #     time.sleep(2)  # always wait after each query attempt
-                # search_results[key][index]['Section Number'] = section_number
-                # search_results[key][index]['Section Title'] = section_title
-
+                result_count += 1
             file_count += 1
 
         gemini_update = "Section finding finished!"
         print(gemini_update)
+        print(f"{time.time() - start_section}")
         return search_results
 
     def load_processed_data(self, processed_file):
@@ -290,12 +266,13 @@ class Obj2AI():
     def get_section_info(self, prompt, max_retry = 3):
         chatbot = APIConnect.hugchat_connect_section()
         retry_count = 0
-        section_number = "Unknown"
-        section_title = "Unknown"
+        timeout = 45
+        section_number = "Unknown - Error from huggingchat AI platform."
+        section_title = "Unknown - Error from huggingchat AI platform."
 
-        while retry_count < max_retry:
+        while retry_count < max_retry and chatbot is not None:
+
             try:
-                print(f"Sending request to chatbot")
                 query_result = chatbot.chat(prompt)
                 print(f"Result before parsing the response: {query_result}")
                 if query_result:
