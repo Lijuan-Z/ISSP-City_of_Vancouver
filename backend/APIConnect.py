@@ -1,7 +1,5 @@
 from hugchat import hugchat
 from hugchat.login import Login
-from config import EMAIL, PASSWD
-from config import GOOGLE_API_KEY
 import google.generativeai as genai
 import time
 import configparser

@@ -135,7 +135,7 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
             time.sleep(WAITING_TIME)
 
             start_index = output_str.find("[")
-            end_index = output_str.find("]") + 1
+            end_index = output_str.rfind("]") + 1
             array_of_dicts_str = output_str[start_index:end_index]
             print(array_of_dicts_str)
             o3_message = f"Aggregate information for output (step 4 of 4)"
@@ -330,7 +330,7 @@ def enter_obj3(file_list):
 
     process_status = []
     for file_name in file_list:
-        full_file_name = os.path.join('downloaded_pdfs', file_name + '.pdf')
+        full_file_name = os.path.join('../downloaded_pdfs', file_name + '.pdf')
         url = get_file_url(file_name, data_dict)
 
         is_AI_works, result = search_pdf(full_file_name, chatbot, FSR_keywords)
@@ -376,7 +376,7 @@ def enter_obj3(file_list):
 
                         all_result.append(sc_row_data)
         save_to_json(temp_json_file, all_result)
-    output_filename = "output_obj3"
+    output_filename = "excel_output/output_obj3"
     formatted_time = current_date.strftime("%Y-%m-%d-%H%M")
     excel_file_name = f"{output_filename}_{formatted_time}.xlsx"
 
