@@ -370,7 +370,7 @@ def search_o3():
 
 @app.route("/search", methods=["POST"])
 def search():
-    # try:
+    try:
         file_data = request.json
         app.logger.info(f'/search: received a request of {file_data["data"]["search-terms"]}')
 
@@ -386,9 +386,9 @@ def search():
         else:
            app.logger.error(f"/search: receive an empty query and returning status code 404")
            abort(404)
-    # except Exception as e:
-    #     app.logger.error(f"/search: Error in loading file - {e}")
-    #     abort(500)
+    except Exception as e:
+        app.logger.error(f"/search: Error in loading file - {e}")
+        abort(500)
 
 @app.route("/data")
 def data():
