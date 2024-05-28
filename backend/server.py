@@ -32,7 +32,7 @@ last_update_date = max(list([list(obj.values())[0]["Last update"] for obj in lat
 app = Flask(__name__)
 # app._static_folder = "_next/static"
 CORS(app)
-gemini = GeminiAPI.Obj2AI()
+gemini = Obj2AI.Obj2AI()
 update_status = False
 o2_status = False
 o3_status = False
