@@ -35,13 +35,18 @@ CORS(app)
 gemini = Obj2AI.Obj2AI()
 update_status = False
 o2_status = False
+o2_output_info = ""
 o3_status = False
 
 
 def o2_handler(output_dict, prompt):
-    global  o2_status
+    global o2_status
+    global o2_output_info
     o2_status = True
-    gemini.get_amendment_and_rationale(output_dict, prompt)
+    data = gemini.get_amendment_and_rationale(output_dict, prompt)
+    filename = generate_excel_file_name("2")
+    OutputHandler.create_excel_file(data, f'{config.get("server", "excel_folder")}/{filename}')
+    o2_output_info = f'File is created in folder {config.get("server", "excel_folder")} with filename {filename}'
     o2_status = False
 def o3_handler(file_list):
     global  o3_status
@@ -316,8 +321,12 @@ def update():
 @app.route("/search/info")
 def search_info():
     app.logger.info(f"/search/info: received a request")
-    output = {"ai": Obj2AI.gemini_update,
-              "file_ready": not o2_status}
+    if o2_status:
+        output = {"ai": Obj2AI.gemini_update,
+                  "file_ready": not o2_status}
+    else:
+        output = {"ai": o2_output_info,
+                  "file_ready": not o2_status}
 
     app.logger.info(f"/search: finished scrapping and return response")
     response = app.response_class(
