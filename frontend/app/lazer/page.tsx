@@ -9,16 +9,7 @@ import UpdateReminder from '@/components/UpdateReminder/update-reminder';
 import SearchBar1 from '@/components/SearchBar/search-bar';
 import LazerSearchBar from '@/components/LazerSearchBar/lazer-search-bar';
 
-const Lazer = () => {
-    const [filterTags, setFilterTags] = useState<string[]>([]);
-    const [searchError, setSearchError] = useState('');
-    const { getFilterTagsType } = useContext(FilesContext);
-    const showError = !!searchError;
-    const getLazerOutput = () => {
-        getSearchTagsForLazer(getFilterTagsType(filterTags))
-            .catch(error => setSearchError(error.message));
-    };
-    return (
+const Lazer = () => (
         <Box
           style={{
                 height: '100%',
@@ -31,6 +22,5 @@ const Lazer = () => {
             </Center>
         </Box>
     );
-};
 
 export default Lazer;
