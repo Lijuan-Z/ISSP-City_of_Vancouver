@@ -4,7 +4,10 @@ from config import EMAIL, PASSWD
 from config import GOOGLE_API_KEY
 import google.generativeai as genai
 import time
+import configparser
 
+config = configparser.ConfigParser()
+config.read('credential.ini')
 
 class APIConnect:
     """
@@ -20,7 +23,7 @@ class APIConnect:
             hugchat.ChatBot: An instance of the HugChat bot initialized with user cookies.
         """
         cookie_path_dir = "./cookies/"  # Directory where cookies will be saved; trailing slash is required
-        sign = Login(EMAIL, PASSWD)  # Login instance created with user credentials
+        sign = Login(config.get('hf1', 'name'), config.get('hf1', 'password'))  # Login instance created with user credentials
         cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)  # Perform login and save cookies
         # Create and return ChatBot instance with the obtained cookies
         return hugchat.ChatBot(cookies=cookies.get_dict())  # or use cookie_path="usercookies/<email>.json"
@@ -42,7 +45,7 @@ class APIConnect:
         while attempts < max_retries:
             try:
                 cookie_path_dir = "./cookies/"  # Directory where cookies will be saved; trailing slash is required
-                sign = Login(EMAIL, PASSWD)  # Login instance created with user credentials
+                sign = Login(config.get('hf2', 'name'), config.get('hf2', 'password'))  # Login instance created with user credentials
                 cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)  # Perform login and save cookies
                 # Create and return ChatBot instance with the obtained cookies
                 return hugchat.ChatBot(cookies=cookies.get_dict())  # or use cookie_path="usercookies/<email>.json"
@@ -64,6 +67,6 @@ class APIConnect:
             genai.GenerativeModel: An instance of the Gemini generative model configured with the system definition.
         """
         gemini_model = "gemini-1.5-flash-latest"  # Specify the version of the Gemini model
-        genai.configure(api_key=GOOGLE_API_KEY)  # Configure the genai module with the Google API key
+        genai.configure(api_key=config.get('gemini', 'key'))  # Configure the genai module with the Google API key
         # Create and return an instance of the Gemini generative model with the provided system definition
         return genai.GenerativeModel(gemini_model, system_instruction=system_definition)
