@@ -384,7 +384,7 @@ def enter_obj3(file_list):
     #     df_process_status.to_excel(writer, sheet_name="Process Status", index=False)
     
     OutputHandler.output_for_objective3(data, df, process_status, excel_file_name)
-    
+    o3_message = f'File is created in {excel_file_name}'
     with open(excel_file_name, 'rb') as file:
         file_content = file.read()
     return file_content
