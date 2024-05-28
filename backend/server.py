@@ -138,6 +138,12 @@ def scrap_file_and_data():
             latest_file = read_previous_source(config.get('server', 'doc_file'))
             last_update_date = max(list([list(obj.values())[0]["Last update"] for obj in latest_file]))
 
+            # run process to json function
+            processor = process_to_JSON(config("scrap", "pdf_folder"))
+            dict_info = processor.read_PDFs(image_included=True, URL_info=latest_doc_type)
+            with open(config.get('server', 'processed_json_file'), 'w') as json_file:
+                json.dump(dict_info, json_file, indent=4)
+
             update_status = False
 
         thread_event.clear()
@@ -159,7 +165,8 @@ def scrape_status():
             "file_updated": scrape.file_counter,
             "last_updated": last_update_date,
             "total_updated_files": total_file_to_update,
-            "percentage_updated": f"{percentage_updated:.2f}"
+            "percentage_updated": f"{percentage_updated:.2f}",
+            "ocr": process_to_JSON.process_update
         }
 
 
@@ -279,8 +286,8 @@ def update():
 @app.route("/search/info")
 def search_info():
     app.logger.info(f"/search/info: received a request")
-    output = {"ocr": process_to_JSON.process_update,
-              "ai": GeminiAPI.gemini_update}
+    output = {"ai": Obj2AI.gemini_update,
+              "file_ready": not o2_status}
 
     app.logger.info(f"/search: finished scrapping and return response")
     response = app.response_class(
