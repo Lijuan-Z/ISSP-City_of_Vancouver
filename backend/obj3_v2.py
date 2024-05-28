@@ -13,12 +13,11 @@ import time
 import os
 import PyPDF2
 import re
-from hugchat import hugchat
 from hugchat.login import Login
 import pandas as pd
 from openpyxl import Workbook
 from pandas import ExcelWriter
-from config import EMAIL, PASSWD
+from APIConnect import APIConnect
 
 SECTION1_2 = '1.2 Overview'
 SECTION3 = 'DENSITY, FORM AND PLACEMENT REGULATIONS'
@@ -42,20 +41,6 @@ def is_contain_keyword(keyword, text):
         return re.search(keyword, text)
     else:
         return re.search(keyword, text, re.IGNORECASE)
-
-
-def api_connect():
-    """
-    Establish a connection to the hugging chat API.
-
-    Returns:
-    Connection object: The connection to the API.
-    """
-    cookie_path_dir = "cookies/"  # NOTE: trailing slash (/) is required to avoid errors
-    sign = Login(EMAIL, PASSWD)
-    cookies = sign.login(cookie_dir_path=cookie_path_dir, save_cookies=True)
-    # Create ChatBot
-    return hugchat.ChatBot(cookies=cookies.get_dict())  # or cookie_path="usercookies/<email>.json"
 
 
 def AI_process(input, use_context, chatbot, FSR_keywords):
@@ -290,7 +275,7 @@ def enter_obj3(file_list):
     """
 
     global o3_message
-    chatbot = api_connect()
+    chatbot = APIConnect.hugchat_connect()
 
     FSR_keywords = ['Total FSR Max', 'Residential FSR Max',
                     'Secured Market Rental FSR Max', 'Secured Market Rental%',
