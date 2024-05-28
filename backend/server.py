@@ -56,54 +56,84 @@ def generate_excel_file_name(objective):
     result = result + datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d-%H-%M")
     return result + ".xlsx"
 
+def create_api_excel_file_response(message, input_files, output_file):
+    output_excel = pd.DataFrame({'Message': {"message": message, "files": input_files}})
+    out = io.BytesIO()
+    writer = pd.ExcelWriter(out, engine='xlsxwriter')
+    output_excel.to_excel(excel_writer=writer, index=False, sheet_name='Report')
+    writer.close()
+    # Create response object
+    response = make_response(out.getvalue())
+    # Set headers
+    response.headers["Content-Disposition"] = f"attachment; filename={output_file}"
+    response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    return response
+
+
 # Generate Excel file based on the query
 def generate_response(query, files, enable_ai, prompt):
     start_time = time.time()
     excel_file_path = generate_excel_file_name("1")
 
     output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
-    # tuple is true
-    if enable_ai is True:
-        # For objective 2 - enable Gemini - API AI
-        thread_o2 = threading.Thread(target=o2_handler, args=[output_dict[0], prompt], daemon=True)
-        thread_o2.start()
+    if output_dict[1]:
+        # There is search terms found in the file
 
-        output = f"/search AI is generating report. Request ignored"
+        if enable_ai is True:
+            # For objective 2 - enable Gemini - API AI
+            thread_o2 = threading.Thread(target=o2_handler, args=[output_dict[0], prompt], daemon=True)
+            thread_o2.start()
 
-        app.logger.info(f"/search: AI is returning a response")
-        response = app.response_class(
-            response=json.dumps({"data": output}),
-            status=200,
-            mimetype='application/json'
-        )
-        return response
-    else:
-        # For objective 1 output excel file
-        try:
-            OutputHandler.create_excel_file(output_dict[0],
-                                        output_file=f'{config.get("server", "excel_folder")}/{excel_file_path}')
+            end_time = time.time()
+            elapsed_time = end_time - start_time
+            # Print the elapsed time
+            print("Elapsed time:", elapsed_time, "seconds")
 
-            with open(f'{config.get("server", "excel_folder")}/{excel_file_path}', "rb") as file:
-                file_data = file.read()
+            output = f"/search AI is generating report. We will info you when file is created."
 
-            # Create response object
-            response = make_response(file_data)
-
-            # Set headers
-            response.headers["Content-Disposition"] = f"attachment; filename={excel_file_path}"
-            response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-
+            app.logger.info(f"/search: AI started generating report. Returning a status-code:200 response")
+            response = app.response_class(
+                response=json.dumps({"data": output}),
+                status=200,
+                mimetype='application/json'
+            )
             return response
-        except Exception as e:
-            msg = f"There is either no information for output or an error when searching {query}. code: {e}"
-            print(msg)
-            output_excel = pd.DataFrame({'Error': {"message": msg}})
-            output_excel.to_excel(excel_file_path)
+        else:
+            # For objective 1 output excel file
+            try:
+                OutputHandler.create_excel_file(output_dict[0],
+                                            output_file=f'{config.get("server", "excel_folder")}/{excel_file_path}')
 
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    # Print the elapsed time
-    print("Elapsed time:", elapsed_time, "seconds")
+                with open(f'{config.get("server", "excel_folder")}/{excel_file_path}', "rb") as file:
+                    file_data = file.read()
+
+                end_time = time.time()
+                elapsed_time = end_time - start_time
+                # Print the elapsed time
+                print("Elapsed time:", elapsed_time, "seconds")
+
+                # Create response object
+                response = make_response(file_data)
+                # Set headers
+                response.headers["Content-Disposition"] = f"attachment; filename={excel_file_path}"
+                response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                return response
+
+            except Exception as e:
+                msg = f"There is an error when searching {query}. code: {e}"
+                print(msg)
+                return create_api_excel_file_response(msg, files, excel_file_path)
+
+    else:
+        # No search terms found in the file
+        msg = f"There is no information for output with search term(s): {query}"
+        print(msg)
+        return create_api_excel_file_response(msg, files, excel_file_path)
+
+
+
+
+
 
 
 
@@ -220,7 +250,7 @@ def page_not_found(error):
 @app.errorhandler(500)
 def internal_error(error):
     app.logger.error(f"server encounter error {error.name} and returning status code 500")
-    return render_template('500.html'), 500
+    return {"data": f"Error: The server encounter an error of {error}"}
 
 @app.route('/')
 def home():
