@@ -13,11 +13,12 @@ import time
 import os
 import PyPDF2
 import re
-from hugchat.login import Login
 import pandas as pd
-from openpyxl import Workbook
-from pandas import ExcelWriter
+# from openpyxl import Workbook
+# from pandas import ExcelWriter
 from APIConnect import APIConnect
+from output_handler import OutputHandler 
+
 
 SECTION1_2 = '1.2 Overview'
 SECTION3 = 'DENSITY, FORM AND PLACEMENT REGULATIONS'
@@ -368,20 +369,22 @@ def enter_obj3(file_list):
     with open(temp_json_file, 'r') as json_file:
         data = [json.loads(line) for line in json_file]
     # Create a new Excel file if it doesn't exist
-    try:
-        wb = Workbook()
-        wb.save(excel_file_name)
-    except Exception as e:
-        print(f"An error occurred while creating the Excel file: {e}")
-        o3_message = f"Error: There is a problem when creating the Excel output file."
+    # try:
+    #     wb = Workbook()
+    #     wb.save(excel_file_name)
+    # except Exception as e:
+    #     print(f"An error occurred while creating the Excel file: {e}")
+    #     o3_message = f"Error: There is a problem when creating the Excel output file."
 
-    with ExcelWriter(excel_file_name, mode="a", engine="openpyxl", if_sheet_exists="overlay", ) as writer:
-        df.to_excel(writer, sheet_name="Sheet", index=False)
-        df = pd.DataFrame(data)
-        df.to_excel(writer, sheet_name="Sheet", index=False)
-        df_process_status = pd.DataFrame(process_status)
-        df_process_status.to_excel(writer, sheet_name="Process Status", index=False)
-
+    # with ExcelWriter(excel_file_name, mode="a", engine="openpyxl", if_sheet_exists="overlay", ) as writer:
+    #     df.to_excel(writer, sheet_name="Sheet", index=False)
+    #     df = pd.DataFrame(data)
+    #     df.to_excel(writer, sheet_name="Sheet", index=False)
+    #     df_process_status = pd.DataFrame(process_status)
+    #     df_process_status.to_excel(writer, sheet_name="Process Status", index=False)
+    
+    OutputHandler.output_for_objective3(data, df, process_status, excel_file_name)
+    
     with open(excel_file_name, 'rb') as file:
         file_content = file.read()
     return file_content
