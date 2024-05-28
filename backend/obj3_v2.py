@@ -61,6 +61,8 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
     max_retry = 3
     retry_count = 0
     while retry_count < max_retry:
+        if retry_count > 0:
+            o3_message = f"There are errors replying from HuggingFace API plateform, performing retry {retry_count}"
         try:
             # get use
             use_prompt = ("Identify and list all the 'Use' categories and their corresponding section numbers from the "
@@ -87,7 +89,7 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
             building_result = chatbot.chat(format_prompt)
             time.sleep(WAITING_TIME)
             # print(building_result)
-            o3_message = f"Retrieved basic building information (step 2 of 4)"
+            o3_message = f"Retrieved basic building information (step 2 of 4) of retry {retry_count}"
             prompt = (("Extract the value of those terms and all FSR related values for each 'Use'."
                        "Note: 1)For each 'Use', only search within the section that follows the 'Use' name."
                        "2) FSR is short for 'floor space ratio';"
@@ -108,7 +110,7 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
             fsr_result = chatbot.chat(prompt)
             time.sleep(WAITING_TIME)
             print(fsr_result)
-            o3_message = f"Retrieved FSR information (step 3 of 4)"
+            o3_message = f"Retrieved FSR information (step 3 of 4) of retry {retry_count}"
             format_prompt = ("combine " + str(building_result) + "and" + str(fsr_result)
                              + "together based on 'Use'. "
                                "when combing, if one 'Use' has more than one scenario, "
@@ -124,7 +126,7 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
             end_index = output_str.rfind("]") + 1
             array_of_dicts_str = output_str[start_index:end_index]
             print(array_of_dicts_str)
-            o3_message = f"Aggregate information for output (step 4 of 4)"
+            o3_message = f"Aggregate information for output (step 4 of 4) of retry {retry_count}"
 
             modified_string = array_of_dicts_str.replace('null', 'None')
             array_of_dicts = eval(modified_string)
