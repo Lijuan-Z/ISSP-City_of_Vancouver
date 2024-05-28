@@ -1,19 +1,22 @@
 import { saveAs } from 'file-saver';
 import { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 
-export const searchKeywords = async (keywords: string[], filterTags: FilterTagsType, enableAI?: boolean, aiPrompt?: string) => {
+export const searchKeywords = async (
+    keywords: string[],
+    filterTags: FilterTagsType,
+    enableAI?: boolean,
+    aiPrompt?: string) => {
     console.log(filterTags);
-    const aiSearch = !!enableAI
+    const aiSearch = !!enableAI;
     const requestBody = {
         data: {
             'search-terms': keywords,
             files: filterTags.files,
             categories: filterTags.categories,
             ai: aiSearch,
-            prompt: aiPrompt
+            prompt: aiPrompt,
         },
     };
-    console.log(requestBody);
     const response = await fetch('/search', {
         method: 'POST',
         body: JSON.stringify(requestBody),
@@ -21,12 +24,17 @@ export const searchKeywords = async (keywords: string[], filterTags: FilterTagsT
             'Content-type': 'application/json',
         },
     });
+    console.log(response);
     if (!response.ok) {
-        throw new Error('Failed to submit the data. Please try again.');
+        console.log('response is not ok');
+        const data = await response.json();
+        throw new Error(data.data);
     }
-    const data = await response.blob();
-    const fileName = 'ouptut.xlsx';
-    saveAs(data, fileName);
+    if (!aiSearch) {
+        const data = await response.blob();
+        const fileName = 'ouptut.xlsx';
+        saveAs(data, fileName);
+    }
 };
 
 export const getFilesInformation = async () => {
@@ -71,17 +79,24 @@ export const getSearchTagsForLazer = async (filterTags: FilterTagsType) => {
         },
     });
     if (!response.ok) {
-        throw new Error('Failed to submit the data. Please try again.');
+        const data = await response.json();
+        throw new Error(data.data);
     }
-    const data = await response.blob();
-    const fileName = 'ouptut.xlsx';
-    saveAs(data, fileName);
 };
 
-export const getSearchProgress = async () => {
+export const getConsequentialSearchProgress = async () => {
     const response = await fetch('/search/info');
     if (!response.ok) {
-        throw new Error('Failed to submit the data. Please try again.');
+        throw new Error('Unable to get search progress');
+    }
+    const data = response.json();
+    return data;
+};
+
+export const getLazerSearchProgress = async () => {
+    const response = await fetch('/data/o3');
+    if (!response.ok) {
+        throw new Error('Unable to get search progress');
     }
     const data = response.json();
     return data;
