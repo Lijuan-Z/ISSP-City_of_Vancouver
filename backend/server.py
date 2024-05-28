@@ -249,13 +249,21 @@ def file_filter(file_names, category):
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
 def page_not_found(error):
-    return {"data": f"Error: {error}"}
+    return app.response_class(
+        response=json.dumps({"data": f"Error: The server encounter an error of {error}"}),
+        status=404,
+        mimetype='application/json'
+    )
 
 # return 500 When any there are server errors
 @app.errorhandler(500)
 def internal_error(error):
     app.logger.error(f"server encounter error {error.name} and returning status code 500")
-    return {"data": f"Error: The server encounter an error of {error}"}
+    return app.response_class(
+        response=json.dumps({"data": f"Error: The server encounter an error of {error}"}),
+        status=500,
+        mimetype='application/json'
+    )
 
 @app.route('/')
 def home():
