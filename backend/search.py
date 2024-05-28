@@ -1,8 +1,6 @@
 import json
 import time
 import configparser
-# from search_term import api_connect
-from obj3_v2 import api_connect
 
 # config file for information management
 config = configparser.ConfigParser()
