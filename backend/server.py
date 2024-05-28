@@ -60,36 +60,52 @@ def generate_excel_file_name(objective):
 def generate_response(query, files, enable_ai, prompt):
     start_time = time.time()
     excel_file_path = generate_excel_file_name("1")
-    # output_str = searching_endpoint(query)
-    try:
-        output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
-        if enable_ai is True:
-            # For objective 2 - enable Gemini - API AI
-            thread_o2 = threading.Thread(target=o2_handler, args=[output_dict, prompt], daemon=True)
-            thread_o2.start()
-        OutputHandler.create_excel_file(output_dict, output_file=f'{config.get("server", "excel_folder")}/{excel_file_path}')
-    except Exception as e:
-        msg = f"There is either no information for output or an error when searching {query}. code: {e}"
-        print(msg)
-        output_excel = pd.DataFrame({'Error': {"message": msg}})
-        output_excel.to_excel(excel_file_path)
-    finally:
-        end_time = time.time()
-        elapsed_time = end_time - start_time
-        # Print the elapsed time
-        print("Elapsed time:", elapsed_time, "seconds")
 
-    with open(f'{config.get("server", "excel_folder")}/{excel_file_path}', "rb") as file:
-        file_data = file.read()
+    output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
+    # tuple is true
+    if enable_ai is True:
+        # For objective 2 - enable Gemini - API AI
+        thread_o2 = threading.Thread(target=o2_handler, args=[output_dict[0], prompt], daemon=True)
+        thread_o2.start()
 
-    # Create response object
-    response = make_response(file_data)
-    
-    # Set headers
-    response.headers["Content-Disposition"] = f"attachment; filename={excel_file_path}"
-    response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        output = f"/search AI is generating report. Request ignored"
 
-    return response
+        app.logger.info(f"/search: AI is returning a response")
+        response = app.response_class(
+            response=json.dumps({"data": output}),
+            status=200,
+            mimetype='application/json'
+        )
+        return response
+    else:
+        # For objective 1 output excel file
+        try:
+            OutputHandler.create_excel_file(output_dict[0],
+                                        output_file=f'{config.get("server", "excel_folder")}/{excel_file_path}')
+
+            with open(f'{config.get("server", "excel_folder")}/{excel_file_path}', "rb") as file:
+                file_data = file.read()
+
+            # Create response object
+            response = make_response(file_data)
+
+            # Set headers
+            response.headers["Content-Disposition"] = f"attachment; filename={excel_file_path}"
+            response.headers["Content-type"] = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+
+            return response
+        except Exception as e:
+            msg = f"There is either no information for output or an error when searching {query}. code: {e}"
+            print(msg)
+            output_excel = pd.DataFrame({'Error': {"message": msg}})
+            output_excel.to_excel(excel_file_path)
+
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    # Print the elapsed time
+    print("Elapsed time:", elapsed_time, "seconds")
+
+
 
 # Handling web-scrapping of PDF and document-type json file
 def scrap_file_and_data():
