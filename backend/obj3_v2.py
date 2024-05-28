@@ -61,6 +61,8 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
     max_retry = 3
     retry_count = 0
     while retry_count < max_retry:
+        if retry_count > 0:
+            o3_message = f"There are errors replying from HuggingFace API plateform, performing retry {retry_count}"
         try:
             # get use
             use_prompt = ("Identify and list all the 'Use' categories and their corresponding section numbers from the "
@@ -87,7 +89,7 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
             building_result = chatbot.chat(format_prompt)
             time.sleep(WAITING_TIME)
             # print(building_result)
-            o3_message = f"Retrieved basic building information (step 2 of 4)"
+            o3_message = f"Retrieved basic building information (step 2 of 4) of retry {retry_count}"
             prompt = (("Extract the value of those terms and all FSR related values for each 'Use'."
                        "Note: 1)For each 'Use', only search within the section that follows the 'Use' name."
                        "2) FSR is short for 'floor space ratio';"
@@ -108,7 +110,7 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
             fsr_result = chatbot.chat(prompt)
             time.sleep(WAITING_TIME)
             print(fsr_result)
-            o3_message = f"Retrieved FSR information (step 3 of 4)"
+            o3_message = f"Retrieved FSR information (step 3 of 4) of retry {retry_count}"
             format_prompt = ("combine " + str(building_result) + "and" + str(fsr_result)
                              + "together based on 'Use'. "
                                "when combing, if one 'Use' has more than one scenario, "
@@ -124,7 +126,7 @@ def AI_process(input, use_context, chatbot, FSR_keywords):
             end_index = output_str.rfind("]") + 1
             array_of_dicts_str = output_str[start_index:end_index]
             print(array_of_dicts_str)
-            o3_message = f"Aggregate information for output (step 4 of 4)"
+            o3_message = f"Aggregate information for output (step 4 of 4) of retry {retry_count}"
 
             modified_string = array_of_dicts_str.replace('null', 'None')
             array_of_dicts = eval(modified_string)
@@ -276,118 +278,124 @@ def enter_obj3(file_list):
     """
 
     global o3_message
-    chatbot = APIConnect.hugchat_connect()
+    try:
+        chatbot = APIConnect.hugchat_connect()
 
-    FSR_keywords = ['Total FSR Max', 'Residential FSR Max',
-                    'Secured Market Rental FSR Max', 'Secured Market Rental%',
-                    'Employment Required', 'Employment FSR Min', 'Employment FSR Max', 'Office Required',
-                    'Office FSR Max', 'Commercial Retail Required', 'Commercial Retail FSR Min',
-                    'Commercial Retail FSR Max',
-                    'Hotel Required', 'Hotel FSR Min', 'Hotel FSR Max', 'Industrial Required', 'Industrial FSR Min',
-                    'Industrial FSR Max']
+        FSR_keywords = ['Total FSR Max', 'Residential FSR Max',
+                        'Secured Market Rental FSR Max', 'Secured Market Rental%',
+                        'Employment Required', 'Employment FSR Min', 'Employment FSR Max', 'Office Required',
+                        'Office FSR Max', 'Commercial Retail Required', 'Commercial Retail FSR Min',
+                        'Commercial Retail FSR Max',
+                        'Hotel Required', 'Hotel FSR Min', 'Hotel FSR Max', 'Industrial Required', 'Industrial FSR Min',
+                        'Industrial FSR Max']
 
-    # Write the column headers
-    all_terms = ['Fields', 'Zoning District', 'Last Amended', 'Use', 'Scenario', 'Minimum Site Area (m2)',
-                 'Min Frontage (m)', 'Max Frontage (m)',
-                 'Height Max(m)', 'Height Max(Storeys)', 'Front Setback Min', 'Side Setback Min', 'Rear Setback Min',
-                 'Site coverage Max',
-                 'Total FSR Min', 'Total FSR Max', 'Residential FSR Min', 'Residential FSR Max',
-                 'Secured Market Rental FSR Min',
-                 'Secured Market Rental FSR Max', 'Secured Market Rental%', 'Social Housing FSR Min',
-                 'Social Housing FSR Max',
-                 'Below Market Housing FSR Min', 'Below Market Housing FSR Max', 'Below Market Housing Percentage',
-                 'Employment Required', 'Employment FSR Min', 'Employment FSR Max', 'Office Required',
-                 'Office FSR Min', 'Office FSR Max',
-                 'Commercial Retail Required', 'Commercial Retail FSR Min', 'Commercial Retail FSR Max',
-                 'Hotel Required', 'Hotel FSR Min', 'Hotel FSR Max', 'Industrial Required', 'Industrial FSR Min',
-                 'Industrial FSR Max', 'URL', 'Date of Extraction']
+        # Write the column headers
+        all_terms = ['Fields', 'Zoning District', 'Last Amended', 'Use', 'Scenario', 'Minimum Site Area (m2)',
+                     'Min Frontage (m)', 'Max Frontage (m)',
+                     'Height Max(m)', 'Height Max(Storeys)', 'Front Setback Min', 'Side Setback Min', 'Rear Setback Min',
+                     'Site coverage Max',
+                     'Total FSR Min', 'Total FSR Max', 'Residential FSR Min', 'Residential FSR Max',
+                     'Secured Market Rental FSR Min',
+                     'Secured Market Rental FSR Max', 'Secured Market Rental%', 'Social Housing FSR Min',
+                     'Social Housing FSR Max',
+                     'Below Market Housing FSR Min', 'Below Market Housing FSR Max', 'Below Market Housing Percentage',
+                     'Employment Required', 'Employment FSR Min', 'Employment FSR Max', 'Office Required',
+                     'Office FSR Min', 'Office FSR Max',
+                     'Commercial Retail Required', 'Commercial Retail FSR Min', 'Commercial Retail FSR Max',
+                     'Hotel Required', 'Hotel FSR Min', 'Hotel FSR Max', 'Industrial Required', 'Industrial FSR Min',
+                     'Industrial FSR Max', 'URL', 'Date of Extraction']
 
-    df = pd.DataFrame(columns=all_terms)
+        df = pd.DataFrame(columns=all_terms)
 
-    with open("doc_type.json", "r") as file:
-        data = json.load(file)
-    data_dict = {list(item.keys())[0]: list(item.values())[0] for item in data}
+        with open("doc_type.json", "r") as file:
+            data = json.load(file)
+        data_dict = {list(item.keys())[0]: list(item.values())[0] for item in data}
 
-    current_date = datetime.datetime.now()
-    formatted_date = current_date.strftime('%Y-%m-%d')
-    temp_json_file = 'output_obj3.json'
-    with open(temp_json_file, 'w') as json_file:
-        pass
+        current_date = datetime.datetime.now()
+        formatted_date = current_date.strftime('%Y-%m-%d')
+        temp_json_file = 'output_obj3.json'
+        with open(temp_json_file, 'w') as json_file:
+            pass
 
-    process_status = []
-    for file_name in file_list:
-        full_file_name = os.path.join('../downloaded_pdfs', file_name + '.pdf')
-        url = get_file_url(file_name, data_dict)
+        process_status = []
+        for file_name in file_list:
+            full_file_name = os.path.join('../downloaded_pdfs', file_name + '.pdf')
+            url = get_file_url(file_name, data_dict)
 
-        is_AI_works, result = search_pdf(full_file_name, chatbot, FSR_keywords)
+            is_AI_works, result = search_pdf(full_file_name, chatbot, FSR_keywords)
 
-        process_status.append({'File name': file_name + '.pdf', 'AI processed': is_AI_works})
-        all_result = []
+            process_status.append({'File name': file_name + '.pdf', 'AI processed': is_AI_works})
+            all_result = []
 
-        for row_dict in result:
-            row_data = {}
-            for term in all_terms:
-                if term in row_dict:
-                    row_data[term] = row_dict[term]
-                elif term == 'URL':
-                    row_data[term] = url
-                elif term == 'Date of Extraction':
-                    row_data[term] = formatted_date
+            for row_dict in result:
+                row_data = {}
+                for term in all_terms:
+                    if term in row_dict:
+                        row_data[term] = row_dict[term]
+                    elif term == 'URL':
+                        row_data[term] = url
+                    elif term == 'Date of Extraction':
+                        row_data[term] = formatted_date
+                    else:
+                        row_data[term] = ''
+                keys_not_in_all_terms = [key for key in row_dict if key not in all_terms]
+                if 'Scenarios' not in keys_not_in_all_terms:
+
+                    if 'Non-Dwelling FSR Max' in keys_not_in_all_terms:
+                        row_data['Employment FSR Max'] = row_dict['Non-Dwelling FSR Max']
+                        row_data['Employment Required'] = 'y'
+                    elif 'Non-Dwelling FSR Min' in keys_not_in_all_terms:
+                        row_data['Employment FSR Min'] = row_dict['Non-Dwelling FSR Min']
+                        row_data['Employment Required'] = 'y'
+                    all_result.append(row_data)
                 else:
-                    row_data[term] = ''
-            keys_not_in_all_terms = [key for key in row_dict if key not in all_terms]
-            if 'Scenarios' not in keys_not_in_all_terms:
+                    if row_dict['Scenarios'] is not None:
+                        for sc_row_dict in row_dict['Scenarios']:
+                            sc_row_data = row_data.copy()
+                            for term in all_terms:
+                                if term in sc_row_dict:
+                                    sc_row_data[term] = sc_row_dict[term]
+                            sc_keys_not_in_all_terms = [key for key in sc_row_dict if key not in all_terms]
+                            if 'Non-Dwelling FSR Max' in keys_not_in_all_terms or 'Non-Dwelling FSR max' in sc_keys_not_in_all_terms:
+                                sc_row_data['Employment FSR Max'] = sc_row_dict['Non-Dwelling FSR Max']
+                                sc_row_data['Employment Required'] = 'y'
+                            elif 'Non-Dwelling FSR Min' in keys_not_in_all_terms:
+                                sc_row_data['Employment FSR Min'] = sc_row_dict['Non-Dwelling FSR Min']
+                                sc_row_data['Employment Required'] = 'y'
 
-                if 'Non-Dwelling FSR Max' in keys_not_in_all_terms:
-                    row_data['Employment FSR Max'] = row_dict['Non-Dwelling FSR Max']
-                    row_data['Employment Required'] = 'y'
-                elif 'Non-Dwelling FSR Min' in keys_not_in_all_terms:
-                    row_data['Employment FSR Min'] = row_dict['Non-Dwelling FSR Min']
-                    row_data['Employment Required'] = 'y'
-                all_result.append(row_data)
-            else:
-                if row_dict['Scenarios'] is not None:
-                    for sc_row_dict in row_dict['Scenarios']:
-                        sc_row_data = row_data.copy()
-                        for term in all_terms:
-                            if term in sc_row_dict:
-                                sc_row_data[term] = sc_row_dict[term]
-                        sc_keys_not_in_all_terms = [key for key in sc_row_dict if key not in all_terms]
-                        if 'Non-Dwelling FSR Max' in keys_not_in_all_terms or 'Non-Dwelling FSR max' in sc_keys_not_in_all_terms:
-                            sc_row_data['Employment FSR Max'] = sc_row_dict['Non-Dwelling FSR Max']
-                            sc_row_data['Employment Required'] = 'y'
-                        elif 'Non-Dwelling FSR Min' in keys_not_in_all_terms:
-                            sc_row_data['Employment FSR Min'] = sc_row_dict['Non-Dwelling FSR Min']
-                            sc_row_data['Employment Required'] = 'y'
+                            all_result.append(sc_row_data)
+            save_to_json(temp_json_file, all_result)
+        output_filename = "excel_output/output_obj3"
+        formatted_time = current_date.strftime("%Y-%m-%d-%H%M")
+        excel_file_name = f"{output_filename}_{formatted_time}.xlsx"
 
-                        all_result.append(sc_row_data)
-        save_to_json(temp_json_file, all_result)
-    output_filename = "excel_output/output_obj3"
-    formatted_time = current_date.strftime("%Y-%m-%d-%H%M")
-    excel_file_name = f"{output_filename}_{formatted_time}.xlsx"
+        with open(temp_json_file, 'r') as json_file:
+            data = [json.loads(line) for line in json_file]
+        # Create a new Excel file if it doesn't exist
+        # try:
+        #     wb = Workbook()
+        #     wb.save(excel_file_name)
+        # except Exception as e:
+        #     print(f"An error occurred while creating the Excel file: {e}")
+        #     o3_message = f"Error: There is a problem when creating the Excel output file."
 
-    with open(temp_json_file, 'r') as json_file:
-        data = [json.loads(line) for line in json_file]
-    # Create a new Excel file if it doesn't exist
-    # try:
-    #     wb = Workbook()
-    #     wb.save(excel_file_name)
-    # except Exception as e:
-    #     print(f"An error occurred while creating the Excel file: {e}")
-    #     o3_message = f"Error: There is a problem when creating the Excel output file."
+        # with ExcelWriter(excel_file_name, mode="a", engine="openpyxl", if_sheet_exists="overlay", ) as writer:
+        #     df.to_excel(writer, sheet_name="Sheet", index=False)
+        #     df = pd.DataFrame(data)
+        #     df.to_excel(writer, sheet_name="Sheet", index=False)
+        #     df_process_status = pd.DataFrame(process_status)
+        #     df_process_status.to_excel(writer, sheet_name="Process Status", index=False)
 
-    # with ExcelWriter(excel_file_name, mode="a", engine="openpyxl", if_sheet_exists="overlay", ) as writer:
-    #     df.to_excel(writer, sheet_name="Sheet", index=False)
-    #     df = pd.DataFrame(data)
-    #     df.to_excel(writer, sheet_name="Sheet", index=False)
-    #     df_process_status = pd.DataFrame(process_status)
-    #     df_process_status.to_excel(writer, sheet_name="Process Status", index=False)
-    
-    OutputHandler.output_for_objective3(data, df, process_status, excel_file_name)
-    o3_message = f'File is created in {excel_file_name}'
-    with open(excel_file_name, 'rb') as file:
-        file_content = file.read()
-    return file_content
+        OutputHandler.output_for_objective3(data, df, process_status, excel_file_name)
+        o3_message = f'File is created in {excel_file_name}'
+        with open(excel_file_name, 'rb') as file:
+            file_content = file.read()
+        return file_content
+
+    except Exception as e:
+        print(f"Error: {e}")
+        o3_message = f'There is an error from API. Please check connection or try again later'
+
 
 
 def main():
