@@ -230,8 +230,8 @@ def file_filter(file_names, category):
         validated_file = (list(filter(lambda obj: list(obj.keys())[0] == f, latest_doc_type)))
         if len(validated_file) > 0:
             checked_list.append(f)
-    if len(checked_list) == 0:
-            return []
+    if len(checked_list) == 0 and len(category) == 0:
+        return []
 
     if len(category) == 0:
         return checked_list
@@ -249,7 +249,7 @@ def file_filter(file_names, category):
 # return 404 Not found for non-exist route
 @app.errorhandler(404)
 def page_not_found(error):
-    return render_template('404.html'), 404
+    return {"data": f"Error: {error}"}
 
 # return 500 When any there are server errors
 @app.errorhandler(500)
@@ -394,7 +394,13 @@ def search():
             return generate_response(file_data["data"]["search-terms"], file_list, file_data["data"]["ai"], file_data["data"]["prompt"])
         else:
            app.logger.error(f"/search: receive an empty query and returning status code 404")
-           abort(404)
+           output = "Error: There are no valid file can be search or all files and categories are empty. Please select " \
+                    "files or categories from the search list"
+           return app.response_class(
+               response=json.dumps({"data": output}),
+               status=404,
+               mimetype='application/json'
+           )
     except Exception as e:
         app.logger.error(f"/search: Error in loading file - {e}")
         abort(500)
@@ -422,7 +428,7 @@ def data_o3():
     try:
         # need to check whether output_o3.xlsx exist
         output = {"data": obj3_v2.o3_message,
-                  "in_search": o3_status}
+                  "file_ready": not o3_status}
 
         app.logger.info(f"/data: returning {len(output)} files response")
         response = app.response_class(
