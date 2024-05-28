@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
-    Box,
     Button, Center,
     Flex,
     LoadingOverlay,
@@ -10,16 +9,17 @@ import {
     Notification,
     Dialog,
     Checkbox,
-    Group, Divider, Text, Blockquote, Stack,
+    Group, Divider, Text, Stack,
 } from '@mantine/core';
-import { IconInfoCircle, IconRobot } from '@tabler/icons-react';
+import { IconRobot } from '@tabler/icons-react';
 
 import { useDisclosure, useInputState } from '@mantine/hooks';
 import FilterMenu from '@/components/FilterMenu/filter-menu';
-import { searchKeywords } from '@/utils/backend/backend.utils';
+import { getConsequentialSearchProgress, searchKeywords } from '@/utils/backend/backend.utils';
 import { FilesContext } from '@/contexts/files.context';
 import Prompt from '@/components/Prompt/prompt';
 import InputBar from '@/components/InputBar/input-bar';
+import UpdateReminder from '@/components/UpdateReminder/update-reminder';
 
 const SearchBar1 = () => {
     const [keywords, setKeywords] = useState<string[]>([]);
@@ -27,38 +27,66 @@ const SearchBar1 = () => {
     const [openedTextBox, { toggle }] = useDisclosure(false);
     const [prompt, setPrompt] = useInputState('');
     const [searchError, setSearchError] = useState('');
+    const [backendSearching, setBackendSearching] = useState({
+        ai: '',
+        file_ready: true,
+    });
     const showErrorPrompt = !!searchError;
     const enableSearch = openedTextBox ? prompt.length !== 0
         && keywords.length !== 0
         && filterTags.length !== 0 : keywords.length !== 0
         && filterTags.length !== 0;
     const { getFilterTagsType } = useContext(FilesContext);
-    const searchKeyWords = () => {
+    const searchKeyWords = async () => {
+        setBackendSearching({
+            ai: '',
+            file_ready: false,
+        });
         try {
-            searchKeywords(keywords, getFilterTagsType(filterTags), openedTextBox, prompt)
-                .catch(error => setSearchError(error.message));
-        } catch (e) {
-            e;
+            await searchKeywords(keywords, getFilterTagsType(filterTags), openedTextBox, prompt);
+            getSearchStatus();
+        } catch (error) {
+            if (error instanceof Error) {
+                setSearchError(error.message);
+            } else {
+                setSearchError('An unexpected error occurred.');
+            }
         }
     };
+
+    const getSearchStatus = () => {
+        getConsequentialSearchProgress().then(
+            data => {
+                const fileReady = data.data;
+
+                setBackendSearching(fileReady);
+            }
+        ).catch(
+            error => {
+                setBackendSearching(prev => ({
+                    ...prev,
+                    file_ready: true,
+                }));
+                setSearchError(error.message);
+            }
+        );
+    };
+
+    useEffect(() => {
+        getSearchStatus();
+    }, []);
+
+    useEffect(() => {
+        if (!backendSearching.file_ready) {
+            setTimeout(() => getSearchStatus(), 5000);
+        }
+    }, [backendSearching]);
 
     return (
         <>
             <Stack>
 
-                <Box
-                  style={{
-                        maxWidth: '500px',
-                    }}
-                >
-                    <Blockquote color="blue" iconSize={30} icon={<IconInfoCircle />} mt="sm" p={12}>
-                        <Text size="xs">
-                            Please update the files by clicking the
-                            &apos;Update Files&apos; button on the top right
-                            and clicking &apos;update&apos;.
-                        </Text>
-                    </Blockquote>
-                </Box>
+                <UpdateReminder />
 
                 <Flex
                   direction="column"
@@ -89,7 +117,7 @@ const SearchBar1 = () => {
                     <Prompt text={prompt} setText={setPrompt} opened={openedTextBox} />
                     <Center pos="relative">
                         <LoadingOverlay
-                          visible={false}
+                          visible={!backendSearching.file_ready}
                           zIndex={1000}
                           overlayProps={{
                                 radius: 'sm',
@@ -110,6 +138,8 @@ const SearchBar1 = () => {
                         </Tooltip>
 
                     </Center>
+                    <Text c="dimmed">{backendSearching.ai}</Text>
+
                 </Flex>
             </Stack>
             <Dialog
