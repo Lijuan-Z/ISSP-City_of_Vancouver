@@ -34,8 +34,15 @@ app = Flask(__name__)
 CORS(app)
 gemini = GeminiAPI.GeminiAPI()
 update_status = False
+o2_status = False
 o3_status = False
 
+
+def o2_handler(output_dict, prompt):
+    global  o2_status
+    o2_status = True
+    gemini.get_amendment_and_rationale(output_dict, prompt)
+    o2_status = False
 def o3_handler(file_list):
     global  o3_status
     o3_status = True
@@ -58,7 +65,8 @@ def generate_response(query, files, enable_ai, prompt):
         output_dict = search_files(files, json_path=config.get('server', 'processed_json_file'), search_terms=query)
         if enable_ai is True:
             # For objective 2 - enable Gemini - API AI
-            output_dict = gemini.get_amendment_and_rationale(output_dict, prompt)
+            thread_o2 = threading.Thread(target=o2_handler, args=[output_dict, prompt], daemon=True)
+            thread_o2.start()
         OutputHandler.create_excel_file(output_dict, output_file=f'{config.get("server", "excel_folder")}/{excel_file_path}')
     except Exception as e:
         msg = f"There is either no information for output or an error when searching {query}. code: {e}"
@@ -158,9 +166,17 @@ def read_data_type_file():
         return output
 
 def file_filter(file_names, category):
-    ### file filtering is done here ####
+    checked_list = []
+    for f in file_names:
+        ### file validation ####
+        validated_file = (list(filter(lambda obj: list(obj.keys())[0] == f, latest_doc_type)))
+        if len(validated_file) > 0:
+            checked_list.append(f)
+    if len(checked_list) == 0:
+            return []
+
     if len(category) == 0:
-        return file_names
+        return checked_list
     else:
         file_info = read_data_type_file()
         checkall = list([x.lower() for x in category])
@@ -266,11 +282,9 @@ def search_o3():
 
         # This is my function to filter the restricted list of files for objective 3
         file_list = file_filter(file_data["data"]["files"], file_data["data"]["categories"])
-        # file_list = ["zoning-by-law-district-schedule-fc-1", "zoning-by-law-district-schedule-r1-1"]
         if len(file_list) != 0:
             print(file_list)
 
-            # thread_o3 = threading.Thread(target=enter_obj3, args=[file_list], daemon=True)
             output = ""
             if not o3_status:
                 app.logger.info(f'/search/o3: is going to extract data from {len(file_list)} files')
@@ -288,11 +302,15 @@ def search_o3():
                 status=200,
                 mimetype='application/json'
             )
-
-            return response
         else:
            app.logger.error(f"/search/o3: receive an empty query and returning status code 404")
-           abort(404)
+           output = "Error: file not found"
+           response = app.response_class(
+               response=json.dumps({"data": output}),
+               status=404,
+               mimetype='application/json'
+           )
+        return response
     except Exception as e:
         app.logger.error(f"/search: Error in loading file - {e}")
         abort(500)
