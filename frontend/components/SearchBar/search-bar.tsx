@@ -2,7 +2,6 @@
 
 import React, { useState, useContext, useEffect } from 'react';
 import {
-    Box,
     Button, Center,
     Flex,
     LoadingOverlay,
@@ -10,9 +9,9 @@ import {
     Notification,
     Dialog,
     Checkbox,
-    Group, Divider, Text, Blockquote, Stack,
+    Group, Divider, Text, Stack,
 } from '@mantine/core';
-import { IconInfoCircle, IconRobot } from '@tabler/icons-react';
+import { IconRobot } from '@tabler/icons-react';
 
 import { useDisclosure, useInputState } from '@mantine/hooks';
 import FilterMenu from '@/components/FilterMenu/filter-menu';
@@ -56,12 +55,10 @@ const SearchBar1 = () => {
     };
 
     const getSearchStatus = () => {
-        console.log('searching');
         getConsequentialSearchProgress().then(
             data => {
-                console.log('data', data);
                 const fileReady = data.data;
-                console.log('file Ready', fileReady);
+
                 setBackendSearching(fileReady);
             }
         ).catch(
@@ -80,9 +77,7 @@ const SearchBar1 = () => {
     }, []);
 
     useEffect(() => {
-        console.log('inside use effect');
         if (!backendSearching.file_ready) {
-            console.log('setting search status again');
             setTimeout(() => getSearchStatus(), 5000);
         }
     }, [backendSearching]);

@@ -35,12 +35,10 @@ const LazerSearchBar = () => {
     };
 
     const getSearchStatus = () => {
-        console.log('searching');
         getLazerSearchProgress().then(
             data => {
-                console.log('data', data);
                 const fileReady = data.data;
-                console.log('file Ready', fileReady);
+
                 setBackendSearching(fileReady);
             }
         ).catch(
@@ -59,9 +57,7 @@ const LazerSearchBar = () => {
     }, []);
 
     useEffect(() => {
-        console.log('inside use effect');
         if (!backendSearching.file_ready) {
-            console.log('setting search status again');
             setTimeout(() => getSearchStatus(), 5000);
         }
     });
