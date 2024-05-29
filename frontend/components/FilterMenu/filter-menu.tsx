@@ -25,8 +25,8 @@ const FilterMenu = memo(({
                              filterMenuDescription,
                          }: FilterMenuProps) => {
     const { files: fileData } = useContext(FilesContext);
-    const fileNames = fileData.map(item => item['webpage-title']);
-
+    const fileNames = fileData.map(item => `${item['webpage-title']} | ${item['file-name']}`);
+    console.log(fileNames);
     const options: Record<string, { url: string, id: number }> = fileData.reduce((acc, item) => {
         const key = item['webpage-title'];
         acc[key] = {
@@ -42,7 +42,7 @@ const FilterMenu = memo(({
             >
                 <Text>{option.value}</Text>
                 {
-                    options[option.value].url &&
+                    options[option.value.split('|')[0].trim()].url &&
                     <ActionIcon
                       size={32}
                       radius="xl"
@@ -50,7 +50,7 @@ const FilterMenu = memo(({
                       variant="white"
                       onClick={(e) => {
                             e.stopPropagation();
-                            window.open(options[option.value].url, '_blank', 'noreferrer'
+                            window.open(options[option.value.split('|')[0].trim()].url, '_blank', 'noreferrer'
                             );
                         }}
                     >

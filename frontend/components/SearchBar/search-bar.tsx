@@ -25,6 +25,7 @@ const SearchBar1 = () => {
     const [keywords, setKeywords] = useState<string[]>([]);
     const [filterTags, setFilterTags] = useState<string[]>(['All']);
     const [openedTextBox, { toggle }] = useDisclosure(false);
+    const [sectionChecked, { toggle: toggleSection }] = useDisclosure(false);
     const [prompt, setPrompt] = useInputState('');
     const [searchError, setSearchError] = useState('');
     const [backendSearching, setBackendSearching] = useState({
@@ -43,7 +44,7 @@ const SearchBar1 = () => {
             file_ready: false,
         });
         try {
-            await searchKeywords(keywords, getFilterTagsType(filterTags), openedTextBox, prompt);
+            await searchKeywords(keywords, getFilterTagsType(filterTags), openedTextBox, prompt, sectionChecked);
             getSearchStatus();
         } catch (error) {
             if (error instanceof Error) {
@@ -113,7 +114,16 @@ const SearchBar1 = () => {
                       labelPosition="left"
                       icon={IconRobot as any}
                       label="Generate Consequential Amendments"
-                      onClick={toggle} />
+                      onClick={toggle}
+                      checked={openedTextBox}
+                    />
+                    <Checkbox
+                      labelPosition="left"
+                      icon={IconRobot as any}
+                      label="Generate Sections"
+                      onClick={toggleSection}
+                      checked={sectionChecked}
+                    />
                     <Prompt text={prompt} setText={setPrompt} opened={openedTextBox} />
                     <Center pos="relative">
                         <LoadingOverlay

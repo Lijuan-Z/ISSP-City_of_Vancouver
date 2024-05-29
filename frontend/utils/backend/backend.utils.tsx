@@ -4,8 +4,10 @@ import { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 export const searchKeywords = async (
     keywords: string[],
     filterTags: FilterTagsType,
-    enableAI?: boolean,
-    aiPrompt?: string) => {
+    sectionChecked: boolean,
+    enableAI ?: boolean,
+    aiPrompt ?: string,
+) => {
     console.log(filterTags);
     const aiSearch = !!enableAI;
     const requestBody = {
@@ -14,6 +16,7 @@ export const searchKeywords = async (
             files: filterTags.files,
             categories: filterTags.categories,
             ai: aiSearch,
+            section: sectionChecked,
             prompt: aiPrompt,
         },
     };
@@ -36,7 +39,6 @@ export const searchKeywords = async (
         saveAs(data, fileName);
     }
 };
-
 export const getFilesInformation = async () => {
     const response = await fetch('/data');
     if (!response.ok) {
