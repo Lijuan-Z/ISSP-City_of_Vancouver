@@ -53,20 +53,27 @@ const Header = () => {
                     {
                         //TODO: Add link to the manual
                     }
-                    <Button
-                      variant="filled"
-                      aria-label="manual"
-                      leftSection={
-                            <IconExternalLink
-                              color="white"
-                              size={30}
-                              cursor="pointer"
-                            />
-
-                        }
+                    <a
+                      href="static/user_manual.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                        Manual
-                    </Button>
+                        <Button
+                          variant="filled"
+                          aria-label="manual"
+                          leftSection={
+                                <IconExternalLink
+                                  color="white"
+                                  size={30}
+                                  cursor="pointer"
+                                />
+
+                            }
+                        >
+                            Manual
+                        </Button>
+
+                    </a>
                     <Settings1 />
                 </Flex>
             </Flex>
