@@ -28,10 +28,11 @@ export const FilesProviders = ({ children }: { children: ReactNode }) => {
 
     const getFilterTagsType = (tags: string[]) => {
         const filterTags = tags.reduce((filteredTags, item) => {
-                if (item in dict) {
-                    filteredTags.files.push(dict[item]['file-name']);
+            const key = item.split('|')[0].trim();
+                if (key in dict) {
+                    filteredTags.files.push(dict[key]['file-name']);
                 } else {
-                    filteredTags.categories.push(item);
+                    filteredTags.categories.push(key);
                 }
                 return filteredTags;
         }, {
