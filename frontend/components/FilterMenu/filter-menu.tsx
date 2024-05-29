@@ -52,7 +52,7 @@ const FilterMenu = memo(({
                             window.open(options[option.value.split('|')[0].trim()].url, '_blank', 'noreferrer'
                             );
                         }}
-                    >
+                    >x
                         <IconExternalLink
                           style={{
                                 width: rem(18),

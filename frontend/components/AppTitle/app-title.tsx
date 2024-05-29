@@ -25,18 +25,18 @@ const AppTitle = () => (
                                                                          href="https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
                                                                          target="_blank"
                                                                          rel="noreferrer"
-            >Vancouver`&apos;`s
+            >Vancouver`&apos;s
                 most referenced bylaws
                                                                                   </a>.It
                 can
                 also create amendments based on keyword searches and
                 digitize land use documents for the LZR database.
                 Please refer to the <a
-                  href="https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
+                  href="static/user_manual.pdf"
                   target="_blank"
                   rel="noreferrer"
             >manual
-                                    </a>. for more information.
+                                    </a> for more information.
             </Text>
         </Center>
     </Stack>
