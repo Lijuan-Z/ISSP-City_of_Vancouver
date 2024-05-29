@@ -147,7 +147,8 @@ class Obj2AI():
                              )
         model = APIConnect.gemini_connect(system_definition)
 
-        search_results = self.get_sections_using_hugface(search_results)
+        # search_results = self.get_sections_using_hugface(search_results) # moved to separate step for user choice
+
         max_reference_input = 3
 
         instances_search, total_count = self.prepare_instances(search_results, max_reference_input)
