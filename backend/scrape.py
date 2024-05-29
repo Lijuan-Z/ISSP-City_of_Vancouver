@@ -136,37 +136,41 @@ def retrieve_document_type(html, html2, previous_record, output_file):
                 if file.has_attr("href") and 'pdf' in file['href']:
 
                     pdf_filename = file.get('href').split('/')[-1]
-                    # if len(pdf_filename.split('#')) > 1:
-                    #     pdf_filename = pdf_filename.split('#')[0][:-4] + "#" + pdf_filename.split('#')[1]
-                    # else:
                     pdf_filename = pdf_filename.split('#')[0][:-4]
 
                     # update checksum, last update if a new file was downloaded
-                    file_data = (list(filter(lambda obj: list(obj.keys())[0] == pdf_filename,previous_record)))[0][pdf_filename]
-                    last_update = file_data["Last update"]
-                    checksum = file_data["checksum"]
-                    if file_data["file_updated"]:
-                        with open(f"downloaded_pdfs/{pdf_filename}.pdf", "rb") as new_pdf_file_content:
-                            checksum = generate_checksum(new_pdf_file_content.read())
-                            # last_update = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
-                            last_update = datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S")
+                    file_data = (list(filter(lambda obj: list(obj.keys())[0] == pdf_filename,previous_record)))
+
+                    if len(file_data):
+                        file_data = file_data[0][pdf_filename]
+
+                        last_update = file_data["Last update"]
+                        checksum = file_data["checksum"]
+                        if file_data["file_updated"]:
+                            with open(f"downloaded_pdfs/{pdf_filename}.pdf", "rb") as new_pdf_file_content:
+                                checksum = generate_checksum(new_pdf_file_content.read())
+                                # last_update = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+                                last_update = datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S")
 
 
 
-                    document_type.append(
-                        {
-                            pdf_filename: {
-                                "type": section_title,
-                                "title_original": file.text,
-                                "title": (file.text.split("PDF file")[0]).replace("\u00a0", "").strip(),
-                                # "title": file.text.split("\u00a0")[0],
-                                "url": file['href'],
-                                "file_updated": False,
-                                "Last update": last_update,
-                                "checksum": checksum
+                        document_type.append(
+                            {
+                                pdf_filename: {
+                                    "type": section_title,
+                                    "title_original": file.text,
+                                    "title": (file.text.split("PDF file")[0]).replace("\u00a0", "").strip(),
+                                    # "title": file.text.split("\u00a0")[0],
+                                    "url": file['href'],
+                                    "file_updated": False,
+                                    "Last update": last_update,
+                                    "checksum": checksum
+                                }
                             }
-                        }
-                    )
+                        )
+                    else:
+                        print(f"file not find with the name: {pdf_filename}")
+
 
     # handling vancouvers-most-referenced-bylaws
     sub_pages = html2.find("div", {"id": "simpleList1117"}).findAll("a")
@@ -196,28 +200,33 @@ def retrieve_document_type(html, html2, previous_record, output_file):
             pdf_filename = pdf_filename.split('#')[0][:-4]
 
             # update checksum, last update if a new file was downloaded
-            file_data = (list(filter(lambda obj: list(obj.keys())[0] == pdf_filename, previous_record)))[0][
-                pdf_filename]
-            last_update = file_data["Last update"]
-            checksum = file_data["checksum"]
-            if file_data["file_updated"]:
-                with open(f"downloaded_pdfs/{pdf_filename}.pdf", "rb") as new_pdf_file_content:
-                    checksum = generate_checksum(new_pdf_file_content.read())
-                    last_update = datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S")
+            file_data = (list(filter(lambda obj: list(obj.keys())[0] == pdf_filename, previous_record)))
 
-            document_type.append(
-                {
-                    pdf_filename: {
-                        "type": section_title,
-                        "title_original": link.text,
-                        "title": (link.text.split("PDF file")[0]).replace("\u00a0", "").strip(),
-                        "url": url,
-                        "file_updated": False,
-                        "Last update": last_update,
-                        "checksum": checksum
+            if len(file_data):
+                file_data = file_data[0][pdf_filename]
+
+                last_update = file_data["Last update"]
+                checksum = file_data["checksum"]
+                if file_data["file_updated"]:
+                    with open(f"downloaded_pdfs/{pdf_filename}.pdf", "rb") as new_pdf_file_content:
+                        checksum = generate_checksum(new_pdf_file_content.read())
+                        last_update = datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S")
+
+                document_type.append(
+                    {
+                        pdf_filename: {
+                            "type": section_title,
+                            "title_original": link.text,
+                            "title": (link.text.split("PDF file")[0]).replace("\u00a0", "").strip(),
+                            "url": url,
+                            "file_updated": False,
+                            "Last update": last_update,
+                            "checksum": checksum
+                        }
                     }
-                }
-            )
+                )
+            else:
+                print(f"file not find with the name: {pdf_filename}")
 
     # [print(x) for x in document_type]
     # print(len(document_type))
@@ -252,9 +261,9 @@ if __name__ == "__main__":
 
     source_html = download_source_html(website_url)
     source_html2 = download_source_html(website_url2)
-    download_pdf(source_html, website_url, save_directory)
+    # download_pdf(source_html, website_url, save_directory)
     # download_pdf_voc_bylaws(source_html2, save_directory, 0)
-    # retrieve_document_type(source_html, source_html2, previous_dl_file_info, output_file)
+    retrieve_document_type(source_html, source_html2, previous_dl_file_info, output_file)
 
     # with open("source.html", "r", encoding="utf-8") as file:
     #     retreive_document_type(file)
