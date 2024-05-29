@@ -19,7 +19,6 @@ class Obj2AI():
         return search_results
 
 
-
     def find_title(self, URL_info, processed_data):
         """
         Finds and sets the title of each document based on the first two pages of its content.
