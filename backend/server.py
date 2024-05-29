@@ -42,11 +42,11 @@ o2_output_info = ""
 o3_status = False
 
 
-def o2_handler(output_dict, prompt):
+def o2_handler(output_dict, prompt, section):
     global o2_status
     global o2_output_info
     o2_status = True
-    data = gemini.get_amendment_and_rationale(output_dict, prompt)
+    data = gemini.objective2_choice(output_dict, prompt, section, config.get('server', 'processed_json_file'))
     filename = generate_excel_file_name("2")
     OutputHandler.create_excel_file(data, f'{config.get("server", "excel_folder")}/{filename}')
     o2_output_info = f'File is created in folder {config.get("server", "excel_folder")} with filename {filename}'
@@ -79,7 +79,7 @@ def create_api_excel_file_response(message, input_files, output_file):
 
 
 # Generate Excel file based on the query
-def generate_response(query, files, enable_ai, prompt):
+def generate_response(query, files, enable_ai, prompt, section):
     start_time = time.time()
     excel_file_path = generate_excel_file_name("1")
 
@@ -89,7 +89,7 @@ def generate_response(query, files, enable_ai, prompt):
 
         if enable_ai is True:
             # For objective 2 - enable Gemini - API AI
-            thread_o2 = threading.Thread(target=o2_handler, args=[output_dict[0], prompt], daemon=True)
+            thread_o2 = threading.Thread(target=o2_handler, args=[output_dict[0], prompt, section], daemon=True)
             thread_o2.start()
 
             end_time = time.time()
@@ -402,7 +402,10 @@ def search():
         if len(file_list) != 0:
             print(file_list)
             app.logger.info(f'/search: is going to search {len(file_list)} files')
-            return generate_response(file_data["data"]["search-terms"], file_list, file_data["data"]["ai"], file_data["data"]["prompt"])
+            return generate_response(
+                file_data["data"]["search-terms"],
+                file_list, file_data["data"]["ai"], file_data["data"]["prompt"],
+                file_data["data"]["section"])
         else:
            app.logger.error(f"/search: receive an empty query and returning status code 404")
            output = "Error: There are no valid file can be search or all files and categories are empty. Please select " \
