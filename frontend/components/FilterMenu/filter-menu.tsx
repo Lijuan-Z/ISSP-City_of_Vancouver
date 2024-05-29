@@ -26,7 +26,6 @@ const FilterMenu = memo(({
                          }: FilterMenuProps) => {
     const { files: fileData } = useContext(FilesContext);
     const fileNames = fileData.map(item => `${item['webpage-title']} | ${item['file-name']}`);
-    console.log(fileNames);
     const options: Record<string, { url: string, id: number }> = fileData.reduce((acc, item) => {
         const key = item['webpage-title'];
         acc[key] = {
