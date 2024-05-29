@@ -9,6 +9,17 @@ gemini_update = ""
 
 class Obj2AI():
 
+    def objective2_choice(self, search_results, prompt, find_section, processed_data="processed_final.json"):
+
+        if find_section:
+            search_results = self.get_sections_using_hugface(search_results, processed_data)
+        if prompt:
+            search_results = self.get_amendment_and_rationale(search_results, prompt)
+
+        return search_results
+
+
+
     def find_title(self, URL_info, processed_data):
         """
         Finds and sets the title of each document based on the first two pages of its content.
