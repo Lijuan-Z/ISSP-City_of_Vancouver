@@ -319,7 +319,7 @@ def enter_obj3(file_list):
 
         process_status = []
         for file_name in file_list:
-            full_file_name = os.path.join('../downloaded_pdfs', file_name + '.pdf')
+            full_file_name = os.path.join('./downloaded_pdfs', file_name + '.pdf')
             url = get_file_url(file_name, data_dict)
 
             is_AI_works, result = search_pdf(full_file_name, chatbot, FSR_keywords)
