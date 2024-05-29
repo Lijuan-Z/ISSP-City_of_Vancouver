@@ -39,20 +39,26 @@ def download_pdf(html, url, save_dir):
         # Get the PDF filename from the URL
         pdf_filename = pdf_link.split('/')[-1]
 
-        # Download the PDF
-        pdf_response = httpx.get(pdf_link)
+        try:
+            # Download the PDF
+            pdf_response = httpx.get(pdf_link)
 
-        if pdf_response.status_code == 301:
-            new_url = str(pdf_response.next_request.url)
-            print(f"Redirected to {new_url}")
-            # pdf_filename = new_url.split('/')[-1]
-            pdf_response = httpx.get(new_url)
+            if pdf_response.status_code == 301:
+                new_url = str(pdf_response.next_request.url)
+                print(f"Redirected to {new_url}")
+                # pdf_filename = new_url.split('/')[-1]
+                pdf_response = httpx.get(new_url)
 
-        print(f"Downloading {file_counter} pdf_file from {url}: {pdf_filename}")
-        with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
+            print(f"Downloading {file_counter} pdf_file from {url}: {pdf_filename}")
+            with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
 
-            f.write(pdf_response.content)
+                f.write(pdf_response.content)
+                file_counter += 1
+        except Exception as e:
+            print(f"{e}")
+            print(f"There is error on downloading and creating {pdf_filename}, file skipped")
             file_counter += 1
+            continue
 
     return total_files
 
@@ -85,20 +91,26 @@ def download_pdf_voc_bylaws(html, save_dir, previous_total=0):
 
             # Get the PDF filename from the URL
             pdf_filename = link.split('/')[-1].split("#")[0]
+            try:
+                # Download the PDF
+                pdf_response = httpx.get(link)
+                print(f"Downloading {file_counter} pdf_file from {page.get('href')}: {pdf_filename}")
+                if pdf_response.status_code == 301:
+                    new_url = str(pdf_response.next_request.url)
+                    print(f"Redirected to {new_url}")
+                    # pdf_filename = new_url.split('/')[-1].split("#")[0]
+                    pdf_response = httpx.get(new_url)
 
-            # Download the PDF
-            pdf_response = httpx.get(link)
-            print(f"Downloading {file_counter} pdf_file from {page.get('href')}: {pdf_filename}")
-            if pdf_response.status_code == 301:
-                new_url = str(pdf_response.next_request.url)
-                print(f"Redirected to {new_url}")
-                # pdf_filename = new_url.split('/')[-1].split("#")[0]
-                pdf_response = httpx.get(new_url)
-
-            with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
-                f.write(pdf_response.content)
-                file_counter += 1
+                with open(os.path.join(save_dir, pdf_filename), 'wb') as f:
+                    f.write(pdf_response.content)
+                    file_counter += 1
+                    total_files += 1
+            except Exception as e:
+                print(f"{e}")
+                print(f"There is error on downloading and creating {pdf_filename}, file skipped")
                 total_files += 1
+                continue
+
 
 
     return file_counter
@@ -240,9 +252,9 @@ if __name__ == "__main__":
 
     source_html = download_source_html(website_url)
     source_html2 = download_source_html(website_url2)
-    # download_pdf(source_html, website_url, save_directory)
+    download_pdf(source_html, website_url, save_directory)
     # download_pdf_voc_bylaws(source_html2, save_directory, 0)
-    retrieve_document_type(source_html, source_html2, previous_dl_file_info, output_file)
+    # retrieve_document_type(source_html, source_html2, previous_dl_file_info, output_file)
 
     # with open("source.html", "r", encoding="utf-8") as file:
     #     retreive_document_type(file)
