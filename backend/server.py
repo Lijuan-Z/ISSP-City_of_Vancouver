@@ -13,13 +13,16 @@ from flask_cors import CORS
 import threading
 import json
 import pandas as pd
-import io
+import io, os
 import configparser
 
 from output_handler import OutputHandler
 
 thread_event = threading.Event()
 thread_event_o3 = threading.Event()
+
+# create excel_output if not exist
+os.makedirs("excel_output", exist_ok=True)
 
 # config file for information management
 config = configparser.ConfigParser()
