@@ -46,7 +46,7 @@ def o2_handler(output_dict, prompt, section):
     global o2_status
     global o2_output_info
     o2_status = True
-    # data = gemini.(output_dict, prompt, section, config.get('server', 'processed_json_file'))
+    data = gemini.objective2_choice(output_dict, prompt, section, config.get('server', 'processed_json_file'))
     filename = generate_excel_file_name("2")
     OutputHandler.create_excel_file(data, f'{config.get("server", "excel_folder")}/{filename}')
     o2_output_info = f'File is created in folder {config.get("server", "excel_folder")} with filename {filename}'
