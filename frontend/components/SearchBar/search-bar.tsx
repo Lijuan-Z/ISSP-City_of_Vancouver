@@ -44,7 +44,11 @@ const SearchBar1 = () => {
             file_ready: false,
         });
         try {
-            await searchKeywords(keywords, getFilterTagsType(filterTags), openedTextBox, prompt, sectionChecked);
+            await searchKeywords(keywords,
+                getFilterTagsType(filterTags),
+                sectionChecked,
+                openedTextBox,
+                prompt);
             getSearchStatus();
         } catch (error) {
             if (error instanceof Error) {
