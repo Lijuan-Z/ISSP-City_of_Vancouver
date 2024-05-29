@@ -4,12 +4,11 @@ import { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 export const searchKeywords = async (
     keywords: string[],
     filterTags: FilterTagsType,
-    sectionChecked: boolean,
-    enableAI ?: boolean,
+    sectionChecked?: boolean,
+    enableAI?: boolean,
     aiPrompt ?: string,
 ) => {
-    console.log(filterTags);
-    const aiSearch = !!enableAI;
+    const aiSearch = enableAI || sectionChecked;
     const requestBody = {
         data: {
             'search-terms': keywords,
@@ -20,6 +19,7 @@ export const searchKeywords = async (
             prompt: aiPrompt,
         },
     };
+    console.log(requestBody);
     const response = await fetch('/search', {
         method: 'POST',
         body: JSON.stringify(requestBody),
