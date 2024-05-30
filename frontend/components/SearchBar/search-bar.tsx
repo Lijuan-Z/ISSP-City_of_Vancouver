@@ -118,14 +118,14 @@ const SearchBar1 = () => {
                       labelPosition="left"
                       icon={IconRobot as any}
                       label="Generate Consequential Amendments"
-                      onClick={toggle}
+                      onChange={toggle}
                       checked={openedTextBox}
                     />
                     <Checkbox
                       labelPosition="left"
                       icon={IconRobot as any}
                       label="Generate Sections"
-                      onClick={toggleSection}
+                      onChange={toggleSection}
                       checked={sectionChecked}
                     />
                     <Prompt text={prompt} setText={setPrompt} opened={openedTextBox} />
