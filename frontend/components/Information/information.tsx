@@ -22,11 +22,12 @@ type StatusUpdate = {
     last_updated: string;
     total_updated_files: number;
     percentage_updated: number;
+    ocr: string;
 };
 const Information = () => {
     const [updateInfo, setUpdateInfo] = useState<StatusUpdate>(
         {
-            file_updated: 0, last_updated: '', percentage_updated: 0, status: '', total_updated_files: 0,
+            file_updated: 0, last_updated: '', percentage_updated: 0, status: '', total_updated_files: 0, ocr: '',
         }
     );
     const [updating, setUpdating] = useState(false);
@@ -36,6 +37,7 @@ const Information = () => {
         percentage_updated,
         last_updated,
         status,
+        ocr,
     } = updateInfo;
     const UpdateIcon = updating ? IconPlayerPlay : IconPlayerPause;
     const updateFiles = () => {
@@ -96,6 +98,9 @@ const Information = () => {
                             {last_updated}
                         </Text>
                     </Tooltip>
+                    <Text c="dimmed" fz="sm">
+                        {ocr}
+                    </Text>
 
                 </Stack>
                 {
