@@ -307,6 +307,7 @@ def update_sub(sub_path):
 def update():
     app.logger.info(f"/update: received a request")
     try:
+        process_to_JSON.process_update = ""
         if not update_status:
             start_time = time.time()
             thread_event.set()
