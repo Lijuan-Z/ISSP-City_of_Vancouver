@@ -47,7 +47,7 @@ class Obj2AI():
         doc_count = 0
 
         for key, value in processed_data.items():
-            if not Obj2AI.is_file_updated(key, URL_info):
+            if Obj2AI.is_file_updated(key, URL_info):
                 doc_count += 1
                 first_two_pages = {pg_num: value['Pages'][pg_num] for pg_num in ['1', '2'] if pg_num in value['Pages']}
 
