@@ -233,6 +233,40 @@ def retrieve_document_type(html, html2, previous_record, output_file):
     with open(output_file, 'w') as file:
         json.dump(document_type, file)
 
+    print("document type file is created")
+
+def add_unpaired_file(pdf_folder, doc_type_file):
+    # add the extra pdf file
+    file_count = 0
+    json_file = read_previous_source(doc_type_file)
+    for root, dirs, files in os.walk(pdf_folder):
+        for pdf_filename in files:
+            found_file = (list(filter(lambda obj: list(obj.keys())[0] == pdf_filename[:-4], json_file)))
+            if len(found_file) == 0:
+                file_count += 1
+                with open(f"downloaded_pdfs/{pdf_filename}", "rb") as new_pdf_file_content:
+                    checksum = generate_checksum(new_pdf_file_content.read())
+                    last_update = datetime.datetime.now(pytz.timezone('America/Vancouver')).strftime("%Y-%m-%d %H:%M:%S")
+                    json_file.append(
+                        {
+                            pdf_filename[:-4]: {
+                                "type": "Unknown",
+                                "title_original": "Unknown",
+                                "title": "Unknown",
+                                "url": "Unknown",
+                                "file_updated": False,
+                                "Last update": last_update,
+                                "checksum": checksum
+                            }
+                        }
+                    )
+
+    with open(doc_type_file, 'w') as file:
+        json.dump(json_file, file)
+        print(f"{file_count} is added to the {doc_type_file}")
+
+
+
 
 def read_previous_source(json_file):
     with open(json_file, "r", encoding="utf-8") as source_file:
@@ -263,7 +297,9 @@ if __name__ == "__main__":
     source_html2 = download_source_html(website_url2)
     # download_pdf(source_html, website_url, save_directory)
     # download_pdf_voc_bylaws(source_html2, save_directory, 0)
-    retrieve_document_type(source_html, source_html2, previous_dl_file_info, output_file)
+    # retrieve_document_type(source_html, source_html2, previous_dl_file_info, output_file)
+    # add_unpaired_file("downloaded_pdfs", "doc_type.json")
+
 
     # with open("source.html", "r", encoding="utf-8") as file:
     #     retreive_document_type(file)

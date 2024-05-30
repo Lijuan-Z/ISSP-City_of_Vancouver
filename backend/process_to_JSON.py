@@ -59,7 +59,8 @@ class ProcessToJSON:
         # Traverse the folder path to find PDF files
         for root, dirs, files in os.walk(self.folder_path):
             for file_name in files:
-                if file_name.lower().endswith('.pdf') and not self.is_file_updated(URL_info, file_name):
+                if file_name.lower().endswith('.pdf') and self.is_file_updated(URL_info, file_name):
+
                     file_update_counter += 1
                     process_update = f"Updating file {file_update_counter} of {files_to_update} -> {file_name}"
                     file_path = os.path.join(root, file_name)
@@ -105,6 +106,7 @@ class ProcessToJSON:
         return nested_metadata_dict
 
     def is_file_updated(self, URL_info, file_name):
+
         """
         Check if the file has been updated based on URL information.
 
@@ -118,7 +120,7 @@ class ProcessToJSON:
         try:
             return URL_info[file_name[:-4]]['file_updated']
         except KeyError:
-            return False
+            return True
 
     def process_file(self, file_name, file_path, nested_metadata_dict, image_included):
         """
@@ -166,7 +168,7 @@ class ProcessToJSON:
         files_to_update = 0
         for root, dirs, files in os.walk(self.folder_path):
             for file_name in files:
-                if file_name.lower().endswith('.pdf') and not self.is_file_updated(URL_info, file_name):
+                if file_name.lower().endswith('.pdf') and self.is_file_updated(URL_info, file_name):
                     files_to_update += 1
 
         return files_to_update

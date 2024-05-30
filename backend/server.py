@@ -7,7 +7,7 @@ import process_to_JSON
 import obj3_v2
 from obj3_v2 import enter_obj3
 import scrape
-from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type, read_previous_source
+from scrape import download_source_html, download_pdf, download_pdf_voc_bylaws, retrieve_document_type, read_previous_source, add_unpaired_file
 from flask import Flask, request, make_response, render_template, abort
 from flask_cors import CORS
 import threading
@@ -155,7 +155,7 @@ def scrap_file_and_data():
         if config.getboolean('scrap', 'download'):
             update_status = True
 
-            # URL of the website to scrape
+            # # URL of the website to scrape
             website_url_cov = config.get('scrap', 'cov_url')
             website_url_bylaw = config.get('scrap', 'bylaw_url')
             # Directory to save the downloaded PDFs
@@ -175,9 +175,12 @@ def scrap_file_and_data():
             # getting latest update date
             latest_file = read_previous_source(config.get('server', 'doc_file'))
             last_update_date = max(list([list(obj.values())[0]["Last update"] for obj in latest_file]))
+            add_unpaired_file(config.get('scrap', 'pdf_folder'), config.get('server', 'doc_file'))
+            latest_doc_type = read_previous_source(config.get('server', 'doc_file'))
 
             # run process to json function
-            processor = process_to_JSON(config("scrap", "pdf_folder"))
+            pdf_folder = config.get("scrap", "pdf_folder")
+            processor = process_to_JSON.ProcessToJSON(pdf_folder)
             dict_info = processor.read_PDFs(image_included=True, URL_info=latest_doc_type)
             with open(config.get('server', 'processed_json_file'), 'w') as json_file:
                 json.dump(dict_info, json_file, indent=4)
