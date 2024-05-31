@@ -29,10 +29,6 @@ config = configparser.ConfigParser()
 config.read('development.ini')
 config.read('exclude_file.ini')
 
-# preload the stored doc_type.json for retreiving last update date
-latest_doc_type = read_previous_source(config.get('server', 'doc_file'))
-last_update_date = max(list([list(obj.values())[0]["Last update"] for obj in latest_doc_type]))
-
 app = Flask(__name__)
 # app._static_folder = "_next/static"
 CORS(app)
@@ -42,6 +38,24 @@ o2_status = False
 o2_output_info = ""
 o3_status = False
 
+def read_source_with_exclusion(json_file):
+    with open(json_file, "r", encoding="utf-8") as source_file:
+        file_list = json.load(source_file)
+
+        start_length = len(file_list)
+        file_name = [i[1] for i in config.items("exclusion")]
+        for file in file_name:
+            for item in file_list:
+                if list(item.keys())[0].lower() == file.lower():
+                    file_list.remove(item)
+                    break
+        print(f"{start_length - len(file_list)} of files is excluded from the list")
+        print(f"Excluded files: {[x + '.pdf' for x in file_name]}")
+        return file_list
+
+# preload the stored doc_type.json for retreiving last update date
+latest_doc_type = read_source_with_exclusion(config.get('server', 'doc_file'))
+last_update_date = max(list([list(obj.values())[0]["Last update"] for obj in latest_doc_type]))
 
 def o2_handler(output_dict, prompt, section):
     global o2_status
@@ -150,6 +164,7 @@ def generate_response(query, files, enable_ai, prompt, section):
 def scrap_file_and_data():
     global update_status
     global last_update_date
+    global latest_doc_type
 
     while thread_event.is_set():
     ### html, pdf & doc-type json download process ###
@@ -177,15 +192,16 @@ def scrap_file_and_data():
             latest_file = read_previous_source(config.get('server', 'doc_file'))
             last_update_date = max(list([list(obj.values())[0]["Last update"] for obj in latest_file]))
             add_unpaired_file(config.get('scrap', 'pdf_folder'), config.get('server', 'doc_file'))
-            latest_doc_type = read_previous_source(config.get('server', 'doc_file'))
+            updated_doc_type = read_previous_source(config.get('server', 'doc_file'))
 
             # run process to json function
             pdf_folder = config.get("scrap", "pdf_folder")
             processor = process_to_JSON.ProcessToJSON(pdf_folder)
-            dict_info = processor.read_PDFs(image_included=True, URL_info=latest_doc_type)
+            dict_info = processor.read_PDFs(image_included=True, URL_info=updated_doc_type)
             with open(config.get('server', 'processed_json_file'), 'w') as json_file:
                 json.dump(dict_info, json_file, indent=4)
 
+            latest_doc_type = read_source_with_exclusion(config.get('server', 'doc_file'))
             update_status = False
 
         thread_event.clear()
@@ -211,36 +227,21 @@ def scrape_status():
             "ocr": process_to_JSON.process_update
         }
 
-
-
 def read_data_type_file():
     # open stored doc-type file and return update info
-    with open(config.get('server', 'doc_file'), "r") as file:
-        data = json.load(file)
+    data = read_source_with_exclusion(config.get('server', 'doc_file'))
 
-        output = []
-        for obj in data:
-            for k, v in obj.items():
-                v["section"] = v['type']
-                v["webpage-title"] = v['title']
-                v["file-name"] = k
-                del v["title_original"]
-                del v['type']
-                del v['title']
-                output.append(v)
-        return output
-
-def file_exclusion_handler(file_list):
-    start_length = len(file_list)
-    file_name = [i[1] for i in config.items("exclusion")]
-    for file in file_name:
-        for item in file_list:
-            if item['file-name'].lower() == file.lower():
-                file_list.remove(item)
-                break
-    print(f"{start_length - len(file_list)} of files is excluded from the list")
-    print(f"Excluded files: {[x + '.pdf' for x in file_name]}")
-    return file_list
+    output = []
+    for obj in data:
+        for k, v in obj.items():
+            v["section"] = v['type']
+            v["webpage-title"] = v['title']
+            v["file-name"] = k
+            del v["title_original"]
+            del v['type']
+            del v['title']
+            output.append(v)
+    return output
 
 def file_filter(file_names, category):
     checked_list = []
@@ -457,7 +458,6 @@ def data():
     app.logger.info(f"/data: received a request")
     # try:
     output = read_data_type_file()
-    output = file_exclusion_handler(output)
 
     app.logger.info(f"/data: return {len(output)} files response")
     response = app.response_class(
