@@ -35,7 +35,7 @@ export const searchKeywords = async (
     }
     if (!aiSearch) {
         const data = await response.blob();
-        const fileName = 'ouptut.xlsx';
+        const fileName = 'output.xlsx';
         saveAs(data, fileName);
     }
 };

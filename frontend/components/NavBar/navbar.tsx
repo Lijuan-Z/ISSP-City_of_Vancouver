@@ -13,7 +13,7 @@ const data = [
     },
     {
         link: '/lazer',
-        label: 'Digitization of District Schedule',
+        label: 'Digitization of District Schedules',
         icon: IconDatabase,
 
     },

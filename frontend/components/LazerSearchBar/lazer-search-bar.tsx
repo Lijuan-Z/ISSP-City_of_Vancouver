@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Center, Dialog, LoadingOverlay, Notification, Stack, Text, Tooltip } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 import UpdateReminder from '@/components/UpdateReminder/update-reminder';
 import FilterMenu from '@/components/FilterMenu/filter-menu';
 import { FilesContext } from '@/contexts/files.context';
@@ -65,7 +66,13 @@ const LazerSearchBar = () => {
     return (
         <>
             <Stack>
-                <UpdateReminder />
+                <UpdateReminder
+                  color="blue"
+                  icon={<IconInfoCircle />}
+                  message="Please update the files by clicking the
+                &apos;Update Files&apos; button on the top right
+                and clicking &apos;update&apos;."
+                />
 
                 <FilterMenu
                   filterMenuDescription="Select document(s) and/or document type(s) from the list:"

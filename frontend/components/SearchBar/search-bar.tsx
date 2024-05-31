@@ -11,7 +11,7 @@ import {
     Checkbox,
     Group, Divider, Text, Stack,
 } from '@mantine/core';
-import { IconRobot } from '@tabler/icons-react';
+import { IconAlertTriangle, IconInfoCircle, IconRobot } from '@tabler/icons-react';
 
 import { useDisclosure, useInputState } from '@mantine/hooks';
 import FilterMenu from '@/components/FilterMenu/filter-menu';
@@ -91,7 +91,13 @@ const SearchBar1 = () => {
         <>
             <Stack>
 
-                <UpdateReminder />
+                <UpdateReminder
+                  color="blue"
+                  icon={<IconInfoCircle />}
+                  message="Please update the files by clicking the
+                &apos;Update Files&apos; button on the top right
+                and clicking &apos;update&apos;."
+                />
 
                 <Flex
                   direction="column"
@@ -155,6 +161,12 @@ const SearchBar1 = () => {
                     <Text c="dimmed">{backendSearching.ai}</Text>
 
                 </Flex>
+                <UpdateReminder
+                  color="red"
+                  icon={<IconAlertTriangle />}
+                  message="Do not close the black
+                  screen application window
+                  until you decide to exit the application." />
             </Stack>
             <Dialog
               opened={showErrorPrompt}

@@ -7,7 +7,7 @@ const AppTitle = () => (
     >
         <Text ta="center" fw={500} c="blue">PDS Data Optimization Proof of Concept</Text>
         <Text ta="center" fw={500} c="blue">Land Use Document Search Tool for Consequential Amendments and Digitizing
-            District Schedule
+            District Schedules
         </Text>
         <Center>
             <Text
@@ -16,21 +16,19 @@ const AppTitle = () => (
               style={{
                     maxWidth: '600px',
                 }}>
-                This application searches for keywords in documents at <a
+                This application can search for keywords in documents in the <a
                   href="https://vancouver.ca/home-property-development/zoning-and-land-use-policies-document-library.aspx"
                   target="_blank"
                   rel="noreferrer">
-                Zoning and land use
-                                                                       </a> , and <a
-                                                                         href="https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
-                                                                         target="_blank"
-                                                                         rel="noreferrer"
-            >Vancouver`&apos;s
-                most referenced bylaws
-                                                                                  </a>.It
-                can
-                also create amendments based on keyword searches and
-                digitize land use documents for the LZR database.
+                Zoning and land use document library
+                                                                             </a> , and <a
+                                                                               href="https://vancouver.ca/your-government/vancouvers-most-referenced-bylaws.aspx"
+                                                                               target="_blank"
+                                                                               rel="noreferrer"
+            >
+                Vancouver&apos;s most referenced by-laws
+                                                                                        </a> pages.It can also propose amendments based on keyword searches and digitize land use documents for the
+                LZR database.
                 Please refer to the <a
                   href="static/user_manual.pdf"
                   target="_blank"
