@@ -1,47 +1,37 @@
 # ISSP-City_of_Vancouver
-This is the main structure of our app. Currently, there is a button on the frontend that, when clicked, triggers the backend to return an Excel file.
+This application is for the PDS data optimization project of the City of Vancouver. Currently, it has fulfilled three objectives:
+1) Identify Documents Referencing Specific Terms.
+2) Utilize AI for Consequential Amendments.
+3) Support Digitization of Policies/Regulations.
 
 # Project Setup Instructions
 
 ## Clone the Repository
-After cloning the repository, you need to open two terminals: one for the backend and one for the frontend. Follow the instructions below to run them separately.
+After cloning the repository, open a terminal and navigate to the Backend directory:
 
-### Backend (Flask)
-in the first terminal, navigate to the Backend Directory:
+# Project Setup Instructions
+
+## Clone the Repository
+After cloning the repository. open one terminal, navigate to the Backend Directory:
 cd backend
 
-#### Create a Virtual Environment
+## Create a Virtual Environment
 python -m venv myenv
 
-#### Activate the Virtual Environment
+## Activate the Virtual Environment
 - On Windows:
 myenv\Scripts\activate
 - On macOS/Linux:
 source myenv/bin/activate
 
-#### Install Dependencies
+## Install Dependencies
 pip install -r requirements.txt
 
-#### Copy config.py
-Copy config.py from Google Drive to the backend folder
+## Copy config.py
+Copy credential.ini to the backend folder.
 
-#### Run the Backend
+## Run the Backend
 python server.py
 
-#### Check Backend
-Open http://localhost:8000/search in the browser. It should display "Hello team!"
-
-
-### Frontend (React)
-in the second terminal, navigate to the Frontend Directory:
-cd frontend
-
-
-#### Install Dependencies
-npm install
-
-#### Run the Frontend
-npm start
-
-#### Check Frontend
-Open http://localhost:3000/searching in the browser. There should be a "Search" button.
+## Check Backend
+Open http://localhost:8000/ in the browser. It should display the main page of app.
