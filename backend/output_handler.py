@@ -75,12 +75,14 @@ class OutputHandler:
                 new_dictionary['Title'] = instance["Title"]
                 try:
                     new_dictionary['AI Title'] = instance["AI Title"]
+                except:
+                    new_dictionary['AI Title'] = "N/A"
+                try:
                     new_dictionary['Section #'] = instance['Section Number']
                     new_dictionary['Section Title'] = instance['Section Title']
                 except:
-                    new_dictionary['AI Title'] = "No AI Title"
-                    new_dictionary['Section #'] = "Unknown"
-                    new_dictionary['Section Title'] = "Unknown"
+                    new_dictionary['Section #'] = "N/A"
+                    new_dictionary['Section Title'] = "N/A"
                 new_dictionary['Search Terms'] = ','.join(instance['Search terms'])
                 if instance['Link'] is not None and instance['Link'] != "No link":
                     new_dictionary['Link'] = f"{instance['Link']}#page={instance['Page']}"
@@ -92,8 +94,8 @@ class OutputHandler:
                     new_dictionary['Proposed amendment'] = instance['Amendment']
                     new_dictionary['Rationale'] = instance['Rationale']
                 except:
-                    new_dictionary['Proposed amendment'] = "No Amendment"
-                    new_dictionary['Rationale'] = "No Rationale"
+                    new_dictionary['Proposed amendment'] = "N/A"
+                    new_dictionary['Rationale'] = "N/A"
                 dict_list.append(new_dictionary)
 
         return dict_list

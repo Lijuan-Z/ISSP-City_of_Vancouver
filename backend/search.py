@@ -1,6 +1,7 @@
 import json
 import time
 import configparser
+import re
 
 # config file for information management
 config = configparser.ConfigParser()
@@ -115,7 +116,7 @@ def search_terms_in_file(file_name, file_data, search_terms, nested_metadata_dic
     for page_num, page_content in file_data['Pages'].items():
         paragraphs = page_content.split('\n \n')
         for paragraph in paragraphs:
-            found_terms = [term for term in search_terms if term.lower() in paragraph.lower()]
+            found_terms = [term for term in search_terms if re.search(r'\b{}\b'.format(re.escape(term)), paragraph, re.IGNORECASE)]
             if found_terms:
                 context = paragraph.replace('\n', '')
                 nested_metadata_dict = add_search_result(file_name, file_data, page_num, found_terms,
