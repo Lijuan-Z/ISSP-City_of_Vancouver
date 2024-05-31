@@ -138,7 +138,7 @@ const SearchBar1 = () => {
                     <Center pos="relative">
                         <LoadingOverlay
                           visible={!backendSearching.file_ready}
-                          zIndex={1000}
+                          zIndex={199}
                           overlayProps={{
                                 radius: 'sm',
                                 blur: 2,
