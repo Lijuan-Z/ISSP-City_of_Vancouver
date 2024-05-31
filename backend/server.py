@@ -95,6 +95,7 @@ def create_api_excel_file_response(message, input_files, output_file):
 
 # Generate Excel file based on the query
 def generate_response(query, files, enable_ai, prompt, section):
+    global o2_output_info
     start_time = time.time()
     excel_file_path = generate_excel_file_name("1")
 
@@ -150,6 +151,7 @@ def generate_response(query, files, enable_ai, prompt, section):
     else:
         # No search terms found in the file
         msg = f"There is no information for output with search term(s): {query}"
+        o2_output_info = msg
         print(msg)
         return create_api_excel_file_response(msg, files, excel_file_path)
 
@@ -456,19 +458,19 @@ def data_o3():
 @app.route("/data")
 def data():
     app.logger.info(f"/data: received a request")
-    # try:
-    output = read_data_type_file()
+    try:
+        output = read_data_type_file()
 
-    app.logger.info(f"/data: return {len(output)} files response")
-    response = app.response_class(
-        response=json.dumps({"data": output}),
-        status=200,
-        mimetype='application/json'
-    )
-    return response
-    # except Exception as e:
-    #     app.logger.error(f"/data: Error in loading file - {e}")
-    #     abort(500)
+        app.logger.info(f"/data: return {len(output)} files response")
+        response = app.response_class(
+            response=json.dumps({"data": output}),
+            status=200,
+            mimetype='application/json'
+        )
+        return response
+    except Exception as e:
+        app.logger.error(f"/data: Error in loading file - {e}")
+        abort(500)
 
 if __name__ == "__main__":
     app.run(debug=config.get('server', 'debug'), port=config.get('server', 'port'))
