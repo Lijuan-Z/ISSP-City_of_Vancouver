@@ -46,7 +46,6 @@ const Information = () => {
             .catch(error => error);
         getNewUpdateInformation();
     };
-
     const getNewUpdateInformation = () => {
         getUpdateInformation()
             .then(data => setUpdateInfo(data.data))
@@ -70,7 +69,7 @@ const Information = () => {
     return (
         <Paper radius="md" p={10}>
             <Grid justify="space-between">
-                <Stack>
+                <Stack style={{ marginBottom: '20px' }}>
                     <Group justify="space-between">
                         <Group align="flex-end" gap="xs">
                             <Text fz="xl" fw={700}>
