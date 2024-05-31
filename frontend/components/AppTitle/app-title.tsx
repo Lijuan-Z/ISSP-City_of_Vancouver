@@ -32,7 +32,7 @@ const AppTitle = () => (
                 amendments based on keyword searches and digitize land use documents for the
                 LZR database.
                 Please refer to the <a
-                  href="static/user_manual.pdf"
+                  href="https://covoffice.sharepoint.com/:w:/r/sites/PDSBrainTrust/PDSAccess/Shared%20Documents/user_manual.docx?d=w1a6bd151474c49bb8c85a906f6133e45&csf=1&web=1&e=gnJpG2"
                   target="_blank"
                   rel="noreferrer"
             >manual
