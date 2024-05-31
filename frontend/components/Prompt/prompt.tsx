@@ -40,7 +40,7 @@ const Prompt = ({ opened, text, setText }: PromptPropsType) => (
                 maxWidth: '600px',
             }}
           withAsterisk
-          placeholder="Add you AI prompt here"
+          placeholder="Add your AI prompt here..."
           autosize
           minRows={5}
           value={text}
