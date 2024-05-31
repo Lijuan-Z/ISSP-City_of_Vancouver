@@ -54,7 +54,7 @@ const Header = () => {
                         //TODO: Add link to the manual
                     }
                     <a
-                      href="static/user_manual.pdf"
+                      href="https://covoffice.sharepoint.com/:w:/r/sites/PDSBrainTrust/PDSAccess/Shared%20Documents/user_manual.docx?d=w1a6bd151474c49bb8c85a906f6133e45&csf=1&web=1&e=gnJpG2"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
