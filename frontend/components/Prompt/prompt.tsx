@@ -10,9 +10,12 @@ const Prompt = ({ opened, text, setText }: PromptPropsType) => (
 
     <Collapse in={opened}>
         <Textarea
+          style={{
+                maxWidth: '600px',
+            }}
           withAsterisk
-          description="Please type your AI prompt to identify regulations in need of change and to propose a consequential amendment."
-          placeholder="Example: If there is any mention of parking space size or the number of parking spots, replace it with 'See parking by-law'. Do not replace mentions of parking access or location. Do not replace if the parking by-law is already mentioned. "
+          description="Please type your AI prompt to identify texts in need of change and to propose a consequential amendment and specify your rationale."
+          placeholder={"For example:\n1: Replace 'RS-1' with 'R1-1'\n2: Remove references to specific numbers of parking spaces, and replace them with `See Parking Bylaw`. The 'Rationale' column in the output table can read \"Remove outdated minimum parking space requirements and ensure alignment with Parking By-law"}
           autosize
           minRows={4}
           value={text}
