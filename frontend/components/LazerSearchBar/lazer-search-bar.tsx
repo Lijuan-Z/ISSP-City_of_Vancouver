@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button, Center, Dialog, LoadingOverlay, Notification, Stack, Text, Tooltip } from '@mantine/core';
-import { IconInfoCircle } from '@tabler/icons-react';
+import { IconAlertTriangle, IconInfoCircle } from '@tabler/icons-react';
 import UpdateReminder from '@/components/UpdateReminder/update-reminder';
 import FilterMenu from '@/components/FilterMenu/filter-menu';
 import { FilesContext } from '@/contexts/files.context';
@@ -103,7 +103,12 @@ const LazerSearchBar = () => {
                     </Tooltip>
                 </Center>
                 <Text c="dimmed">{backendSearching.data}</Text>
-
+                <UpdateReminder
+                  color="red"
+                  icon={<IconAlertTriangle />}
+                  message="Do not close the black
+                  screen application window
+                  until you decide to exit the application." />
             </Stack>
             <Dialog
               opened={showError}
