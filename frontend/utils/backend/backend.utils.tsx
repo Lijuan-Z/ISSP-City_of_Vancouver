@@ -19,7 +19,6 @@ export const searchKeywords = async (
             prompt: aiPrompt,
         },
     };
-    console.log(requestBody);
     const response = await fetch('/search', {
         method: 'POST',
         body: JSON.stringify(requestBody),
@@ -27,9 +26,7 @@ export const searchKeywords = async (
             'Content-type': 'application/json',
         },
     });
-    console.log(response);
     if (!response.ok) {
-        console.log('response is not ok');
         const data = await response.json();
         throw new Error(data.data);
     }

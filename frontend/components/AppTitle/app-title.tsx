@@ -27,7 +27,9 @@ const AppTitle = () => (
                                                                                rel="noreferrer"
             >
                 Vancouver&apos;s most referenced by-laws
-                                                                                        </a> pages.It can also propose amendments based on keyword searches and digitize land use documents for the
+                                                                                        </a> pages.
+                It can also propose
+                amendments based on keyword searches and digitize land use documents for the
                 LZR database.
                 Please refer to the <a
                   href="static/user_manual.pdf"
