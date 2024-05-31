@@ -150,6 +150,7 @@ class OutputHandler:
         list: List of text segments with search terms in bold.
         """
         string_creator = []
+        print(result)
         for term in result:
             if term.lower() in search_terms:
                 string_creator.append(bold_format)
@@ -158,7 +159,7 @@ class OutputHandler:
 
 
 if __name__ == "__main__":
-    test_data = "instances.json"
+    test_data = "window.json"
     output_file = 'test5.xlsx'
     with open(test_data, 'r') as f:
         data = json.load(f)
