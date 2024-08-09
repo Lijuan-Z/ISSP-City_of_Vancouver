@@ -5,3 +5,4 @@ venv
 downloaded_pdfs/
 /backend/_next/
 /backend/credential.ini
+/backend/docs/
