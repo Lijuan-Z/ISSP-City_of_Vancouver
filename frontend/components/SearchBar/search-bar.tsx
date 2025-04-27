@@ -8,34 +8,26 @@ import {
     Tooltip,
     Notification,
     Dialog,
-    Checkbox,
-    Group, Divider, Text, Stack,
+    Group, Text, Stack,
 } from '@mantine/core';
-import { IconAlertTriangle, IconInfoCircle, IconRobot } from '@tabler/icons-react';
+import { IconAlertTriangle, IconInfoCircle } from '@tabler/icons-react';
 
-import { useDisclosure, useInputState } from '@mantine/hooks';
 import FilterMenu from '@/components/FilterMenu/filter-menu';
 import { getConsequentialSearchProgress, searchKeywords } from '@/utils/backend/backend.utils';
 import { FilesContext } from '@/contexts/files.context';
-import Prompt from '@/components/Prompt/prompt';
 import InputBar from '@/components/InputBar/input-bar';
 import UpdateReminder from '@/components/UpdateReminder/update-reminder';
 
 const SearchBar1 = () => {
     const [keywords, setKeywords] = useState<string[]>([]);
     const [filterTags, setFilterTags] = useState<string[]>(['All']);
-    const [openedTextBox, { toggle }] = useDisclosure(false);
-    const [sectionChecked, { toggle: toggleSection }] = useDisclosure(false);
-    const [prompt, setPrompt] = useInputState('');
     const [searchError, setSearchError] = useState('');
     const [backendSearching, setBackendSearching] = useState({
         ai: '',
         file_ready: true,
     });
     const showErrorPrompt = !!searchError;
-    const enableSearch = openedTextBox ? prompt.length !== 0
-        && keywords.length !== 0
-        && filterTags.length !== 0 : keywords.length !== 0
+    const enableSearch = keywords.length !== 0
         && filterTags.length !== 0;
     const { getFilterTagsType } = useContext(FilesContext);
     const searchKeyWords = async () => {
@@ -46,9 +38,7 @@ const SearchBar1 = () => {
         try {
             await searchKeywords(keywords,
                 getFilterTagsType(filterTags),
-                sectionChecked,
-                openedTextBox,
-                prompt);
+            );
             getSearchStatus();
         } catch (error) {
             if (error instanceof Error) {
@@ -119,22 +109,6 @@ const SearchBar1 = () => {
                             // keepFiltersConsistent={keepFilterTagsConsistent}
                         />
                     </Group>
-                    <Divider my="md" />
-                    <Checkbox
-                      labelPosition="left"
-                      icon={IconRobot as any}
-                      label="Generate Consequential Amendments"
-                      onChange={toggle}
-                      checked={openedTextBox}
-                    />
-                    <Checkbox
-                      labelPosition="left"
-                      icon={IconRobot as any}
-                      label="Generate Sections"
-                      onChange={toggleSection}
-                      checked={sectionChecked}
-                    />
-                    <Prompt text={prompt} setText={setPrompt} opened={openedTextBox} />
                     <Center pos="relative">
                         <LoadingOverlay
                           visible={!backendSearching.file_ready}

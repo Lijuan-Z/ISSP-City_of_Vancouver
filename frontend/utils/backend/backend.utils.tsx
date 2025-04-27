@@ -4,19 +4,15 @@ import { FilterTagsType } from '@/components/FilterMenu/filter-menu';
 export const searchKeywords = async (
     keywords: string[],
     filterTags: FilterTagsType,
-    sectionChecked?: boolean,
-    enableAI?: boolean,
-    aiPrompt ?: string,
 ) => {
-    const aiSearch = enableAI || sectionChecked;
     const requestBody = {
         data: {
             'search-terms': keywords,
             files: filterTags.files,
             categories: filterTags.categories,
-            ai: aiSearch,
-            section: sectionChecked,
-            prompt: aiPrompt,
+            ai: false,
+            prompt: '',
+            section: false,
         },
     };
     const response = await fetch('/search', {
@@ -30,11 +26,9 @@ export const searchKeywords = async (
         const data = await response.json();
         throw new Error(data.data);
     }
-    if (!aiSearch) {
-        const data = await response.blob();
-        const fileName = 'output.xlsx';
-        saveAs(data, fileName);
-    }
+    const data = await response.blob();
+    const fileName = 'output.xlsx';
+    saveAs(data, fileName);
 };
 export const getFilesInformation = async () => {
     const response = await fetch('/data');

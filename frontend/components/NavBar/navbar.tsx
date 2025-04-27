@@ -11,12 +11,6 @@ const data = [
         label: 'Consequential Amendments',
         icon: IconPdf,
     },
-    {
-        link: '/lazer',
-        label: 'Digitization of District Schedules',
-        icon: IconDatabase,
-
-    },
 ];
 
 export function NavbarSimple() {
