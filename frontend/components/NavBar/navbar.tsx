@@ -1,6 +1,6 @@
 'use client';
 
-import { IconPdf, IconDatabase,
+import { IconPdf,
 } from '@tabler/icons-react';
 import { usePathname, useRouter } from 'next/navigation';
 import classes from './NavbarSimple.module.css';
