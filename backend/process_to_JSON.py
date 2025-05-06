@@ -3,7 +3,6 @@ import json
 import os
 import time
 import easyocr
-from Obj2AI import Obj2AI
 import configparser
 
 config = configparser.ConfigParser()
@@ -60,7 +59,6 @@ class ProcessToJSON:
         for root, dirs, files in os.walk(self.folder_path):
             for file_name in files:
                 if file_name.lower().endswith('.pdf') and self.is_file_updated(URL_info, file_name):
-
                     file_update_counter += 1
                     process_update = f"Updating file {file_update_counter} of {files_to_update} -> {file_name}"
                     file_path = os.path.join(root, file_name)
@@ -95,13 +93,6 @@ class ProcessToJSON:
 
         # Save intermediate results again
         self.save_to_json("processed.json", nested_metadata_dict)
-
-        # Add AI titles using an external AI module (gemini)
-        gemAI = Obj2AI()
-        nested_metadata_dict = gemAI.find_title(URL_info, nested_metadata_dict)
-
-        # Save the final processed data
-        self.save_to_json(config.get('server', 'processed_json_file'), nested_metadata_dict)
 
         return nested_metadata_dict
 
@@ -258,7 +249,6 @@ if __name__ == '__main__':
     processor = ProcessToJSON(folder_path)
     with open('doc_type.json') as json_file:
         data = json.load(json_file)
-
 
     start = time.time()
     dict_info = processor.read_PDFs(image_included=False, URL_info=data)

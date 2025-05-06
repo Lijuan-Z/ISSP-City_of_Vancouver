@@ -1,6 +1,6 @@
 'use client';
 
-import { IconPdf, IconDatabase,
+import { IconPdf,
 } from '@tabler/icons-react';
 import { usePathname, useRouter } from 'next/navigation';
 import classes from './NavbarSimple.module.css';
@@ -10,12 +10,6 @@ const data = [
         link: '/',
         label: 'Consequential Amendments',
         icon: IconPdf,
-    },
-    {
-        link: '/lazer',
-        label: 'Digitization of District Schedules',
-        icon: IconDatabase,
-
     },
 ];
 
